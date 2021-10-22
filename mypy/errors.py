@@ -484,11 +484,12 @@ class Errors:
             self.error_info_map[path] = new_errors
 
     def generate_unused_ignore_errors(self, file: str) -> None:
-        ignored_lines = self.ignored_lines[file]
         if not is_typeshed_file(file) and file not in self.ignored_files:
             ignored_lines = self.ignored_lines[file]
             used_ignored_lines = self.used_ignored_lines[file]
             for line, ignored_codes in ignored_lines.items():
+                if "unused-ignore" in ignored_codes:
+                    continue
                 used_ignored_codes = used_ignored_lines[line]
                 unused_ignored_codes = set(ignored_codes) - set(used_ignored_codes)
                 # `ignore` is used
@@ -505,7 +506,7 @@ class Errors:
                 # Don't use report since add_error_info will ignore the error!
                 info = ErrorInfo(self.import_context(), file, self.current_module(), None,
                                  None, line, -1, 'error', message,
-                                 None, False, False, False)
+                                 codes.UNUSED_IGNORE, False, False, False)
                 self._add_error_info(file, info)
 
     def generate_ignore_without_code_errors(self,
