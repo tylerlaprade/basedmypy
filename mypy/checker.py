@@ -877,11 +877,12 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                         self.fail(message_registry.MUST_HAVE_NONE_RETURN_TYPE.format(fdef.name),
                                   item)
 
+                    self.check_for_missing_annotations(fdef, typ)
+
                     # Check validity of __new__ signature
                     if fdef.info and fdef.name == '__new__':
                         self.check___new___signature(fdef, typ)
 
-                    self.check_for_missing_annotations(fdef, typ)
                     if self.options.disallow_any_unimported:
                         if fdef.type and isinstance(fdef.type, CallableType):
                             ret_type = fdef.type.ret_type
