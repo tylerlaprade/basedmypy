@@ -1106,6 +1106,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         if show_untyped and (self.options.disallow_untyped_defs or check_incomplete_defs):
             if fdef.type is None and self.options.disallow_untyped_defs:
                 if self.options.default_return:
+                    typ.implicit = False
                     typ.ret_type = NoneType()
                     # fully unannotated fdef needs to be assigned a type
                     fdef.type = typ
