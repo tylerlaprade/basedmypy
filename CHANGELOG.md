@@ -1,6 +1,6 @@
 # Basedmypy Changelog
 
-## [Unreleased]
+### [1.0.0]
 ### Added
 - Strict by default(`--strict` and disable dynamic typing)
 - add baseline support(`--write-baseline`, `--baseline-file`)
