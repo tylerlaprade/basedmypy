@@ -5,6 +5,7 @@
 # flags: --default-return
 def f(): ...
 reveal_type(f)  # N:13: Revealed type is "def ()"
+reveal_type(f())  # N:13: Revealed type is "None"
 
 def g(i: int): ...
 reveal_type(g)  # N:13: Revealed type is "def (i: builtins.int)"
