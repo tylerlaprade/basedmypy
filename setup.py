@@ -26,15 +26,20 @@ Basedmypy -- Based Static Typing for Python
 
 Ever tried to use pythons type system and thought to yourself "This doesn't seem based".
 Well fret no longer as basedmypy got you covered!
+
 Baseline
 --------
+
 Basedmypy has baseline, baseline is based! It allows you to adopt new features from basedmypy
 without the burden of fixing up every usage, just save all current errors to the baseline
 file and deal with them later.
+
 .. code-block:: python
+
     def foo(a):
         print(a)
 .. code-block:: bash
+
     > mypy .
     error: missing typehints !!!!!
     Epic fail bro!
