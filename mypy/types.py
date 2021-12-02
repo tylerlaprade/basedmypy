@@ -3074,7 +3074,10 @@ class TypeStrVisitor(SyntheticTypeVisitor[str]):
         if t.last_known_value and not t.args:
             # Instances with a literal fallback should never be generic. If they are,
             # something went wrong so we fall back to showing the full Instance repr.
-            s = f"{t.last_known_value.accept(self)}?"
+            if mypy.options._based:
+                s = str(t.last_known_value.accept(self))
+            else:
+                s = f"{t.last_known_value.accept(self)}?"
         else:
             s = t.type.fullname or t.type.name or "<???>"
 
