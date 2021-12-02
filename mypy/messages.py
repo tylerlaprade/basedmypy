@@ -2790,7 +2790,10 @@ def pretty_callable(tp: CallableType, options: Options, skip_self: bool = False)
                     isinstance(upper_bound, Instance)
                     and upper_bound.type.fullname != "builtins.object"
                 ):
-                    tvars.append(f"{tvar.name} <: {format_type_bare(upper_bound, options)}")
+                    if mypy.options._based:
+                        tvars.append(f"{tvar.name}: {format_type_bare(upper_bound, options)}")
+                    else:
+                        tvars.append(f"{tvar.name} <: {format_type_bare(upper_bound, options)}")
                 elif tvar.values:
                     tvars.append(
                         "{} in ({})".format(
