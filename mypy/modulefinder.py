@@ -855,7 +855,7 @@ def load_stdlib_py_versions(custom_typeshed_dir: Optional[str]) -> StdlibVersion
 
     None means there is no maximum version.
     """
-    typeshed_dir = custom_typeshed_dir or os.path.join(os.path.dirname(__file__), "typeshed")
+    typeshed_dir = custom_typeshed_dir or os.path.join(os.path.dirname(__file__), "..", "basedtypeshed")
     stdlib_dir = os.path.join(typeshed_dir, "stdlib")
     result = {}
 
