@@ -496,7 +496,7 @@ def process_options(args: List[str],
         help="More verbose messages")
     general_group.add_argument(
         '-V', '--version', action=CapturableVersionAction,
-        version='basedmypy ' + __version__ + '\n%(prog)s ' + mypy_version,
+        version='basedmypy ' + __version__ + '\nBased on %(prog)s ' + mypy_version,
         help="Show program's version number and exit",
         stdout=stdout)
 
