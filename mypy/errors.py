@@ -805,7 +805,7 @@ class Errors:
                 file: [
                     {
                         "line": error.line,
-                        "code": error.code.code,
+                        "code": error.code and error.code.code,
                         "message": error.message
                     } for error in errors
                 ]
@@ -837,7 +837,7 @@ class Errors:
                 for baseline_error in baseline_errors:
                     if (
                         error.line == baseline_error["line"] and
-                            error.code.code == baseline_error["code"]
+                            (error.code and error.code.code) == baseline_error["code"]
                             or clean_baseline_message(error.message) ==
                             clean_baseline_message(baseline_error["message"]) and
                             abs(error.line - baseline_error["line"]) < 50
