@@ -1500,14 +1500,14 @@ def get_typeshed_stdlib_modules(
                 return version_info >= minver and (maxver is None or version_info <= maxver)
         return False
 
-    python_executable: str = python_executable or _python_executable_from_version(sys.version_info)
+    python_executable: str = python_executable or _python_executable_from_version(version_info)
     stdlib_py_versions = mypy.modulefinder.load_stdlib_py_versions(
         custom_typeshed_dir, python_executable
     )
     if custom_typeshed_dir:
         typeshed_dir = Path(custom_typeshed_dir)
     else:
-        typeshed_dir = Path(mypy.build.default_data_dir()) / "typeshed"
+        typeshed_dir = Path(mypy.modulefinder.get_typeshed_dir())
     stdlib_dir = typeshed_dir / "stdlib"
 
     modules = []
