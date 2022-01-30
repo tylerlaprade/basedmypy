@@ -189,7 +189,8 @@ class FindModuleCache:
             custom_typeshed_dir = options.custom_typeshed_dir
         self.stdlib_py_versions = stdlib_py_versions or load_stdlib_py_versions(
             custom_typeshed_dir,
-            options.python_executable or _python_executable_from_version(sys.version_info),
+            (options and options.python_executable)
+            or _python_executable_from_version(sys.version_info[:2]),
         )
 
     def clear(self) -> None:
@@ -742,7 +743,7 @@ def get_search_dirs(python_executable: Optional[str]) -> Tuple[List[str], List[s
     """
 
     if python_executable is None:
-        return ([], [])
+        return [], []
     elif python_executable == sys.executable:
         # Use running Python's package dirs
         sys_path, site_packages = pyinfo.getsearchdirs()
@@ -854,7 +855,20 @@ def compute_search_paths(
 
 
 def get_typeshed_dir(python_executable: Optional[str] = None) -> str:
-    return os.path.join(get_site_packages_dirs(python_executable)[1][1], "basedtypeshed")
+    packages_dirs = get_site_packages_dirs(python_executable)[1]
+    typeshed_dir_name = "basedtypeshed"
+    try:
+        next(
+            dir
+            for dir in packages_dirs
+            if os.path.isdir(result := os.path.join(dir, typeshed_dir_name))
+        )
+        return result
+    except StopIteration:
+        raise StopIteration(
+            "failed to find site-packages directory with basedtypeshed in it. "
+            f"found the following packages: {(os.listdir(dir) for dir in packages_dirs)}"
+        )
 
 
 def load_stdlib_py_versions(
