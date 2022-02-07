@@ -26,7 +26,7 @@ from mypy.options import Options, BuildType
 from mypy.config_parser import get_config_module_names, parse_version, parse_config_file
 from mypy.split_namespace import SplitNamespace
 
-from mypy.version import __version__, mypy_version
+from mypy.version import __version__, __based_version__
 
 orig_stat: Final = os.stat
 MEM_PROFILE: Final = False  # If True, dump memory profile
@@ -512,7 +512,7 @@ def process_options(args: List[str],
         help="More verbose messages")
     general_group.add_argument(
         '-V', '--version', action=CapturableVersionAction,
-        version='basedmypy ' + __version__ + '\nBased on %(prog)s ' + mypy_version,
+        version=f'basedmypy {__based_version__}\nBased on %(prog)s {__version__}',
         help="Show program's version number and exit",
         stdout=stdout)
 
