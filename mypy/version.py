@@ -8,9 +8,22 @@ from mypy import git
 __version__ = '0.941'
 base_version = __version__
 
+# tuple[major, minor, patch, releaselevel, mypy version, mypy releaselevel, hash]
+__based_version_info__ = (
+    2,
+    0,
+    0,
+    "dev",
+    __version__.split("+dev")[0],
+    "dev" if "+dev" in __version__ else "release",
+    None,
+)
+
+__based_version__ = ".".join(str(e) for e in __based_version_info__[:3])
+
 mypy_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-if __version__.endswith('+dev') and git.is_git_repo(mypy_dir) and git.have_git():
-    __version__ += '.' + git.git_revision(mypy_dir).decode('utf-8')
+if __based_version_info__[3] == 'dev' and git.is_git_repo(mypy_dir) and git.have_git():
+    __based_version__ += '+dev.' + git.git_revision(mypy_dir).decode('utf-8')
     if git.is_dirty(mypy_dir):
-        __version__ += '.dirty'
+        __based_version__ += '.dirty'
 del mypy_dir
