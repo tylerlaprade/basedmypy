@@ -1621,14 +1621,14 @@ class MessageBuilder:
 
     def reveal_type(self, typ: Type, context: Context) -> None:
         visitor = TypeStrVisitor(options=self.options)
-        self.note(f'Revealed type is "{typ.accept(visitor)}"', context)
+        self.note(f'Revealed type is "{typ.accept(visitor)}"', context, code=codes.REVEAL)
 
     def reveal_locals(self, type_map: dict[str, Type | None], context: Context) -> None:
         # To ensure that the output is predictable on Python < 3.6,
         # use an ordered dictionary sorted by variable name
         sorted_locals = dict(sorted(type_map.items(), key=lambda t: t[0]))
         if sorted_locals:
-            self.note("Revealed local types are:", context)
+            self.note("Revealed local types are:", context, code=codes.REVEAL)
             for k, v in sorted_locals.items():
                 visitor = TypeStrVisitor(options=self.options)
                 self.note(f"    {k}: {v.accept(visitor) if v is not None else None}", context)
@@ -1704,7 +1704,7 @@ class MessageBuilder:
         )
 
     def explicit_any(self, ctx: Context) -> None:
-        self.fail('Explicit "Any" is not allowed', ctx)
+        self.fail('Explicit "Any" is not allowed', ctx, code=codes.NO_ANY_EXPLICIT)
 
     def unexpected_typeddict_keys(
         self,
@@ -1823,7 +1823,7 @@ class MessageBuilder:
             message = 'Expression has type "Any"'
         else:
             message = f'Expression type contains "Any" (has type {format_type(typ, self.options)})'
-        self.fail(message, context)
+        self.fail(message, context, code=codes.NO_ANY_EXPR)
 
     def incorrectly_returning_any(self, typ: Type, context: Context) -> None:
         message = (
@@ -1852,11 +1852,16 @@ class MessageBuilder:
     def untyped_decorated_function(self, typ: Type, context: Context) -> None:
         typ = get_proper_type(typ)
         if isinstance(typ, AnyType):
-            self.fail("Function is untyped after decorator transformation", context)
+            self.fail(
+                "Function is untyped after decorator transformation",
+                context,
+                code=codes.NO_ANY_DECORATED,
+            )
         else:
             self.fail(
                 f'Type of decorated function contains type "Any" ({format_type(typ, self.options)})',
                 context,
+                code=codes.NO_ANY_DECORATED,
             )
 
     def typed_function_untyped_decorator(self, func_name: str, context: Context) -> None:
