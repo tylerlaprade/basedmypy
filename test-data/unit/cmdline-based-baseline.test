@@ -3,8 +3,36 @@
 -- See cmdline.test for specifics
 -- ----------------------------------------
 
-
 [case testWriteBaseline]
+# cmd: mypy --write-baseline --baseline-file a/b pkg
+[file pkg/a.py]
+a
+[out]
+pkg/a.py:1:1 error: Name "a" not defined  [name-defined]
+Found 1 error (1 new error) in 1 file (checked 1 source file)
+Baseline successfully written to a/b
+== Return code: 0
+[outfile a/b]
+{
+  "files": {
+    "pkg/a.py": [
+      {
+        "code": "name-defined",
+        "column": 1,
+        "message": "Name \"a\" is no defined",
+        "offset": 1,
+        "target": "a"
+      }
+    ]
+  },
+  "format": "1.3",
+  "targets": [
+    "file:pkg"
+  ]
+}
+
+
+[case testRewriteBaseline]
 # cmd: mypy --write-baseline --error-summary pkg
 # dont-normalize-output:
 [file pkg/a.py]
@@ -172,6 +200,7 @@ reveal_type(a)
 {"main.py": [{"line": 1, "code": "misc", "message": "test"}]}
 [out]
 pkg/main.py:2:13: note: Revealed type is "builtins.int"
+Success: no issues found in 1 source file
 
 
 [case testRevealLocals]
@@ -185,6 +214,7 @@ def foo() -> None:
 [out]
 pkg/main.py:3:5: note: Revealed local types are:
 pkg/main.py:3:5: note:     a: builtins.int
+Success: no issues found in 1 source file
 
 
 [case testBaselineFormat1_2]

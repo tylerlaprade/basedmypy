@@ -1109,12 +1109,15 @@ def load_baseline(options: Options, errors: Errors, stdout: TextIO) -> None:
     file = Path(options.baseline_file)
 
     if not file.exists():
-        if options.baseline_file != defaults.BASELINE_FILE:
+        if options.baseline_file != defaults.BASELINE_FILE and not options.write_baseline:
             msg = formatter.style(
                 f"error: Baseline file not found at {file}", 'red',
                 bold=True
             )
             main.fail(msg, stderr, options)
+        else:
+            if options.baseline_format == "default":
+                options.baseline_format = "1.3"
         return
     try:
         data: UnknownBaseline = json.load(file.open())
