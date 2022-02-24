@@ -4,8 +4,8 @@ NOTE: These must not be accessed from mypy.nodes or mypy.types to avoid import
       cycles. These must not be called from the semantic analysis main pass
       since these may assume that MROs are ready.
 """
-
 import itertools
+from collections import defaultdict
 from typing import (
     Any,
     Dict,
