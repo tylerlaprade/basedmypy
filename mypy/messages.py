@@ -215,6 +215,7 @@ class MessageBuilder:
         offset: int = 0,
         allow_dups: bool = False,
         secondary_context: Context | None = None,
+        notes: list[str] | None = None,
     ) -> None:
         """Report an error or note (unless disabled).
 
@@ -260,6 +261,7 @@ class MessageBuilder:
             end_column=context.end_column if context else -1,
             code=code,
             allow_dups=allow_dups,
+            notes=notes,
         )
 
     def fail(
@@ -271,6 +273,7 @@ class MessageBuilder:
         file: str | None = None,
         allow_dups: bool = False,
         secondary_context: Context | None = None,
+        notes: list[str] | None = None,
     ) -> None:
         """Report an error message (unless disabled)."""
         self.report(
@@ -281,6 +284,7 @@ class MessageBuilder:
             file=file,
             allow_dups=allow_dups,
             secondary_context=secondary_context,
+            notes=notes,
         )
 
     def note(
