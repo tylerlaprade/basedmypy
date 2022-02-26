@@ -1100,18 +1100,19 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         check_incomplete_defs = self.options.disallow_incomplete_defs and has_explicit_annotation
         if show_untyped and (self.options.disallow_untyped_defs or check_incomplete_defs):
             if fdef.type is None and self.options.disallow_untyped_defs:
-                if (not fdef.arguments or (len(fdef.arguments) == 1 and
-                        (fdef.arg_names[0] == 'self' or fdef.arg_names[0] == 'cls'))):
-                    if self.options.default_return:
-                        typ.ret_type = NoneType()
-                        fdef.type = typ
-                    else:
+                if self.options.default_return:
+                    typ.ret_type = NoneType()
+                    # fully unannotated fdef needs to be assigned a type
+                    fdef.type = typ
+                else:
+                    if (not fdef.arguments or (len(fdef.arguments) == 1 and
+                            (fdef.arg_names[0] == 'self' or fdef.arg_names[0] == 'cls'))):
                         self.fail(message_registry.RETURN_TYPE_EXPECTED, fdef)
                         if not has_return_statement(fdef) and not fdef.is_generator:
                             self.note('Use "-> None" if function does not return a value', fdef,
                                       code=codes.NO_UNTYPED_DEF)
-                else:
-                    self.fail(message_registry.FUNCTION_TYPE_EXPECTED, fdef)
+                    else:
+                        self.fail(message_registry.FUNCTION_TYPE_EXPECTED, fdef)
             elif isinstance(fdef.type, CallableType):
                 ret_type = get_proper_type(fdef.type.ret_type)
                 if is_unannotated_any(ret_type):
