@@ -16,7 +16,6 @@ class A:
 reveal_type(A.f)  # N: Revealed type is "def (self: __main__.A)"
 reveal_type(A.g)  # N: Revealed type is "def (self: __main__.A, i: builtins.int)"
 
-
 [case testUntypedDefs]
 # flags: --default-return --allow-untyped-defs --allow-any-expr
 
@@ -112,3 +111,103 @@ class A:
     def f(self, i): ...  # E: Function is missing a type annotation  [no-untyped-def]
     def g(self, i: int, j): ...  # E: Function is missing a return type annotation  [no-untyped-def] \
         # E: Function is missing a type annotation for one or more arguments  [no-untyped-def]
+
+
+[case testOverload]
+# flags: --default-return
+from typing import overload
+
+class A:
+    @overload
+    def f(self): ...
+    @overload
+    def f(self, i: int): ...
+    def f(self, i: int = 0): ...
+
+reveal_type(A.f)  # N: Revealed type is "Overload(def (self: __main__.A), def (self: __main__.A, i: builtins.int))"
+
+@overload
+def f(): ...
+@overload
+def f(i: int): ...
+def f(i: int = 0): ...
+
+reveal_type(f)  # N: Revealed type is "Overload(def (), def (i: builtins.int))"
+
+
+[case testOverloadIncomplete]
+# flags: --default-return --allow-incomplete-defs --allow-untyped-defs --allow-any-expr
+from typing import overload
+
+class A:
+    @overload
+    def f(self): ...
+    @overload
+    def f(self, i): ...
+    @overload
+    def f(self, i, j: int): ...
+    def f(self, i: int = 0, j: int = 0): ...
+
+reveal_type(A.f)  # N: Revealed type is "Overload(def (self: __main__.A) -> Any, def (self: __main__.A, i: Any) -> Any, def (self: __main__.A, i: Any, j: builtins.int))"
+
+@overload
+def f(): ...
+@overload
+def f(i): ...
+@overload
+def f(i, j: int): ...
+def f(i: int = 0, j: int = 0): ...
+
+reveal_type(f)  # N: Revealed type is "Overload(def () -> Any, def (i: Any) -> Any, def (i: Any, j: builtins.int))"
+
+
+[case testOverloadUntyped]
+# flags: --default-return --allow-untyped-defs --allow-any-expr
+from typing import overload
+
+class A:
+    @overload
+    def f(self): ...
+    @overload
+    def f(self, i): ...
+    @overload
+    def f(self, *, j: int): ...
+    def f(self, i: int = 0, j: int = 0): ...
+
+reveal_type(A.f)  # N: Revealed type is "Overload(def (self: __main__.A) -> Any, def (self: __main__.A, i: Any) -> Any, def (self: __main__.A, *, j: builtins.int))"
+
+@overload
+def f(): ...
+@overload
+def f(i): ...
+@overload
+def f(*, j: int): ...
+def f(i: int = 0, j: int = 0): ...
+
+reveal_type(f)  # N: Revealed type is "Overload(def () -> Any, def (i: Any) -> Any, def (*, j: builtins.int))"
+
+[case testOverloadOther]
+# flags: --default-return --allow-untyped-defs --allow-incomplete-defs --allow-any-expr
+from typing import overload
+
+class A:
+    @overload
+    def f(self) -> int: ...
+    @overload
+    def f(self, i): ...
+    @overload
+    def f(self, i, j: int): ...
+    def f(self, i: int = 0, j: int = 0) -> object: ...
+
+reveal_type(A.f)  # N: Revealed type is "Overload(def (self: __main__.A) -> builtins.int, def (self: __main__.A, i: Any) -> Any, def (self: __main__.A, i: Any, j: builtins.int))"
+
+class B:
+    @overload
+    def f(self) -> str: ...
+    @overload
+    def f(self, i): ...
+    @overload
+    def f(self, i, j: int) -> int: ...
+    def f(self, i: int = 0, j: int = 0) -> object: ...
+
+reveal_type(B.f)  # N: Revealed type is "Overload(def (self: __main__.B) -> builtins.str, def (self: __main__.B, i: Any) -> Any, def (self: __main__.B, i: Any, j: builtins.int) -> builtins.int)"
