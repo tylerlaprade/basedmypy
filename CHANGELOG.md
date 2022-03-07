@@ -1,9 +1,9 @@
 # Basedmypy Changelog
 
-## [Unreleased]
+## [1.3.0]
 ### Added
 - `default_return` option to imply unannotated return type as `None`.
-- Specific error code for dynamic/Any errors
+- Specific error code for dynamic/`Any` errors
 - Automatic baseline mode, if there are no new errors then write.
 - Ignore baseline with `mypy --baseline-file= src/`
 ### Enhancements

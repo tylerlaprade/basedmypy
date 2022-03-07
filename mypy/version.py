@@ -20,7 +20,7 @@ __based_version_info__ = (
     None,
 )
 
-__based_version__ = ".".join(str(e) for e in __based_version_info__[:3])
+__based_version__ = "1.3.0a2"
 
 mypy_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 if __based_version_info__[3] == 'dev' and git.is_git_repo(mypy_dir) and git.have_git():
