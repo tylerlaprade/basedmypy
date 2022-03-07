@@ -127,9 +127,11 @@ ErrorTuple = Tuple[Optional[str],
 
 
 class BaselineError(TypedDict):
-    line: int
     code: str
+    column: int
+    line: int
     message: str
+    target: str
 
 
 class Errors:
@@ -844,8 +846,9 @@ class Errors:
             {
                 self.common_path(file): [
                     {
-                        "line": error.line,
                         "code": error.code and error.code.code,
+                        "column": error.column,
+                        "line": error.line,
                         "message": error.message,
                         "target": error.target,
                     } for error in self.sort_messages(errors)
