@@ -141,10 +141,20 @@ def main(script_path: Optional[str],
 
     if options.write_baseline:
         stdout.write(
-            formatter.style("Baseline successfully written to {}\n".format(options.baseline_file),
+            formatter.style(f"Baseline successfully written to {options.baseline_file}\n",
                             "green", bold=True))
         stdout.flush()
         code = 0
+
+    if (
+        options.auto_baseline
+        and not messages
+        and res and res.manager.errors.baseline != res.manager.errors.original_baseline
+    ):
+        stdout.write(
+            formatter.style(f"Baseline successfully updated at {options.baseline_file}\n",
+                            "green", bold=True))
+        stdout.flush()
 
     if options.install_types and not options.non_interactive:
         result = install_types(formatter, options, after_run=True, non_interactive=False)
