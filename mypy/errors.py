@@ -3,6 +3,7 @@ import os.path
 import re
 import sys
 import traceback
+from copy import deepcopy
 from pathlib import Path
 
 from mypy.backports import OrderedDict
@@ -122,11 +123,11 @@ ErrorTuple = Tuple[Optional[str],
 
 
 class BaselineError(TypedDict):
-    code: str
+    code: Optional[str]
     column: int
     line: int
     message: str
-    target: str
+    target: Optional[str]
 
 
 class Errors:
@@ -186,6 +187,7 @@ class Errors:
     seen_import_error = False
 
     # Error baseline
+    original_baseline: Dict[str, List[BaselineError]]
     baseline: Dict[str, List[BaselineError]]
     # All detected errors before baseline filter
     all_errors: Dict[str, List[ErrorInfo]]
@@ -215,6 +217,7 @@ class Errors:
     def initialize(self) -> None:
         self.error_info_map = OrderedDict()
         self.all_errors = {}
+        self.original_baseline = {}
         self.baseline = {}
         self.flushed_files = set()
         self.import_ctx = []
@@ -797,21 +800,24 @@ class Errors:
             return
         if not file.parent.exists():
             file.parent.mkdir()
+        self.baseline = {
+            self.common_path(file): [
+                {
+                    "code": error.code.code if error.code else None,
+                    "column": error.column,
+                    "line": error.line,
+                    "message": error.message,
+                    "target": error.target,
+                } for error in self.sort_messages(errors)
+                # don't store reveal errors
+                if error.code != codes.REVEAL
+            ]
+            for file, errors in self.all_errors.items()
+        }
+        if self.baseline == self.original_baseline:
+            return
         json.dump(
-            {
-                self.common_path(file): [
-                    {
-                        "code": error.code and error.code.code,
-                        "column": error.column,
-                        "line": error.line,
-                        "message": error.message,
-                        "target": error.target,
-                    } for error in self.sort_messages(errors)
-                    # don't store reveal errors
-                    if error.code != codes.REVEAL
-                ]
-                for file, errors in self.all_errors.items()
-            },
+            self.baseline,
             file.open("w"),
             indent=2,
             sort_keys=True,
@@ -825,7 +831,9 @@ class Errors:
 
         if not file.exists():
             return False
+
         self.baseline = json.load(file.open("r"))
+        self.original_baseline = deepcopy(self.baseline)
         return True
 
     def filter_baseline(self, path: str) -> None:

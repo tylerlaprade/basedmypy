@@ -2494,125 +2494,118 @@
     {
       "code": "dynamic",
       "column": 39,
-      "line": 1115,
+      "line": 1116,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_for_missing_annotations"
     },
     {
       "code": "dynamic",
       "column": 35,
-      "line": 1131,
+      "line": 1132,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_for_missing_annotations"
     },
     {
       "code": "dynamic",
       "column": 35,
-      "line": 1131,
+      "line": 1132,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_for_missing_annotations"
     },
     {
       "code": "dynamic",
       "column": 40,
-      "line": 1329,
+      "line": 1330,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_overlapping_op_methods"
     },
     {
       "code": "dynamic",
       "column": 12,
-      "line": 1472,
+      "line": 1473,
       "message": "Expression type contains \"Any\" (has type \"Tuple[Any, ...]\")",
       "target": "mypy.checker.TypeChecker.expand_typevars"
     },
     {
       "code": "dynamic",
       "column": 33,
-      "line": 1472,
+      "line": 1473,
       "message": "Expression type contains \"Any\" (has type \"product[Tuple[Any, ...]]\")",
       "target": "mypy.checker.TypeChecker.expand_typevars"
     },
     {
       "code": "dynamic",
       "column": 26,
-      "line": 1473,
-      "message": "Expression type contains \"Any\" (has type \"Dict[Any, Any]\")",
-      "target": "mypy.checker.TypeChecker.expand_typevars"
-    },
-    {
-      "code": "dynamic",
-      "column": 31,
-      "line": 1473,
-      "message": "Expression type contains \"Any\" (has type \"Tuple[Any, ...]\")",
-      "target": "mypy.checker.TypeChecker.expand_typevars"
-    },
-    {
-      "code": "dynamic",
-      "column": 31,
-      "line": 1473,
-      "message": "Expression type contains \"Any\" (has type \"Tuple[Any, ...]\")",
-      "target": "mypy.checker.TypeChecker.expand_typevars"
-    },
-    {
-      "code": "dynamic",
-      "column": 63,
       "line": 1474,
       "message": "Expression type contains \"Any\" (has type \"Dict[Any, Any]\")",
       "target": "mypy.checker.TypeChecker.expand_typevars"
     },
     {
       "code": "dynamic",
-      "column": 49,
+      "column": 31,
+      "line": 1474,
+      "message": "Expression type contains \"Any\" (has type \"Tuple[Any, ...]\")",
+      "target": "mypy.checker.TypeChecker.expand_typevars"
+    },
+    {
+      "code": "dynamic",
+      "column": 31,
+      "line": 1474,
+      "message": "Expression type contains \"Any\" (has type \"Tuple[Any, ...]\")",
+      "target": "mypy.checker.TypeChecker.expand_typevars"
+    },
+    {
+      "code": "dynamic",
+      "column": 63,
       "line": 1475,
       "message": "Expression type contains \"Any\" (has type \"Dict[Any, Any]\")",
       "target": "mypy.checker.TypeChecker.expand_typevars"
     },
     {
       "code": "dynamic",
+      "column": 49,
+      "line": 1476,
+      "message": "Expression type contains \"Any\" (has type \"Dict[Any, Any]\")",
+      "target": "mypy.checker.TypeChecker.expand_typevars"
+    },
+    {
+      "code": "dynamic",
       "column": 26,
-      "line": 1646,
+      "line": 1647,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.get_op_other_domain"
     },
     {
       "code": "dynamic",
       "column": 38,
-      "line": 1690,
+      "line": 1691,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_override"
     },
     {
       "code": "dynamic",
       "column": 38,
-      "line": 1690,
+      "line": 1691,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_override"
     },
     {
       "code": "dynamic",
       "column": 77,
-      "line": 1690,
+      "line": 1691,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_override"
     },
     {
       "code": "dynamic",
       "column": 37,
-      "line": 1699,
+      "line": 1700,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_override"
     },
     {
       "code": "dynamic",
       "column": 37,
-      "line": 1699,
-      "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
-      "target": "mypy.checker.TypeChecker.check_override"
-    },
-    {
-      "code": "dynamic",
-      "column": 41,
       "line": 1700,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_override"
@@ -2620,126 +2613,119 @@
     {
       "code": "dynamic",
       "column": 41,
-      "line": 1700,
+      "line": 1701,
+      "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
+      "target": "mypy.checker.TypeChecker.check_override"
+    },
+    {
+      "code": "dynamic",
+      "column": 41,
+      "line": 1701,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_override"
     },
     {
       "code": "dynamic",
       "column": 54,
-      "line": 1777,
+      "line": 1778,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check__exit__return_type"
     },
     {
       "code": "unreachable",
       "column": 12,
-      "line": 1950,
+      "line": 1951,
       "message": "Statement is unreachable",
       "target": "mypy.checker.TypeChecker.determine_type_of_class_member"
     },
     {
       "code": "dynamic",
       "column": 44,
-      "line": 2271,
+      "line": 2272,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_assignment"
     },
     {
       "code": "dynamic",
       "column": 44,
-      "line": 2271,
+      "line": 2272,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_assignment"
     },
     {
       "code": "dynamic",
       "column": 38,
-      "line": 2431,
-      "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
-      "target": "mypy.checker.TypeChecker.check_compatibility_super"
-    },
-    {
-      "code": "dynamic",
-      "column": 38,
-      "line": 2431,
-      "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
-      "target": "mypy.checker.TypeChecker.check_compatibility_super"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
       "line": 2432,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_compatibility_super"
     },
     {
       "code": "dynamic",
+      "column": 38,
+      "line": 2432,
+      "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
+      "target": "mypy.checker.TypeChecker.check_compatibility_super"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 2433,
+      "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
+      "target": "mypy.checker.TypeChecker.check_compatibility_super"
+    },
+    {
+      "code": "dynamic",
       "column": 41,
-      "line": 2490,
+      "line": 2491,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.lvalue_type_from_base"
     },
     {
       "code": "dynamic",
       "column": 41,
-      "line": 2490,
+      "line": 2491,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.lvalue_type_from_base"
     },
     {
       "code": "dynamic",
       "column": 11,
-      "line": 2659,
+      "line": 2660,
       "message": "Expression type contains \"Any\" (has type \"Optional[Any]\")",
       "target": "mypy.checker.TypeChecker.is_assignable_slot"
     },
     {
       "code": "dynamic",
       "column": 36,
-      "line": 2841,
+      "line": 2842,
       "message": "Explicit \"Any\" is not allowed",
       "target": "mypy.checker.TypeChecker.check_multi_assignment_from_union"
     },
     {
       "code": "dynamic",
       "column": 36,
-      "line": 2841,
+      "line": 2842,
       "message": "Expression has type \"Any\"",
       "target": "mypy.checker.TypeChecker.check_multi_assignment_from_union"
     },
     {
       "code": "dynamic",
       "column": 36,
-      "line": 2841,
+      "line": 2842,
       "message": "Expression has type \"Any\"",
       "target": "mypy.checker.TypeChecker.check_multi_assignment_from_union"
     },
     {
       "code": "dynamic",
       "column": 36,
-      "line": 2841,
+      "line": 2842,
       "message": "Expression has type \"Any\"",
       "target": "mypy.checker.TypeChecker.check_multi_assignment_from_union"
     },
     {
       "code": "dynamic",
       "column": 36,
-      "line": 2841,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.checker.TypeChecker.check_multi_assignment_from_union"
-    },
-    {
-      "code": "dynamic",
-      "column": 63,
-      "line": 2843,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.checker.TypeChecker.check_multi_assignment_from_union"
-    },
-    {
-      "code": "dynamic",
-      "column": 63,
-      "line": 2843,
+      "line": 2842,
       "message": "Expression has type \"Any\"",
       "target": "mypy.checker.TypeChecker.check_multi_assignment_from_union"
     },
@@ -2754,153 +2740,167 @@
       "code": "dynamic",
       "column": 63,
       "line": 2844,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.checker.TypeChecker.check_multi_assignment_from_union"
+    },
+    {
+      "code": "dynamic",
+      "column": 63,
+      "line": 2845,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.checker.TypeChecker.check_multi_assignment_from_union"
+    },
+    {
+      "code": "dynamic",
+      "column": 63,
+      "line": 2845,
       "message": "Expression has type \"Any\"",
       "target": "mypy.checker.TypeChecker.check_multi_assignment_from_union"
     },
     {
       "code": "dynamic",
       "column": 28,
-      "line": 2971,
+      "line": 2972,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.type_is_iterable"
     },
     {
       "code": "dynamic",
       "column": 28,
-      "line": 2971,
+      "line": 2972,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.type_is_iterable"
     },
     {
       "code": "dynamic",
       "column": 48,
-      "line": 3272,
+      "line": 3273,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_member_assignment"
     },
     {
       "code": "dynamic",
       "column": 54,
-      "line": 3282,
+      "line": 3283,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_member_assignment"
     },
     {
       "code": "dynamic",
       "column": 54,
-      "line": 3282,
+      "line": 3283,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_member_assignment"
     },
     {
       "code": "dynamic",
       "column": 33,
-      "line": 4962,
+      "line": 4963,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_subtype"
     },
     {
       "code": "dynamic",
       "column": 33,
-      "line": 4962,
+      "line": 4963,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_subtype"
     },
     {
       "code": "dynamic",
       "column": 31,
-      "line": 4966,
+      "line": 4967,
       "message": "Expression type contains \"Any\" (has type \"Tuple[Type[CallableType], Type[Overloaded]]\")",
       "target": "mypy.checker.TypeChecker.check_subtype"
     },
     {
       "code": "dynamic",
       "column": 31,
-      "line": 4966,
+      "line": 4967,
       "message": "Expression type contains \"Any\" (has type \"Tuple[Type[CallableType], Type[Overloaded]]\")",
       "target": "mypy.checker.TypeChecker.check_subtype"
     },
     {
       "code": "dynamic",
       "column": 32,
-      "line": 4966,
+      "line": 4967,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_subtype"
     },
     {
       "code": "dynamic",
       "column": 32,
-      "line": 4966,
+      "line": 4967,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_subtype"
     },
     {
       "code": "no-error-code",
       "column": -1,
-      "line": 4995,
+      "line": 4996,
       "message": "No error code on \"type: ignore\" comment",
       "target": null
     },
     {
       "code": "dynamic",
       "column": 47,
-      "line": 5253,
+      "line": 5254,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.iterable_item_type"
     },
     {
       "code": "dynamic",
       "column": 37,
-      "line": 5797,
+      "line": 5798,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.overload_can_never_match"
     },
     {
       "code": "dynamic",
       "column": 21,
-      "line": 5807,
-      "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
-      "target": "mypy.checker.is_more_general_arg_prefix"
-    },
-    {
-      "code": "dynamic",
-      "column": 25,
       "line": 5808,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.is_more_general_arg_prefix"
     },
     {
       "code": "dynamic",
+      "column": 25,
+      "line": 5809,
+      "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
+      "target": "mypy.checker.is_more_general_arg_prefix"
+    },
+    {
+      "code": "dynamic",
       "column": 38,
-      "line": 6152,
+      "line": 6153,
       "message": "Expression type contains \"Any\" (has type \"Callable[[Any], Any]\")",
       "target": "mypy.checker.group_comparison_operands"
     },
     {
       "code": "dynamic",
       "column": 51,
-      "line": 6152,
+      "line": 6153,
       "message": "Expression has type \"Any\"",
       "target": "mypy.checker.group_comparison_operands"
     },
     {
       "code": "dynamic",
       "column": 51,
-      "line": 6152,
+      "line": 6153,
       "message": "Expression has type \"Any\"",
       "target": "mypy.checker.group_comparison_operands"
     },
     {
       "code": "dynamic",
       "column": 34,
-      "line": 6158,
+      "line": 6159,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.is_typed_callable"
     },
     {
       "code": "dynamic",
       "column": 25,
-      "line": 6168,
+      "line": 6169,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.is_untyped_decorator"
     }
@@ -7293,57 +7293,50 @@
     {
       "code": "unreachable",
       "column": 16,
-      "line": 722,
+      "line": 724,
       "message": "Statement is unreachable",
       "target": "mypy.errors.Errors.render_messages"
     },
     {
       "code": "dynamic",
       "column": 41,
-      "line": 753,
+      "line": 755,
       "message": "Expression type contains \"Any\" (has type \"Callable[[Any], Tuple[Any, Any]]\")",
       "target": "mypy.errors.Errors.sort_messages"
     },
     {
       "code": "dynamic",
       "column": 51,
-      "line": 753,
+      "line": 755,
       "message": "Expression type contains \"Any\" (has type \"Tuple[Any, Any]\")",
       "target": "mypy.errors.Errors.sort_messages"
     },
     {
       "code": "dynamic",
       "column": 52,
-      "line": 753,
+      "line": 755,
       "message": "Expression has type \"Any\"",
       "target": "mypy.errors.Errors.sort_messages"
     },
     {
       "code": "dynamic",
       "column": 60,
-      "line": 753,
+      "line": 755,
       "message": "Expression has type \"Any\"",
       "target": "mypy.errors.Errors.sort_messages"
     },
     {
-      "code": "dynamic",
-      "column": 12,
-      "line": 801,
-      "message": "Expression type contains \"Any\" (has type \"Dict[Any, Any]\")",
+      "code": "typeddict-item",
+      "column": 28,
+      "line": 805,
+      "message": "Incompatible types (expression has type \"Union[ErrorCode, None, str]\", TypedDict item \"code\" has type \"str\")",
       "target": "mypy.errors.Errors.save_baseline"
     },
     {
-      "code": "dynamic",
-      "column": 40,
-      "line": 802,
-      "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
-      "target": "mypy.errors.Errors.save_baseline"
-    },
-    {
-      "code": "dynamic",
-      "column": 20,
-      "line": 803,
-      "message": "Expression type contains \"Any\" (has type \"Dict[Any, Any]\")",
+      "code": "typeddict-item",
+      "column": 30,
+      "line": 809,
+      "message": "Incompatible types (expression has type \"Optional[str]\", TypedDict item \"target\" has type \"str\")",
       "target": "mypy.errors.Errors.save_baseline"
     }
   ],
@@ -11135,252 +11128,210 @@
     {
       "code": "dynamic",
       "column": 24,
-      "line": 307,
+      "line": 317,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.infer_python_executable"
     },
     {
       "code": "dynamic",
       "column": 24,
-      "line": 307,
+      "line": 317,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.infer_python_executable"
     },
     {
       "code": "dynamic",
       "column": 24,
-      "line": 307,
+      "line": 317,
       "message": "Expression type contains \"Any\" (has type \"Union[Any, str, None]\")",
       "target": "mypy.main.infer_python_executable"
     },
     {
       "code": "dynamic",
       "column": 7,
-      "line": 309,
+      "line": 319,
       "message": "Expression type contains \"Any\" (has type \"Union[Any, str, None]\")",
       "target": "mypy.main.infer_python_executable"
     },
     {
       "code": "dynamic",
       "column": 15,
-      "line": 310,
+      "line": 320,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.infer_python_executable"
     },
     {
       "code": "dynamic",
       "column": 15,
-      "line": 310,
+      "line": 320,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.infer_python_executable"
     },
     {
       "code": "dynamic",
       "column": 4,
-      "line": 359,
+      "line": 369,
       "message": "Explicit \"Any\" is not allowed",
       "target": "mypy.main.CapturableArgumentParser.__init__"
     },
     {
       "code": "dynamic",
       "column": 22,
-      "line": 360,
+      "line": 370,
       "message": "Expression type contains \"Any\" (has type \"Dict[str, Any]\")",
       "target": "mypy.main.CapturableArgumentParser.__init__"
     },
     {
       "code": "dynamic",
       "column": 22,
-      "line": 360,
+      "line": 370,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.CapturableArgumentParser.__init__"
     },
     {
       "code": "dynamic",
       "column": 22,
-      "line": 361,
+      "line": 371,
       "message": "Expression type contains \"Any\" (has type \"Dict[str, Any]\")",
       "target": "mypy.main.CapturableArgumentParser.__init__"
     },
     {
       "code": "dynamic",
       "column": 22,
-      "line": 361,
+      "line": 371,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.CapturableArgumentParser.__init__"
     },
     {
       "code": "dynamic",
       "column": 26,
-      "line": 362,
+      "line": 372,
       "message": "Expression type contains \"Any\" (has type \"Tuple[Any, ...]\")",
       "target": "mypy.main.CapturableArgumentParser.__init__"
     },
     {
       "code": "dynamic",
       "column": 26,
-      "line": 362,
+      "line": 372,
       "message": "Expression type contains \"Any\" (has type \"Tuple[Any, ...]\")",
       "target": "mypy.main.CapturableArgumentParser.__init__"
     },
     {
       "code": "dynamic",
       "column": 34,
-      "line": 362,
+      "line": 372,
       "message": "Expression type contains \"Any\" (has type \"Dict[str, Any]\")",
       "target": "mypy.main.CapturableArgumentParser.__init__"
     },
     {
       "code": "dynamic",
       "column": 34,
-      "line": 362,
+      "line": 372,
       "message": "Expression type contains \"Any\" (has type \"Dict[str, Any]\")",
       "target": "mypy.main.CapturableArgumentParser.__init__"
     },
     {
       "code": "dynamic",
       "column": 49,
-      "line": 370,
+      "line": 380,
       "message": "Expression type contains \"Any\" (has type \"Union[IO[str], Any]\")",
       "target": "mypy.main.CapturableArgumentParser.print_usage"
     },
     {
       "code": "dynamic",
       "column": 48,
-      "line": 375,
+      "line": 385,
       "message": "Expression type contains \"Any\" (has type \"Union[IO[str], Any]\")",
       "target": "mypy.main.CapturableArgumentParser.print_help"
     },
     {
       "code": "dynamic",
       "column": 12,
-      "line": 381,
+      "line": 391,
       "message": "Expression type contains \"Any\" (has type \"Union[IO[str], Any]\")",
       "target": "mypy.main.CapturableArgumentParser._print_message"
     },
     {
       "code": "dynamic",
       "column": 41,
-      "line": 388,
+      "line": 398,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.CapturableArgumentParser.exit"
     },
     {
       "code": "dynamic",
       "column": 25,
-      "line": 400,
+      "line": 410,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.CapturableArgumentParser.error"
     },
     {
       "code": "dynamic",
       "column": 4,
-      "line": 433,
+      "line": 443,
       "message": "Explicit \"Any\" is not allowed",
       "target": "mypy.main.CapturableVersionAction.__call__"
     },
     {
       "code": "dynamic",
       "column": 66,
-      "line": 598,
+      "line": 608,
       "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 67,
-      "line": 601,
+      "line": 611,
       "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 73,
-      "line": 719,
+      "line": 729,
       "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 72,
-      "line": 722,
+      "line": 732,
       "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 83,
-      "line": 887,
+      "line": 897,
       "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 16,
-      "line": 909,
+      "line": 919,
       "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 16,
-      "line": 918,
+      "line": 928,
       "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 16,
-      "line": 923,
+      "line": 933,
       "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 18,
-      "line": 938,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 7,
-      "line": 941,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 7,
-      "line": 941,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 7,
-      "line": 941,
-      "message": "Expression type contains \"Any\" (has type \"Union[Any, bool]\")",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 42,
-      "line": 941,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 54,
-      "line": 942,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 7,
-      "line": 944,
+      "line": 948,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
@@ -11393,659 +11344,701 @@
     },
     {
       "code": "dynamic",
-      "column": 49,
-      "line": 960,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 29,
-      "line": 974,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 29,
-      "line": 974,
+      "column": 7,
+      "line": 951,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 7,
-      "line": 980,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 7,
-      "line": 980,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 7,
-      "line": 980,
+      "line": 951,
       "message": "Expression type contains \"Any\" (has type \"Union[Any, bool]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
-      "column": 30,
-      "line": 985,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 30,
-      "line": 985,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 30,
-      "line": 985,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 30,
-      "line": 985,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 52,
-      "line": 985,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 52,
-      "line": 985,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 77,
-      "line": 985,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 26,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 26,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 32,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 32,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 44,
-      "line": 990,
-      "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 44,
-      "line": 990,
-      "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 68,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 68,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 68,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 68,
-      "line": 990,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 991,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 991,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 991,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 991,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 992,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 992,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 992,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 992,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 36,
-      "line": 1024,
-      "message": "Expression type contains \"Any\" (has type \"Set[Any]\")",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 7,
-      "line": 1030,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 33,
-      "line": 1031,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 4,
-      "line": 1039,
-      "message": "Expression type contains \"Any\" (has type \"Tuple[str, Any]\")",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 4,
-      "line": 1039,
-      "message": "Expression type contains \"Any\" (has type \"Tuple[str, Any]\")",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 4,
-      "line": 1039,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 21,
-      "line": 1039,
-      "message": "Expression type contains \"Any\" (has type \"Dict[str, Any]\")",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 21,
-      "line": 1039,
-      "message": "Expression type contains \"Any\" (has type \"dict_items[str, Any]\")",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 40,
-      "line": 1040,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 25,
-      "line": 1042,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 47,
-      "line": 1043,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 7,
-      "line": 1050,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 7,
-      "line": 1066,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 7,
-      "line": 1066,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 30,
-      "line": 1066,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 8,
-      "line": 1076,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 17,
-      "line": 1076,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 25,
-      "line": 1077,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 25,
-      "line": 1077,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 57,
-      "line": 1077,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 75,
-      "line": 1078,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 53,
-      "line": 1080,
+      "column": 42,
+      "line": 951,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 54,
-      "line": 1082,
+      "line": 952,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
-      "column": 8,
-      "line": 1084,
+      "column": 7,
+      "line": 954,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
-      "column": 17,
-      "line": 1084,
+      "column": 7,
+      "line": 961,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 49,
+      "line": 970,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 29,
+      "line": 984,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 29,
+      "line": 984,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 7,
+      "line": 990,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 7,
+      "line": 990,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 7,
+      "line": 990,
+      "message": "Expression type contains \"Any\" (has type \"Union[Any, bool]\")",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 30,
+      "line": 995,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 30,
+      "line": 995,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 30,
+      "line": 995,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 30,
+      "line": 995,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 52,
+      "line": 995,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 52,
+      "line": 995,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 77,
+      "line": 995,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 26,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 26,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 32,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 32,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 44,
+      "line": 1000,
+      "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 44,
+      "line": 1000,
+      "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1000,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1085,
+      "line": 1000,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
-      "column": 9,
+      "column": 45,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 68,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 68,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 68,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 68,
+      "line": 1000,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1001,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1001,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1001,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1001,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1002,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1002,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1002,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1002,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 36,
+      "line": 1034,
+      "message": "Expression type contains \"Any\" (has type \"Set[Any]\")",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 7,
+      "line": 1040,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 33,
+      "line": 1041,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 4,
+      "line": 1049,
+      "message": "Expression type contains \"Any\" (has type \"Tuple[str, Any]\")",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 4,
+      "line": 1049,
+      "message": "Expression type contains \"Any\" (has type \"Tuple[str, Any]\")",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 4,
+      "line": 1049,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 21,
+      "line": 1049,
+      "message": "Expression type contains \"Any\" (has type \"Dict[str, Any]\")",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 21,
+      "line": 1049,
+      "message": "Expression type contains \"Any\" (has type \"dict_items[str, Any]\")",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 40,
+      "line": 1050,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 25,
+      "line": 1052,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 47,
+      "line": 1053,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 7,
+      "line": 1060,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 7,
+      "line": 1076,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 7,
+      "line": 1076,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 30,
+      "line": 1076,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 8,
+      "line": 1086,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 17,
+      "line": 1086,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 25,
       "line": 1087,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
+      "column": 25,
+      "line": 1087,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 57,
+      "line": 1087,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 75,
+      "line": 1088,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
       "column": 53,
-      "line": 1089,
+      "line": 1090,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 54,
+      "line": 1092,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 8,
+      "line": 1094,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 17,
+      "line": 1094,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 1095,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 9,
+      "line": 1097,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 53,
+      "line": 1099,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 41,
-      "line": 1093,
+      "line": 1103,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 12,
-      "line": 1141,
+      "line": 1151,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 39,
-      "line": 1145,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 39,
-      "line": 1145,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 39,
-      "line": 1145,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 39,
-      "line": 1145,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 39,
-      "line": 1145,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 11,
-      "line": 1146,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 11,
-      "line": 1146,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 62,
-      "line": 1147,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 15,
-      "line": 1148,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 15,
-      "line": 1148,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 15,
-      "line": 1148,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 15,
-      "line": 1148,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 46,
-      "line": 1148,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 46,
-      "line": 1148,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 87,
-      "line": 1149,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 15,
-      "line": 1150,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 15,
-      "line": 1150,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 25,
-      "line": 1152,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 15,
-      "line": 1153,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 15,
-      "line": 1153,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 25,
       "line": 1155,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
-      "column": 26,
+      "column": 39,
+      "line": 1155,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 39,
+      "line": 1155,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 39,
+      "line": 1155,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 39,
+      "line": 1155,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 11,
       "line": 1156,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 11,
+      "line": 1156,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 62,
+      "line": 1157,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 15,
+      "line": 1158,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 15,
+      "line": 1158,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 15,
+      "line": 1158,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 15,
+      "line": 1158,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 46,
+      "line": 1158,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 46,
+      "line": 1158,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 87,
+      "line": 1159,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 15,
+      "line": 1160,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 15,
+      "line": 1160,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 25,
+      "line": 1162,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 15,
+      "line": 1163,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 15,
+      "line": 1163,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 25,
+      "line": 1165,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 26,
+      "line": 1166,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 36,
-      "line": 1156,
+      "line": 1166,
       "message": "Expression type contains \"Any\" (has type \"Tuple[Any, Any]\")",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 37,
-      "line": 1156,
+      "line": 1166,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 48,
-      "line": 1156,
+      "line": 1166,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     }
@@ -15522,147 +15515,147 @@
     {
       "code": "dynamic",
       "column": 31,
-      "line": 1004,
+      "line": 1015,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.semanal.SemanticAnalyzer.check_classvar_in_signature"
     },
     {
       "code": "dynamic",
       "column": 31,
-      "line": 1014,
+      "line": 1025,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.semanal.SemanticAnalyzer.check_function_signature"
     },
     {
       "code": "dynamic",
       "column": 43,
-      "line": 1340,
+      "line": 1351,
       "message": "Expression type contains \"Any\" (has type \"Set[Any]\")",
       "target": "mypy.semanal.SemanticAnalyzer.clean_up_bases_and_infer_type_variables"
     },
     {
       "code": "dynamic",
       "column": 67,
-      "line": 1962,
+      "line": 1973,
       "message": "Expression type contains \"Any\" (has type \"Set[Any]\")",
       "target": "mypy.semanal.SemanticAnalyzer.report_missing_module_attribute"
     },
     {
       "code": "unreachable",
       "column": 20,
-      "line": 2028,
+      "line": 2039,
       "message": "Statement is unreachable",
       "target": "mypy.semanal.SemanticAnalyzer.visit_import_all"
     },
     {
       "code": "dynamic",
       "column": 38,
-      "line": 3450,
+      "line": 3461,
       "message": "Expression type contains \"Any\" (has type \"zip[Tuple[Any, ...]]\")",
       "target": "mypy.semanal.SemanticAnalyzer.process_module_assignment"
     },
     {
       "code": "dynamic",
       "column": 12,
-      "line": 3451,
+      "line": 3462,
       "message": "Expression type contains \"Any\" (has type \"Tuple[Any, ...]\")",
       "target": "mypy.semanal.SemanticAnalyzer.process_module_assignment"
     },
     {
       "code": "dynamic",
       "column": 12,
-      "line": 3451,
+      "line": 3462,
       "message": "Expression has type \"Any\"",
       "target": "mypy.semanal.SemanticAnalyzer.process_module_assignment"
     },
     {
       "code": "dynamic",
       "column": 12,
-      "line": 3451,
+      "line": 3462,
       "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
       "target": "mypy.semanal.SemanticAnalyzer.process_module_assignment"
     },
     {
       "code": "dynamic",
       "column": 28,
-      "line": 3451,
+      "line": 3462,
       "message": "Expression type contains \"Any\" (has type \"zip[Tuple[Any, ...]]\")",
       "target": "mypy.semanal.SemanticAnalyzer.process_module_assignment"
     },
     {
       "code": "dynamic",
       "column": 47,
-      "line": 3452,
+      "line": 3463,
       "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
       "target": "mypy.semanal.SemanticAnalyzer.process_module_assignment"
     },
     {
       "code": "dynamic",
       "column": 52,
-      "line": 3452,
+      "line": 3463,
       "message": "Expression has type \"Any\"",
       "target": "mypy.semanal.SemanticAnalyzer.process_module_assignment"
     },
     {
       "code": "dynamic",
       "column": 34,
-      "line": 3895,
+      "line": 3906,
       "message": "Expression type contains \"Any\" (has type \"Union[Any, bool]\")",
       "target": "mypy.semanal.SemanticAnalyzer.visit_call_expr"
     },
     {
       "code": "dynamic",
       "column": 34,
-      "line": 3895,
+      "line": 3906,
       "message": "Expression type contains \"Any\" (has type \"Union[Any, bool]\")",
       "target": "mypy.semanal.SemanticAnalyzer.visit_call_expr"
     },
     {
       "code": "dynamic",
       "column": 34,
-      "line": 3895,
+      "line": 3906,
       "message": "Expression type contains \"Any\" (has type \"Union[Any, bool]\")",
       "target": "mypy.semanal.SemanticAnalyzer.visit_call_expr"
     },
     {
       "code": "dynamic",
       "column": 72,
-      "line": 4018,
+      "line": 4029,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.semanal.SemanticAnalyzer.visit_member_expr"
     },
     {
       "code": "dynamic",
       "column": 37,
-      "line": 4498,
+      "line": 4509,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.semanal.SemanticAnalyzer.create_getattr_var"
     },
     {
       "code": "no-error-code",
       "column": -1,
-      "line": 4559,
+      "line": 4570,
       "message": "No error code on \"type: ignore\" comment",
       "target": null
     },
     {
       "code": "dynamic",
       "column": 23,
-      "line": 5307,
+      "line": 5318,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.semanal.replace_implicit_first_type"
     },
     {
       "code": "dynamic",
       "column": 46,
-      "line": 5384,
+      "line": 5395,
       "message": "Expression type contains \"Any\" (has type \"Callable[[Any], Any]\")",
       "target": "mypy.semanal.apply_semantic_analyzer_patches"
     },
     {
       "code": "dynamic",
       "column": 56,
-      "line": 5384,
+      "line": 5395,
       "message": "Expression has type \"Any\"",
       "target": "mypy.semanal.apply_semantic_analyzer_patches"
     }
