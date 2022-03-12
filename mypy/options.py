@@ -119,7 +119,7 @@ class Options:
         self.baseline_file = defaults.BASELINE_FILE
         self.auto_baseline = True
         self.default_return = False
-
+        self.targets: List[str] = []
         # disallow_any options
         self.disallow_any_generics = flip_if_not_based(True)
         self.disallow_any_unimported = flip_if_not_based(True)

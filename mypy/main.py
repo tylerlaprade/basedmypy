@@ -1073,6 +1073,11 @@ def process_options(args: List[str],
         options.cache_fine_grained = True
 
     # Set target.
+    options.targets = (
+        [f"module:{el}" for el in special_opts.modules]
+        + [f"package:{el}" for el in special_opts.packages]
+        + [f"file:{el}" for el in special_opts.files]
+    )
     if special_opts.modules + special_opts.packages:
         options.build_type = BuildType.MODULE
         egg_dirs, site_packages = get_site_packages_dirs(options.python_executable)
