@@ -20,7 +20,7 @@ from typing import Any, Dict, Iterator, List
 from urllib.request import urlopen
 
 BASE = "https://api.github.com/repos"
-REPO = "mypyc/mypy_mypyc-wheels"
+REPO = "KotlinIsland/mypy_mypyc-wheels"
 
 
 def is_whl_or_tar(name: str) -> bool:
@@ -100,7 +100,7 @@ def upload_dist(dist: Path, dry_run: bool = True) -> None:
 
 
 def upload_to_pypi(version: str, dry_run: bool = True) -> None:
-    assert re.match(r"v?0\.[0-9]{3}(\+\S+)?$", version)
+    assert re.match(r"v?\d+\.\d+\.\d+(\+\S+)?(a|b|rc)\d+$", version)
     if "dev" in version:
         assert dry_run, "Must use --dry-run with dev versions of mypy"
     if version.startswith("v"):
