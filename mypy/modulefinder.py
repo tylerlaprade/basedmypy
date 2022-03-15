@@ -857,17 +857,14 @@ def compute_search_paths(
 def get_typeshed_dir(python_executable: Optional[str] = None) -> str:
     packages_dirs = get_site_packages_dirs(python_executable)[1]
     typeshed_dir_name = "basedtypeshed"
-    try:
-        next(
-            dir
-            for dir in packages_dirs
-            if os.path.isdir(result := os.path.join(dir, typeshed_dir_name))
-        )
-        return result
-    except StopIteration:
-        raise StopIteration(
+    for dir in packages_dirs:
+        result = os.path.join(dir, typeshed_dir_name)
+        if os.path.isdir(result):
+            return result
+    else:
+        raise RuntimeError(
             "failed to find site-packages directory with basedtypeshed in it. "
-            f"found the following packages: {(os.listdir(dir) for dir in packages_dirs)}"
+            f"found the following packages: {[os.listdir(dir) for dir in packages_dirs]}"
         )
 
 
