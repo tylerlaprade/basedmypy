@@ -1480,7 +1480,7 @@ def get_stub(module: str) -> Optional[nodes.MypyFile]:
 def get_typeshed_stdlib_modules(
     custom_typeshed_dir: Optional[str],
     version_info: Optional[Tuple[int, int]] = None,
-    python_executable: Optional[str] = None,
+    python_executable_or_none: Optional[str] = None,
 ) -> List[str]:
     """Returns a list of stdlib modules in typeshed (for current Python version)."""
     stdlib_py_versions = mypy.modulefinder.load_stdlib_py_versions(custom_typeshed_dir)
@@ -1500,7 +1500,9 @@ def get_typeshed_stdlib_modules(
                 return version_info >= minver and (maxver is None or version_info <= maxver)
         return False
 
-    python_executable: str = python_executable or _python_executable_from_version(version_info)
+    python_executable: str = python_executable_or_none or _python_executable_from_version(
+        version_info
+    )
     stdlib_py_versions = mypy.modulefinder.load_stdlib_py_versions(
         custom_typeshed_dir, python_executable
     )
