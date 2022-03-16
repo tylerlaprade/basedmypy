@@ -44,7 +44,7 @@
         "code": "no-any-expr",
         "column": 20,
         "message": "Expression type contains \"Any\" (has type \"Set[Any]\")",
-        "offset": 234,
+        "offset": 235,
         "target": "mypy.build._build"
       },
       {
@@ -825,31 +825,10 @@
         "target": "mypy.build.load_baseline"
       },
       {
-        "code": "arg-type",
-        "column": 12,
-        "message": "Argument 1 to \"initialize_baseline\" of \"Errors\" has incompatible type \"Dict[str, List[BaselineError]]\"; expected \"Dict[str, Union[List[StoredBaselineError], List[BaselineError]]]\"",
-        "offset": 13,
-        "target": "mypy.build.load_baseline"
-      },
-      {
-        "code": "arg-type",
-        "column": 12,
-        "message": "\"Dict\" is invariant -- see https://mypy.readthedocs.io/en/stable/common_issues.html#variance",
-        "offset": 0,
-        "target": "mypy.build.load_baseline"
-      },
-      {
-        "code": "arg-type",
-        "column": 12,
-        "message": "Consider using \"Mapping\" instead, which is covariant in the value type",
-        "offset": 0,
-        "target": "mypy.build.load_baseline"
-      },
-      {
         "code": "no-any-expr",
         "column": 15,
         "message": "Expression type contains \"Any\" (has type \"Optional[Dict[str, Any]]\")",
-        "offset": 30,
+        "offset": 43,
         "target": "mypy.build.read_plugins_snapshot"
       },
       {
@@ -7330,7 +7309,7 @@
         "code": "unreachable",
         "column": 16,
         "message": "Statement is unreachable",
-        "offset": 734,
+        "offset": 743,
         "target": "mypy.errors.Errors.render_messages"
       },
       {
@@ -7360,104 +7339,6 @@
         "message": "Expression has type \"Any\"",
         "offset": 0,
         "target": "mypy.errors.Errors.sort_messages"
-      },
-      {
-        "code": "typeddict-item",
-        "column": 37,
-        "message": "TypedDict \"StoredBaselineError\" has no key \"line\"",
-        "offset": 46,
-        "target": "mypy.errors.Errors.initialize_baseline"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 47,
-        "message": "Expression type contains \"Any\" (has type \"Union[int, Any]\")",
-        "offset": 0,
-        "target": "mypy.errors.Errors.initialize_baseline"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 47,
-        "message": "Expression type contains \"Any\" (has type \"Union[int, Any]\")",
-        "offset": 0,
-        "target": "mypy.errors.Errors.initialize_baseline"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 47,
-        "message": "Expression type contains \"Any\" (has type \"Union[int, Any]\")",
-        "offset": 0,
-        "target": "mypy.errors.Errors.initialize_baseline"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 47,
-        "message": "Expression type contains \"Any\" (has type \"Union[int, Any]\")",
-        "offset": 0,
-        "target": "mypy.errors.Errors.initialize_baseline"
-      },
-      {
-        "code": "typeddict-item",
-        "column": 53,
-        "message": "TypedDict \"BaselineError\" has no key \"offset\"",
-        "offset": 0,
-        "target": "mypy.errors.Errors.initialize_baseline"
-      },
-      {
-        "code": "typeddict-item",
-        "column": 53,
-        "message": "TypedDict \"BaselineError\" has no key \"offset\"",
-        "offset": 0,
-        "target": "mypy.errors.Errors.initialize_baseline"
-      },
-      {
-        "code": "misc",
-        "column": 20,
-        "message": "Key \"offset\" of TypedDict \"StoredBaselineError\" cannot be deleted",
-        "offset": 1,
-        "target": "mypy.errors.Errors.initialize_baseline"
-      },
-      {
-        "code": "typeddict-item",
-        "column": 20,
-        "message": "TypedDict \"BaselineError\" has no key \"offset\"",
-        "offset": 0,
-        "target": "mypy.errors.Errors.initialize_baseline"
-      },
-      {
-        "code": "operator",
-        "column": 38,
-        "message": "Unsupported operand types for - (\"str\" and \"int\")",
-        "offset": 29,
-        "target": "mypy.errors.Errors.prepare_baseline_errors"
-      },
-      {
-        "code": "operator",
-        "column": 38,
-        "message": "Unsupported operand types for - (\"None\" and \"int\")",
-        "offset": 0,
-        "target": "mypy.errors.Errors.prepare_baseline_errors"
-      },
-      {
-        "code": "operator",
-        "column": 38,
-        "message": "Left operand is of type \"Union[int, str, None]\"",
-        "offset": 0,
-        "target": "mypy.errors.Errors.prepare_baseline_errors"
-      },
-      {
-        "code": "assignment",
-        "column": 31,
-        "message": "Incompatible types in assignment (expression has type \"Union[int, str, None]\", variable has type \"int\")",
-        "offset": 1,
-        "target": "mypy.errors.Errors.prepare_baseline_errors"
-      },
-      {
-        "code": "return-value",
-        "column": 15,
-        "message": "Incompatible return value type (got \"Dict[str, List[Dict[str, Union[int, str, None]]]]\", expected \"Dict[str, Union[List[BaselineError], List[StoredBaselineError]]]\")",
-        "offset": 2,
-        "target": "mypy.errors.Errors.prepare_baseline_errors"
       }
     ],
     "mypy/expandtype.py": [
@@ -13897,7 +13778,7 @@
         "code": "no-any-expr",
         "column": 17,
         "message": "Expression type contains \"Any\" (has type \"Union[Any, Tuple[]]\")",
-        "offset": 21,
+        "offset": 30,
         "target": "mypy.options.Options.snapshot"
       },
       {
