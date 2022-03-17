@@ -147,8 +147,8 @@ IGNORE_WITHOUT_CODE: Final = ErrorCode(
     "General",
     default_enabled=False,
 )
-UNSAFE_VARIANCE: Final = ErrorCode("unsafe-variance", "Incorrect usages of variance", "General")
 UNUSED_IGNORE: Final = ErrorCode("unused-ignore", "Ignore comment is unused", "General")
+UNSAFE_VARIANCE: Final = ErrorCode("unsafe-variance", "Incorrect usages of variance", "General")
 
 NO_ANY_EXPR: Final = ErrorCode("no-any-expr", "An expression contains Any", "General")
 NO_ANY_EXPLICIT: Final = ErrorCode("no-any-explicit", "Usage of the Any type", "General")
@@ -157,9 +157,6 @@ NO_ANY_DECORATED: Final = ErrorCode(
     "no-any-decorated", "Decorated function contains Any", "General")
 
 REVEAL: Final = ErrorCode("reveal", "Reveal types at check time", "General")
-
-NO_ERROR_CODE: Final = ErrorCode("no-error-code", "No error code specified in ignore comment",
-                                 "General")
 
 # Syntax errors are often blocking.
 SYNTAX: Final = ErrorCode("syntax", "Report syntax errors", "General")

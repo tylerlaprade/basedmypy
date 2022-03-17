@@ -552,7 +552,7 @@ class Errors:
                 # Don't use report since add_error_info will ignore the error!
                 info = ErrorInfo(self.import_context(), file, self.current_module(), None,
                                  None, line, -1, 'error', message,
-                                 codes.IGNORE_WITHOUT_CODE, False, False, False)
+                                 codes.UNUSED_IGNORE, False, False, False)
                 self._add_error_info(file, info)
 
     def generate_ignore_without_code_errors(self,
