@@ -1265,6 +1265,13 @@
       "target": "mypy.build.find_cache_meta"
     },
     {
+      "code": "redundant-expr",
+      "column": 12,
+      "line": 1239,
+      "message": "Left operand of \"or\" is always false",
+      "target": "mypy.build.find_cache_meta"
+    },
+    {
       "code": "dynamic",
       "column": 31,
       "line": 1239,
@@ -1279,6 +1286,13 @@
       "target": "mypy.build.find_cache_meta"
     },
     {
+      "code": "redundant-expr",
+      "column": 31,
+      "line": 1239,
+      "message": "Left operand of \"or\" is always false",
+      "target": "mypy.build.find_cache_meta"
+    },
+    {
       "code": "dynamic",
       "column": 12,
       "line": 1240,
@@ -1290,6 +1304,13 @@
       "column": 12,
       "line": 1240,
       "message": "Expression type contains \"Any\" (has type \"CacheMeta\")",
+      "target": "mypy.build.find_cache_meta"
+    },
+    {
+      "code": "redundant-expr",
+      "column": 12,
+      "line": 1240,
+      "message": "Left operand of \"or\" is always false",
       "target": "mypy.build.find_cache_meta"
     },
     {
@@ -2513,6 +2534,13 @@
       "target": "mypy.checker.TypeChecker.check_for_missing_annotations"
     },
     {
+      "code": "redundant-expr",
+      "column": 11,
+      "line": 1143,
+      "message": "Left operand of \"and\" is always true",
+      "target": "mypy.checker.TypeChecker.check___new___signature"
+    },
+    {
       "code": "dynamic",
       "column": 40,
       "line": 1330,
@@ -2574,6 +2602,13 @@
       "line": 1647,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.get_op_other_domain"
+    },
+    {
+      "code": "redundant-expr",
+      "column": 11,
+      "line": 1688,
+      "message": "Left operand of \"and\" is always true",
+      "target": "mypy.checker.TypeChecker.check_override"
     },
     {
       "code": "dynamic",
@@ -2639,6 +2674,13 @@
       "target": "mypy.checker.TypeChecker.determine_type_of_class_member"
     },
     {
+      "code": "truthy-bool",
+      "column": 23,
+      "line": 2182,
+      "message": "\"signature\" has type \"Type\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.checker.TypeChecker.check_assignment"
+    },
+    {
       "code": "dynamic",
       "column": 44,
       "line": 2272,
@@ -2651,6 +2693,27 @@
       "line": 2272,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.check_assignment"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 19,
+      "line": 2281,
+      "message": "\"rvalue_type\" has type \"ProperType\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.checker.TypeChecker.check_assignment"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 19,
+      "line": 2281,
+      "message": "\"rvalue_type\" has type \"ProperType\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.checker.TypeChecker.check_assignment"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 2431,
+      "message": "\"compare_type\" has type \"ProperType\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.checker.TypeChecker.check_compatibility_super"
     },
     {
       "code": "dynamic",
@@ -2770,6 +2833,20 @@
       "line": 2972,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
       "target": "mypy.checker.TypeChecker.type_is_iterable"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 3140,
+      "message": "\"var\" has type \"Var\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.checker.TypeChecker.set_inferred_type"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 3140,
+      "message": "\"var\" has type \"Var\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.checker.TypeChecker.set_inferred_type"
     },
     {
       "code": "dynamic",
@@ -3301,6 +3378,13 @@
   ],
   "mypy/checkmember.py": [
     {
+      "code": "redundant-expr",
+      "column": 15,
+      "line": 217,
+      "message": "Left operand of \"and\" is always true",
+      "target": "mypy.checkmember.analyze_instance_member_access"
+    },
+    {
       "code": "dynamic",
       "column": 48,
       "line": 405,
@@ -3322,6 +3406,20 @@
       "target": "mypy.checkmember.analyze_member_var_access"
     },
     {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 437,
+      "message": "Member \"chk\" has type \"TypeChecker\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.checkmember.analyze_member_var_access"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 437,
+      "message": "Member \"chk\" has type \"TypeChecker\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.checkmember.analyze_member_var_access"
+    },
+    {
       "code": "dynamic",
       "column": 48,
       "line": 520,
@@ -3333,6 +3431,20 @@
       "column": 58,
       "line": 599,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
+      "target": "mypy.checkmember.analyze_var"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 7,
+      "line": 610,
+      "message": "\"result\" has type \"Type\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.checkmember.analyze_var"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 7,
+      "line": 610,
+      "message": "\"result\" has type \"Type\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
       "target": "mypy.checkmember.analyze_var"
     },
     {
@@ -7293,51 +7405,37 @@
     {
       "code": "unreachable",
       "column": 16,
-      "line": 724,
+      "line": 725,
       "message": "Statement is unreachable",
       "target": "mypy.errors.Errors.render_messages"
     },
     {
       "code": "dynamic",
       "column": 41,
-      "line": 755,
+      "line": 756,
       "message": "Expression type contains \"Any\" (has type \"Callable[[Any], Tuple[Any, Any]]\")",
       "target": "mypy.errors.Errors.sort_messages"
     },
     {
       "code": "dynamic",
       "column": 51,
-      "line": 755,
+      "line": 756,
       "message": "Expression type contains \"Any\" (has type \"Tuple[Any, Any]\")",
       "target": "mypy.errors.Errors.sort_messages"
     },
     {
       "code": "dynamic",
       "column": 52,
-      "line": 755,
+      "line": 756,
       "message": "Expression has type \"Any\"",
       "target": "mypy.errors.Errors.sort_messages"
     },
     {
       "code": "dynamic",
       "column": 60,
-      "line": 755,
+      "line": 756,
       "message": "Expression has type \"Any\"",
       "target": "mypy.errors.Errors.sort_messages"
-    },
-    {
-      "code": "typeddict-item",
-      "column": 28,
-      "line": 805,
-      "message": "Incompatible types (expression has type \"Union[ErrorCode, None, str]\", TypedDict item \"code\" has type \"str\")",
-      "target": "mypy.errors.Errors.save_baseline"
-    },
-    {
-      "code": "typeddict-item",
-      "column": 30,
-      "line": 809,
-      "message": "Incompatible types (expression has type \"Optional[str]\", TypedDict item \"target\" has type \"str\")",
-      "target": "mypy.errors.Errors.save_baseline"
     }
   ],
   "mypy/expandtype.py": [
@@ -8023,6 +8121,13 @@
       "target": "mypy.fastparse.ASTConverter.do_func_def"
     },
     {
+      "code": "redundant-expr",
+      "column": 38,
+      "line": 567,
+      "message": "If condition is always true",
+      "target": "mypy.fastparse.ASTConverter.do_func_def"
+    },
+    {
       "code": "dynamic",
       "column": 37,
       "line": 618,
@@ -8230,6 +8335,13 @@
       "column": 16,
       "line": 696,
       "message": "Expression has type \"Any\"",
+      "target": "mypy.fastparse.ASTConverter.transform_args"
+    },
+    {
+      "code": "redundant-expr",
+      "column": 29,
+      "line": 698,
+      "message": "If condition is always false",
       "target": "mypy.fastparse.ASTConverter.transform_args"
     },
     {
@@ -10188,6 +10300,13 @@
       "target": "mypy.fastparse2.ASTConverter.visit_FunctionDef"
     },
     {
+      "code": "redundant-expr",
+      "column": 38,
+      "line": 402,
+      "message": "If condition is always true",
+      "target": "mypy.fastparse2.ASTConverter.visit_FunctionDef"
+    },
+    {
       "code": "dynamic",
       "column": 37,
       "line": 449,
@@ -10780,11 +10899,39 @@
   ],
   "mypy/fixup.py": [
     {
+      "code": "truthy-bool",
+      "column": 15,
+      "line": 42,
+      "message": "Member \"defn\" has type \"ClassDef\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.fixup.NodeFixer.visit_type_info"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 115,
+      "message": "Member \"func\" has type \"FuncDef\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.fixup.NodeFixer.visit_decorator"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 117,
+      "message": "Member \"var\" has type \"Var\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.fixup.NodeFixer.visit_decorator"
+    },
+    {
       "code": "dynamic",
       "column": 4,
       "line": 177,
       "message": "Explicit \"Any\" is not allowed",
       "target": "mypy.fixup.TypeFixer.visit_any"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 181,
+      "message": "Member \"fallback\" has type \"Instance\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.fixup.TypeFixer.visit_callable_type"
     },
     {
       "code": "dynamic",
@@ -11373,7 +11520,7 @@
     {
       "code": "dynamic",
       "column": 7,
-      "line": 954,
+      "line": 955,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
@@ -11387,216 +11534,251 @@
     {
       "code": "dynamic",
       "column": 49,
-      "line": 970,
+      "line": 968,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 29,
-      "line": 984,
+      "line": 982,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 29,
-      "line": 984,
+      "line": 982,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 7,
-      "line": 990,
+      "line": 988,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 7,
-      "line": 990,
+      "line": 988,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 7,
-      "line": 990,
+      "line": 988,
       "message": "Expression type contains \"Any\" (has type \"Union[Any, bool]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 30,
-      "line": 995,
+      "line": 993,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 30,
-      "line": 995,
+      "line": 993,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 30,
-      "line": 995,
+      "line": 993,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 30,
-      "line": 995,
+      "line": 993,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 52,
-      "line": 995,
+      "line": 993,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 52,
-      "line": 995,
+      "line": 993,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 77,
-      "line": 995,
+      "line": 993,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 26,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 26,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 32,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 32,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 44,
-      "line": 1000,
+      "line": 998,
       "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 44,
-      "line": 1000,
+      "line": 998,
       "message": "Expression type contains \"Any\" (has type \"List[Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 68,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 68,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 68,
-      "line": 1000,
+      "line": 998,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 68,
+      "line": 998,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 999,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 999,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 999,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
+      "line": 999,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 45,
       "line": 1000,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
@@ -11604,321 +11786,335 @@
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1001,
+      "line": 1000,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1001,
+      "line": 1000,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1001,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 1001,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 1002,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 1002,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 1002,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
-      "column": 45,
-      "line": 1002,
+      "line": 1000,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 36,
-      "line": 1034,
+      "line": 1032,
       "message": "Expression type contains \"Any\" (has type \"Set[Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 7,
-      "line": 1040,
+      "line": 1038,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 33,
-      "line": 1041,
+      "line": 1039,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 4,
-      "line": 1049,
+      "line": 1047,
       "message": "Expression type contains \"Any\" (has type \"Tuple[str, Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 4,
-      "line": 1049,
+      "line": 1047,
       "message": "Expression type contains \"Any\" (has type \"Tuple[str, Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 4,
-      "line": 1049,
+      "line": 1047,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 21,
-      "line": 1049,
+      "line": 1047,
       "message": "Expression type contains \"Any\" (has type \"Dict[str, Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 21,
-      "line": 1049,
+      "line": 1047,
       "message": "Expression type contains \"Any\" (has type \"dict_items[str, Any]\")",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 40,
+      "line": 1048,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 25,
       "line": 1050,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
-      "column": 25,
-      "line": 1052,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
       "column": 47,
-      "line": 1053,
+      "line": 1051,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 7,
-      "line": 1060,
+      "line": 1058,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 7,
-      "line": 1076,
+      "line": 1074,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 7,
-      "line": 1076,
+      "line": 1074,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 30,
-      "line": 1076,
+      "line": 1074,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 8,
-      "line": 1086,
+      "line": 1084,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 17,
-      "line": 1086,
+      "line": 1084,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 25,
-      "line": 1087,
+      "line": 1085,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 25,
-      "line": 1087,
+      "line": 1085,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 57,
-      "line": 1087,
+      "line": 1085,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 75,
+      "line": 1086,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_options"
+    },
+    {
+      "code": "dynamic",
+      "column": 53,
       "line": 1088,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
-      "column": 53,
+      "column": 54,
       "line": 1090,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
-      "column": 54,
+      "column": 8,
       "line": 1092,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
-      "column": 8,
-      "line": 1094,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_options"
-    },
-    {
-      "code": "dynamic",
       "column": 17,
-      "line": 1094,
+      "line": 1092,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 45,
-      "line": 1095,
+      "line": 1093,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 9,
-      "line": 1097,
+      "line": 1095,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 53,
-      "line": 1099,
+      "line": 1097,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 41,
-      "line": 1103,
+      "line": 1101,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_options"
     },
     {
       "code": "dynamic",
       "column": 12,
-      "line": 1151,
+      "line": 1149,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 39,
-      "line": 1155,
+      "line": 1153,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 39,
-      "line": 1155,
+      "line": 1153,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 39,
-      "line": 1155,
+      "line": 1153,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 39,
-      "line": 1155,
+      "line": 1153,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 39,
-      "line": 1155,
+      "line": 1153,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 11,
-      "line": 1156,
+      "line": 1154,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 11,
-      "line": 1156,
+      "line": 1154,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 62,
+      "line": 1155,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 15,
+      "line": 1156,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 15,
+      "line": 1156,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 15,
+      "line": 1156,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 15,
+      "line": 1156,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 46,
+      "line": 1156,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 46,
+      "line": 1156,
+      "message": "Expression has type \"Any\"",
+      "target": "mypy.main.process_cache_map"
+    },
+    {
+      "code": "dynamic",
+      "column": 87,
       "line": 1157,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
@@ -11939,42 +12135,7 @@
     },
     {
       "code": "dynamic",
-      "column": 15,
-      "line": 1158,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 15,
-      "line": 1158,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 46,
-      "line": 1158,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 46,
-      "line": 1158,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 87,
-      "line": 1159,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 15,
+      "column": 25,
       "line": 1160,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
@@ -11982,63 +12143,49 @@
     {
       "code": "dynamic",
       "column": 15,
-      "line": 1160,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 25,
-      "line": 1162,
+      "line": 1161,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 15,
-      "line": 1163,
-      "message": "Expression has type \"Any\"",
-      "target": "mypy.main.process_cache_map"
-    },
-    {
-      "code": "dynamic",
-      "column": 15,
-      "line": 1163,
+      "line": 1161,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 25,
-      "line": 1165,
+      "line": 1163,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 26,
-      "line": 1166,
+      "line": 1164,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 36,
-      "line": 1166,
+      "line": 1164,
       "message": "Expression type contains \"Any\" (has type \"Tuple[Any, Any]\")",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 37,
-      "line": 1166,
+      "line": 1164,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     },
     {
       "code": "dynamic",
       "column": 48,
-      "line": 1166,
+      "line": 1164,
       "message": "Expression has type \"Any\"",
       "target": "mypy.main.process_cache_map"
     }
@@ -12784,6 +12931,13 @@
       "target": "mypy.messages.plural_s"
     },
     {
+      "code": "redundant-expr",
+      "column": 7,
+      "line": 2121,
+      "message": "Left operand of \"and\" is always true",
+      "target": "mypy.messages.find_defining_module"
+    },
+    {
       "code": "dynamic",
       "column": 36,
       "line": 2141,
@@ -13506,6 +13660,13 @@
       "target": "mypy.nodes.TypeAlias.deserialize"
     },
     {
+      "code": "redundant-expr",
+      "column": 20,
+      "line": 3258,
+      "message": "Left operand of \"and\" is always true",
+      "target": "mypy.nodes.SymbolTableNode.serialize"
+    },
+    {
       "code": "dynamic",
       "column": 15,
       "line": 3272,
@@ -13688,6 +13849,13 @@
       "line": 339,
       "message": "Expression has type \"Any\"",
       "target": "mypy.options.Options.snapshot"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 351,
+      "message": "\"get\" returns \"object\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.options.Options.apply_changes"
     },
     {
       "code": "dynamic",
@@ -13890,6 +14058,13 @@
       "line": 387,
       "message": "Expression has type \"Any\"",
       "target": "mypy.plugins.attrs._analyze_class"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 20,
+      "line": 608,
+      "message": "Expression has type \"Expression\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.plugins.attrs._parse_converter"
     },
     {
       "code": "dynamic",
@@ -14443,6 +14618,13 @@
       "line": 282,
       "message": "Expression has type \"Any\"",
       "target": "mypy.report.AnyExpressionsReporter._report_types_of_anys"
+    },
+    {
+      "code": "redundant-expr",
+      "column": 17,
+      "line": 360,
+      "message": "Left operand of \"and\" is always true",
+      "target": "mypy.report.LineCoverageVisitor.visit_func_def"
     },
     {
       "code": "dynamic",
@@ -15434,6 +15616,15 @@
       "target": "mypy.sametypes.SameTypeVisitor.visit_callable_type"
     }
   ],
+  "mypy/scope.py": [
+    {
+      "code": "truthy-bool",
+      "column": 19,
+      "line": 78,
+      "message": "Member \"function\" has type \"FuncBase\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.scope.Scope.function_scope"
+    }
+  ],
   "mypy/semanal.py": [
     {
       "code": "dynamic",
@@ -15534,6 +15725,13 @@
       "target": "mypy.semanal.SemanticAnalyzer.clean_up_bases_and_infer_type_variables"
     },
     {
+      "code": "truthy-bool",
+      "column": 16,
+      "line": 1612,
+      "message": "Member \"defn\" has type \"ClassDef\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.semanal.SemanticAnalyzer.enum_has_final_values"
+    },
+    {
       "code": "dynamic",
       "column": 67,
       "line": 1973,
@@ -15546,6 +15744,13 @@
       "line": 2039,
       "message": "Statement is unreachable",
       "target": "mypy.semanal.SemanticAnalyzer.visit_import_all"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 2367,
+      "message": "Member \"rvalue\" has type \"Expression\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.semanal.SemanticAnalyzer.analyze_lvalues"
     },
     {
       "code": "dynamic",
@@ -15597,6 +15802,20 @@
       "target": "mypy.semanal.SemanticAnalyzer.process_module_assignment"
     },
     {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 3613,
+      "message": "Member \"expr\" has type \"Expression\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.semanal.SemanticAnalyzer.visit_assert_stmt"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 3861,
+      "message": "Member \"expr\" has type \"Expression\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.semanal.SemanticAnalyzer.visit_yield_from_expr"
+    },
+    {
       "code": "dynamic",
       "column": 34,
       "line": 3906,
@@ -15625,6 +15844,13 @@
       "target": "mypy.semanal.SemanticAnalyzer.visit_member_expr"
     },
     {
+      "code": "truthy-bool",
+      "column": 27,
+      "line": 4041,
+      "message": "\"n\" has type \"SymbolTableNode\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.semanal.SemanticAnalyzer.visit_member_expr"
+    },
+    {
       "code": "dynamic",
       "column": 37,
       "line": 4509,
@@ -15632,11 +15858,32 @@
       "target": "mypy.semanal.SemanticAnalyzer.create_getattr_var"
     },
     {
+      "code": "truthy-bool",
+      "column": 15,
+      "line": 4555,
+      "message": "\"sym\" has type \"SymbolTableNode\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.semanal.SemanticAnalyzer.named_type"
+    },
+    {
       "code": "no-error-code",
       "column": -1,
       "line": 4570,
       "message": "No error code on \"type: ignore\" comment",
       "target": null
+    },
+    {
+      "code": "redundant-expr",
+      "column": 16,
+      "line": 5102,
+      "message": "Left operand of \"and\" is always true",
+      "target": "mypy.semanal.SemanticAnalyzer.in_checked_function"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 15,
+      "line": 5272,
+      "message": "\"aliases_used\" has type \"Iterable[str]\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.semanal.SemanticAnalyzer.add_type_alias_deps"
     },
     {
       "code": "dynamic",
@@ -15828,6 +16075,13 @@
       "line": 421,
       "message": "Statement is unreachable",
       "target": "mypy.server.deps.DependencyVisitor.visit_assignment_stmt"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 951,
+      "message": "Member \"upper_bound\" has type \"Type\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.server.deps.TypeTriggersVisitor.visit_type_var"
     },
     {
       "code": "dynamic",
@@ -16315,6 +16569,13 @@
     }
   ],
   "mypy/stats.py": [
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 214,
+      "message": "Member \"expr\" has type \"Expression\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.stats.StatisticsVisitor.visit_yield_from_expr"
+    },
     {
       "code": "dynamic",
       "column": 35,
@@ -16911,6 +17172,13 @@
       "line": 333,
       "message": "Expression has type \"Any\"",
       "target": "mypy.strconv.StrConv.str_repr"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 388,
+      "message": "Member \"expr\" has type \"Expression\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.strconv.StrConv.visit_yield_from_expr"
     },
     {
       "code": "dynamic",
@@ -17603,6 +17871,13 @@
   ],
   "mypy/stubgen.py": [
     {
+      "code": "redundant-expr",
+      "column": 17,
+      "line": 605,
+      "message": "Left operand of \"and\" is always true",
+      "target": "mypy.stubgen.StubGenerator.visit_overloaded_func_def"
+    },
+    {
       "code": "dynamic",
       "column": 63,
       "line": 641,
@@ -17614,6 +17889,13 @@
       "column": 66,
       "line": 672,
       "message": "Expression type contains \"Any\" (has type \"Type[CallableType]\")",
+      "target": "mypy.stubgen.StubGenerator.visit_func_def"
+    },
+    {
+      "code": "redundant-expr",
+      "column": 13,
+      "line": 679,
+      "message": "Left operand of \"and\" is always true",
       "target": "mypy.stubgen.StubGenerator.visit_func_def"
     },
     {
@@ -18169,6 +18451,27 @@
       "column": 28,
       "line": 243,
       "message": "Expression type contains \"Any\" (has type \"Union[str, Any]\")",
+      "target": "mypy.stubgenc.strip_or_import"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 244,
+      "message": "\"module\" has type Module which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.stubgenc.strip_or_import"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 9,
+      "line": 250,
+      "message": "\"module\" has type Module which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.stubgenc.strip_or_import"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 9,
+      "line": 250,
+      "message": "\"module\" has type Module which does not implement __bool__ or __len__ so it could always be true in boolean context",
       "target": "mypy.stubgenc.strip_or_import"
     },
     {
@@ -21106,6 +21409,20 @@
       "target": "mypy.suggestions.any_score_type"
     },
     {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 817,
+      "message": "Member \"partial_fallback\" has type \"Instance\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.suggestions.TypeFormatter.visit_tuple_type"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 817,
+      "message": "Member \"partial_fallback\" has type \"Instance\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.suggestions.TypeFormatter.visit_tuple_type"
+    },
+    {
       "code": "dynamic",
       "column": 21,
       "line": 951,
@@ -22928,6 +23245,15 @@
       "target": "mypy.test.testreports.CoberturaReportSuite.test_as_xml"
     }
   ],
+  "mypy/test/testsemanal.py": [
+    {
+      "code": "redundant-expr",
+      "column": 15,
+      "line": 203,
+      "message": "Left operand of \"and\" is always true",
+      "target": "mypy.test.testsemanal.TypeInfoMap.__str__"
+    }
+  ],
   "mypy/test/testsolve.py": [
     {
       "code": "attr-defined",
@@ -23518,6 +23844,20 @@
     }
   ],
   "mypy/test/testtypegen.py": [
+    {
+      "code": "redundant-expr",
+      "column": 19,
+      "line": 52,
+      "message": "Left operand of \"and\" is always true",
+      "target": "mypy.test.testtypegen.TypeExportSuite.run_case"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 65,
+      "line": 52,
+      "message": "Expression has type \"Type\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.test.testtypegen.TypeExportSuite.run_case"
+    },
     {
       "code": "dynamic",
       "column": 34,
@@ -24894,11 +25234,46 @@
       "target": "mypy.types.TypeStrVisitor.visit_type_var"
     },
     {
+      "code": "truthy-bool",
+      "column": 30,
+      "line": 2320,
+      "message": "Member \"upper_bound\" has type \"Type\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.types.TypeStrVisitor.visit_type_var"
+    },
+    {
       "code": "unreachable",
       "column": 12,
       "line": 2327,
       "message": "Statement is unreachable",
       "target": "mypy.types.TypeStrVisitor.visit_param_spec"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 2400,
+      "message": "Member \"partial_fallback\" has type \"Instance\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.types.TypeStrVisitor.visit_tuple_type"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 2400,
+      "message": "Member \"partial_fallback\" has type \"Instance\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.types.TypeStrVisitor.visit_tuple_type"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 2416,
+      "message": "Member \"fallback\" has type \"Instance\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.types.TypeStrVisitor.visit_typeddict_type"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 2416,
+      "message": "Member \"fallback\" has type \"Instance\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypy.types.TypeStrVisitor.visit_typeddict_type"
     },
     {
       "code": "dynamic",
@@ -26444,6 +26819,22 @@
       "line": 146,
       "message": "Expression has type \"Any\"",
       "target": "mypyc.codegen.emitclass.generate_slots"
+    }
+  ],
+  "mypyc/codegen/emitfunc.py": [
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 353,
+      "message": "Member \"ann\" has type \"object\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypyc.codegen.emitfunc.FunctionEmitterVisitor.visit_load_static"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 11,
+      "line": 478,
+      "message": "Member \"ann\" has type \"object\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypyc.codegen.emitfunc.FunctionEmitterVisitor.visit_load_global"
     }
   ],
   "mypyc/codegen/emitmodule.py": [
@@ -28702,6 +29093,20 @@
   ],
   "mypyc/ir/pprint.py": [
     {
+      "code": "truthy-bool",
+      "column": 47,
+      "line": 86,
+      "message": "Member \"ann\" has type \"object\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypyc.ir.pprint.IRPrettyPrintVisitor.visit_load_static"
+    },
+    {
+      "code": "truthy-bool",
+      "column": 47,
+      "line": 166,
+      "message": "Member \"ann\" has type \"object\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypyc.ir.pprint.IRPrettyPrintVisitor.visit_load_global"
+    },
+    {
       "code": "dynamic",
       "column": 4,
       "line": 203,
@@ -28906,6 +29311,15 @@
       "line": 140,
       "message": "Expression has type \"Any\"",
       "target": "mypyc.irbuild.expression.transform_member_expr"
+    }
+  ],
+  "mypyc/irbuild/for_helpers.py": [
+    {
+      "code": "truthy-bool",
+      "column": 15,
+      "line": 571,
+      "message": "\"value_box\" has type \"Value\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
+      "target": "mypyc.irbuild.for_helpers.ForSequence.begin_body"
     }
   ],
   "mypyc/irbuild/function.py": [
