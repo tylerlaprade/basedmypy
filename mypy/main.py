@@ -946,6 +946,9 @@ def process_options(args: List[str],
     if dummy.legacy:
         mypy.options._based = False
 
+    based_enabled_codes = {
+        "ignore-without-code", "redundant-expr", "truthy-bool"
+    } if mypy.options._based else set()
     options = Options()
 
     if dummy.legacy:
@@ -1006,7 +1009,7 @@ def process_options(args: List[str],
 
     # Process `--enable-error-code` and `--disable-error-code` flags
     disabled_codes = set(options.disable_error_code)
-    enabled_codes = set(options.enable_error_code)
+    enabled_codes = set(options.enable_error_code) | (based_enabled_codes - disabled_codes)
 
     valid_error_codes = set(error_codes.keys())
 
