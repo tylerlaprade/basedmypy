@@ -43,7 +43,7 @@ PER_MODULE_OPTIONS: Final = {
     "ignore_errors",
     "ignore_missing_imports",
     "implicit_reexport",
-    "local_partial_types",
+    "nonlocal_partial_types",
     "mypyc",
     "no_implicit_optional",
     "show_none_errors",
@@ -53,7 +53,6 @@ PER_MODULE_OPTIONS: Final = {
     "warn_no_return",
     "warn_return_any",
     "warn_unreachable",
-    "warn_no_ignore_code",
     "warn_unused_ignores",
 }
 
@@ -163,9 +162,6 @@ class Options:
 
         # Warn about unused '# type: ignore' comments
         self.warn_unused_ignores = flip_if_not_based(True)
-
-        # Warn about '# type: ignore' comments that don't include an error code
-        self.warn_no_ignore_code = flip_if_not_based(True)
 
         # Warn about unused '[mypy-<pattern>]'  or '[[tool.mypy.overrides]]' config sections
         self.warn_unused_configs = flip_if_not_based(True)
