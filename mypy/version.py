@@ -12,10 +12,10 @@ base_version = __version__
 # friendly version information
 based_version_info = VersionInfo(
     1,
-    4,
+    3,
     0,
-    "dev",
-    0,
+    "beta",
+    1,
     __version__.split("+dev")[0],
     "dev" if "+dev" in __version__ else "final",
 )
