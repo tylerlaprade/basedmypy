@@ -683,11 +683,6 @@ def process_options(args: List[str],
     add_invertible_flag('--no-warn-unused-ignores', default=True, dest="warn_unused_ignores",
                         help="Do not warn about unneeded '# type: ignore' comments",
                         group=lint_group)
-    add_invertible_flag('--no-warn-no-ignore-code', default=False,
-                        dest="warn_no_ignore_code",
-                        help="Do not warn about '# type: ignore' comments "
-                             "that don't specify the error code",
-                        group=lint_group)
     add_invertible_flag('--no-warn-no-return', dest='warn_no_return', default=True,
                         help="Do not warn about functions that end without returning",
                         group=lint_group)
