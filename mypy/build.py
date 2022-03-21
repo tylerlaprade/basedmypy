@@ -1099,7 +1099,7 @@ def save_baseline(manager: BuildManager) -> None:
         manager.stdout.write(f"Baseline successfully updated at {file}\n")
 
 
-def load_baseline(options: Options, errors: Errors, stdout: TextIO) -> None:
+def load_baseline(options: Options, errors: Errors, stdout: TextIO):
     if not options.baseline_file:
         return
 
