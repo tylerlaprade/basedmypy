@@ -84,6 +84,7 @@ def test_python_evaluation(testcase: DataDrivenTestCase, cache_dir: str) -> None
         for s in testcase.input:
             file.write('{}\n'.format(s))
     mypy_cmdline.append('--cache-dir={}'.format(cache_dir))
+    mypy_cmdline.append('--legacy')
     output = []
     # Type check the program.
     out, err, returncode = api.run(mypy_cmdline)

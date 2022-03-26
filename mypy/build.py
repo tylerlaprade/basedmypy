@@ -1062,7 +1062,7 @@ def save_baseline(manager: BuildManager) -> None:
         if file.exists():
             file.unlink()
             print("No errors, baseline file removed")
-        if manager.options.write_baseline:
+        elif manager.options.write_baseline:
             print("No errors, no baseline to write")
         # Indicate that writing was canceled
         manager.options.write_baseline = False
