@@ -26,7 +26,10 @@ class TypeExportSuite(DataSuite):
                 mask = '(' + line[2:].strip() + ')$'
 
             src = '\n'.join(testcase.input)
+            import mypy.options
+            mypy.options._based = False
             options = Options()
+            mypy.options._based = True
             options.strict_optional = False  # TODO: Enable strict optional checking
             options.use_builtins_fixtures = True
             options.show_traceback = True

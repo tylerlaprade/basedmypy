@@ -18,8 +18,8 @@ Baseline successfully written to a/b
     "pkg/a.py": [
       {
         "code": "name-defined",
-        "column": 1,
-        "message": "Name \"a\" is no defined",
+        "column": 0,
+        "message": "Name \"a\" is not defined",
         "offset": 1,
         "target": "a"
       }
@@ -84,6 +84,7 @@ Baseline successfully written to .mypy/baseline.json
 No errors, baseline file removed
 Success: no issues found in 1 source file
 == Return code: 0
+
 
 [case testAutoBaselineDoesntActivateWithErrors]
 # cmd: mypy --error-summary pkg
@@ -200,7 +201,6 @@ reveal_type(a)
 {"main.py": [{"line": 1, "code": "misc", "message": "test"}]}
 [out]
 pkg/main.py:2:13: note: Revealed type is "builtins.int"
-Success: no issues found in 1 source file
 
 
 [case testRevealLocals]
@@ -214,7 +214,6 @@ def foo() -> None:
 [out]
 pkg/main.py:3:5: note: Revealed local types are:
 pkg/main.py:3:5: note:     a: builtins.int
-Success: no issues found in 1 source file
 
 
 [case testBaselineFormat1_2]

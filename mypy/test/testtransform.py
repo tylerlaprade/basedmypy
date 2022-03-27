@@ -35,7 +35,10 @@ def test_transform(testcase: DataDrivenTestCase) -> None:
 
     try:
         src = '\n'.join(testcase.input)
+        import mypy.options
+        mypy.options._based = False
         options = parse_options(src, testcase, 1)
+        mypy.options._based = True
         options.use_builtins_fixtures = True
         options.semantic_analysis_only = True
         options.show_traceback = True
