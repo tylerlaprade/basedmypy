@@ -24,7 +24,13 @@ allowed_duplicates: Final = ["@overload", "Got:", "Expected:"]
 
 # Keep track of the original error code when the error code of a message is changed.
 # This is used to give notes about out-of-date "type: ignore" comments.
-original_error_codes: Final = {codes.LITERAL_REQ: codes.MISC}
+original_error_codes: Final = {
+    codes.LITERAL_REQ: codes.MISC,
+    codes.NO_ANY_EXPR: codes.MISC,
+    codes.NO_ANY_EXPLICIT: codes.MISC,
+    codes.NO_SUBCLASS_ANY: codes.MISC,
+    codes.NO_ANY_DECORATED: codes.MISC,
+}
 
 
 class ErrorInfo:
@@ -81,6 +87,9 @@ class ErrorInfo:
     # by mypy daemon)
     hidden = False
 
+    # Any note messages that are associated with this error
+    notes: List['ErrorInfo']
+
     def __init__(self,
                  import_ctx: List[Tuple[str, int]],
                  file: str,
@@ -112,6 +121,7 @@ class ErrorInfo:
         self.allow_dups = allow_dups
         self.origin = origin or (file, line, line)
         self.target = target
+        self.notes = []
 
 
 # Type used internally to represent errors:
@@ -457,6 +467,7 @@ class Errors:
                 info.line, info.column, 'note', msg,
                 code=None, blocker=False, only_once=False, allow_dups=False
             )
+            info.notes.append(note)
             self._add_error_info(file, note)
 
     def has_many_errors(self) -> bool:
@@ -907,10 +918,13 @@ class Errors:
         if not baseline_errors:
             return
         new_errors = []
+        ignored_notes = []
         # first pass for exact matches
         for error in self.sort_messages(self.error_info_map[path]):
             if error.code == codes.REVEAL:
                 new_errors.append(error)
+                continue
+            if id(error) in ignored_notes:
                 continue
             for i, baseline_error in enumerate(baseline_errors):
                 if (
@@ -918,15 +932,19 @@ class Errors:
                         clean_baseline_message(error.message) ==
                         clean_baseline_message(baseline_error["message"])
                 ):
+                    ignored_notes.extend([id(note) for note in error.notes])
                     del baseline_errors[i]
                     break
             else:
                 new_errors.append(error)
         # second pass for rough matches
         new_errors, temp = [], new_errors
+        ignored_notes = []
         for error in temp:
             if error.code == codes.REVEAL:
                 new_errors.append(error)
+                continue
+            if id(error) in ignored_notes:
                 continue
             for i, baseline_error in enumerate(baseline_errors):
                 if (
@@ -936,6 +954,7 @@ class Errors:
                         clean_baseline_message(baseline_error["message"]) and
                         abs(error.line - baseline_error["line"]) < 100
                 ):
+                    ignored_notes.extend([id(note) for note in error.notes])
                     del baseline_errors[i]
                     break
             else:

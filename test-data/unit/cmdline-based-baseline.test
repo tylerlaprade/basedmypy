@@ -221,6 +221,27 @@ Found 1 error in 1 file (errors prevented further checking)
 == Return code: 2
 
 
+[case testBaselineFilterLinkedNotes]
+# cmd: mypy --error-summary pkg
+[file pkg/a.py]
+(a,)  # type: ignore[name-defined]
+[file .mypy/baseline.json]
+{
+  "files": {
+    "pkg/a.py": [
+      {"code": "name-defined", "column": 1, "message": "Name \"a\" is not defined", "offset": 1},
+      {"code": "no-any-expr", "column": 0, "message": "Expression has type \"Any\"", "offset": 0}
+    ]
+  },
+  "format": "1.3",
+  "targets": [ "file:pkg" ]
+}
+[out]
+Baseline successfully updated at .mypy/baseline.json
+Success: no issues found in 1 source file
+== Return code: 0
+
+
 [case testRevealType]
 # cmd: mypy --error-summary pkg
 [file pkg/main.py]
