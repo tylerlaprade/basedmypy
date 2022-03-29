@@ -209,7 +209,7 @@ class Errors:
     seen_import_error = False
 
     # Error baseline
-    original_baseline: Dict[str, List[BaselineError]]
+    original_baseline: Dict[str, List[UnknownBaselineError]]
     baseline: Dict[str, List[BaselineError]]
     # baseline metadata
     baseline_targets: List[str]
@@ -860,6 +860,7 @@ class Errors:
         targets: List[str], baseline_format: str
     ) -> None:
         """Initialize the baseline properties"""
+        self.original_baseline = deepcopy(errors)
         if baseline_format == "1.3":
             for file in errors.values():
                 previous = 0
@@ -867,7 +868,6 @@ class Errors:
                     previous = error["line"] = error["offset"] + previous
         baseline_errors = cast(Dict[str, List[BaselineError]], errors)
         self.baseline = baseline_errors
-        self.original_baseline = deepcopy(baseline_errors)
         self.baseline_targets = targets
 
     def prepare_baseline_errors(self, baseline_format: str) -> Dict[

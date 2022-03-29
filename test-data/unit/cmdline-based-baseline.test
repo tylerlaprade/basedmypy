@@ -114,6 +114,35 @@ Success: no issues found in 1 source file
 == Return code: 0
 
 
+[case testAutoBaselineDoesntMessageWhenSame]
+# cmd: mypy --error-summary pkg
+# dont-normalize-output:
+[file pkg/a.py]
+a
+[file .mypy/baseline.json]
+{
+"__baseline_metadata__": {"targets": ["file:pkg"]},
+"pkg/a.py": [{"code": "name-defined", "column": 0, "line": 1, "message": "Name \"a\" is not defined", "target": "a"}]
+}
+[outfile .mypy/baseline.json]
+{
+"__baseline_metadata__": {"targets": ["file:pkg"]},
+"pkg/a.py": [{"code": "name-defined", "column": 0, "line": 1, "message": "Name \"a\" is not defined", "target": "a"}]
+}
+[case testAutoBaselineDoesntMessageWhenSame2]
+# cmd: mypy --error-summary pkg
+[file pkg/a.py]
+a
+[file .mypy/baseline.json]
+{
+"__baseline_metadata__": {"targets": ["file:pkg"]},
+"pkg/a.py": [{"code": "name-defined", "column": 0, "line": 1, "message": "Name \"a\" is not defined", "target": "a"}]
+}
+[out]
+Success: no issues found in 1 source file
+== Return code: 0
+
+
 [case testInvalidFormat]
 # cmd: mypy --error-summary --baseline-file a/b pkg
 [file pkg/a.py]
