@@ -14,10 +14,10 @@ based_version_info = VersionInfo(
     1,
     3,
     0,
-    "rc",
-    2,
-    __version__.split("+dev")[0],
-    "dev" if "+dev" in __version__ else "final",
+    "final",
+    0,
+    '0.942',
+    "final",
 )
 # simple string version with git info
 __based_version__ = based_version_info.simple_str()
