@@ -13,7 +13,7 @@ base_version = __version__
 based_version_info = VersionInfo(
     1,
     3,
-    0,
+    1,
     "final",
     0,
     '0.942',
