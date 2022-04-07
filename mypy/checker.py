@@ -1111,6 +1111,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                     typ.ret_type = NoneType()
                     # fully unannotated fdef needs to be assigned a type
                     fdef.type = typ
+                    self.check_for_missing_annotations(fdef, typ)
                 else:
                     if (not fdef.arguments or (len(fdef.arguments) == 1 and
                             (fdef.arg_names[0] == 'self' or fdef.arg_names[0] == 'cls'))):
