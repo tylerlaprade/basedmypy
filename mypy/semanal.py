@@ -995,6 +995,7 @@ class SemanticAnalyzer(NodeVisitor[None],
                         none_func = callable_type(
                             item.func, self.named_type("builtins.function"), NoneType()
                         )
+                        none_func.implicit = False
                         untyped_func = callable_type(
                             item.func, self.named_type("builtins.function"),
                             UntypedType(TypeOfAny.explicit)
