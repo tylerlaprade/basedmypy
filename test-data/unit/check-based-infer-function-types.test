@@ -318,7 +318,7 @@ class B:
 b = B()
 reveal_type(b.f)  # E: Expression has type "Untyped"  [no-any-expr] \
                   # N: Revealed type is "Untyped"
-b.f = 1
+b.f = 1  # E: Usage of untyped name "f" in typed context  [no-untyped-usage]
 del b.f
 [builtins fixtures/property.pyi]
 

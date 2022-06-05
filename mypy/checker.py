@@ -4195,17 +4195,6 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                     e.var.type = AnyType(TypeOfAny.special_form)
                     e.var.is_ready = True
                     return
-        # detect default_return and warn against it
-        #  This isn't perfect, as None return could come from inheritance, but who cares
-        if (
-            self.options.disallow_untyped_defs and e.var.is_property
-            and isinstance(e.func.type, CallableType)
-        ):
-            if isinstance(
-                get_proper_type(e.func.type.ret_type), NoneType
-            ) and not e.func.unanalyzed_type:
-                self.fail("Property is missing a type annotation",
-                          e.func, code=codes.NO_UNTYPED_DEF)
         if self.recurse_into_functions:
             with self.tscope.function_scope(e.func):
                 self.check_func_item(e.func, name=e.func.name)
@@ -4245,6 +4234,19 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         if e.func.info and e.func.name in ('__init__', '__new__'):
             if e.type and not isinstance(get_proper_type(e.type), (FunctionLike, AnyType)):
                 self.fail(message_registry.BAD_CONSTRUCTOR_TYPE, e)
+        # detect default_return and warn against it
+        #  This isn't perfect, as None return could come from inheritance, but who cares
+        if (
+            self.options.disallow_untyped_defs and e.var.is_property
+            and isinstance(e.func.type, CallableType)
+        ):
+            if isinstance(
+                get_proper_type(e.func.type.ret_type), NoneType
+            ) and (not e.func.unanalyzed_type or (isinstance(e.func.unanalyzed_type, CallableType)
+                and is_unannotated_any(e.func.unanalyzed_type.ret_type))
+            ):
+                self.fail("Property is missing a type annotation",
+                          e.func, code=codes.NO_UNTYPED_DEF)
 
     def check_for_untyped_decorator(self,
                                     func: FuncDef,
