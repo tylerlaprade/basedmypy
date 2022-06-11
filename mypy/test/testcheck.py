@@ -108,6 +108,17 @@ typecheck_files = [
     'check-native-int.test',
 ]
 
+based_files = [
+    'check-based-bare-literals.test',
+    'check-based-default-return.test',
+    'check-based-ignore-any-from-error.test',
+    'check-based-incomplete-defs.test',
+    'check-based-infer-function-types.test',
+    'check-based-type-render.test',
+    'check-based-union-join.test',
+    'check-based-untyped.test',
+]
+
 # Tests that use Python 3.8-only AST features (like expression-scoped ignores):
 if sys.version_info >= (3, 8):
     typecheck_files.append('check-python38.test')
@@ -122,7 +133,10 @@ if sys.platform in ('darwin', 'win32'):
 
 
 class TypeCheckSuite(DataSuite):
-    files = typecheck_files
+    files = typecheck_files + based_files
+
+    def based(self, testcase: DataDrivenTestCase) -> bool:
+        return "based" in testcase.file.rsplit(os.sep)[-1]
 
     def run_case(self, testcase: DataDrivenTestCase) -> None:
         if lxml is None and os.path.basename(testcase.file) == 'check-reports.test':
@@ -172,20 +186,14 @@ class TypeCheckSuite(DataSuite):
             # In runs 2+, copy *.[num] files to * files.
             perform_file_operations(operations)
 
-        # set mypy to legacy mode
-        from mypy import options as mypy_options
-        mypy_options._based = 'based' in testcase.file.rsplit(os.sep)[-1]
+        based = self.based(testcase)
         # Parse options after moving files (in case mypy.ini is being moved).
-        options = parse_options(
-            original_program_text, testcase, incremental_step, based=mypy_options._based
-        )
+        options = parse_options(original_program_text, testcase, incremental_step, based=based)
         options.use_builtins_fixtures = True
         options.enable_incomplete_features = True
         options.show_traceback = True
 
         # Enable some options automatically based on test file name.
-        if mypy_options._based:
-            options.show_column_numbers = False
         if 'optional' in testcase.file:
             options.strict_optional = True
         if 'columns' in testcase.file:
@@ -222,6 +230,13 @@ class TypeCheckSuite(DataSuite):
         finally:
             assert sys.path[0] == plugin_dir
             del sys.path[0]
+
+        # When running the legacy tests in based mode, we just make sure they don't crash
+        if isinstance(self, BasedTypeCheckSuite):
+            # We fail xfail tests explicitly
+            if testcase.xfail:
+                raise AssertionError()
+            return
 
         if testcase.normalize_output:
             a = normalize_error_messages(a)
@@ -373,3 +388,10 @@ class TypeCheckSuite(DataSuite):
             return out
         else:
             return [('__main__', 'main', program_text)]
+
+
+class BasedTypeCheckSuite(TypeCheckSuite):
+    files = typecheck_files
+
+    def based(self, testcase: DataDrivenTestCase) -> bool:
+        return True
