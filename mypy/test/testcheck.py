@@ -115,6 +115,7 @@ based_files = [
     'check-based-untyped.test',
     'check-based-infer-function-types.test',
     'check-based-incomplete-defs.test',
+    'check-based-union-join.test',
 ]
 
 # Tests that use Python 3.8-only AST features (like expression-scoped ignores):

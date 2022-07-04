@@ -1,0 +1,29 @@
+[case testSimpleUnionAtJoin]
+a = [1, ""]
+reveal_type(a)  # N: Revealed type is "list[int | str]"
+
+
+[case testSubtype]
+class A: pass
+class B(A): pass
+
+reveal_type([A(), B()])  # N: Revealed type is "list[__main__.A]"
+
+
+[case testConditionalExpression]
+class A: pass
+class B: pass
+c: bool
+
+res = A() if c else B()
+
+reveal_type(res)  # N: Revealed type is "__main__.A | __main__.B"
+
+
+[case testTupleUnion]
+reveal_type([(1, ""), (None, False)])  # N: Revealed type is "list[(int | None, bool | str)]"
+[builtins fixtures/tuple.pyi]
+
+
+[case testUnionType]
+reveal_type(type([1, ""][0]))  # N: Revealed type is "type[int] | type[str]"
