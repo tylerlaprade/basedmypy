@@ -14,8 +14,8 @@ based_version_info = VersionInfo(
     1,
     4,
     0,
-    "rc",
-    2,
+    "final",
+    0,
     __version__.split("+dev")[0],
     "dev" if "+dev" in __version__ else "final",
 )
