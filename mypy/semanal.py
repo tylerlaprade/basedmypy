@@ -2675,10 +2675,7 @@ class SemanticAnalyzer(NodeVisitor[None],
             value, type_name = rvalue.value, 'builtins.bytes'
         if isinstance(rvalue, UnicodeExpr):
             value, type_name = rvalue.value, 'builtins.unicode'
-        if (
-            do_bools and isinstance(rvalue, NameExpr)
-            and rvalue.fullname in ("builtins.True", "builtins.False")
-        ):
+        if do_bools and isinstance(rvalue, NameExpr) and rvalue.name in ("True", "False"):
             value, type_name = rvalue.name == "True", 'builtins.bool'
         if type_name is not None:
             assert value is not None
