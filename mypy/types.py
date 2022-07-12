@@ -1673,6 +1673,8 @@ class CallableType(FunctionLike):
             ret = get_proper_type(ret.upper_bound)
         if isinstance(ret, TupleType):
             ret = ret.partial_fallback
+        if isinstance(ret, UnionType):
+            ret = join_instances()
         assert isinstance(ret, Instance)
         return ret.type
 
