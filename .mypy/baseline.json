@@ -10541,7 +10541,7 @@
         "code": "no-any-expr",
         "column": 60,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 423,
+        "offset": 438,
         "src": "if isinstance(left, TypeType) and isinstance(right, CallableType):",
         "target": "mypy.meet.is_overlapping_types"
       },
@@ -24226,10 +24226,18 @@
     ],
     "mypyc/build.py": [
       {
+        "code": "possibly-undefined",
+        "column": 26,
+        "message": "Name \"setuptools\" may be undefined",
+        "offset": 73,
+        "src": "extension_class = setuptools.Extension",
+        "target": "mypyc.build"
+      },
+      {
         "code": "no-any-expr",
         "column": 23,
         "message": "Expression type contains \"Any\" (has type \"list[Any]\")",
-        "offset": 378,
+        "offset": 314,
         "src": "headers.update(re.findall(r'#include \"(.*)\"', contents))",
         "target": "mypyc.build.get_header_deps"
       },
