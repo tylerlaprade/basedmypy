@@ -1294,7 +1294,7 @@ try:
 except TypeError as e:
     assert(str(e) == "mypyc classes can't have a metaclass")
 
-[case testMetaclass]
+[case testMetaclass-xfail]
 from meta import Meta
 import six
 
@@ -1312,7 +1312,7 @@ class Nothing2(six.with_metaclass(Meta, Test)):
 
 @six.add_metaclass(Meta)
 class Nothing3:
-    pass
+--    pass
 
 [file meta.py]
 from typing import Any
