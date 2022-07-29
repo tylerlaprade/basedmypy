@@ -13,7 +13,7 @@ base_version = __version__
 based_version_info = VersionInfo(
     1,
     4,
-    0,
+    1,
     "final",
     0,
     __version__.split("+dev")[0],
