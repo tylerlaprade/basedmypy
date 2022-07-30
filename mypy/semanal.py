@@ -3760,7 +3760,10 @@ class SemanticAnalyzer(
                     # We want to use our custom error message below, so we suppress
                     # the default error message for invalid types here.
                     analyzed = self.expr_to_analyzed_type(
-                        param_value, allow_placeholder=True, report_invalid_types=False
+                        param_value,
+                        allow_placeholder=True,
+                        report_invalid_types=False,
+                        allow_unbound_tvars=True,
                     )
                     if analyzed is None:
                         # Type variables are special: we need to place them in the symbol table
@@ -5952,7 +5955,11 @@ class SemanticAnalyzer(
             report_internal_error(err, self.errors.file, node.line, self.errors, self.options)
 
     def expr_to_analyzed_type(
-        self, expr: Expression, report_invalid_types: bool = True, allow_placeholder: bool = False
+        self,
+        expr: Expression,
+        report_invalid_types: bool = True,
+        allow_placeholder: bool = False,
+        allow_unbound_tvars=False,
     ) -> Optional[Type]:
         if isinstance(expr, CallExpr):
             expr.accept(self)
@@ -5971,7 +5978,10 @@ class SemanticAnalyzer(
             return TupleType(info.tuple_type.items, fallback=fallback)
         typ = self.expr_to_unanalyzed_type(expr)
         return self.anal_type(
-            typ, report_invalid_types=report_invalid_types, allow_placeholder=allow_placeholder
+            typ,
+            report_invalid_types=report_invalid_types,
+            allow_placeholder=allow_placeholder,
+            allow_unbound_tvars=allow_unbound_tvars,
         )
 
     def analyze_type_expr(self, expr: Expression) -> None:
