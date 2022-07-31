@@ -855,7 +855,7 @@ def compute_search_paths(
 
 
 def get_typeshed_dir(python_executable: Optional[str] = None) -> str:
-    packages_dirs = get_site_packages_dirs(python_executable)[1]
+    packages_dirs = get_search_dirs(python_executable)[1]
     typeshed_dir_name = "basedtypeshed"
     for dir in packages_dirs:
         result = os.path.join(dir, typeshed_dir_name)
