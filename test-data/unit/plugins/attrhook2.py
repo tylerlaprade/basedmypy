@@ -1,14 +1,14 @@
-from typing import Optional, Callable
+from typing import Callable, Optional
 
-from mypy.plugin import Plugin, AttributeContext
-from mypy.types import Type, AnyType, TypeOfAny
+from mypy.plugin import AttributeContext, Plugin
+from mypy.types import AnyType, Type, TypeOfAny
 
 
 class AttrPlugin(Plugin):
     def get_attribute_hook(self, fullname: str) -> Optional[Callable[[AttributeContext], Type]]:
-        if fullname == 'm.Magic.magic_field':
+        if fullname == "m.Magic.magic_field":
             return magic_field_callback
-        if fullname == 'm.Magic.nonexistent_field':
+        if fullname == "m.Magic.nonexistent_field":
             return nonexistent_field_callback
         return None
 

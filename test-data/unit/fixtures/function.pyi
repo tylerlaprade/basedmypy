@@ -1,7 +1,15 @@
 class object:
-    def __init__(self): pass
+    def __init__(self):
+        pass
 
-class type: pass
-class function: pass
-class int: pass
-class str: pass
+class type:
+    pass
+
+class function:
+    pass
+
+class int:
+    pass
+
+class str:
+    pass

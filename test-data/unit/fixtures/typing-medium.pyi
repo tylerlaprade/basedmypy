@@ -29,43 +29,53 @@ NewType = 0
 TypeAlias = 0
 LiteralString = 0
 
-T = TypeVar('T')
-T_co = TypeVar('T_co', covariant=True)
-T_contra = TypeVar('T_contra', contravariant=True)
-U = TypeVar('U')
-V = TypeVar('V')
-S = TypeVar('S')
+T = TypeVar("T")
+T_co = TypeVar("T_co", covariant=True)
+T_contra = TypeVar("T_contra", contravariant=True)
+U = TypeVar("U")
+V = TypeVar("V")
+S = TypeVar("S")
 
 # Note: definitions below are different from typeshed, variances are declared
 # to silence the protocol variance checks. Maybe it is better to use type: ignore?
 
 class Sized(Protocol):
-    def __len__(self) -> int: pass
+    def __len__(self) -> int:
+        pass
 
 class Iterable(Protocol[T_co]):
-    def __iter__(self) -> 'Iterator[T_co]': pass
+    def __iter__(self) -> "Iterator[T_co]":
+        pass
 
 class Iterator(Iterable[T_co], Protocol):
-    def __next__(self) -> T_co: pass
+    def __next__(self) -> T_co:
+        pass
 
 class Generator(Iterator[T], Generic[T, U, V]):
-    def __iter__(self) -> 'Generator[T, U, V]': pass
+    def __iter__(self) -> "Generator[T, U, V]":
+        pass
 
 class Sequence(Iterable[T_co]):
-    def __getitem__(self, n: Any) -> T_co: pass
+    def __getitem__(self, n: Any) -> T_co:
+        pass
 
 class Mapping(Iterable[T], Generic[T, T_co]):
-    def __getitem__(self, key: T) -> T_co: pass
+    def __getitem__(self, key: T) -> T_co:
+        pass
 
 class SupportsInt(Protocol):
-    def __int__(self) -> int: pass
+    def __int__(self) -> int:
+        pass
 
 class SupportsFloat(Protocol):
-    def __float__(self) -> float: pass
+    def __float__(self) -> float:
+        pass
 
 class ContextManager(Generic[T]):
-    def __enter__(self) -> T: pass
+    def __enter__(self) -> T:
+        pass
     # Use Any because not all the precise types are in the fixtures.
-    def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> Any: pass
+    def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any) -> Any:
+        pass
 
 TYPE_CHECKING = 1

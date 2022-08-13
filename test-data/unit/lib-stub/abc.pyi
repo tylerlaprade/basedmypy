@@ -1,9 +1,13 @@
-from typing import Type, Any, TypeVar
+from typing import Any, Type, TypeVar
 
-T = TypeVar('T', bound=Type[Any])
+T = TypeVar("T", bound=Type[Any])
 
-class ABC(type): pass
+class ABC(type):
+    pass
+
 class ABCMeta(type):
-    def register(cls, tp: T) -> T: pass
+    def register(cls, tp: T) -> T:
+        pass
+
 abstractmethod = object()
 abstractproperty = object()

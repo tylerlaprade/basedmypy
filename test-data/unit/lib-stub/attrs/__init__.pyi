@@ -1,7 +1,7 @@
-from typing import TypeVar, overload, Callable, Any, Optional, Union, Sequence, Mapping
+from typing import Any, Callable, Mapping, Optional, Sequence, TypeVar, Union, overload
 
-_T = TypeVar('_T')
-_C = TypeVar('_C', bound=type)
+_T = TypeVar("_T")
+_C = TypeVar("_C", bound=type)
 
 _ValidatorType = Callable[[Any, Any, _T], Any]
 _ConverterType = Callable[[Any], _T]

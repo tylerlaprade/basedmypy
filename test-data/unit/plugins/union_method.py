@@ -1,25 +1,29 @@
 from mypy.plugin import (
-    CallableType, CheckerPluginInterface, MethodSigContext, MethodContext, Plugin
+    CallableType,
+    CheckerPluginInterface,
+    MethodContext,
+    MethodSigContext,
+    Plugin,
 )
 from mypy.types import Instance, Type
 
 
 class MethodPlugin(Plugin):
     def get_method_signature_hook(self, fullname):
-        if fullname.startswith('__main__.Foo.'):
+        if fullname.startswith("__main__.Foo."):
             return my_meth_sig_hook
         return None
 
     def get_method_hook(self, fullname):
-        if fullname.startswith('__main__.Bar.'):
+        if fullname.startswith("__main__.Bar."):
             return my_meth_hook
         return None
 
 
 def _str_to_int(api: CheckerPluginInterface, typ: Type) -> Type:
     if isinstance(typ, Instance):
-        if typ.type.fullname == 'builtins.str':
-            return api.named_generic_type('builtins.int', [])
+        if typ.type.fullname == "builtins.str":
+            return api.named_generic_type("builtins.int", [])
         elif typ.args:
             return typ.copy_modified(args=[_str_to_int(api, t) for t in typ.args])
     return typ
@@ -27,8 +31,8 @@ def _str_to_int(api: CheckerPluginInterface, typ: Type) -> Type:
 
 def _float_to_int(api: CheckerPluginInterface, typ: Type) -> Type:
     if isinstance(typ, Instance):
-        if typ.type.fullname == 'builtins.float':
-            return api.named_generic_type('builtins.int', [])
+        if typ.type.fullname == "builtins.float":
+            return api.named_generic_type("builtins.int", [])
         elif typ.args:
             return typ.copy_modified(args=[_float_to_int(api, t) for t in typ.args])
     return typ

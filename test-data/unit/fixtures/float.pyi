@@ -1,25 +1,33 @@
 from typing import Generic, TypeVar
-T = TypeVar('T')
+
+T = TypeVar("T")
 
 Any = 0
 
 class object:
-    def __init__(self) -> None: pass
+    def __init__(self) -> None:
+        pass
 
 class type:
-    def __init__(self, x: Any) -> None: pass
+    def __init__(self, x: Any) -> None:
+        pass
 
 class str:
-    def __add__(self, other: 'str') -> 'str': pass
+    def __add__(self, other: "str") -> "str":
+        pass
     def __rmul__(self, n: int) -> str: ...
 
-class bytes: pass
+class bytes:
+    pass
 
-class tuple(Generic[T]): pass
-class function: pass
+class tuple(Generic[T]):
+    pass
 
-class ellipsis: pass
+class function:
+    pass
 
+class ellipsis:
+    pass
 
 class int:
     def __abs__(self) -> int: ...

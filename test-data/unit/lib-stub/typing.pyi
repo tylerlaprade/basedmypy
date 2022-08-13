@@ -28,31 +28,40 @@ Never = 0
 NewType = 0
 ParamSpec = 0
 
-T = TypeVar('T')
-T_co = TypeVar('T_co', covariant=True)
-U = TypeVar('U')
-V = TypeVar('V')
+T = TypeVar("T")
+T_co = TypeVar("T_co", covariant=True)
+U = TypeVar("U")
+V = TypeVar("V")
 
 class Iterable(Protocol[T_co]):
-    def __iter__(self) -> Iterator[T_co]: pass
+    def __iter__(self) -> Iterator[T_co]:
+        pass
 
 class Iterator(Iterable[T_co], Protocol):
-    def __next__(self) -> T_co: pass
+    def __next__(self) -> T_co:
+        pass
 
 class Generator(Iterator[T], Generic[T, U, V]):
-    def __iter__(self) -> Generator[T, U, V]: pass
+    def __iter__(self) -> Generator[T, U, V]:
+        pass
 
 class Sequence(Iterable[T_co]):
-    def __getitem__(self, n: Any) -> T_co: pass
+    def __getitem__(self, n: Any) -> T_co:
+        pass
 
 # Mapping type is oversimplified intentionally.
-class Mapping(Iterable[T], Generic[T, T_co]): pass
+class Mapping(Iterable[T], Generic[T, T_co]):
+    pass
 
 class Awaitable(Protocol[T]):
-    def __await__(self) -> Generator[Any, Any, T]: pass
+    def __await__(self) -> Generator[Any, Any, T]:
+        pass
 
-class Coroutine(Awaitable[V], Generic[T, U, V]): pass
+class Coroutine(Awaitable[V], Generic[T, U, V]):
+    pass
 
-def final(meth: T) -> T: pass
+def final(meth: T) -> T:
+    pass
 
-def reveal_type(__obj: T) -> T: pass
+def reveal_type(__obj: T) -> T:
+    pass

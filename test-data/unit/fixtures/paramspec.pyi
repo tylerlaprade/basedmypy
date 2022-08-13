@@ -1,12 +1,22 @@
 # builtins stub for paramspec-related test cases
 
 from typing import (
-    Sequence, Generic, TypeVar, Iterable, Iterator, Tuple, Mapping, Optional, Union, Type, overload,
-    Protocol
+    Generic,
+    Iterable,
+    Iterator,
+    Mapping,
+    Optional,
+    Protocol,
+    Sequence,
+    Tuple,
+    Type,
+    TypeVar,
+    Union,
+    overload,
 )
 
 T = TypeVar("T")
-T_co = TypeVar('T_co', covariant=True)
+T_co = TypeVar("T_co", covariant=True)
 KT = TypeVar("KT")
 VT = TypeVar("VT")
 
@@ -29,7 +39,7 @@ class list(Sequence[T], Generic[T]):
     def __iter__(self) -> Iterator[T]: ...
 
 class int:
-    def __neg__(self) -> 'int': ...
+    def __neg__(self) -> "int": ...
 
 class bool(int): ...
 class float: ...

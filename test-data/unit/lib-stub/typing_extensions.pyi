@@ -1,10 +1,18 @@
-from typing import TypeVar, Any, Mapping, Iterator, NoReturn as NoReturn, Dict, Type
-from typing import TYPE_CHECKING as TYPE_CHECKING
-from typing import NewType as NewType, overload as overload
-
 import sys
+from typing import (
+    TYPE_CHECKING as TYPE_CHECKING,
+    Any,
+    Dict,
+    Iterator,
+    Mapping,
+    NewType as NewType,
+    NoReturn as NoReturn,
+    Type,
+    TypeVar,
+    overload as overload,
+)
 
-_T = TypeVar('_T')
+_T = TypeVar("_T")
 
 class _SpecialForm:
     def __getitem__(self, typeargs: Any) -> Any:
@@ -12,11 +20,16 @@ class _SpecialForm:
 
 NamedTuple = 0
 Protocol: _SpecialForm = ...
-def runtime_checkable(x: _T) -> _T: pass
+
+def runtime_checkable(x: _T) -> _T:
+    pass
+
 runtime = runtime_checkable
 
 Final: _SpecialForm = ...
-def final(x: _T) -> _T: pass
+
+def final(x: _T) -> _T:
+    pass
 
 Literal: _SpecialForm = ...
 
@@ -46,8 +59,9 @@ class _TypedDict(Mapping[str, object]):
     def update(self: _T, __m: _T) -> None: ...
     if sys.version_info < (3, 0):
         def has_key(self, k: str) -> bool: ...
+
     def __delitem__(self, k: NoReturn) -> None: ...
 
 def TypedDict(typename: str, fields: Dict[str, Type[_T]], *, total: Any = ...) -> Type[dict]: ...
-
-def reveal_type(__obj: T) -> T: pass
+def reveal_type(__obj: T) -> T:
+    pass

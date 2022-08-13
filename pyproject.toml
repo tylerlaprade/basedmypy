@@ -11,8 +11,7 @@ target-version = ['py37']
 skip-magic-trailing-comma = true
 extend-exclude = '''
 ^/mypy/typeshed|
-^/mypyc/test-data|
-^/test-data
+^/test-data/unit/lib-stub/blocker.pyi
 '''
 
 [tool.isort]
@@ -23,6 +22,5 @@ skip_gitignore = true
 extra_standard_library = ["typing_extensions"]
 skip = [
     "mypy/typeshed",
-    "mypyc/test-data",
-    "test-data",
+    "test-data/unit/lib-stub/blocker.pyi",
 ]

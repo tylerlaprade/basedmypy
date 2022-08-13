@@ -1,6 +1,5 @@
-from typing import ClassVar
+from typing import ClassVar, overload
 
-from typing import overload
 PI: float
 
 class Point:

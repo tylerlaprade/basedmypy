@@ -1,17 +1,27 @@
 # Builtins stub used in tuple-related test cases.
 
+from typing import Generic, Iterable, TypeVar
+
 from isinstance import isinstance
-from typing import Iterable, TypeVar, Generic
-T = TypeVar('T')
+
+T = TypeVar("T")
 
 class object:
-    def __init__(self): pass
+    def __init__(self):
+        pass
 
-class type: pass
-class function: pass
+class type:
+    pass
 
-class tuple(Generic[T]): pass
+class function:
+    pass
+
+class tuple(Generic[T]):
+    pass
 
 # We need int for indexing tuples.
-class int: pass
-class str: pass # For convenience
+class int:
+    pass
+
+class str:
+    pass  # For convenience

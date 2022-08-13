@@ -7,8 +7,10 @@ class MyPlugin(Plugin):
             return decimal_to_int_hook
         return None
 
+
 def plugin(version):
     return MyPlugin
 
+
 def decimal_to_int_hook(ctx):
-    return ctx.api.named_type('builtins.int', [])
+    return ctx.api.named_type("builtins.int", [])

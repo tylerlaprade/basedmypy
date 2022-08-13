@@ -1,5 +1,6 @@
 from typing import Generic, TypeVar
-_T = TypeVar('_T')
+
+_T = TypeVar("_T")
 
 Any = 0
 
@@ -14,17 +15,28 @@ class type:
         pass
 
 # These are provided here for convenience.
-class int: pass
-class float: pass
+class int:
+    pass
 
-class str: pass
-class unicode: pass
+class float:
+    pass
 
-class tuple(Generic[_T]): pass
-class function: pass
+class str:
+    pass
 
-class ellipsis: pass
+class unicode:
+    pass
 
-def print(*args, end=''): pass
+class tuple(Generic[_T]):
+    pass
+
+class function:
+    pass
+
+class ellipsis:
+    pass
+
+def print(*args, end=""):
+    pass
 
 # Definition of None is implicit

@@ -3,18 +3,27 @@
 # This is a simpler version of tuple.py which is useful
 # and makes some test cases easier to write/debug.
 
-from typing import Iterable, TypeVar, Generic
+from typing import Generic, Iterable, TypeVar
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 class object:
-    def __init__(self): pass
+    def __init__(self):
+        pass
 
-class type: pass
+class type:
+    pass
+
 class tuple(Generic[T]):
-    def __getitem__(self, x: int) -> T: pass
-class function: pass
+    def __getitem__(self, x: int) -> T:
+        pass
+
+class function:
+    pass
 
 # We need int for indexing tuples.
-class int: pass
-class str: pass # For convenience
+class int:
+    pass
+
+class str:
+    pass  # For convenience
