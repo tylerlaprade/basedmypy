@@ -6,8 +6,7 @@ import sys
 import traceback
 from collections import defaultdict
 from copy import deepcopy
-from pathlib import Path
-from typing import Callable, Dict, List, Iterable, NoReturn, Optional, TextIO, Tuple, TypeVar, cast
+from typing import Callable, Dict, Iterable, List, NoReturn, Optional, TextIO, Tuple, TypeVar, cast
 from typing_extensions import Final, Literal, TypeAlias as _TypeAlias, TypedDict
 
 from mypy import errorcodes as codes
