@@ -236,7 +236,13 @@ from mypy.typeanal import (
     remove_dups,
     type_constructors,
 )
-from mypy.typeops import callable_type, function_type, get_type_vars, infer_impl_from_parts, try_getting_str_literals_from_type
+from mypy.typeops import (
+    callable_type,
+    function_type,
+    get_type_vars,
+    infer_impl_from_parts,
+    try_getting_str_literals_from_type,
+)
 from mypy.types import (
     ASSERT_TYPE_NAMES,
     DATACLASS_TRANSFORM_NAMES,
