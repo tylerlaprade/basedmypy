@@ -1,8 +1,8 @@
 # Basedmypy Changelog
 
-## [Unreleased]
+## [1.8.0]
 ### Added
-- `Intersection` type
+- `Intersection` type (#357)
 
 ## [1.7.0]
 ### Added

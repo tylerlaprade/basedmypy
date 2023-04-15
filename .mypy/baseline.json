@@ -1987,7 +1987,7 @@
         "code": "no-any-expr",
         "column": 42,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 681,
+        "offset": 685,
         "src": "if isinstance(inner_type, CallableType):",
         "target": "mypy.checker.TypeChecker.check_overlapping_overloads"
       },
@@ -2195,7 +2195,7 @@
         "code": "truthy-bool",
         "column": 23,
         "message": "\"signature\" has type \"Type\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
-        "offset": 308,
+        "offset": 315,
         "src": "if signature:",
         "target": "mypy.checker.TypeChecker.check_assignment"
       },
@@ -2427,7 +2427,7 @@
         "code": "no-any-expr",
         "column": 27,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 591,
+        "offset": 612,
         "src": "if isinstance(typ, CallableType):",
         "target": "mypy.checker.TypeChecker.add_any_attribute_to_type"
       },
@@ -2493,7 +2493,7 @@
         "code": "no-any-expr",
         "column": 34,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 354,
+        "offset": 355,
         "src": "if isinstance(result, CallableType) and isinstance(  # type: ignore[misc]",
         "target": "mypy.checkexpr.ExpressionChecker.analyze_ref_expr"
       },
@@ -2533,7 +2533,7 @@
         "code": "no-any-expr",
         "column": 35,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 130,
+        "offset": 132,
         "src": "if isinstance(object_type, CallableType) and object_type.is_type_obj():",
         "target": "mypy.checkexpr.ExpressionChecker.method_fullname"
       },
@@ -2733,7 +2733,7 @@
         "code": "no-any-expr",
         "column": 33,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 360,
+        "offset": 349,
         "src": "if not all(isinstance(c, CallableType) for c in types):",
         "target": "mypy.checkexpr.ExpressionChecker.combine_function_signatures"
       },
@@ -4759,7 +4759,7 @@
         "code": "unreachable",
         "column": 20,
         "message": "Statement is unreachable",
-        "offset": 399,
+        "offset": 435,
         "src": "merged_option = None",
         "target": "mypy.constraints.any_constraints"
       },
@@ -4791,7 +4791,7 @@
         "code": "no-any-expr",
         "column": 46,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 98,
+        "offset": 96,
         "src": "if isinstance(suffix, CallableType):",
         "target": "mypy.constraints.ConstraintBuilderVisitor.visit_instance"
       },
@@ -4831,7 +4831,7 @@
         "code": "no-any-expr",
         "column": 35,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 217,
+        "offset": 214,
         "src": "if isinstance(self.actual, CallableType):",
         "target": "mypy.constraints.ConstraintBuilderVisitor.visit_overloaded"
       },
@@ -10581,7 +10581,7 @@
         "code": "no-any-expr",
         "column": 60,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 441,
+        "offset": 450,
         "src": "if isinstance(left, TypeType) and isinstance(right, CallableType):",
         "target": "mypy.meet.is_overlapping_types"
       },
@@ -12162,18 +12162,10 @@
         "target": "mypy.options.Options.__init__"
       },
       {
-        "code": "var-annotated",
-        "column": 12,
-        "message": "Need type annotation for \"d\"",
-        "offset": 40,
-        "src": "d = dict(getattr(self, \"__dict__\", ()))",
-        "target": "mypy.options.Options.snapshot"
-      },
-      {
         "code": "no-any-expr",
         "column": 17,
         "message": "Expression type contains \"Any\" (has type \"Any | ()\")",
-        "offset": 0,
+        "offset": 40,
         "src": "d = dict(getattr(self, \"__dict__\", ()))",
         "target": "mypy.options.Options.snapshot"
       },
@@ -12479,7 +12471,7 @@
         "code": "no-any-expr",
         "column": 42,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 108,
+        "offset": 181,
         "src": "elif isinstance(callee_node_type, CallableType):",
         "target": "mypy.plugins.common._get_callee_type"
       }
@@ -12489,7 +12481,7 @@
         "code": "no-any-expr",
         "column": 15,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 135,
+        "offset": 137,
         "src": "return {",
         "target": "mypy.plugins.dataclasses.DataclassAttribute.serialize"
       },
@@ -12545,7 +12537,7 @@
         "code": "no-any-expr",
         "column": 31,
         "message": "Expression type contains \"Any\" (has type \"(Untyped) -> Any\")",
-        "offset": 151,
+        "offset": 155,
         "src": "all_attrs.sort(key=lambda a: a.kw_only)",
         "target": "mypy.plugins.dataclasses.DataclassTransformer.collect_attributes"
       },
@@ -12567,9 +12559,17 @@
       },
       {
         "code": "no-any-expr",
+        "column": 43,
+        "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
+        "offset": 143,
+        "src": "if isinstance(setter_type, CallableType) and setter_type.arg_kinds == [",
+        "target": "mypy.plugins.dataclasses.DataclassTransformer._infer_dataclass_attr_init_type"
+      },
+      {
+        "code": "no-any-expr",
         "column": 37,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 93,
+        "offset": 18,
         "src": "info.metadata[\"dataclass_tag\"] = {}",
         "target": "mypy.plugins.dataclasses.add_dataclass_tag"
       }
@@ -13529,7 +13529,7 @@
         "code": "no-any-expr",
         "column": 41,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 846,
+        "offset": 847,
         "src": "assert isinstance(defn.type, CallableType)",
         "target": "mypy.semanal.SemanticAnalyzer.analyze_func_def"
       },
@@ -13937,7 +13937,7 @@
         "code": "no-any-expr",
         "column": 23,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 430,
+        "offset": 426,
         "src": "if isinstance(sig, CallableType):",
         "target": "mypy.semanal.replace_implicit_first_type"
       },
@@ -17180,14 +17180,6 @@
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
         "offset": 3,
-        "src": "def _static_lookup_runtime(object_path: list[str]) -> MaybeMissing[Any]:",
-        "target": "mypy.stubtest._static_lookup_runtime"
-      },
-      {
-        "code": "no-any-explicit",
-        "column": 0,
-        "message": "Explicit \"Any\" is not allowed",
-        "offset": 13,
         "src": "def _verify_static_class_methods(",
         "target": "mypy.stubtest._verify_static_class_methods"
       },
@@ -17217,49 +17209,9 @@
       },
       {
         "code": "no-any-expr",
-        "column": 7,
-        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 7,
-        "src": "if static_runtime is MISSING:",
-        "target": "mypy.stubtest._verify_static_class_methods"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 18,
-        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 3,
-        "src": "if isinstance(static_runtime, classmethod) and not stub.is_class:",
-        "target": "mypy.stubtest._verify_static_class_methods"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 22,
-        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 2,
-        "src": "if not isinstance(static_runtime, classmethod) and stub.is_class:",
-        "target": "mypy.stubtest._verify_static_class_methods"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 18,
-        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 2,
-        "src": "if isinstance(static_runtime, staticmethod) and not stub.is_static:",
-        "target": "mypy.stubtest._verify_static_class_methods"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 22,
-        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 2,
-        "src": "if not isinstance(static_runtime, staticmethod) and stub.is_static:",
-        "target": "mypy.stubtest._verify_static_class_methods"
-      },
-      {
-        "code": "no-any-expr",
         "column": 27,
         "message": "Expression type contains \"Any\" (has type \"type[Parameter]\")",
-        "offset": 24,
+        "offset": 48,
         "src": "if runtime_arg.kind == inspect.Parameter.POSITIONAL_ONLY and names_approx_match(",
         "target": "mypy.stubtest._verify_arg_name"
       },
@@ -17665,42 +17617,10 @@
       },
       {
         "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 4,
-        "src": "static_runtime = _static_lookup_runtime(object_path)",
-        "target": "mypy.stubtest.verify_funcitem"
-      },
-      {
-        "code": "no-any-expr",
         "column": 56,
         "message": "Expression has type \"Any\"",
-        "offset": 3,
+        "offset": 4,
         "src": "for error_text in _verify_abstract_status(stub, runtime):",
-        "target": "mypy.stubtest.verify_funcitem"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 55,
-        "message": "Expression has type \"Any\"",
-        "offset": 1,
-        "src": "yield Error(object_path, error_text, stub, runtime)",
-        "target": "mypy.stubtest.verify_funcitem"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 53,
-        "message": "Expression has type \"Any\"",
-        "offset": 1,
-        "src": "for error_text in _verify_final_method(stub, runtime, static_runtime):",
-        "target": "mypy.stubtest.verify_funcitem"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 62,
-        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 0,
-        "src": "for error_text in _verify_final_method(stub, runtime, static_runtime):",
         "target": "mypy.stubtest.verify_funcitem"
       },
       {
@@ -17716,15 +17636,7 @@
         "column": 54,
         "message": "Expression has type \"Any\"",
         "offset": 2,
-        "src": "for message in _verify_static_class_methods(stub, runtime, static_runtime, object_path):",
-        "target": "mypy.stubtest.verify_funcitem"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 63,
-        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 0,
-        "src": "for message in _verify_static_class_methods(stub, runtime, static_runtime, object_path):",
+        "src": "for message in _verify_static_class_methods(stub, runtime, object_path):",
         "target": "mypy.stubtest.verify_funcitem"
       },
       {
@@ -18017,42 +17929,10 @@
       },
       {
         "code": "no-any-expr",
-        "column": 60,
-        "message": "Expression has type \"Any\"",
-        "offset": 11,
-        "src": "for msg in _verify_abstract_status(first_part.func, runtime):",
-        "target": "mypy.stubtest.verify_overloadedfuncdef"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 48,
-        "message": "Expression has type \"Any\"",
-        "offset": 1,
-        "src": "yield Error(object_path, msg, stub, runtime)",
-        "target": "mypy.stubtest.verify_overloadedfuncdef"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 3,
-        "src": "static_runtime = _static_lookup_runtime(object_path)",
-        "target": "mypy.stubtest.verify_overloadedfuncdef"
-      },
-      {
-        "code": "no-any-expr",
         "column": 54,
         "message": "Expression has type \"Any\"",
-        "offset": 2,
-        "src": "for message in _verify_static_class_methods(stub, runtime, static_runtime, object_path):",
-        "target": "mypy.stubtest.verify_overloadedfuncdef"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 63,
-        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 0,
-        "src": "for message in _verify_static_class_methods(stub, runtime, static_runtime, object_path):",
+        "offset": 3,
+        "src": "for message in _verify_static_class_methods(stub, runtime, object_path):",
         "target": "mypy.stubtest.verify_overloadedfuncdef"
       },
       {
@@ -18067,7 +17947,7 @@
         "code": "no-any-expr",
         "column": 39,
         "message": "Expression has type \"Any\"",
-        "offset": 5,
+        "offset": 2,
         "src": "signature = safe_inspect_signature(runtime)",
         "target": "mypy.stubtest.verify_overloadedfuncdef"
       },
@@ -18329,14 +18209,6 @@
       },
       {
         "code": "no-any-expr",
-        "column": 51,
-        "message": "Expression type contains \"Any\" (has type \"(Any) -> Any | None\")",
-        "offset": 1,
-        "src": "yield from _verify_final_method(stub.func, runtime.fget, MISSING)",
-        "target": "mypy.stubtest._verify_readonly_property"
-      },
-      {
-        "code": "no-any-expr",
         "column": 32,
         "message": "Expression has type \"Any\"",
         "offset": 2,
@@ -18390,62 +18262,6 @@
         "offset": 2,
         "src": "if runtime_abstract and not stub_abstract:",
         "target": "mypy.stubtest._verify_abstract_status"
-      },
-      {
-        "code": "no-any-explicit",
-        "column": 0,
-        "message": "Explicit \"Any\" is not allowed",
-        "offset": 5,
-        "src": "def _verify_final_method(",
-        "target": "mypy.stubtest._verify_final_method"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 7,
-        "message": "Expression type contains \"Any\" (has type \"Any | bool\")",
-        "offset": 5,
-        "src": "if getattr(runtime, \"__final__\", False) or (",
-        "target": "mypy.stubtest._verify_final_method"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression has type \"Any\"",
-        "offset": 0,
-        "src": "if getattr(runtime, \"__final__\", False) or (",
-        "target": "mypy.stubtest._verify_final_method"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 8,
-        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 1,
-        "src": "static_runtime is not MISSING and getattr(static_runtime, \"__final__\", False)",
-        "target": "mypy.stubtest._verify_final_method"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 8,
-        "message": "Expression type contains \"Any\" (has type \"Any | bool\")",
-        "offset": 0,
-        "src": "static_runtime is not MISSING and getattr(static_runtime, \"__final__\", False)",
-        "target": "mypy.stubtest._verify_final_method"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 42,
-        "message": "Expression type contains \"Any\" (has type \"Any | bool\")",
-        "offset": 0,
-        "src": "static_runtime is not MISSING and getattr(static_runtime, \"__final__\", False)",
-        "target": "mypy.stubtest._verify_final_method"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 50,
-        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 0,
-        "src": "static_runtime is not MISSING and getattr(static_runtime, \"__final__\", False)",
-        "target": "mypy.stubtest._verify_final_method"
       },
       {
         "code": "no-any-expr",
@@ -19037,7 +18853,7 @@
         "code": "no-any-expr",
         "column": 29,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 630,
+        "offset": 638,
         "src": "if isinstance(right, CallableType):",
         "target": "mypy.subtypes.SubtypeVisitor.visit_instance"
       },
@@ -21545,7 +21361,7 @@
         "code": "no-any-expr",
         "column": 5,
         "message": "Expression type contains \"Any\" (has type \"((...) -> Iterator[Case]) -> (...) -> None\")",
-        "offset": 256,
+        "offset": 38,
         "src": "@collect_cases",
         "target": "mypy.test.teststubtest"
       },
@@ -21705,7 +21521,7 @@
         "code": "no-any-expr",
         "column": 5,
         "message": "Expression type contains \"Any\" (has type \"((...) -> Iterator[Case]) -> (...) -> None\")",
-        "offset": 97,
+        "offset": 45,
         "src": "@collect_cases",
         "target": "mypy.test.teststubtest"
       },
@@ -21773,7 +21589,7 @@
         "code": "no-any-expr",
         "column": 29,
         "message": "Expression type contains \"Any\" (has type \"type[CallableType]\")",
-        "offset": 937,
+        "offset": 951,
         "src": "assert isinstance(j, CallableType)",
         "target": "mypy.test.testtypes.JoinSuite.test_simple_type_objects"
       }
@@ -23493,7 +23309,7 @@
         "code": "no-any-expr",
         "column": 15,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 131,
+        "offset": 137,
         "src": "return {\".class\": \"TypeType\", \"item\": self.item.serialize()}",
         "target": "mypy.types.TypeType.serialize"
       },
