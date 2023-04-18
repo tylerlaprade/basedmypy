@@ -80,7 +80,7 @@ Then on subsequent runs the existing errors will be filtered out.
 Intersection Types
 ------------------
 
-Using the `&` operator or `basedtyping.Intersection` you can denote intersection types.
+Using the ``&`` operator or ``basedtyping.Intersection`` you can denote intersection types.
 
 .. code-block:: python
 
@@ -118,7 +118,7 @@ Basedmypy joins types into unions instead:
 Bare Literals
 -------------
 
-`Literal` is so cumbersome! just use a bare literal instead.
+``Literal`` is so cumbersome! just use a bare literal instead.
 
 .. code-block:: python
 
@@ -132,7 +132,7 @@ Bare Literals
 Default Return Type
 -------------------
 
-With the `default_return` option, the default return type of functions becomes `None` instead of `Any`.
+With the ``default_return`` option, the default return type of functions becomes ``None`` instead of `Any`.
 
 .. code-block:: python
 
@@ -220,7 +220,7 @@ Ignore Unused Type Ignores
 In code that is targeting multiple versions of python or multiple platforms it is difficult
 to work with `type: ignore` comments and use the `warn_unused_ignore` option.
 
-The `unused-ignore` error code can be used for this situation.
+The ``unused-ignore`` error code can be used for this situation.
 
 .. code-block:: python
 
