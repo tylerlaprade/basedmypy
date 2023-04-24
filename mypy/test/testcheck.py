@@ -24,6 +24,7 @@ from mypy.test.helpers import (
     perform_file_operations,
     update_testcase_output,
 )
+from mypy.util import safe
 
 try:
     import lxml  # type: ignore[import]
@@ -75,7 +76,7 @@ class TypeCheckSuite(DataSuite):
             for dn, dirs, files in os.walk(os.curdir):
                 for file in files:
                     m = re.search(r"\.([2-9])$", file)
-                    if m and int(m.group(1)) > num_steps:
+                    if m and int(safe(m.group(1))) > num_steps:
                         raise ValueError(
                             "Output file {} exists though test case only has {} runs".format(
                                 file, num_steps
@@ -256,7 +257,7 @@ class TypeCheckSuite(DataSuite):
         for line in a:
             m = re.match(r"([^\s:]+):(\d+:)?(\d+:)? (error|warning|note):", line)
             if m:
-                p = m.group(1)
+                p = safe(m.group(1))
                 hits.add(p)
         return hits
 
@@ -305,7 +306,7 @@ class TypeCheckSuite(DataSuite):
             # The test case wants to use a non-default main
             # module. Look up the module and give it as the thing to
             # analyze.
-            module_names = m.group(1)
+            module_names = safe(m.group(1))
             out = []
             search_paths = SearchPaths((test_temp_dir,), (), (), ())
             cache = FindModuleCache(search_paths, fscache=None, options=None)

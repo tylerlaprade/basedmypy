@@ -18,6 +18,7 @@ from mypy.test.helpers import (
     check_test_output_files,
     normalize_error_messages,
 )
+from mypy.util import safe
 
 try:
     import lxml  # type: ignore[import]
@@ -144,7 +145,7 @@ def parse_args(line: str) -> list[str]:
     m = re.match("# cmd: mypy (.*)$", line)
     if not m:
         return []  # No args; mypy will spit out an error.
-    return m.group(1).split()
+    return safe(m.group(1)).split()
 
 
 def parse_cwd(line: str) -> str | None:

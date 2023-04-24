@@ -14,11 +14,13 @@ import subprocess
 import sys
 import tempfile
 
+from mypy.util import safe
+
 
 def parse_commit_title(diff: str) -> str:
     m = re.search("\n    ([^ ].*)", diff)
     assert m is not None, "Could not parse diff"
-    return m.group(1)
+    return safe(m.group(1))
 
 
 def main() -> None:

@@ -116,7 +116,7 @@ from mypy.types import (
     UnionType,
     UntypedType,
 )
-from mypy.util import bytes_to_human_readable_repr, unnamed_function
+from mypy.util import bytes_to_human_readable_repr, safe, unnamed_function
 
 try:
     # pull this into a final variable to make mypyc be quiet about the
@@ -329,7 +329,7 @@ def parse_type_ignore_tag(tag: str | None) -> list[str] | None:
     if m is None:
         # Invalid "# type: ignore" comment.
         return None
-    return [code.strip() for code in m.group(1).split(",")]
+    return [code.strip() for code in safe(m.group(1)).split(",")]
 
 
 def parse_type_comment(
