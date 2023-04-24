@@ -42,6 +42,7 @@ from mypy.test.helpers import (
     parse_options,
     perform_file_operations,
 )
+from mypy.util import safe
 
 # Set to True to perform (somewhat expensive) checks for duplicate AST nodes after merge
 CHECK_CONSISTENCY = False
@@ -194,7 +195,7 @@ class FineGrainedSuite(DataSuite):
             return 0
         m = re.search("# num_build_steps: ([0-9]+)$", program_text, flags=re.MULTILINE)
         if m is not None:
-            return int(m.group(1))
+            return int(safe(m.group(1)))
         return 1
 
     def perform_step(
@@ -284,7 +285,9 @@ class FineGrainedSuite(DataSuite):
 
         if m:
             # The test case wants to use a non-default set of files.
-            paths = [os.path.join(test_temp_dir, path) for path in m.group(1).strip().split()]
+            paths = [
+                os.path.join(test_temp_dir, path) for path in safe(m.group(1)).strip().split()
+            ]
             return create_source_list(paths, options)
         else:
             base = BuildSource(os.path.join(test_temp_dir, "main"), "__main__", None)
@@ -301,11 +304,11 @@ class FineGrainedSuite(DataSuite):
             no_any = "--no-any" in flags
             no_errors = "--no-errors" in flags
             m = re.match("--flex-any=([0-9.]+)", flags)
-            flex_any = float(m.group(1)) if m else None
+            flex_any = float(safe(m.group(1))) if m else None
             m = re.match(r"--use-fixme=(\w+)", flags)
             use_fixme = m.group(1) if m else None
             m = re.match("--max-guesses=([0-9]+)", flags)
-            max_guesses = int(m.group(1)) if m else None
+            max_guesses = int(safe(m.group(1))) if m else None
             res: dict[str, Any] = server.cmd_suggest(
                 target.strip(),
                 json=json,
@@ -329,14 +332,14 @@ class FineGrainedSuite(DataSuite):
         targets = self.get_inspect(src, step)
         for flags, location in targets:
             m = re.match(r"--show=(\w+)", flags)
-            show = m.group(1) if m else "type"
+            show = safe(m.group(1)) if m else "type"
             verbosity = 0
             if "-v" in flags:
                 verbosity = 1
             if "-vv" in flags:
                 verbosity = 2
             m = re.match(r"--limit=([0-9]+)", flags)
-            limit = int(m.group(1)) if m else 0
+            limit = int(safe(m.group(1))) if m else 0
             include_span = "--include-span" in flags
             include_kind = "--include-kind" in flags
             include_object_attrs = "--include-object-attrs" in flags

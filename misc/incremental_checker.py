@@ -47,6 +47,8 @@ from argparse import ArgumentParser, Namespace, RawDescriptionHelpFormatter
 from typing import Any, Dict
 from typing_extensions import Final, TypeAlias as _TypeAlias
 
+from mypy.util import safe
+
 CACHE_PATH: Final = ".incremental_checker_cache.json"
 MYPY_REPO_URL: Final = "https://github.com/python/mypy.git"
 MYPY_TARGET_FILE: Final = "mypy"
@@ -169,7 +171,7 @@ def filter_daemon_stats(output: str) -> tuple[str, dict[str, Any]]:
     for line in lines:
         m = re.match(r"(\w+)\s+:\s+(.*)", line)
         if m:
-            key, value = m.groups()
+            key, value = [safe(g) for g in m.groups()]
             stats[key] = value
         else:
             output_lines.append(line)

@@ -2964,894 +2964,20 @@
         "target": "mypy.checkmember.is_valid_constructor"
       }
     ],
-    "mypy/checkstrformat.py": [
-      {
-        "code": "no-any-expr",
-        "column": 17,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, str | Any]\")",
-        "offset": 145,
-        "src": "m_dict = match.groupdict()",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, str | Any]\")",
-        "offset": 1,
-        "src": "self.key = m_dict.get(\"key\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 0,
-        "src": "self.key = m_dict.get(\"key\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 25,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, str | Any]\")",
-        "offset": 3,
-        "src": "self.conv_type = m_dict.get(\"type\", \"\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 25,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "self.conv_type = m_dict.get(\"type\", \"\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, str | Any]\")",
-        "offset": 1,
-        "src": "self.flags = m_dict.get(\"flags\", \"\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "self.flags = m_dict.get(\"flags\", \"\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, str | Any]\")",
-        "offset": 1,
-        "src": "self.width = m_dict.get(\"width\", \"\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "self.width = m_dict.get(\"width\", \"\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 25,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, str | Any]\")",
-        "offset": 1,
-        "src": "self.precision = m_dict.get(\"precision\", \"\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 25,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "self.precision = m_dict.get(\"precision\", \"\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 27,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, str | Any]\")",
-        "offset": 3,
-        "src": "self.format_spec = m_dict.get(\"format_spec\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 27,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 0,
-        "src": "self.format_spec = m_dict.get(\"format_spec\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 26,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, str | Any]\")",
-        "offset": 3,
-        "src": "self.conversion = m_dict.get(\"conversion\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 26,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 0,
-        "src": "self.conversion = m_dict.get(\"conversion\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, str | Any]\")",
-        "offset": 3,
-        "src": "self.field = m_dict.get(\"field\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 0,
-        "src": "self.field = m_dict.get(\"field\")",
-        "target": "mypy.checkstrformat.ConversionSpecifier.__init__"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 3,
-        "src": "return self.key is not None",
-        "target": "mypy.checkstrformat.ConversionSpecifier.has_key"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 3,
-        "src": "return self.width == \"*\" or self.precision == \"*\"",
-        "target": "mypy.checkstrformat.ConversionSpecifier.has_star"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "return self.width == \"*\" or self.precision == \"*\"",
-        "target": "mypy.checkstrformat.ConversionSpecifier.has_star"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"Any | bool\")",
-        "offset": 0,
-        "src": "return self.width == \"*\" or self.precision == \"*\"",
-        "target": "mypy.checkstrformat.ConversionSpecifier.has_star"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 36,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "return self.width == \"*\" or self.precision == \"*\"",
-        "target": "mypy.checkstrformat.ConversionSpecifier.has_star"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 36,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "return self.width == \"*\" or self.precision == \"*\"",
-        "target": "mypy.checkstrformat.ConversionSpecifier.has_star"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 42,
-        "src": "if conv_spec.key and (\"{\" in conv_spec.key or \"}\" in conv_spec.key):",
-        "target": "mypy.checkstrformat.parse_format_value"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None | bool\")",
-        "offset": 0,
-        "src": "if conv_spec.key and (\"{\" in conv_spec.key or \"}\" in conv_spec.key):",
-        "target": "mypy.checkstrformat.parse_format_value"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 37,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "if conv_spec.key and (\"{\" in conv_spec.key or \"}\" in conv_spec.key):",
-        "target": "mypy.checkstrformat.parse_format_value"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 61,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "if conv_spec.key and (\"{\" in conv_spec.key or \"}\" in conv_spec.key):",
-        "target": "mypy.checkstrformat.parse_format_value"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 12,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 7,
-        "src": "conv_spec.format_spec",
-        "target": "mypy.checkstrformat.parse_format_value"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 12,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None | bool\")",
-        "offset": 0,
-        "src": "conv_spec.format_spec",
-        "target": "mypy.checkstrformat.parse_format_value"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 24,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "and (\"{\" in conv_spec.format_spec or \"}\" in conv_spec.format_spec)",
-        "target": "mypy.checkstrformat.parse_format_value"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 56,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "and (\"{\" in conv_spec.format_spec or \"}\" in conv_spec.format_spec)",
-        "target": "mypy.checkstrformat.parse_format_value"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 48,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 9,
-        "src": "sub_conv_specs = parse_format_value(conv_spec.format_spec, ctx, msg, nested=True)",
-        "target": "mypy.checkstrformat.parse_format_value"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 123,
-        "src": "assert all(s.key for s in specs), \"Keys must be auto-generated first!\"",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 16,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 10,
-        "src": "spec.format_spec",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 16,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None | bool\")",
-        "offset": 0,
-        "src": "spec.format_spec",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 28,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 4,
-        "src": "not (\"{\" in spec.format_spec or \"}\" in spec.format_spec)",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 55,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "not (\"{\" in spec.format_spec or \"}\" in spec.format_spec)",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 20,
-        "message": "Expression type contains \"Any\" (has type \"True | str | Any | None\")",
-        "offset": 3,
-        "src": "not custom_special_method(actual_type, \"__format__\", check_all=True)",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 23,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 1,
-        "src": "or spec.conversion",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 75,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 4,
-        "src": "\"Unrecognized format\" ' specification \"{}\"'.format(spec.format_spec[1:]),",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 6,
-        "src": "if not spec.conv_type:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 20,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 9,
-        "src": "spec.conv_type, call, format_str, format_call=True",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 2,
-        "src": "if spec.conversion is not None:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "if spec.conversion[1] not in \"rsa\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 65,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 3,
-        "src": "' must be one of \"r\", \"s\" or \"a\"'.format(spec.conversion[1]),",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_specs_in_format_call"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 29,
-        "src": "if spec.conv_type == \"c\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if spec.conv_type == \"c\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"Any | bool\")",
-        "offset": 9,
-        "src": "if (not spec.conv_type or spec.conv_type == \"s\") and not spec.conversion:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 12,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if (not spec.conv_type or spec.conv_type == \"s\") and not spec.conversion:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 16,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "if (not spec.conv_type or spec.conv_type == \"s\") and not spec.conversion:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 34,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "if (not spec.conv_type or spec.conv_type == \"s\") and not spec.conversion:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 34,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if (not spec.conv_type or spec.conv_type == \"s\") and not spec.conversion:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 65,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 0,
-        "src": "if (not spec.conv_type or spec.conv_type == \"s\") and not spec.conversion:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 11,
-        "src": "if spec.flags:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 16,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 5,
-        "src": "spec.conv_type",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 16,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | bool\")",
-        "offset": 0,
-        "src": "spec.conv_type",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 20,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "and spec.conv_type not in NUMERIC_TYPES_NEW",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 23,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "or not spec.conv_type",
-        "target": "mypy.checkstrformat.StringFormatterChecker.perform_special_format_checks"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 27,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 105,
-        "src": "some_defined = any(s.key and s.key.isdecimal() for s in all_specs)",
-        "target": "mypy.checkstrformat.StringFormatterChecker.auto_generate_keys"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 27,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None | bool\")",
-        "offset": 0,
-        "src": "some_defined = any(s.key and s.key.isdecimal() for s in all_specs)",
-        "target": "mypy.checkstrformat.StringFormatterChecker.auto_generate_keys"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 37,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "some_defined = any(s.key and s.key.isdecimal() for s in all_specs)",
-        "target": "mypy.checkstrformat.StringFormatterChecker.auto_generate_keys"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 37,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "some_defined = any(s.key and s.key.isdecimal() for s in all_specs)",
-        "target": "mypy.checkstrformat.StringFormatterChecker.auto_generate_keys"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 31,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 1,
-        "src": "all_defined = all(bool(s.key) for s in all_specs)",
-        "target": "mypy.checkstrformat.StringFormatterChecker.auto_generate_keys"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 12,
-        "src": "if not spec.key:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.auto_generate_keys"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 23,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 4,
-        "src": "if not spec.field:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.auto_generate_keys"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 45,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 3,
-        "src": "spec.field = str_index + spec.field",
-        "target": "mypy.checkstrformat.StringFormatterChecker.auto_generate_keys"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 11,
-        "src": "assert spec.key, \"Keys must be auto-generated first!\"",
-        "target": "mypy.checkstrformat.StringFormatterChecker.apply_field_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 1,
-        "src": "if spec.field == spec.key:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.apply_field_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if spec.field == spec.key:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.apply_field_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 25,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "if spec.field == spec.key:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.apply_field_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 2,
-        "src": "assert spec.field",
-        "target": "mypy.checkstrformat.StringFormatterChecker.apply_field_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 16,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 3,
-        "src": "dummy = DUMMY_FIELD_NAME + spec.field[len(spec.key) :]",
-        "target": "mypy.checkstrformat.StringFormatterChecker.apply_field_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 35,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "dummy = DUMMY_FIELD_NAME + spec.field[len(spec.key) :]",
-        "target": "mypy.checkstrformat.StringFormatterChecker.apply_field_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 50,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "dummy = DUMMY_FIELD_NAME + spec.field[len(spec.key) :]",
-        "target": "mypy.checkstrformat.StringFormatterChecker.apply_field_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 12,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "dummy, fnam=\"<format>\", module=None, options=self.chk.options, errors=temp_errors",
-        "target": "mypy.checkstrformat.StringFormatterChecker.apply_field_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 16,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 4,
-        "src": "f'Syntax error in format specifier \"{spec.field}\"',",
-        "target": "mypy.checkstrformat.StringFormatterChecker.apply_field_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 59,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 43,
-        "src": "' format field accessors; got \"{}\"'.format(spec.field),",
-        "target": "mypy.checkstrformat.StringFormatterChecker.validate_and_transform_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 23,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 10,
-        "src": "assert spec.key, \"Call this method only after auto-generating keys!\"",
-        "target": "mypy.checkstrformat.StringFormatterChecker.validate_and_transform_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 23,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 1,
-        "src": "assert spec.field",
-        "target": "mypy.checkstrformat.StringFormatterChecker.validate_and_transform_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 44,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 3,
-        "src": "' accessor \"{}\"'.format(spec.field[len(spec.key) :]),",
-        "target": "mypy.checkstrformat.StringFormatterChecker.validate_and_transform_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 59,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "' accessor \"{}\"'.format(spec.field[len(spec.key) :]),",
-        "target": "mypy.checkstrformat.StringFormatterChecker.validate_and_transform_accessors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 12,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 58,
-        "src": "specifier.has_key() or specifier.conv_type == \"%\" for specifier in specifiers",
-        "target": "mypy.checkstrformat.StringFormatterChecker.analyze_conversion_specifiers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 35,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "specifier.has_key() or specifier.conv_type == \"%\" for specifier in specifiers",
-        "target": "mypy.checkstrformat.StringFormatterChecker.analyze_conversion_specifiers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 35,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "specifier.has_key() or specifier.conv_type == \"%\" for specifier in specifiers",
-        "target": "mypy.checkstrformat.StringFormatterChecker.analyze_conversion_specifiers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 92,
-        "src": "if specifier.conv_type == \"%\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_mapping_str_interpolation"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if specifier.conv_type == \"%\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_mapping_str_interpolation"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 23,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 3,
-        "src": "assert specifier.key is not None",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_mapping_str_interpolation"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "if specifier.key not in mapping:",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_mapping_str_interpolation"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 48,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "self.msg.key_not_in_mapping(specifier.key, replacements)",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_mapping_str_interpolation"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 35,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "rep_type = mapping[specifier.key]",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_mapping_str_interpolation"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 23,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "assert specifier.conv_type is not None",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_mapping_str_interpolation"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 53,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "expected_type = self.conversion_type(specifier.conv_type, replacements, expr)",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_mapping_str_interpolation"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 20,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 9,
-        "src": "f\"placeholder with key '{specifier.key}' has type\",",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_mapping_str_interpolation"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 3,
-        "src": "if specifier.conv_type == \"s\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_mapping_str_interpolation"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if specifier.conv_type == \"s\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.check_mapping_str_interpolation"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 51,
-        "src": "if specifier.width == \"*\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.replacement_checkers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if specifier.width == \"*\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.replacement_checkers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "if specifier.precision == \"*\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.replacement_checkers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if specifier.precision == \"*\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.replacement_checkers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 3,
-        "src": "if specifier.conv_type == \"c\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.replacement_checkers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if specifier.conv_type == \"c\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.replacement_checkers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 41,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "c = self.checkers_for_c_type(specifier.conv_type, context, expr)",
-        "target": "mypy.checkstrformat.StringFormatterChecker.replacement_checkers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 13,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 4,
-        "src": "elif specifier.conv_type is not None and specifier.conv_type != \"%\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.replacement_checkers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 13,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "elif specifier.conv_type is not None and specifier.conv_type != \"%\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.replacement_checkers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 49,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "elif specifier.conv_type is not None and specifier.conv_type != \"%\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.replacement_checkers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 49,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "elif specifier.conv_type is not None and specifier.conv_type != \"%\":",
-        "target": "mypy.checkstrformat.StringFormatterChecker.replacement_checkers"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 47,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "c = self.checkers_for_regular_type(specifier.conv_type, context, expr)",
-        "target": "mypy.checkstrformat.StringFormatterChecker.replacement_checkers"
-      }
-    ],
     "mypy/config_parser.py": [
       {
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 39,
+        "offset": 40,
         "src": "_INI_PARSER_CALLABLE: _TypeAlias = Callable[[Any], _CONFIG_VALUE_TYPES]",
         "target": "mypy.config_parser"
       },
       {
         "code": "no-any-expr",
-        "column": 23,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 7,
-        "src": "major, minor = int(m.group(1)), int(m.group(2))",
-        "target": "mypy.config_parser.parse_version"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 40,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "major, minor = int(m.group(1)), int(m.group(2))",
-        "target": "mypy.config_parser.parse_version"
-      },
-      {
-        "code": "no-any-expr",
         "column": 16,
         "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 23,
+        "offset": 30,
         "src": "return [p.strip() for p in re.split(split_regex, v)]",
         "target": "mypy.config_parser.try_split"
       },
@@ -6861,33 +5987,9 @@
       },
       {
         "code": "no-any-expr",
-        "column": 12,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 19,
-        "src": "return [code.strip() for code in m.group(1).split(\",\")]",
-        "target": "mypy.fastparse.parse_type_ignore_tag"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 37,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "return [code.strip() for code in m.group(1).split(\",\")]",
-        "target": "mypy.fastparse.parse_type_ignore_tag"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 37,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 0,
-        "src": "return [code.strip() for code in m.group(1).split(\",\")]",
-        "target": "mypy.fastparse.parse_type_ignore_tag"
-      },
-      {
-        "code": "no-any-expr",
         "column": 31,
         "message": "Expression type contains \"Any\" (has type \"type[Expression]\")",
-        "offset": 32,
+        "offset": 51,
         "src": "assert isinstance(typ, ast3_Expression)",
         "target": "mypy.fastparse.parse_type_comment"
       },
@@ -14519,17 +13621,9 @@
       },
       {
         "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 411,
-        "src": "return m.group(1)",
-        "target": "mypy.server.update.extract_fnam_from_message"
-      },
-      {
-        "code": "no-any-expr",
         "column": 32,
         "message": "Expression type contains \"Any\" (has type \"(Untyped) -> Any\")",
-        "offset": 48,
+        "offset": 459,
         "src": "groups = sorted(groups, key=lambda g: g[0])",
         "target": "mypy.server.update.sort_messages_preserving_file_order"
       },
@@ -15681,7 +14775,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 49,
+        "offset": 51,
         "src": "def __eq__(self, other: Any) -> bool:",
         "target": "mypy.stubdoc.ArgSig.__eq__"
       },
@@ -15700,326 +14794,6 @@
         "offset": 189,
         "src": "return list(sorted(self.signatures, key=lambda x: 1 if args_kwargs(x) else 0))",
         "target": "mypy.stubdoc.DocStringParser.get_signatures"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 70,
-        "src": "name = m.group(1)",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "name = name.split(\".\")[-1]",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 0,
-        "src": "name = name.split(\".\")[-1]",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 17,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "arg_string = m.group(2)",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "if not arg_string.strip():",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "return name, [], []",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"(str | Any, list[str], list[str])\")",
-        "offset": 0,
-        "src": "return name, [], []",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 12,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "args = [arg.strip() for arg in arg_string.split(\",\")]",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 12,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 0,
-        "src": "args = [arg.strip() for arg in arg_string.split(\",\")]",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 35,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "args = [arg.strip() for arg in arg_string.split(\",\")]",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 35,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 0,
-        "src": "args = [arg.strip() for arg in arg_string.split(\",\")]",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 18,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 4,
-        "src": "while i < len(args):",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 2,
-        "src": "if args[i].startswith(\"[\") or \"=\" in args[i]:",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "if args[i].startswith(\"[\") or \"=\" in args[i]:",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if args[i].startswith(\"[\") or \"=\" in args[i]:",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"Any | bool\")",
-        "offset": 0,
-        "src": "if args[i].startswith(\"[\") or \"=\" in args[i]:",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 45,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 0,
-        "src": "if args[i].startswith(\"[\") or \"=\" in args[i]:",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 45,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "if args[i].startswith(\"[\") or \"=\" in args[i]:",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 8,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 2,
-        "src": "positional.append(args[i].rstrip(\"[\"))",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 26,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 0,
-        "src": "positional.append(args[i].rstrip(\"[\"))",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 26,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "positional.append(args[i].rstrip(\"[\"))",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 2,
-        "src": "if args[i - 1].endswith(\"[\"):",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "if args[i - 1].endswith(\"[\"):",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if args[i - 1].endswith(\"[\"):",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 18,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 2,
-        "src": "while i < len(args):",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 14,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 1,
-        "src": "arg = args[i]",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 14,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "arg = args[i]",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 14,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "arg = arg.strip(\"[]\")",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 14,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "arg = arg.split(\"=\")[0]",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 14,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 0,
-        "src": "arg = arg.split(\"=\")[0]",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 8,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 1,
-        "src": "optional.append(arg)",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 24,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "optional.append(arg)",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "return name, positional, optional",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"(str | Any, list[str | Any], list[str | Any])\")",
-        "offset": 0,
-        "src": "return name, positional, optional",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 17,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 0,
-        "src": "return name, positional, optional",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 29,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 0,
-        "src": "return name, positional, optional",
-        "target": "mypy.stubdoc.parse_signature"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 33,
-        "src": "if m.group(1) != \"class\":",
-        "target": "mypy.stubdoc.parse_all_signatures"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if m.group(1) != \"class\":",
-        "target": "mypy.stubdoc.parse_all_signatures"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 34,
-        "src": "return m.group(1) if m else None",
-        "target": "mypy.stubdoc.infer_prop_type_from_docstring"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 0,
-        "src": "return m.group(1) if m else None",
-        "target": "mypy.stubdoc.infer_prop_type_from_docstring"
       }
     ],
     "mypy/stubgen.py": [
@@ -19522,26 +18296,10 @@
     ],
     "mypy/test/data.py": [
       {
-        "code": "no-any-expr",
-        "column": 22,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 134,
-        "src": "num = int(m.group(2))",
-        "target": "mypy.test.data.parse_test_case"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 35,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "full = join(base_path, m.group(1))",
-        "target": "mypy.test.data.parse_test_case"
-      },
-      {
         "code": "no-untyped-usage",
         "column": 8,
         "message": "Usage of untyped name \"suite\" in typed context",
-        "offset": 176,
+        "offset": 313,
         "src": "suite = parent.obj()",
         "target": "mypy.test.data.DataDrivenTestCase.runtest"
       },
@@ -19570,18 +18328,10 @@
         "target": "mypy.test.data.DataDrivenTestCase.runtest"
       },
       {
-        "code": "no-any-expr",
-        "column": 26,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 29,
-        "src": "num = int(m.group(1))",
-        "target": "mypy.test.data.DataDrivenTestCase.setup"
-      },
-      {
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 34,
+        "offset": 63,
         "src": "def repr_failure(self, excinfo: Any, style: Any | None = None) -> str:",
         "target": "mypy.test.data.DataDrivenTestCase.repr_failure"
       },
@@ -19674,170 +18424,26 @@
         "target": "mypy.test.data.module_from_path"
       },
       {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 123,
-        "src": "if m.group(1) == \"E\":",
-        "target": "mypy.test.data.expand_errors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if m.group(1) == \"E\":",
-        "target": "mypy.test.data.expand_errors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "elif m.group(1) == \"N\":",
-        "target": "mypy.test.data.expand_errors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "elif m.group(1) == \"N\":",
-        "target": "mypy.test.data.expand_errors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "elif m.group(1) == \"W\":",
-        "target": "mypy.test.data.expand_errors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "elif m.group(1) == \"W\":",
-        "target": "mypy.test.data.expand_errors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 22,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "col = m.group(\"col\")",
-        "target": "mypy.test.data.expand_errors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 26,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "message = m.group(\"message\")",
-        "target": "mypy.test.data.expand_errors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 26,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "message = message.replace(\"\\\\#\", \"#\")  # adds back escaped # character",
-        "target": "mypy.test.data.expand_errors"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "if col is None:",
-        "target": "mypy.test.data.expand_errors"
-      },
-      {
-        "code": "no-any-expr",
+        "code": "possibly-undefined",
         "column": 34,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
+        "message": "Name \"severity\" may be undefined",
+        "offset": 133,
         "src": "output.append(f\"{fnam}:{i + 1}: {severity}: {message}\")",
-        "target": "mypy.test.data.expand_errors"
+        "target": "mypy.test.data"
       },
       {
         "code": "possibly-undefined",
         "column": 34,
         "message": "Name \"severity\" may be undefined",
-        "offset": 0,
-        "src": "output.append(f\"{fnam}:{i + 1}: {severity}: {message}\")",
-        "target": "mypy.test.data"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 34,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
         "offset": 2,
         "src": "output.append(f\"{fnam}:{i + 1}:{col}: {severity}: {message}\")",
-        "target": "mypy.test.data.expand_errors"
-      },
-      {
-        "code": "possibly-undefined",
-        "column": 34,
-        "message": "Name \"severity\" may be undefined",
-        "offset": 0,
-        "src": "output.append(f\"{fnam}:{i + 1}:{col}: {severity}: {message}\")",
         "target": "mypy.test.data"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 36,
-        "message": "Expression type contains \"Any\" (has type \"tuple[str | Any, ...]\")",
-        "offset": 13,
-        "src": "filename, lineno, message = m.groups()",
-        "target": "mypy.test.data.fix_win_path"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 36,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "filename, lineno, message = m.groups()",
-        "target": "mypy.test.data.fix_win_path"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 32,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "return \"{}:{}{}\".format(filename.replace(\"\\\\\", \"/\"), lineno or \"\", message)",
-        "target": "mypy.test.data.fix_win_path"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 61,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "return \"{}:{}{}\".format(filename.replace(\"\\\\\", \"/\"), lineno or \"\", message)",
-        "target": "mypy.test.data.fix_win_path"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 75,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "return \"{}:{}{}\".format(filename.replace(\"\\\\\", \"/\"), lineno or \"\", message)",
-        "target": "mypy.test.data.fix_win_path"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 28,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 12,
-        "src": "line[: m.start(1)], m.group(\"filename\").replace(\"\\\\\", \"/\"), line[m.end(1) :]",
-        "target": "mypy.test.data.fix_cobertura_filename"
       },
       {
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 13,
+        "offset": 39,
         "src": "def pytest_addoption(parser: Any) -> None:",
         "target": "mypy.test.data.pytest_addoption"
       },
@@ -20247,7 +18853,7 @@
         "code": "no-any-expr",
         "column": 54,
         "message": "Expression type contains \"Any\" (has type \"set[Any]\")",
-        "offset": 123,
+        "offset": 125,
         "src": "actual_normalized = sorted(set(actual).difference({\"__main__\"}))",
         "target": "mypy.test.helpers.assert_module_equivalence"
       },
@@ -20261,17 +18867,9 @@
       },
       {
         "code": "no-any-expr",
-        "column": 31,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 71,
-        "src": "flag_list: list[str] = flags.group(1).split()",
-        "target": "mypy.test.helpers.parse_options"
-      },
-      {
-        "code": "no-any-expr",
         "column": 7,
         "message": "Expression has type \"Untyped\"",
-        "offset": 35,
+        "offset": 106,
         "src": "if testcase.config.getoption(\"--mypy-verbose\"):",
         "target": "mypy.test.helpers.parse_options"
       },
@@ -20297,23 +18895,15 @@
         "code": "no-any-expr",
         "column": 11,
         "message": "Expression has type \"Any (from unimported type)\"",
-        "offset": 63,
+        "offset": 64,
         "src": "if lxml is None and os.path.basename(testcase.file) == \"check-reports.test\":",
-        "target": "mypy.test.testcheck.TypeCheckSuite.run_case"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 33,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 15,
-        "src": "if m and int(m.group(1)) > num_steps:",
         "target": "mypy.test.testcheck.TypeCheckSuite.run_case"
       },
       {
         "code": "no-any-expr",
         "column": 11,
         "message": "Expression type contains \"Any\" (has type \"False | Untyped\")",
-        "offset": 115,
+        "offset": 130,
         "src": "if output != a and testcase.config.getoption(\"--update-data\", False):",
         "target": "mypy.test.testcheck.TypeCheckSuite.run_case_once"
       },
@@ -20327,41 +18917,9 @@
       },
       {
         "code": "no-any-expr",
-        "column": 20,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 68,
-        "src": "p = m.group(1)",
-        "target": "mypy.test.testcheck.TypeCheckSuite.find_error_message_paths"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 16,
-        "message": "Expression type contains \"Any\" (has type \"set[str | Any]\")",
-        "offset": 1,
-        "src": "hits.add(p)",
-        "target": "mypy.test.testcheck.TypeCheckSuite.find_error_message_paths"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 25,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "hits.add(p)",
-        "target": "mypy.test.testcheck.TypeCheckSuite.find_error_message_paths"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"set[str | Any]\")",
-        "offset": 1,
-        "src": "return hits",
-        "target": "mypy.test.testcheck.TypeCheckSuite.find_error_message_paths"
-      },
-      {
-        "code": "no-any-expr",
         "column": 19,
         "message": "Expression type contains \"Any\" (has type \"CacheMeta | None\")",
-        "offset": 11,
+        "offset": 81,
         "src": "meta = build.find_cache_meta(id, path, manager)",
         "target": "mypy.test.testcheck.TypeCheckSuite.find_missing_cache_files"
       },
@@ -20380,86 +18938,6 @@
         "offset": 0,
         "src": "if not build.validate_meta(meta, id, path, ignore_errors, manager):",
         "target": "mypy.test.testcheck.TypeCheckSuite.find_missing_cache_files"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 27,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 35,
-        "src": "module_names = m.group(1)",
-        "target": "mypy.test.testcheck.TypeCheckSuite.parse_module"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 12,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 4,
-        "src": "for module_name in module_names.split(\" \"):",
-        "target": "mypy.test.testcheck.TypeCheckSuite.parse_module"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 31,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "for module_name in module_names.split(\" \"):",
-        "target": "mypy.test.testcheck.TypeCheckSuite.parse_module"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 31,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 0,
-        "src": "for module_name in module_names.split(\" \"):",
-        "target": "mypy.test.testcheck.TypeCheckSuite.parse_module"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 41,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "path = cache.find_module(module_name)",
-        "target": "mypy.test.testcheck.TypeCheckSuite.parse_module"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 46,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "assert isinstance(path, str), f\"Can't find ad hoc case file: {module_name}\"",
-        "target": "mypy.test.testcheck.TypeCheckSuite.parse_module"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 16,
-        "message": "Expression type contains \"Any\" (has type \"list[(str | Any, str, str)]\")",
-        "offset": 3,
-        "src": "out.append((module_name, path, program_text))",
-        "target": "mypy.test.testcheck.TypeCheckSuite.parse_module"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 28,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "out.append((module_name, path, program_text))",
-        "target": "mypy.test.testcheck.TypeCheckSuite.parse_module"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 28,
-        "message": "Expression type contains \"Any\" (has type \"(str | Any, str, str)\")",
-        "offset": 0,
-        "src": "out.append((module_name, path, program_text))",
-        "target": "mypy.test.testcheck.TypeCheckSuite.parse_module"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"list[(str | Any, str, str)]\")",
-        "offset": 1,
-        "src": "return out",
-        "target": "mypy.test.testcheck.TypeCheckSuite.parse_module"
       }
     ],
     "mypy/test/testcmdline.py": [
@@ -20467,7 +18945,7 @@
         "code": "no-any-expr",
         "column": 11,
         "message": "Expression has type \"Any (from unimported type)\"",
-        "offset": 48,
+        "offset": 49,
         "src": "if lxml is None and os.path.basename(testcase.file) == \"reports.test\":",
         "target": "mypy.test.testcmdline.PythonCmdlineSuite.run_case"
       },
@@ -20534,38 +19012,6 @@
         "offset": 1,
         "src": "out.append(f\"== Return code: {result}\")",
         "target": "mypy.test.testcmdline.test_python_cmdline"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 27,
-        "src": "return m.group(1).split()",
-        "target": "mypy.test.testcmdline.parse_args"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 0,
-        "src": "return m.group(1).split()",
-        "target": "mypy.test.testcmdline.parse_args"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 15,
-        "src": "return m.group(1) if m else None",
-        "target": "mypy.test.testcmdline.parse_cwd"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 0,
-        "src": "return m.group(1) if m else None",
-        "target": "mypy.test.testcmdline.parse_cwd"
       }
     ],
     "mypy/test/testdaemon.py": [
@@ -20591,7 +19037,7 @@
         "code": "unreachable",
         "column": 12,
         "message": "Statement is unreachable",
-        "offset": 81,
+        "offset": 82,
         "src": "return",
         "target": "mypy.test.testfinegrained.FineGrainedSuite.run_case"
       },
@@ -20644,98 +19090,18 @@
         "target": "mypy.test.testfinegrained.FineGrainedSuite.run_check"
       },
       {
-        "code": "no-any-expr",
-        "column": 23,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 24,
-        "src": "return int(m.group(1))",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.get_build_steps"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 90,
-        "src": "paths = [os.path.join(test_temp_dir, path) for path in m.group(1).strip().split()]",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.parse_sources"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 49,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "paths = [os.path.join(test_temp_dir, path) for path in m.group(1).strip().split()]",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.parse_sources"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 67,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "paths = [os.path.join(test_temp_dir, path) for path in m.group(1).strip().split()]",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.parse_sources"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 67,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 0,
-        "src": "paths = [os.path.join(test_temp_dir, path) for path in m.group(1).strip().split()]",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.parse_sources"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 29,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 17,
-        "src": "flex_any = float(m.group(1)) if m else None",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_suggest"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 24,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "use_fixme = m.group(1) if m else None",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_suggest"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 24,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 0,
-        "src": "use_fixme = m.group(1) if m else None",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_suggest"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 30,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "max_guesses = int(m.group(1)) if m else None",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_suggest"
-      },
-      {
         "code": "no-any-explicit",
         "column": 12,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 1,
+        "offset": 138,
         "src": "res: dict[str, Any] = server.cmd_suggest(",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_suggest"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 26,
-        "message": "Expression type contains \"Any\" (has type \"str | Any | None\")",
-        "offset": 6,
-        "src": "use_fixme=use_fixme,",
         "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_suggest"
       },
       {
         "code": "no-any-expr",
         "column": 18,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 4,
+        "offset": 10,
         "src": "val = res[\"error\"] if \"error\" in res else res[\"out\"] + res[\"err\"]",
         "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_suggest"
       },
@@ -20812,42 +19178,18 @@
         "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_suggest"
       },
       {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 8,
-        "src": "show = m.group(1) if m else \"type\"",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_inspect"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 24,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 7,
-        "src": "limit = int(m.group(1)) if m else 0",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_inspect"
-      },
-      {
         "code": "no-any-explicit",
         "column": 12,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 6,
+        "offset": 21,
         "src": "res: dict[str, Any] = server.cmd_inspect(",
-        "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_inspect"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 16,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 1,
-        "src": "show,",
         "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_inspect"
       },
       {
         "code": "no-any-expr",
         "column": 18,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 10,
+        "offset": 11,
         "src": "val = res[\"error\"] if \"error\" in res else res[\"out\"] + res[\"err\"]",
         "target": "mypy.test.testfinegrained.FineGrainedSuite.maybe_inspect"
       },
@@ -21125,51 +19467,17 @@
         "code": "possibly-undefined",
         "column": 22,
         "message": "Name \"program\" may be undefined",
-        "offset": 143,
+        "offset": 144,
         "src": "os.remove(program)",
         "target": "mypy.test.testpep561"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 15,
-        "src": "return m.group(1).split()",
-        "target": "mypy.test.testpep561.parse_mypy_args"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 0,
-        "src": "return m.group(1).split()",
-        "target": "mypy.test.testpep561.parse_mypy_args"
       },
       {
         "code": "unreachable",
         "column": 4,
         "message": "Statement is unreachable",
-        "offset": 5,
+        "offset": 20,
         "src": "packages = \"packages\"",
         "target": "mypy.test.testpep561.test_mypy_path_is_respected"
-      }
-    ],
-    "mypy/test/testpythoneval.py": [
-      {
-        "code": "no-any-expr",
-        "column": 28,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 65,
-        "src": "mypy_cmdline.extend(m.group(1).split())",
-        "target": "mypy.test.testpythoneval.test_python_evaluation"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 28,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 0,
-        "src": "mypy_cmdline.extend(m.group(1).split())",
-        "target": "mypy.test.testpythoneval.test_python_evaluation"
       }
     ],
     "mypy/test/testreports.py": [
@@ -21227,7 +19535,7 @@
         "code": "no-any-expr",
         "column": 5,
         "message": "Expression type contains \"Any\" (has type \"[_FT: (...) -> Any] (_FT) -> _FT\")",
-        "offset": 53,
+        "offset": 54,
         "src": "@unittest.skipIf(sys.platform == \"win32\", \"clean up fails on Windows\")",
         "target": "mypy.test.teststubgen"
       },
@@ -21289,57 +19597,9 @@
       },
       {
         "code": "no-any-expr",
-        "column": 24,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 134,
-        "src": "flag_list = flags.group(1).split()",
-        "target": "mypy.test.teststubgen.StubgenPythonSuite.parse_flags"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 24,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 0,
-        "src": "flag_list = flags.group(1).split()",
-        "target": "mypy.test.teststubgen.StubgenPythonSuite.parse_flags"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 32,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 3,
-        "src": "options = parse_options(flag_list + extra)",
-        "target": "mypy.test.teststubgen.StubgenPythonSuite.parse_flags"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 30,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 1,
-        "src": "if \"--verbose\" not in flag_list:",
-        "target": "mypy.test.teststubgen.StubgenPythonSuite.parse_flags"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 9,
-        "src": "return modules.group(1).split()",
-        "target": "mypy.test.teststubgen.StubgenPythonSuite.parse_modules"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 0,
-        "src": "return modules.group(1).split()",
-        "target": "mypy.test.teststubgen.StubgenPythonSuite.parse_modules"
-      },
-      {
-        "code": "no-any-expr",
         "column": 12,
         "message": "Expression type contains \"Any\" (has type \"type[TestClass]\")",
-        "offset": 176,
+        "offset": 323,
         "src": "TestClass,",
         "target": "mypy.test.teststubgen.StubgencSuite.test_generate_c_type_inheritance_builtin_type"
       },
@@ -23937,89 +22197,9 @@
     "mypy/util.py": [
       {
         "code": "no-any-expr",
-        "column": 20,
-        "message": "Expression type contains \"Any\" (has type \"bytes | Any\")",
-        "offset": 122,
-        "src": "line = 2 if result.group(1) else 1",
-        "target": "mypy.util.find_python_encoding"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"bytes | Any\")",
-        "offset": 1,
-        "src": "encoding = result.group(3).decode(\"ascii\")",
-        "target": "mypy.util.find_python_encoding"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 19,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "encoding = result.group(3).decode(\"ascii\")",
-        "target": "mypy.util.find_python_encoding"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "if encoding.startswith((\"iso-latin-1-\", \"latin-1-\")) or encoding == \"iso-latin-1\":",
-        "target": "mypy.util.find_python_encoding"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if encoding.startswith((\"iso-latin-1-\", \"latin-1-\")) or encoding == \"iso-latin-1\":",
-        "target": "mypy.util.find_python_encoding"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"Any | bool\")",
-        "offset": 0,
-        "src": "if encoding.startswith((\"iso-latin-1-\", \"latin-1-\")) or encoding == \"iso-latin-1\":",
-        "target": "mypy.util.find_python_encoding"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 64,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "if encoding.startswith((\"iso-latin-1-\", \"latin-1-\")) or encoding == \"iso-latin-1\":",
-        "target": "mypy.util.find_python_encoding"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 64,
-        "message": "Expression type contains \"Any\" (has type \"bool | Any\")",
-        "offset": 0,
-        "src": "if encoding.startswith((\"iso-latin-1-\", \"latin-1-\")) or encoding == \"iso-latin-1\":",
-        "target": "mypy.util.find_python_encoding"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 2,
-        "src": "return encoding, line",
-        "target": "mypy.util.find_python_encoding"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"(str | Any, int)\")",
-        "offset": 0,
-        "src": "return encoding, line",
-        "target": "mypy.util.find_python_encoding"
-      },
-      {
-        "code": "no-any-expr",
         "column": 17,
         "message": "Expression type contains \"Any\" (has type \"(Untyped) -> bool\")",
-        "offset": 220,
+        "offset": 347,
         "src": "cls, lambda o: inspect.isgetsetdescriptor(o) or inspect.ismemberdescriptor(o)",
         "target": "mypy.util.get_class_descriptors"
       },
@@ -26556,32 +24736,6 @@
         "target": "mypyc.test.test_cheader.TestHeaderInclusion.test_primitives_included_in_header"
       }
     ],
-    "mypyc/test/test_commandline.py": [
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 38,
-        "src": "args = m.group(1).split()",
-        "target": "mypyc.test.test_commandline.TestCommandLine.run_case"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 0,
-        "src": "args = m.group(1).split()",
-        "target": "mypyc.test.test_commandline.TestCommandLine.run_case"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 61,
-        "message": "Expression type contains \"Any\" (has type \"list[str] | Any\")",
-        "offset": 16,
-        "src": "[sys.executable, \"-m\", \"mypyc\", \"--legacy\", *args],",
-        "target": "mypyc.test.test_commandline.TestCommandLine.run_case"
-      }
-    ],
     "mypyc/test/test_emitclass.py": [
       {
         "code": "no-any-expr",
@@ -26625,7 +24779,7 @@
         "code": "no-any-expr",
         "column": 16,
         "message": "Expression has type \"Untyped\"",
-        "offset": 188,
+        "offset": 189,
         "src": "bench = testcase.config.getoption(\"--bench\", False) and \"Benchmark\" in testcase.name",
         "target": "mypyc.test.test_run.TestRun.run_case_step"
       },
@@ -26818,63 +24972,39 @@
         "column": 19,
         "message": "Expression has type \"Any\"",
         "offset": 6,
-        "src": "return ast.literal_eval(m.group(1))",
+        "src": "return ast.literal_eval(safe(m.group(1)))",
         "target": "mypyc.test.test_run.TestRun.get_separate"
       },
       {
         "code": "no-any-expr",
-        "column": 36,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "return ast.literal_eval(m.group(1))",
-        "target": "mypyc.test.test_run.TestRun.get_separate"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 33,
+        "column": 8,
         "message": "Expression type contains \"Any\" (has type \"(Untyped) -> str\")",
-        "offset": 55,
-        "src": "r\"native\\.py:([0-9]+):\", lambda m: \"%s:%d:\" % (fnam, int(m.group(1)) + delta), message",
+        "offset": 56,
+        "src": "lambda m: \"%s:%d:\" % (fnam, int(safe(m.group(1))) + delta),",
         "target": "mypyc.test.test_run.fix_native_line_number"
       },
       {
         "code": "no-any-expr",
-        "column": 65,
+        "column": 45,
         "message": "Expression has type \"Any\"",
         "offset": 0,
-        "src": "r\"native\\.py:([0-9]+):\", lambda m: \"%s:%d:\" % (fnam, int(m.group(1)) + delta), message",
-        "target": "mypyc.test.test_run.fix_native_line_number"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 65,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "r\"native\\.py:([0-9]+):\", lambda m: \"%s:%d:\" % (fnam, int(m.group(1)) + delta), message",
+        "src": "lambda m: \"%s:%d:\" % (fnam, int(safe(m.group(1))) + delta),",
         "target": "mypyc.test.test_run.fix_native_line_number"
       },
       {
         "code": "no-any-expr",
         "column": 8,
         "message": "Expression type contains \"Any\" (has type \"(Untyped) -> str\")",
-        "offset": 4,
-        "src": "lambda m: '\"%s\", line %d,' % (fnam, int(m.group(1)) + delta),",
+        "offset": 5,
+        "src": "lambda m: '\"%s\", line %d,' % (fnam, int(safe(m.group(1))) + delta),",
         "target": "mypyc.test.test_run.fix_native_line_number"
       },
       {
         "code": "no-any-expr",
-        "column": 48,
+        "column": 53,
         "message": "Expression has type \"Any\"",
         "offset": 0,
-        "src": "lambda m: '\"%s\", line %d,' % (fnam, int(m.group(1)) + delta),",
-        "target": "mypyc.test.test_run.fix_native_line_number"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 48,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "lambda m: '\"%s\", line %d,' % (fnam, int(m.group(1)) + delta),",
+        "src": "lambda m: '\"%s\", line %d,' % (fnam, int(safe(m.group(1))) + delta),",
         "target": "mypyc.test.test_run.fix_native_line_number"
       }
     ],
@@ -27485,7 +25615,7 @@
         "code": "possibly-undefined",
         "column": 11,
         "message": "Name \"default_builtins\" may be undefined",
-        "offset": 66,
+        "offset": 67,
         "src": "if default_builtins:",
         "target": "mypyc.test.testutil"
       },
@@ -27528,46 +25658,6 @@
         "offset": 0,
         "src": "if expected_output != actual and testcase.config.getoption(\"--update-data\", False):",
         "target": "mypyc.test.testutil.assert_test_output"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 12,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 13,
-        "src": "res.append(m.group(1))",
-        "target": "mypyc.test.testutil.get_func_names"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 23,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "res.append(m.group(1))",
-        "target": "mypyc.test.testutil.get_func_names"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 11,
-        "message": "Expression type contains \"Any\" (has type \"list[str | Any]\")",
-        "offset": 1,
-        "src": "return res",
-        "target": "mypyc.test.testutil.get_func_names"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 36,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 85,
-        "src": "options.capi_version = (int(m.group(1)), int(m.group(2)))",
-        "target": "mypyc.test.testutil.infer_ir_build_options_from_test_name"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 53,
-        "message": "Expression type contains \"Any\" (has type \"str | Any\")",
-        "offset": 0,
-        "src": "options.capi_version = (int(m.group(1)), int(m.group(2)))",
-        "target": "mypyc.test.testutil.infer_ir_build_options_from_test_name"
       }
     ],
     "mypyc/transform/refcount.py": [

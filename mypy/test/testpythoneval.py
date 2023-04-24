@@ -24,6 +24,7 @@ from mypy.defaults import PYTHON3_VERSION
 from mypy.test.config import test_temp_dir
 from mypy.test.data import DataDrivenTestCase, DataSuite
 from mypy.test.helpers import assert_string_arrays_equal, split_lines
+from mypy.util import safe
 
 # Path to Python 3 interpreter
 python3_path = sys.executable
@@ -62,7 +63,7 @@ def test_python_evaluation(testcase: DataDrivenTestCase, cache_dir: str) -> None
 
     m = re.search("# flags: (.*)$", "\n".join(testcase.input), re.MULTILINE)
     if m:
-        mypy_cmdline.extend(m.group(1).split())
+        mypy_cmdline.extend(safe(m.group(1)).split())
 
     # Write the program to a file.
     program = "_" + testcase.name + ".py"
