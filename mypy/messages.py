@@ -19,8 +19,8 @@ from textwrap import dedent
 from typing import Any, Callable, Collection, Iterable, Iterator, List, Sequence, cast
 from typing_extensions import Final
 
-import mypy.typeops
 import mypy.options
+import mypy.typeops
 from mypy import errorcodes as codes, message_registry
 from mypy.erasetype import erase_type
 from mypy.errorcodes import ErrorCode
@@ -2406,7 +2406,9 @@ def format_type_inner(
     """
 
     def format(typ: Type) -> str:
-        return format_type_inner(typ, verbosity, options, fullnames, disable_own_scope=disable_own_scope)
+        return format_type_inner(
+            typ, verbosity, options, fullnames, disable_own_scope=disable_own_scope
+        )
 
     def format_list(types: Sequence[Type]) -> str:
         return ", ".join(format(typ) for typ in types)

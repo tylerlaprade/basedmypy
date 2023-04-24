@@ -211,7 +211,6 @@ def f(x: AnyStr & A, *a: AnyStr): pass
 f(strA)
 f(strA, 'bar')
 f(strA, b'bar') # E: Value of type variable "AnyStr" of "f" cannot be "str | bytes"  [type-var]
-[builtins fixtures/primitives.pyi]
 [builtins fixtures/tuple.pyi]
 
 -- what's going on here?
@@ -229,7 +228,6 @@ b = ['b']
 # not a subtype of list[str], we must have U = int.
 # This is not currently implemented.
 j(a, b)
-[builtins fixtures/list.pyi]
 [builtins fixtures/tuple.pyi]
 
 
@@ -245,7 +243,6 @@ T = TypeVar('T')
 def f() -> list[T]: pass
 d1: list[int] & A = f()  # E: Incompatible types in assignment (expression has type "list[int]", variable has type "list[int] & A")  [assignment]
 d2: A & B = f() # E: Incompatible types in assignment (expression has type "list[Never]", variable has type "A & B")  [assignment]
-[builtins fixtures/list.pyi]
 [builtins fixtures/tuple.pyi]
 
 
@@ -262,7 +259,6 @@ a = k1 # E: Incompatible types in assignment (expression has type "[T] (int, lis
 b = k1
 b = k2
 [builtins fixtures/list.pyi]
-[builtins fixtures/tuple.pyi]
 
 
 [case testEqual-xfail]
