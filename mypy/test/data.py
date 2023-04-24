@@ -16,6 +16,7 @@ from typing_extensions import Final, TypeAlias as _TypeAlias
 import pytest
 
 from mypy.test.config import PREFIX, test_data_prefix, test_temp_dir
+from mypy.util import safe
 
 root_dir = os.path.normpath(PREFIX)
 
@@ -131,9 +132,9 @@ def parse_test_case(case: DataDrivenTestCase) -> None:
             assert item.arg is not None
             m = re.match(r"(.*)\.([0-9]+)$", item.arg)
             assert m, f"Invalid delete section: {item.arg}"
-            num = int(m.group(2))
+            num = int(safe(m.group(2)))
             assert num >= 2, f"Can't delete during step {num}"
-            full = join(base_path, m.group(1))
+            full = join(base_path, safe(m.group(1)))
             deleted_paths.setdefault(num, set()).add(full)
         elif re.match(r"out[0-9]*$", item.id):
             if item.arg is None:
@@ -341,7 +342,7 @@ class DataDrivenTestCase(pytest.Item):
             if m:
                 # Skip writing subsequent incremental steps - rather
                 # store them as operations.
-                num = int(m.group(1))
+                num = int(safe(m.group(1)))
                 assert num >= 2
                 target_path = re.sub(r"\.[0-9]+$", "", path)
                 module = module_from_path(target_path)
@@ -537,7 +538,7 @@ def expand_errors(input: list[str], output: list[str], fnam: str) -> None:
                 elif m.group(1) == "W":
                     severity = "warning"
                 col = m.group("col")
-                message = m.group("message")
+                message = safe(m.group("message"))
                 message = message.replace("\\#", "#")  # adds back escaped # character
                 if col is None:
                     output.append(f"{fnam}:{i + 1}: {severity}: {message}")
@@ -556,7 +557,7 @@ def fix_win_path(line: str) -> str:
         return line
     else:
         filename, lineno, message = m.groups()
-        return "{}:{}{}".format(filename.replace("\\", "/"), lineno or "", message)
+        return "{}:{}{}".format(safe(filename).replace("\\", "/"), lineno or "", message)
 
 
 def fix_cobertura_filename(line: str) -> str:
@@ -568,7 +569,7 @@ def fix_cobertura_filename(line: str) -> str:
     if not m:
         return line
     return "{}{}{}".format(
-        line[: m.start(1)], m.group("filename").replace("\\", "/"), line[m.end(1) :]
+        line[: m.start(1)], safe(m.group("filename")).replace("\\", "/"), line[m.end(1) :]
     )
 
 

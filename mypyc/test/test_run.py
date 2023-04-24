@@ -19,6 +19,7 @@ from mypy.options import TYPE_VAR_TUPLE, UNPACK, Options
 from mypy.test.config import test_temp_dir
 from mypy.test.data import DataDrivenTestCase
 from mypy.test.helpers import assert_module_equivalence, perform_file_operations
+from mypy.util import safe
 from mypyc.build import construct_groups
 from mypyc.codegen import emitmodule
 from mypyc.errors import Errors
@@ -368,7 +369,7 @@ class TestRun(MypycDataSuite):
         if not m:
             m = re.search(template.format(""), program_text, flags=re.MULTILINE)
         if m:
-            return ast.literal_eval(m.group(1))
+            return ast.literal_eval(safe(m.group(1)))
         else:
             return True
 
@@ -423,11 +424,13 @@ def fix_native_line_number(message: str, fnam: str, delta: int) -> str:
     """
     fnam = os.path.basename(fnam)
     message = re.sub(
-        r"native\.py:([0-9]+):", lambda m: "%s:%d:" % (fnam, int(m.group(1)) + delta), message
+        r"native\.py:([0-9]+):",
+        lambda m: "%s:%d:" % (fnam, int(safe(m.group(1))) + delta),
+        message,
     )
     message = re.sub(
         r'"native.py", line ([0-9]+),',
-        lambda m: '"%s", line %d,' % (fnam, int(m.group(1)) + delta),
+        lambda m: '"%s", line %d,' % (fnam, int(safe(m.group(1))) + delta),
         message,
     )
     return message
