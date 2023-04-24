@@ -380,7 +380,7 @@ class Options:
         self.force_uppercase_builtins = False
 
     def use_lowercase_names(self) -> bool:
-        if self.python_version >= (3, 9):
+        if self.python_version >= (3, 9) or _based:
             return not self.force_uppercase_builtins
         return False
 

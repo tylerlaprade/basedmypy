@@ -2890,7 +2890,7 @@ class ExpressionChecker(ExpressionVisitor[Type]):
         if isinstance(context, CallExpr) and isinstance(context.callee, MemberExpr):
             name = f"{context.callee.name} of {object_type}"
         else:
-            name = format_type_inner(callee, 0, None)
+            name = format_type_inner(callee, 0, self.chk.options, None)
         return self.check_call(NamedOverloaded(results, name), args, arg_kinds, context, arg_names)
 
     def visit_member_expr(self, e: MemberExpr, is_lvalue: bool = False) -> Type:

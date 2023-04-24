@@ -401,7 +401,7 @@ def parse_options(
         options.error_summary = False
         if not based:
             options.hide_error_codes = True
-        options.force_uppercase_builtins = True
+            options.force_uppercase_builtins = True
 
     # Allow custom python version to override testfile_pyversion.
     if all(flag.split("=")[0] not in ["--python-version", "-2", "--py2"] for flag in flag_list):
