@@ -1,8 +1,12 @@
 # Basedmypy Changelog
 
 ## [Unreleased]
+### Enhancements
+- Removed `Any` from the typings for `re.Match` group functions. (#459)
+
+## [1.8.0]
 ### Added
-- `Intersection` type
+- `Intersection` type (#357)
 
 ## [1.7.0]
 ### Added

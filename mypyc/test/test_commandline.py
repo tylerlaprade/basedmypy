@@ -15,6 +15,7 @@ import sys
 from mypy.test.config import test_temp_dir
 from mypy.test.data import DataDrivenTestCase
 from mypy.test.helpers import normalize_error_messages
+from mypy.util import safe
 from mypyc.test.testutil import MypycDataSuite, assert_test_output
 
 files = ["commandline.test"]
@@ -35,7 +36,7 @@ class TestCommandLine(MypycDataSuite):
         text = "\n".join(testcase.input)
         m = re.search(r"# *cmd: *(.*)", text)
         assert m is not None, 'Test case missing "# cmd: <files>" section'
-        args = m.group(1).split()
+        args = safe(m.group(1)).split()
 
         # Write main program to run (not compiled)
         program = "_%s.py" % testcase.name
