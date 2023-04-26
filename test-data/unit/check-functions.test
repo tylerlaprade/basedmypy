@@ -2112,7 +2112,7 @@ class A(Generic[t]):
 [builtins fixtures/bool.pyi]
 [out]
 main:5: error: This usage of this covariant type variable is unsafe as an input parameter.
-main:5: note: If this is intentional and you know what you are doing, you can ignore this line with 'unsafe-variance'
+main:5: note: If you are using the value in a 'variance safe' way (not storing or retrieving values), this error could be ignored
 
 [case testRejectCovariantArgumentSplitLine]
 from typing import TypeVar, Generic
@@ -2125,7 +2125,7 @@ class A(Generic[t]):
 [builtins fixtures/bool.pyi]
 [out]
 main:6: error: This usage of this covariant type variable is unsafe as an input parameter.
-main:6: note: If this is intentional and you know what you are doing, you can ignore this line with 'unsafe-variance'
+main:6: note: If you are using the value in a 'variance safe' way (not storing or retrieving values), this error could be ignored
 
 [case testRejectCovariantArgumentInLambda]
 from typing import TypeVar, Generic, Callable
@@ -2139,7 +2139,7 @@ class Thing(Generic[t]):
 [builtins fixtures/bool.pyi]
 [out]
 main:8: error: This usage of this covariant type variable is unsafe as an input parameter.
-main:8: note: If this is intentional and you know what you are doing, you can ignore this line with 'unsafe-variance'
+main:8: note: If you are using the value in a 'variance safe' way (not storing or retrieving values), this error could be ignored
 
 [case testRejectCovariantArgumentInLambdaSplitLine]
 from typing import TypeVar, Generic, Callable
@@ -2154,7 +2154,7 @@ class A(Generic[t]):
 [builtins fixtures/bool.pyi]
 [out]
 main:5: error: This usage of this contravariant type variable is unsafe as a return type.
-main:5: note: If this is intentional and you know what you are doing, you can ignore this line with 'unsafe-variance'
+main:5: note: If you are using the value in a 'variance safe' way (not storing or retrieving values), this error could be ignored
 
 [case testAcceptCovariantReturnType]
 from typing import TypeVar, Generic

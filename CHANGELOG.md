@@ -3,6 +3,8 @@
 ## [Unreleased]
 ### Enhancements
 - Removed `Any` from the typings for `re.Match` group functions. (#459)
+### Fixes
+- Fix unsafe variance note (#452)
 
 ## [1.8.0]
 ### Added
