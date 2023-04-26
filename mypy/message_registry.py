@@ -112,7 +112,10 @@ FUNCTION_PARAMETER_CANNOT_BE_COVARIANT: Final = ErrorMessage(
     "This usage of this covariant type variable is unsafe as an input parameter.",
     codes.UNSAFE_VARIANCE,
 )
-UNSAFE_VARIANCE_NOTE = "If this is intentional and you know what you are doing, you can ignore this line with 'unsafe-variance'"
+UNSAFE_VARIANCE_NOTE = ErrorMessage(
+    "If you are using the value in a 'variance safe' way (not storing or retrieving values), this error could be ignored",
+    codes.UNSAFE_VARIANCE,
+)
 INCOMPATIBLE_IMPORT_OF: Final = ErrorMessage('Incompatible import of "{}"', code=codes.ASSIGNMENT)
 FUNCTION_TYPE_EXPECTED: Final = ErrorMessage(
     "Function is missing a type annotation", codes.NO_UNTYPED_DEF
