@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 - Deprecate python 3.7 support (#457)
+- Allow denotation of tuple types with tuple literals (#458)
 ### Enhancements
 - Removed `Any` from the typings for `re.Match` group functions. (#459)
 ### Fixes
