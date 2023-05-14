@@ -888,6 +888,8 @@ class SemanticAnalyzer(
                         definition=defn,
                         implicit=True,
                     )
+            if defn.name == "__len__":
+                defn.type.ret_type = self.named_type("builtins.int")
             self.prepare_method_signature(defn, self.type, has_self_type)
 
         # Analyze function signature

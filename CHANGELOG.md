@@ -1,6 +1,8 @@
 # Basedmypy Changelog
 
 ## [Unreleased]
+### Added
+- Infer the type of dunder functions
 ### Enhancements
 - Removed `Any` from the typings for `re.Match` group functions. (#459)
 ### Fixes
