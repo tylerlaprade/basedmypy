@@ -291,7 +291,7 @@ class Errors:
 
     # Error baseline
     original_baseline: dict[str, list[StoredBaselineError]]
-    baseline: dict[str, list[BaselineError]]
+    baseline: dict[str, list[BaselineError]] = {}
     filtered_baseline = False
     """False means 'we didn't find any errors' or 'We filtered errors and there were no errors', True means 'The build had errors'"""
     # baseline metadata
@@ -318,7 +318,8 @@ class Errors:
         self.error_info_map = {}
         self.all_errors = {}
         self.original_baseline = {}
-        self.baseline = {}
+        # TODO: should the baseline reload when your using the daemon?
+        # self.baseline = {}
         self.baseline_errors: list[ErrorTuple] = []
         self.baseline_targets = []
         self.flushed_files = set()
@@ -1297,6 +1298,7 @@ class Errors:
         self.all_errors[path] = errors
         if not baseline_errors:
             return errors
+        baseline_errors = list(baseline_errors)
         new_errors = []
         previous_matches: list[ErrorInfo] = []
         ignored_notes = []
