@@ -10,6 +10,7 @@
 - Removed `Any` from the typings for `re.Match` group functions. (#459)
 ### Fixes
 - Fix unsafe variance note (#452)
+- Fix crash with baseline filtering (#471)
 
 ## [1.8.0]
 ### Added

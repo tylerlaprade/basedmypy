@@ -1272,7 +1272,7 @@ class Errors:
                     "line": error.line,
                     "message": error.message,
                     "target": error.target,
-                    "src": self.read_source
+                    "src": self.read_source and error.file == file
                     and cast(List[str], self.read_source(file))[error.line - 1].strip(),
                 }
                 for error in remove_duplicates(errors)
@@ -1322,7 +1322,7 @@ class Errors:
                 continue
             if error in ignored_notes:
                 continue
-            source = source_lines and source_lines[error.line - 1].strip()
+            source = error.file == path and source_lines and source_lines[error.line - 1].strip()
             message = clean_baseline_message(error.message)
             for i, baseline_error in enumerate(baseline_errors):
                 if (
@@ -1358,7 +1358,7 @@ class Errors:
                 continue
             if error in ignored_notes:
                 continue
-            source = source_lines and source_lines[error.line - 1].strip()
+            source = error.file == path and source_lines and source_lines[error.line - 1].strip()
             message = clean_baseline_message(error.message)
             for i, baseline_error in enumerate(baseline_errors):
                 if (
