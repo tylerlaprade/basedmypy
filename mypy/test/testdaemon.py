@@ -22,6 +22,7 @@ from mypy.test.helpers import assert_string_arrays_equal, normalize_error_messag
 
 # Files containing test cases descriptions.
 daemon_files = ["daemon.test"]
+based_daemon_files = ["daemon-based.test"]
 
 
 class DaemonSuite(DataSuite):
@@ -33,6 +34,10 @@ class DaemonSuite(DataSuite):
         finally:
             # Kill the daemon if it's still running.
             run_cmd("dmypy kill")
+
+
+class BasedDaemonSuite(DaemonSuite):
+    files = based_daemon_files
 
 
 def test_daemon(testcase: DataDrivenTestCase) -> None:
