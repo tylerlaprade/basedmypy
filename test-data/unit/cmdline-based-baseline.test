@@ -526,3 +526,52 @@ foo()
         "package:pkg"
     ]
 }
+
+[case testSrcOtherFile]
+# cmd: mypy --write-baseline a.py
+[file a.py]
+from b import f
+f(a=1)
+[file b.py]
+# need
+# empty lines
+# here
+def f(): ...
+[out]
+a.py:2:1: error: Unexpected keyword argument "a" for "f"  [call-arg]
+b.py:4:1: note: "f" defined here
+Baseline successfully written to .mypy/baseline.json
+== Return code: 0
+
+[case testSrcOtherFile2]
+# cmd: mypy a.py
+[file a.py]
+from b import f
+f(a=1)
+[file b.py]
+# need
+# empty lines
+# here
+def f(): ...
+[file .mypy/baseline.json]
+{
+    "files": {
+        "a.py": [
+            {
+                "code": "no-untyped-def",
+                "column": 0,
+                "message": "Function is missing a type annotation for one or more arguments",
+                "offset": 1,
+                "src": "def foo(a=b):",
+                "target": "test.foo"
+            }
+        ]
+    },
+    "format": "1.7",
+    "targets": [
+        "file:a.py"
+    ]
+}
+[out]
+a.py:2:1: error: Unexpected keyword argument "a" for "f"  [call-arg]
+b.py:4:1: note: "f" defined here
