@@ -1272,7 +1272,8 @@ class Errors:
                     "line": error.line,
                     "message": error.message,
                     "target": error.target,
-                    "src": self.read_source and error.file == file
+                    "src": self.read_source
+                    and error.file == file
                     and cast(List[str], self.read_source(file))[error.line - 1].strip(),
                 }
                 for error in remove_duplicates(errors)
