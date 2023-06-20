@@ -1471,9 +1471,9 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
         yield
         self.tvar_scope = old_scope
 
-    def find_type_var_likes(self, t: Type, include_callables: bool = True) -> TypeVarLikeList:
+    def find_type_var_likes(self, t: Type, include_callables: bool = True, *,collect_generic_bounds=False) -> TypeVarLikeList:
         return t.accept(
-            TypeVarLikeQuery(self.api, self.tvar_scope, include_callables=include_callables)
+            TypeVarLikeQuery(self.api, self.tvar_scope, include_callables=include_callables, collect_generic_bounds=collect_generic_bounds)
         )
 
     def infer_type_variables(self, type: CallableType) -> list[tuple[str, TypeVarLikeExpr]]:
@@ -1481,7 +1481,7 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
         names: list[str] = []
         tvars: list[TypeVarLikeExpr] = []
         for arg in type.arg_types:
-            for name, tvar_expr in self.find_type_var_likes(arg):
+            for name, tvar_expr in self.find_type_var_likes(arg, collect_generic_bounds=True):
                 if name not in names:
                     names.append(name)
                     tvars.append(tvar_expr)
@@ -1902,6 +1902,7 @@ class TypeVarLikeQuery(TypeQuery[TypeVarLikeList]):
         scope: TypeVarLikeScope,
         *,
         include_callables: bool = True,
+        collect_generic_bounds = False
     ) -> None:
         super().__init__(flatten_tvars)
         self.api = api
@@ -1911,6 +1912,9 @@ class TypeVarLikeQuery(TypeQuery[TypeVarLikeList]):
         # that case if we expand (as target variables would be overridden with args)
         # and it may cause infinite recursion on invalid (diverging) recursive aliases.
         self.skip_alias_target = True
+        # When we are searching for generic bounds, we do want them when we are declaring a function
+        # But not when we are specifying a base type.
+        self.collect_generic_bounds = collect_generic_bounds
 
     def _seems_like_callable(self, type: UnboundType) -> bool:
         if not type.args:
@@ -1936,10 +1940,11 @@ class TypeVarLikeQuery(TypeQuery[TypeVarLikeList]):
             and self.scope.get_binding(node) is None
         ):
             assert isinstance(node.node, TypeVarLikeExpr)
+            if not self.collect_generic_bounds:
+                return [(name, node.node)]
             upper_bound = get_proper_type(node.node.upper_bound)
             if isinstance(upper_bound, (Instance, UnboundType)):
                 return upper_bound.accept(self) + [(name, node.node)]
-            return [(name, node.node)]
         elif not self.include_callables and self._seems_like_callable(t):
             return []
         elif node and node.fullname in LITERAL_TYPE_NAMES:

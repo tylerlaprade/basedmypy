@@ -10,6 +10,7 @@
 - Removed `Any` from the typings for `re.Match` group functions. (#459)
 ### Fixes
 - Fix unsafe variance note (#452)
+- Fix base type with generic bounded TypeVar. (#???)
 
 ## [1.8.0]
 ### Added

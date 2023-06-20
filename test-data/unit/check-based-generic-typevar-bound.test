@@ -75,3 +75,13 @@ reveal_type(foo([True], True))  # N: Revealed type is "Sequence[bool]"
 reveal_type(foo(["my"], "py"))  # E: "T of foo" can't be "str"
 reveal_type(foo({1: 1}, "10"))  # E: bad arg 2
 reveal_type(foo({True: True}, True))  # N: Mapping[bool]
+
+
+[case testBaseWithGenericTypeVarBound]
+from typing import TypeVar, Generic
+
+T = TypeVar("T")
+class A(Generic[T]): ...
+AT = TypeVar("AT", bound=A[T])
+class B(Generic[AT], A[AT]): ...
+def f(x: B[AT]): ...
