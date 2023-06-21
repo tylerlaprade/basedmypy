@@ -1471,9 +1471,16 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
         yield
         self.tvar_scope = old_scope
 
-    def find_type_var_likes(self, t: Type, include_callables: bool = True, *,collect_generic_bounds=False) -> TypeVarLikeList:
+    def find_type_var_likes(
+        self, t: Type, include_callables: bool = True, *, collect_generic_bounds=False
+    ) -> TypeVarLikeList:
         return t.accept(
-            TypeVarLikeQuery(self.api, self.tvar_scope, include_callables=include_callables, collect_generic_bounds=collect_generic_bounds)
+            TypeVarLikeQuery(
+                self.api,
+                self.tvar_scope,
+                include_callables=include_callables,
+                collect_generic_bounds=collect_generic_bounds,
+            )
         )
 
     def infer_type_variables(self, type: CallableType) -> list[tuple[str, TypeVarLikeExpr]]:
@@ -1902,7 +1909,7 @@ class TypeVarLikeQuery(TypeQuery[TypeVarLikeList]):
         scope: TypeVarLikeScope,
         *,
         include_callables: bool = True,
-        collect_generic_bounds = False
+        collect_generic_bounds=False,
     ) -> None:
         super().__init__(flatten_tvars)
         self.api = api
