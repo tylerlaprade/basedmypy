@@ -84,7 +84,7 @@ jobs:
               body = 'Diff from [mypy_primer](https://github.com/hauntsaninja/mypy_primer), showing the effect of this PR on open source code:\n' + data
               body = truncateIfNeeded(body, MAX_CHARACTERS, data.split('\n').length > 500 ? '```</details>' : '')
             } else {
-              body = 'According to [mypy_primer](https://github.com/hauntsaninja/mypy_primer), this change has no effect on the checked open source code. 🤖🎉'
+              body = "According to [mypy_primer](https://github.com/hauntsaninja/mypy_primer), this change doesn't affect type check results on a corpus of open source code. ✅"
             }
             const prNumber = parseInt(fs.readFileSync("pr_number.txt", { encoding: "utf8" }))
             await github.rest.issues.createComment({

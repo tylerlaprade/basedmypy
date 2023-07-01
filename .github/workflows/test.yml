@@ -3,7 +3,7 @@ name: Tests
 on:
   workflow_dispatch:
   push:
-    branches: [master, 'release*', 'rebase-master']
+    branches: [main, master, 'release*', 'rebase-master']
     tags: ['*']
   pull_request:
     paths-ignore:
@@ -95,8 +95,11 @@ jobs:
           arch: x64
           os: windows-latest
           toxenv: type
+          # We also run these checks with pre-commit in CI,
+          # but it's useful to run them with tox too,
+          # to ensure the tox env works as expected
         - name: Formatting with Black + isort and code style with flake8
-          python: '3.8'
+          python: '3.10'
           arch: x64
           os: ubuntu-latest
           toxenv: lint
@@ -182,6 +185,7 @@ jobs:
           sudo dpkg --add-architecture i386 && \
           sudo apt-get update && sudo apt-get install -y \
             zlib1g-dev:i386 \
+            libgcc-s1:i386 \
             g++-i686-linux-gnu \
             gcc-i686-linux-gnu \
             libffi-dev:i386 \

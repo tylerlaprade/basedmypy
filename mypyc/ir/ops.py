@@ -81,6 +81,7 @@ class BasicBlock:
         self.label = label
         self.ops: list[Op] = []
         self.error_handler: BasicBlock | None = None
+        self.referenced = False
 
     @property
     def terminated(self) -> bool:
@@ -1348,13 +1349,14 @@ class LoadAddress(RegisterOp):
     Attributes:
       type: Type of the loaded address(e.g. ptr/object_ptr)
       src: Source value (str for globals like 'PyList_Type',
-           Register for temporary values or locals)
+           Register for temporary values or locals, LoadStatic
+           for statics.)
     """
 
     error_kind = ERR_NEVER
     is_borrowed = True
 
-    def __init__(self, type: RType, src: str | Register, line: int = -1) -> None:
+    def __init__(self, type: RType, src: str | Register | LoadStatic, line: int = -1) -> None:
         super().__init__(line)
         self.type = type
         self.src = src

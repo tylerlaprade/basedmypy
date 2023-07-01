@@ -7,7 +7,7 @@ requires = [
     "wheel >= 0.30.0",
     # the following is from mypy-requirements.txt
     "basedtyping>=0.0.3",
-    "typing_extensions>=3.10",
+    "typing_extensions>=4.1.0",
     "mypy_extensions>=1.0.0",
     "tomli>=1.1.0; python_version<'3.11'",
     # the following is from build-requirements.txt
@@ -28,6 +28,7 @@ force-exclude = '''
 '''
 
 [tool.isort]
+py_version = 38
 profile = "black"
 line_length = 99
 combine_as_imports = true

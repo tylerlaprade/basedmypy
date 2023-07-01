@@ -1040,6 +1040,8 @@ class TypeTriggersVisitor(TypeVisitor[List[str]]):
             triggers.append(make_trigger(typ.fullname))
         if typ.upper_bound:
             triggers.extend(self.get_type_triggers(typ.upper_bound))
+        if typ.default:
+            triggers.extend(self.get_type_triggers(typ.default))
         for val in typ.values:
             triggers.extend(self.get_type_triggers(val))
         return triggers
@@ -1048,6 +1050,10 @@ class TypeTriggersVisitor(TypeVisitor[List[str]]):
         triggers = []
         if typ.fullname:
             triggers.append(make_trigger(typ.fullname))
+        if typ.upper_bound:
+            triggers.extend(self.get_type_triggers(typ.upper_bound))
+        if typ.default:
+            triggers.extend(self.get_type_triggers(typ.default))
         triggers.extend(self.get_type_triggers(typ.upper_bound))
         return triggers
 
@@ -1055,6 +1061,10 @@ class TypeTriggersVisitor(TypeVisitor[List[str]]):
         triggers = []
         if typ.fullname:
             triggers.append(make_trigger(typ.fullname))
+        if typ.upper_bound:
+            triggers.extend(self.get_type_triggers(typ.upper_bound))
+        if typ.default:
+            triggers.extend(self.get_type_triggers(typ.default))
         triggers.extend(self.get_type_triggers(typ.upper_bound))
         return triggers
 
