@@ -199,7 +199,7 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
         allow_placeholder: bool = False,
         allow_required: bool = False,
         allow_param_spec_literals: bool = False,
-        report_invalid_types: bool = True,
+        report_invalid_types: int = True,
         prohibit_self_type: str | None = None,
         allowed_alias_tvars: list[TypeVarLikeType] | None = None,
         allow_type_any: bool = False,
@@ -348,7 +348,9 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
                         f'Type variable "{t.name}" used with arguments', t, code=codes.VALID_TYPE
                     )
                 # Change the line number
-                return tvar_def.copy_modified(line=t.line, column=t.column, scopename=tvar_def.scopename)
+                return tvar_def.copy_modified(
+                    line=t.line, column=t.column, scopename=tvar_def.scopename
+                )
             if isinstance(sym.node, TypeVarTupleExpr) and (
                 tvar_def is not None
                 and self.defining_alias

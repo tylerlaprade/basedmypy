@@ -19,7 +19,11 @@ class RefInfoSuite(DataSuite):
     files = ["ref-info.test"]
 
     def run_case(self, testcase: DataDrivenTestCase) -> None:
+        import mypy.options
+
+        mypy.options._based = False
         options = Options()
+        mypy.options._based = True
         options.use_builtins_fixtures = True
         options.show_traceback = True
         options.export_ref_info = True  # This is the flag we are testing

@@ -1302,8 +1302,11 @@ def process_options(
             "possibly-undefined",
             "redundant-expr",
             "truthy-bool",
+            "truthy-iterable",
             "ignore-without-code",
             "unused-awaitable",
+            "redundant-self",
+            "unused-ignore",
         }
         if mypy.options._based
         else set()

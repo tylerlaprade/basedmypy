@@ -793,8 +793,7 @@ class StubGenerator(mypy.traverser.TraverserVisitor):
             send_name = "None"
             return_name = "None"
             if has_yield_from_expression(o):
-                self.add_typing_import("Incomplete")
-                yield_name = send_name = self.typing_name("Incomplete")
+                yield_name = send_name = self.untyped
             else:
                 for expr, in_assignment in all_yield_expressions(o):
                     if expr.expr is not None and not self.is_none_expr(expr.expr):
@@ -964,14 +963,13 @@ class StubGenerator(mypy.traverser.TraverserVisitor):
                         self.add_typing_import("NamedTuple")
                     else:
                         # Invalid namedtuple() call, cannot determine fields
-                        base_types.append(self.typing_name("Incomplete"))
+                        base_types.append(self.untyped)
                 elif self.is_typed_namedtuple(base):
                     base_types.append(base.accept(p))
                 else:
                     # At this point, we don't know what the base class is, so we
                     # just use Incomplete as the base class.
-                    base_types.append(self.typing_name("Incomplete"))
-                    self.add_typing_import("Incomplete")
+                    base_types.append(self.untyped)
         for name, value in cdef.keywords.items():
             if name == "metaclass":
                 continue  # handled separately
@@ -1052,8 +1050,8 @@ class StubGenerator(mypy.traverser.TraverserVisitor):
             else:
                 return None  # Invalid namedtuple fields type
             if field_names:
-                self.add_typing_import("Incomplete")
-            incomplete = self.typing_name("Incomplete")
+                self.untyped
+            incomplete = self.untyped_no_import
             return [(field_name, incomplete) for field_name in field_names]
         elif self.is_typed_namedtuple(call):
             fields_arg = call.args[1]
@@ -1159,8 +1157,7 @@ class StubGenerator(mypy.traverser.TraverserVisitor):
                 self._state = CLASS
 
     def annotate_as_incomplete(self, lvalue: NameExpr) -> None:
-        self.add_typing_import("Incomplete")
-        self.add(f"{self._indent}{lvalue.name}: {self.typing_name('Incomplete')}\n")
+        self.add(f"{self._indent}{lvalue.name}: {self.untyped}\n")
         self._state = VAR
 
     def is_alias_expression(self, expr: Expression, top_level: bool = True) -> bool:
@@ -1366,6 +1363,14 @@ class StubGenerator(mypy.traverser.TraverserVisitor):
         else:
             result = "Incomplete"
         return self.add_typing_import(result)
+
+    @property
+    def untyped_no_import(self) -> str:
+        if not self.legacy:
+            result = "Untyped"
+        else:
+            result = "Incomplete"
+        return self.typing_name(result)
 
     def add_typing_import(self, name: str) -> str:
         """Add a name to be imported for typing, unless it's imported already.

@@ -285,7 +285,6 @@ from mypy.types import (
     get_proper_types,
     is_named_instance,
     is_unannotated_any,
-    store_argument_type,
 )
 from mypy.types_utils import is_invalid_recursive_alias, store_argument_type
 from mypy.typevars import fill_typevars, fill_typevars_with_any
@@ -4233,8 +4232,9 @@ class SemanticAnalyzer(
                 if has_values:
                     self.fail("TypeVar cannot have both values and an upper bound", context)
                     return None
-                tv_arg = self.get_typevarlike_argument("TypeVar", param_name, param_value, context,
-                        allow_unbound_tvars=True)
+                tv_arg = self.get_typevarlike_argument(
+                    "TypeVar", param_name, param_value, context, allow_unbound_tvars=True
+                )
                 if tv_arg is None:
                     return None
                 upper_bound = tv_arg
@@ -4300,6 +4300,9 @@ class SemanticAnalyzer(
                 #         ...
                 analyzed = PlaceholderType(None, [], context.line)
             typ = get_proper_type(analyzed)
+            if isinstance(typ, LiteralType) and typ.bare_literal:
+                msg = message_registry.INVALID_BARE_LITERAL.format(typ.value_repr())
+                self.fail(msg.value, param_value, code=msg.code)
             if report_invalid_typevar_arg and isinstance(typ, AnyType) and typ.is_from_error:
                 self.fail(
                     message_registry.TYPEVAR_ARG_MUST_BE_TYPE.format(typevarlike_name, param_name),
@@ -4307,10 +4310,10 @@ class SemanticAnalyzer(
                 )
                 # Note: we do not return 'None' here -- we want to continue
                 # using the AnyType.
-            elif isinstance(upper_bound, LiteralType) and upper_bound.bare_literal:
-                msg = message_registry.INVALID_BARE_LITERAL.format(
-                    upper_bound.value_repr()
-                )
+            elif isinstance(typ, TypeVarLikeType):
+                upper_bound = get_proper_type(typ.upper_bound)
+                if isinstance(upper_bound, LiteralType) and upper_bound.bare_literal:
+                    msg = message_registry.INVALID_BARE_LITERAL.format(upper_bound.value_repr())
                 self.fail(msg.value, param_value, code=msg.code)
             return typ
         except TypeTranslationError:

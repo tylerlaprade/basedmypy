@@ -8,6 +8,7 @@ from abc import abstractmethod
 from typing import (
     TYPE_CHECKING,
     Any,
+    Callable,
     ClassVar,
     Dict,
     Generator,
@@ -612,6 +613,7 @@ class TypeVarType(TypeVarLikeType):
         id: Bogus[TypeVarId | int] = _dummy,
         line: int = _dummy_int,
         column: int = _dummy_int,
+        scopename: Bogus[str | None] = _dummy,
         **kwargs: Any,
     ) -> TypeVarType:
         return TypeVarType(
@@ -624,6 +626,7 @@ class TypeVarType(TypeVarLikeType):
             variance=self.variance,
             line=self.line if line == _dummy_int else line,
             column=self.column if column == _dummy_int else column,
+            scopename=self.scopename if scopename == _dummy else scopename,
         )
 
     def accept(self, visitor: TypeVisitor[T]) -> T:
@@ -3350,8 +3353,8 @@ class TypeStrVisitor(SyntheticTypeVisitor[str]):
                 if s:
                     s += ", "
                 s += f"*{n}.args, **{n}.kwargs"
-            if param_spec.has_default():
-                s += f" = {param_spec.default.accept(self)}"
+                if param_spec.has_default():
+                    s += f" = {param_spec.default.accept(self)}"
 
             s = f"({s})"
 
@@ -3367,8 +3370,7 @@ class TypeStrVisitor(SyntheticTypeVisitor[str]):
 
             return f"def {s}"
 
-    @staticmethod
-    def render_callable_type_params(t: CallableType, renderer: Callable[[Type], str]) -> str:
+    def render_callable_type_params(self, t: CallableType, renderer: Callable[[Type], str]) -> str:
         if not t.variables:
             return ""
         vs = []
@@ -3397,12 +3399,14 @@ class TypeStrVisitor(SyntheticTypeVisitor[str]):
                             f"{name} <: {renderer(var.upper_bound)}{f' = {var.default.accept(self)}' if var.has_default() else ''}"
                         )
                 else:
-                    vs.append(f"{name}{f' = {var.default.accept(self)}' if var.has_default() else ''}")
+                    vs.append(
+                        f"{name}{f' = {var.default.accept(self)}' if var.has_default() else ''}"
+                    )
             else:
                 # For other TypeVarLikeTypes, use the name and default
                 vs.append(
-                        f"{var.name}{f' = {var.default.accept(self)}' if var.has_default() else ''}"
-                    )
+                    f"{var.name}{f' = {var.default.accept(self)}' if var.has_default() else ''}"
+                )
         return f"[{', '.join(vs)}] "
 
     def visit_overloaded(self, t: Overloaded) -> str:
@@ -3737,6 +3741,7 @@ def is_unannotated_any(t: Type) -> bool:
 # of get_proper_type() from types.py. Majority of them have been removed, but few remaining
 # are quite tricky to get rid of, but ultimately we want to do it at some point.
 from mypy.expandtype import ExpandTypeVisitor
+
 
 class InstantiateAliasVisitor(ExpandTypeVisitor):
     def visit_union_type(self, t: UnionType) -> Type:

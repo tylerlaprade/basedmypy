@@ -5469,6 +5469,13 @@ class HasUntypedType(types.TypeQuery[bool]):
     def __init__(self) -> None:
         super().__init__(any)
 
+    def visit_type_var(self, t: TypeVarType) -> bool:
+        # type var defaults are Any (from omitted generics), so catch it here
+        default = get_proper_type(t.default)
+        if isinstance(default, AnyType) and default.type_of_any == TypeOfAny.from_omitted_generics:
+            return self.query_types([t.upper_bound] + t.values)
+        return super().visit_type_var(t)
+
     def visit_any(self, t: AnyType) -> bool:
         return isinstance(t, UntypedType) or t.type_of_any in (
             TypeOfAny.unannotated,
