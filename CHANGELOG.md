@@ -1,6 +1,6 @@
 # Basedmypy Changelog
 
-## [Unreleased]
+## [2.0.0]
 ### Added
 - Deprecate python 3.7 support (#457)
 - Allow denotation of tuple types with tuple literals (#458)
