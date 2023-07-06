@@ -28,9 +28,6 @@ if TYPE_CHECKING:
 
 description = "Based static typing for Python"
 long_description = """
-Basedmypy -- Based Static Typing for Python
-===========================================
-
 .. image:: https://raw.githubusercontent.com/KotlinIsland/basedmypy/master/docs/static/logo-light.png
 
 Basedmypy is a type checker that is built on top of the work done by the
