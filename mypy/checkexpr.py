@@ -5101,7 +5101,11 @@ class ExpressionChecker(ExpressionVisitor[Type]):
             and not always_allow_any
             and not self.chk.is_stub
             and self.chk.in_checked_function()
-            and has_any_type(typ, ignore_any_from_error=self.chk.options.hide_any_from_error)
+            and has_any_type(
+                typ,
+                ignore_in_type_obj=True,
+                ignore_any_from_error=self.chk.options.hide_any_from_error,
+            )
             and not self.chk.current_node_deferred
         ):
             self.msg.disallowed_any_type(typ, node)
@@ -5465,16 +5469,9 @@ class HasAnyType(types.BoolTypeQuery):
         return self.query_types([t.upper_bound, *default])
 
 
-class HasUntypedType(types.TypeQuery[bool]):
+class HasUntypedType(HasAnyType):
     def __init__(self) -> None:
-        super().__init__(any)
-
-    def visit_type_var(self, t: TypeVarType) -> bool:
-        # type var defaults are Any (from omitted generics), so catch it here
-        default = get_proper_type(t.default)
-        if isinstance(default, AnyType) and default.type_of_any == TypeOfAny.from_omitted_generics:
-            return self.query_types([t.upper_bound] + t.values)
-        return super().visit_type_var(t)
+        super().__init__(True, True)
 
     def visit_any(self, t: AnyType) -> bool:
         return isinstance(t, UntypedType) or t.type_of_any in (
