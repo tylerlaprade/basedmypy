@@ -2,12 +2,18 @@
 
 ## [Unreleased]
 ### Added
+### Enhancements
+### Fixes
+
+## [2.0.0]
+### Added
 - Deprecate python 3.7 support (#457)
 - Allow denotation of tuple types with tuple literals (#458)
 - Removed `--legacy` flag in favour of `--no-strict` (#445)
 - `default-return` is now enabled by default (#445)
 ### Enhancements
 - Removed `Any` from the typings for `re.Match` group functions. (#459)
+- Ignore `Any` from unused `__init__`.
 ### Fixes
 - Fix unsafe variance note (#452)
 - Fix crash with baseline filtering (#471)
