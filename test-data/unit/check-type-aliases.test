@@ -28,7 +28,7 @@ f(1) # E: Argument 1 to "f" has incompatible type "int"; expected "Tuple[int, st
 [case testCallableTypeAlias]
 from typing import Callable
 A = Callable[[int], None]
-f = None  # type: A
+f: A
 f(1)
 f('') # E: Argument 1 has incompatible type "str"; expected "int"
 [targets __main__]
@@ -169,11 +169,11 @@ f(1) # E: Argument 1 to "f" has incompatible type "int"; expected "str"
 [case testEmptyTupleTypeAlias]
 from typing import Tuple, Callable
 EmptyTuple = Tuple[()]
-x = None # type: EmptyTuple
+x: EmptyTuple
 reveal_type(x)  # N: Revealed type is "Tuple[]"
 
 EmptyTupleCallable = Callable[[Tuple[()]], None]
-f = None # type: EmptyTupleCallable
+f: EmptyTupleCallable
 reveal_type(f)  # N: Revealed type is "def (Tuple[])"
 [builtins fixtures/list.pyi]
 
@@ -1045,3 +1045,19 @@ class C(Generic[T]):
     def test(cls) -> None:
         cls.attr
 [builtins fixtures/classmethod.pyi]
+
+[case testRecursiveAliasTuple]
+from typing_extensions import Literal, TypeAlias
+from typing import Tuple, Union
+
+Expr: TypeAlias = Union[
+    Tuple[Literal[123], int],
+    Tuple[Literal[456], "Expr"],
+]
+
+def eval(e: Expr) -> int:
+    if e[0] == 123:
+        return e[1]
+    elif e[0] == 456:
+        return -eval(e[1])
+[builtins fixtures/dict.pyi]

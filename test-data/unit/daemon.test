@@ -28,12 +28,61 @@ Daemon stopped
 [file foo.py]
 def f(): pass
 
+[case testDaemonRunIgnoreMissingImports]
+$ dmypy run -- foo.py --follow-imports=error --ignore-missing-imports
+Daemon started
+Success: no issues found in 1 source file
+$ dmypy stop
+Daemon stopped
+[file foo.py]
+def f(): pass
+
+[case testDaemonRunErrorCodes]
+$ dmypy run -- foo.py --follow-imports=error --disable-error-code=type-abstract
+Daemon started
+Success: no issues found in 1 source file
+$ dmypy stop
+Daemon stopped
+[file foo.py]
+def f(): pass
+
+[case testDaemonRunCombinedOptions]
+$ dmypy run -- foo.py --follow-imports=error --ignore-missing-imports --disable-error-code=type-abstract
+Daemon started
+Success: no issues found in 1 source file
+$ dmypy stop
+Daemon stopped
+[file foo.py]
+def f(): pass
+
 [case testDaemonIgnoreConfigFiles]
 $ dmypy start -- --follow-imports=error
 Daemon started
 [file mypy.ini]
 \[mypy]
 files = ./foo.py
+
+[case testDaemonRunMultipleStrict]
+$ dmypy run -- foo.py --strict --follow-imports=error
+Daemon started
+foo.py:1: error: Function is missing a return type annotation
+foo.py:1: note: Use "-> None" if function does not return a value
+Found 1 error in 1 file (checked 1 source file)
+== Return code: 1
+$ dmypy run -- bar.py --strict --follow-imports=error
+bar.py:1: error: Function is missing a return type annotation
+bar.py:1: note: Use "-> None" if function does not return a value
+Found 1 error in 1 file (checked 1 source file)
+== Return code: 1
+$ dmypy run -- foo.py --strict --follow-imports=error
+foo.py:1: error: Function is missing a return type annotation
+foo.py:1: note: Use "-> None" if function does not return a value
+Found 1 error in 1 file (checked 1 source file)
+== Return code: 1
+[file foo.py]
+def f(): pass
+[file bar.py]
+def f(): pass
 
 [case testDaemonRunRestart]
 $ dmypy run -- foo.py --follow-imports=error
@@ -311,8 +360,8 @@ def bar() -> None:
     x = foo('abc')  # type: str
     foo(arg='xyz')
 
-[case testDaemonGetType_python38]
-$ dmypy start --log-file log.txt -- --follow-imports=error --no-error-summary
+[case testDaemonGetType]
+$ dmypy start --log-file log.txt -- --follow-imports=error --no-error-summary --python-version 3.8
 Daemon started
 $ dmypy inspect foo:1:2:3:4
 Command "inspect" is only valid after a "check" command (that produces no parse errors)
@@ -374,7 +423,7 @@ def unreachable(x: int) -> None:
     return
     x  # line 17
 
-[case testDaemonGetTypeInexact_python38]
+[case testDaemonGetTypeInexact]
 $ dmypy start --log-file log.txt -- --follow-imports=error --no-error-summary
 Daemon started
 $ dmypy check foo.py --export-types
@@ -429,7 +478,7 @@ def unreachable(x: int, y: int) -> None:
     return
     x and y  # line 11
 
-[case testDaemonGetAttrs_python38]
+[case testDaemonGetAttrs]
 $ dmypy start --log-file log.txt -- --follow-imports=error --no-error-summary
 Daemon started
 $ dmypy check foo.py bar.py --export-types
@@ -471,7 +520,7 @@ class B:
 var: Union[A, B]
 var  # line 10
 
-[case testDaemonGetDefinition_python38]
+[case testDaemonGetDefinition]
 $ dmypy start --log-file log.txt -- --follow-imports=error --no-error-summary
 Daemon started
 $ dmypy check foo.py bar/baz.py bar/__init__.py --export-types
@@ -522,92 +571,3 @@ class A:
     x: int
 class B:
     x: int
-
-[case testUnusedTypeIgnorePreservedOnRerun]
--- Regression test for https://github.com/python/mypy/issues/9655
-$ dmypy start -- --warn-unused-ignores --no-error-summary
-Daemon started
-$ dmypy check -- bar.py
-bar.py:2: error: Unused "type: ignore" comment  [unused-ignore]
-== Return code: 1
-$ dmypy check -- bar.py
-bar.py:2: error: Unused "type: ignore" comment  [unused-ignore]
-== Return code: 1
-
-[file foo/__init__.py]
-[file foo/empty.py]
-[file bar.py]
-from foo.empty import *
-a = 1  # type: ignore
-
-[case testTypeIgnoreWithoutCodePreservedOnRerun]
--- Regression test for https://github.com/python/mypy/issues/9655
-$ dmypy start -- --enable-error-code ignore-without-code --no-error-summary
-Daemon started
-$ dmypy check -- bar.py
-bar.py:2: error: "type: ignore" comment without error code  [ignore-without-code]
-== Return code: 1
-$ dmypy check -- bar.py
-bar.py:2: error: "type: ignore" comment without error code  [ignore-without-code]
-== Return code: 1
-
-[file foo/__init__.py]
-[file foo/empty.py]
-[file bar.py]
-from foo.empty import *
-a = 1  # type: ignore
-
-[case testUnusedTypeIgnorePreservedAfterChange]
--- Regression test for https://github.com/python/mypy/issues/9655
-$ dmypy start -- --warn-unused-ignores --no-error-summary
-Daemon started
-$ dmypy check -- bar.py
-bar.py:2: error: Unused "type: ignore" comment  [unused-ignore]
-== Return code: 1
-$ {python} -c "print('\n')" >> bar.py
-$ dmypy check -- bar.py
-bar.py:2: error: Unused "type: ignore" comment  [unused-ignore]
-== Return code: 1
-
-[file foo/__init__.py]
-[file foo/empty.py]
-[file bar.py]
-from foo.empty import *
-a = 1  # type: ignore
-
-[case testTypeIgnoreWithoutCodePreservedAfterChange]
--- Regression test for https://github.com/python/mypy/issues/9655
-$ dmypy start -- --enable-error-code ignore-without-code --no-error-summary
-Daemon started
-$ dmypy check -- bar.py
-bar.py:2: error: "type: ignore" comment without error code  [ignore-without-code]
-== Return code: 1
-$ {python} -c "print('\n')" >> bar.py
-$ dmypy check -- bar.py
-bar.py:2: error: "type: ignore" comment without error code  [ignore-without-code]
-== Return code: 1
-
-[file foo/__init__.py]
-[file foo/empty.py]
-[file bar.py]
-from foo.empty import *
-a = 1  # type: ignore
-
-[case testPossiblyUndefinedVarsPreservedAfterUpdate]
--- Regression test for https://github.com/python/mypy/issues/9655
-$ dmypy start -- --enable-error-code possibly-undefined --no-error-summary
-Daemon started
-$ dmypy check -- bar.py
-bar.py:4: error: Name "a" may be undefined  [possibly-undefined]
-== Return code: 1
-$ dmypy check -- bar.py
-bar.py:4: error: Name "a" may be undefined  [possibly-undefined]
-== Return code: 1
-
-[file foo/__init__.py]
-[file foo/empty.py]
-[file bar.py]
-from foo.empty import *
-if False:
-    a = 1
-a

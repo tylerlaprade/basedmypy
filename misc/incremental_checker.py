@@ -44,8 +44,8 @@ import sys
 import textwrap
 import time
 from argparse import ArgumentParser, Namespace, RawDescriptionHelpFormatter
-from typing import Any, Dict
-from typing_extensions import Final, TypeAlias as _TypeAlias
+from typing import Any, Dict, Final
+from typing_extensions import TypeAlias as _TypeAlias
 
 from mypy.util import safe
 

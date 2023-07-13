@@ -34,7 +34,7 @@ from typing import (
     Callable,
     ClassVar,
     Dict,
-    Iterable,
+    Final,
     Iterator,
     List,
     Mapping,
@@ -42,16 +42,14 @@ from typing import (
     NoReturn,
     Sequence,
     TextIO,
-    TypeVar,
     cast,
 )
-from typing_extensions import Final, TypeAlias as _TypeAlias
-
-from mypy_extensions import TypedDict
+from typing_extensions import TypeAlias as _TypeAlias, TypedDict
 
 import mypy.semanal_main
 from mypy.checker import TypeChecker
 from mypy.errors import CompileError, ErrorInfo, Errors, StoredBaselineError, report_internal_error
+from mypy.graph_utils import prepare_sccs, strongly_connected_components, topsort
 from mypy.indirection import TypeIndirectionVisitor
 from mypy.messages import MessageBuilder
 from mypy.nodes import Import, ImportAll, ImportBase, ImportFrom, MypyFile, SymbolTable, TypeInfo
@@ -121,7 +119,10 @@ CORE_BUILTIN_MODULES: Final = {
     "types",
     "typing_extensions",
     "mypy_extensions",
-    "_importlib_modulespec",
+    "_typeshed",
+    "_collections_abc",
+    "collections",
+    "collections.abc",
     "sys",
     "abc",
 }
@@ -349,7 +350,9 @@ class CacheMeta(NamedTuple):
 
 
 # Metadata for the fine-grained dependencies file associated with a module.
-FgDepMeta = TypedDict("FgDepMeta", {"path": str, "mtime": int})
+class FgDepMeta(TypedDict):
+    path: str
+    mtime: int
 
 
 def cache_meta_from_dict(meta: dict[str, Any], data_json: str) -> CacheMeta:
@@ -667,8 +670,6 @@ class BuildManager:
         for module in CORE_BUILTIN_MODULES:
             if options.use_builtins_fixtures:
                 continue
-            if module == "_importlib_modulespec":
-                continue
             path = self.find_module_cache.find_module(module)
             if not isinstance(path, str):
                 raise CompileError(
@@ -843,6 +844,8 @@ class BuildManager:
         Raise CompileError if there is a parse error.
         """
         t0 = time.time()
+        if ignore_errors:
+            self.errors.ignored_files.add(path)
         tree = parse(source, path, id, self.errors, options=options)
         tree._fullname = id
         self.add_stats(
@@ -2371,6 +2374,7 @@ class State:
         analyzer = SemanticAnalyzerPreAnalysis()
         with self.wrap_context():
             analyzer.visit_file(self.tree, self.xpath, self.id, options)
+        self.manager.errors.set_skipped_lines(self.xpath, self.tree.skipped_lines)
         # TODO: Do this while constructing the AST?
         self.tree.names = SymbolTable()
         if not self.tree.is_stub:
@@ -2705,7 +2709,10 @@ class State:
         return [self.dep_line_map.get(dep, 1) for dep in self.dependencies + self.suppressed]
 
     def generate_unused_ignore_notes(self) -> None:
-        if self.options.warn_unused_ignores:
+        if (
+            self.options.warn_unused_ignores
+            or codes.UNUSED_IGNORE in self.options.enabled_error_codes
+        ) and codes.UNUSED_IGNORE not in self.options.disabled_error_codes:
             # If this file was initially loaded from the cache, it may have suppressed
             # dependencies due to imports with ignores on them. We need to generate
             # those errors to avoid spuriously flagging them as unused ignores.
@@ -2766,7 +2773,7 @@ def find_module_and_diagnose(
                 result.endswith(".pyi")  # Stubs are always normal
                 and not options.follow_imports_for_stubs  # except when they aren't
             )
-            or id in mypy.semanal_main.core_modules  # core is always normal
+            or id in CORE_BUILTIN_MODULES  # core is always normal
         ):
             follow_imports = "normal"
         if skip_diagnose:
@@ -3208,7 +3215,7 @@ def load_graph(
             manager.errors.report(
                 -1,
                 -1,
-                "See https://mypy.readthedocs.io/en/stable/running_mypy.html#mapping-file-paths-to-modules "  # noqa: E501
+                "See https://mypy.readthedocs.io/en/stable/running_mypy.html#mapping-file-paths-to-modules "
                 "for more info",
                 severity="note",
             )
@@ -3296,7 +3303,7 @@ def load_graph(
                             manager.errors.report(
                                 -1,
                                 0,
-                                "See https://mypy.readthedocs.io/en/stable/running_mypy.html#mapping-file-paths-to-modules "  # noqa: E501
+                                "See https://mypy.readthedocs.io/en/stable/running_mypy.html#mapping-file-paths-to-modules "
                                 "for more info",
                                 severity="note",
                             )
@@ -3597,15 +3604,8 @@ def sorted_components(
     edges = {id: deps_filtered(graph, vertices, id, pri_max) for id in vertices}
     sccs = list(strongly_connected_components(vertices, edges))
     # Topsort.
-    sccsmap = {id: frozenset(scc) for scc in sccs for id in scc}
-    data: dict[AbstractSet[str], set[AbstractSet[str]]] = {}
-    for scc in sccs:
-        deps: set[AbstractSet[str]] = set()
-        for id in scc:
-            deps.update(sccsmap[x] for x in deps_filtered(graph, vertices, id, pri_max))
-        data[frozenset(scc)] = deps
     res = []
-    for ready in topsort(data):
+    for ready in topsort(prepare_sccs(sccs, edges)):
         # Sort the sets in ready by reversed smallest State.order.  Examples:
         #
         # - If ready is [{x}, {y}], x.order == 1, y.order == 2, we get
@@ -3628,100 +3628,6 @@ def deps_filtered(graph: Graph, vertices: AbstractSet[str], id: str, pri_max: in
         for dep in state.dependencies
         if dep in vertices and state.priorities.get(dep, PRI_HIGH) < pri_max
     ]
-
-
-def strongly_connected_components(
-    vertices: AbstractSet[str], edges: dict[str, list[str]]
-) -> Iterator[set[str]]:
-    """Compute Strongly Connected Components of a directed graph.
-
-    Args:
-      vertices: the labels for the vertices
-      edges: for each vertex, gives the target vertices of its outgoing edges
-
-    Returns:
-      An iterator yielding strongly connected components, each
-      represented as a set of vertices.  Each input vertex will occur
-      exactly once; vertices not part of a SCC are returned as
-      singleton sets.
-
-    From https://code.activestate.com/recipes/578507/.
-    """
-    identified: set[str] = set()
-    stack: list[str] = []
-    index: dict[str, int] = {}
-    boundaries: list[int] = []
-
-    def dfs(v: str) -> Iterator[set[str]]:
-        index[v] = len(stack)
-        stack.append(v)
-        boundaries.append(index[v])
-
-        for w in edges[v]:
-            if w not in index:
-                yield from dfs(w)
-            elif w not in identified:
-                while index[w] < boundaries[-1]:
-                    boundaries.pop()
-
-        if boundaries[-1] == index[v]:
-            boundaries.pop()
-            scc = set(stack[index[v] :])
-            del stack[index[v] :]
-            identified.update(scc)
-            yield scc
-
-    for v in vertices:
-        if v not in index:
-            yield from dfs(v)
-
-
-T = TypeVar("T")
-
-
-def topsort(data: dict[T, set[T]]) -> Iterable[set[T]]:
-    """Topological sort.
-
-    Args:
-      data: A map from vertices to all vertices that it has an edge
-            connecting it to.  NOTE: This data structure
-            is modified in place -- for normalization purposes,
-            self-dependencies are removed and entries representing
-            orphans are added.
-
-    Returns:
-      An iterator yielding sets of vertices that have an equivalent
-      ordering.
-
-    Example:
-      Suppose the input has the following structure:
-
-        {A: {B, C}, B: {D}, C: {D}}
-
-      This is normalized to:
-
-        {A: {B, C}, B: {D}, C: {D}, D: {}}
-
-      The algorithm will yield the following values:
-
-        {D}
-        {B, C}
-        {A}
-
-    From https://code.activestate.com/recipes/577413/.
-    """
-    # TODO: Use a faster algorithm?
-    for k, v in data.items():
-        v.discard(k)  # Ignore self dependencies.
-    for item in set.union(*data.values()) - set(data.keys()):
-        data[item] = set()
-    while True:
-        ready = {item for item, dep in data.items() if not dep}
-        if not ready:
-            break
-        yield ready
-        data = {item: (dep - ready) for item, dep in data.items() if item not in ready}
-    assert not data, f"A cyclic dependency exists amongst {data!r}"
 
 
 def missing_stubs_file(cache_dir: str) -> str:

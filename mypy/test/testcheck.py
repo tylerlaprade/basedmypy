@@ -22,8 +22,8 @@ from mypy.test.helpers import (
     normalize_error_messages,
     parse_options,
     perform_file_operations,
-    update_testcase_output,
 )
+from mypy.test.update_data import update_testcase_output
 from mypy.util import safe
 
 try:
@@ -39,7 +39,7 @@ based_files = find_test_files(pattern="check-based-*.test")
 typecheck_files = find_test_files(pattern="check-*.test", exclude=based_files)
 
 
-# Tests that use Python 3.8-only AST features (like expression-scoped ignores):
+# Tests that use Python version specific features:
 if sys.version_info < (3, 9):
     typecheck_files.remove("check-python39.test")
 if sys.version_info < (3, 10):
@@ -88,6 +88,19 @@ class TypeCheckSuite(DataSuite):
         else:
             self.run_case_once(testcase)
 
+    def _sort_output_if_needed(self, testcase: DataDrivenTestCase, a: list[str]) -> None:
+        idx = testcase.output_inline_start
+        if not testcase.files or idx == len(testcase.output):
+            return
+
+        def _filename(_msg: str) -> str:
+            return _msg.partition(":")[0]
+
+        file_weights = {file: idx for idx, file in enumerate(_filename(msg) for msg in a)}
+        testcase.output[idx:] = sorted(
+            testcase.output[idx:], key=lambda msg: file_weights.get(_filename(msg), -1)
+        )
+
     def run_case_once(
         self,
         testcase: DataDrivenTestCase,
@@ -122,8 +135,6 @@ class TypeCheckSuite(DataSuite):
         options.show_traceback = True
 
         # Enable some options automatically based on test file name.
-        if "optional" in testcase.file:
-            options.strict_optional = True
         if "columns" in testcase.file:
             options.show_column_numbers = True
         if "errorcodes" in testcase.file:
@@ -132,6 +143,8 @@ class TypeCheckSuite(DataSuite):
             options.allow_empty_bodies = not testcase.name.endswith("_no_empty")
         if "lowercase" not in testcase.file and not based:
             options.force_uppercase_builtins = True
+        if "union-error" not in testcase.file:
+            options.force_union_syntax = True
 
         if incremental_step and options.incremental:
             # Don't overwrite # flags: --no-incremental in incremental test cases
@@ -173,24 +186,24 @@ class TypeCheckSuite(DataSuite):
             a = normalize_error_messages(a)
 
         # Make sure error messages match
-        if incremental_step == 0:
-            # Not incremental
-            msg = "Unexpected type checker output ({}, line {})"
+        if incremental_step < 2:
+            if incremental_step == 1:
+                msg = "Unexpected type checker output in incremental, run 1 ({}, line {})"
+            else:
+                assert incremental_step == 0
+                msg = "Unexpected type checker output ({}, line {})"
+            self._sort_output_if_needed(testcase, a)
             output = testcase.output
-        elif incremental_step == 1:
-            msg = "Unexpected type checker output in incremental, run 1 ({}, line {})"
-            output = testcase.output
-        elif incremental_step > 1:
+        else:
             msg = (
                 f"Unexpected type checker output in incremental, run {incremental_step}"
                 + " ({}, line {})"
             )
             output = testcase.output2.get(incremental_step, [])
-        else:
-            raise AssertionError()
 
         if output != a and testcase.config.getoption("--update-data", False):
-            update_testcase_output(testcase, a)
+            update_testcase_output(testcase, a, incremental_step=incremental_step)
+
         assert_string_arrays_equal(output, a, msg.format(testcase.file, testcase.line))
 
         if res:

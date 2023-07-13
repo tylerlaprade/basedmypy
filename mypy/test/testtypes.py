@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import re
+from unittest import TestCase, skipUnless
+
 from mypy.erasetype import erase_type, remove_instance_last_known_values
-from mypy.expandtype import expand_type
 from mypy.indirection import TypeIndirectionVisitor
 from mypy.join import join_simple, join_types
 from mypy.meet import meet_types, narrow_declared_type
@@ -49,6 +51,9 @@ from mypy.types import (
     get_proper_type,
     has_recursive_types,
 )
+
+# Solving the import cycle:
+import mypy.expandtype  # ruff: isort: skip
 
 
 class TypesSuite(Suite):
@@ -138,8 +143,23 @@ class TypesSuite(Suite):
         )
 
     def test_type_variable_binding(self) -> None:
-        assert_equal(str(TypeVarType("X", "X", 1, [], self.fx.o)), "X`1")
-        assert_equal(str(TypeVarType("X", "X", 1, [self.x, self.y], self.fx.o)), "X`1")
+        assert_equal(
+            str(TypeVarType("X", "X", 1, [], self.fx.o, AnyType(TypeOfAny.from_omitted_generics))),
+            "X`1",
+        )
+        assert_equal(
+            str(
+                TypeVarType(
+                    "X",
+                    "X",
+                    1,
+                    [self.x, self.y],
+                    self.fx.o,
+                    AnyType(TypeOfAny.from_omitted_generics),
+                )
+            ),
+            "X`1",
+        )
 
     def test_generic_function_type(self) -> None:
         c = CallableType(
@@ -149,11 +169,16 @@ class TypesSuite(Suite):
             self.y,
             self.function,
             name=None,
-            variables=[TypeVarType("X", "X", -1, [], self.fx.o)],
+            variables=[
+                TypeVarType("X", "X", -1, [], self.fx.o, AnyType(TypeOfAny.from_omitted_generics))
+            ],
         )
         assert_equal(str(c), "def [X] (X?, Y?) -> Y?")
 
-        v = [TypeVarType("Y", "Y", -1, [], self.fx.o), TypeVarType("X", "X", -2, [], self.fx.o)]
+        v = [
+            TypeVarType("Y", "Y", -1, [], self.fx.o, AnyType(TypeOfAny.from_omitted_generics)),
+            TypeVarType("X", "X", -2, [], self.fx.o, AnyType(TypeOfAny.from_omitted_generics)),
+        ]
         c2 = CallableType([], [], [], NoneType(), self.function, name=None, variables=v)
         assert_equal(str(c2), "def [Y, X] ()")
 
@@ -180,7 +205,7 @@ class TypesSuite(Suite):
 
     def test_recursive_nested_in_non_recursive(self) -> None:
         A, _ = self.fx.def_alias_1(self.fx.a)
-        T = TypeVarType("T", "T", -1, [], self.fx.o)
+        T = TypeVarType("T", "T", -1, [], self.fx.o, AnyType(TypeOfAny.from_omitted_generics))
         NA = self.fx.non_rec_alias(Instance(self.fx.gi, [T]), [T], [A])
         assert not NA.is_recursive
         assert has_recursive_types(NA)
@@ -245,7 +270,7 @@ class TypeOpsSuite(Suite):
         for id, t in map_items:
             lower_bounds[id] = t
 
-        exp = expand_type(orig, lower_bounds)
+        exp = mypy.expandtype.expand_type(orig, lower_bounds)
         # Remove erased tags (asterisks).
         assert_equal(str(exp).replace("*", ""), str(result))
 
@@ -626,10 +651,7 @@ class TypeOpsSuite(Suite):
             [fx.lit_str1, fx.lit_str2, fx.lit_str3_inst],
             UnionType([fx.lit_str1, fx.lit_str2, fx.lit_str3_inst]),
         )
-        self.assert_simplified_union(
-            [fx.lit_str1, fx.lit_str1, fx.lit_str1_inst],
-            UnionType([fx.lit_str1, fx.lit_str1_inst]),
-        )
+        self.assert_simplified_union([fx.lit_str1, fx.lit_str1, fx.lit_str1_inst], fx.lit_str1)
 
     def assert_simplified_union(self, original: list[Type], union: Type) -> None:
         assert_equal(make_simplified_union(original), union)
@@ -671,7 +693,9 @@ class TypeOpsSuite(Suite):
         tv: list[TypeVarType] = []
         n = -1
         for v in vars:
-            tv.append(TypeVarType(v, v, n, [], self.fx.o))
+            tv.append(
+                TypeVarType(v, v, n, [], self.fx.o, AnyType(TypeOfAny.from_omitted_generics))
+            )
             n -= 1
         return CallableType(
             list(a[:-1]),
@@ -914,13 +938,11 @@ class JoinSuite(Suite):
         self.assert_join(ov(c(fx.a, fx.a), c(fx.b, fx.b)), c(any, fx.b), c(any, fx.b))
         self.assert_join(ov(c(fx.a, fx.a), c(any, fx.b)), c(fx.b, fx.b), c(any, fx.b))
 
-    @skip
     def test_join_interface_types(self) -> None:
         self.assert_join(self.fx.f, self.fx.f, self.fx.f)
         self.assert_join(self.fx.f, self.fx.f2, self.fx.o)
         self.assert_join(self.fx.f, self.fx.f3, self.fx.f)
 
-    @skip
     def test_join_interface_and_class_types(self) -> None:
         self.assert_join(self.fx.o, self.fx.f, self.fx.o)
         self.assert_join(self.fx.a, self.fx.f, self.fx.o)
@@ -1195,7 +1217,6 @@ class MeetSuite(Suite):
         self.assert_meet(self.fx.e, self.fx.e2, self.fx.nonet)
         self.assert_meet(self.fx.e2, self.fx.e3, self.fx.nonet)
 
-    @skip
     def test_meet_with_generic_interfaces(self) -> None:
         fx = InterfaceTypeFixture()
         self.assert_meet(fx.gfa, fx.m1, fx.m1)
@@ -1476,3 +1497,16 @@ def make_call(*items: tuple[str, str | None]) -> CallExpr:
         else:
             arg_kinds.append(ARG_POS)
     return CallExpr(NameExpr("f"), args, arg_kinds, arg_names)
+
+
+class TestExpandTypeLimitGetProperType(TestCase):
+    # WARNING: do not increase this number unless absolutely necessary,
+    # and you understand what you are doing.
+    ALLOWED_GET_PROPER_TYPES = 8
+
+    @skipUnless(mypy.expandtype.__file__.endswith(".py"), "Skip for compiled mypy")
+    def test_count_get_proper_type(self) -> None:
+        with open(mypy.expandtype.__file__) as f:
+            code = f.read()
+        get_proper_type_count = len(re.findall("get_proper_type", code))
+        assert get_proper_type_count == self.ALLOWED_GET_PROPER_TYPES

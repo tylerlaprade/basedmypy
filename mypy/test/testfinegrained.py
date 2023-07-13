@@ -70,7 +70,6 @@ class FineGrainedSuite(DataSuite):
         else:
             if testcase.only_when == "-only_when_cache":
                 return True
-
         return False
 
     def run_case(self, testcase: DataDrivenTestCase) -> None:
@@ -323,6 +322,7 @@ class FineGrainedSuite(DataSuite):
                 # on Windows tmp_dir can be in the form x\y\asdf~1\z, do also try to replace is as is
                 val = val.replace(tmp_dir + os.path.sep, "")
                 val = val.replace(os.path.realpath(tmp_dir) + os.path.sep, "")
+                val = val.replace(os.path.abspath(tmp_dir) + os.path.sep, "")
             output.extend(val.strip().split("\n"))
         return normalize_messages(output)
 

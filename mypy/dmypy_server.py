@@ -17,8 +17,8 @@ import sys
 import time
 import traceback
 from contextlib import redirect_stderr, redirect_stdout
-from typing import AbstractSet, Any, Callable, List, Sequence, Tuple
-from typing_extensions import Final, TypeAlias as _TypeAlias
+from typing import AbstractSet, Any, Callable, Final, List, Sequence, Tuple
+from typing_extensions import TypeAlias as _TypeAlias
 
 import mypy.build
 import mypy.errors
@@ -56,8 +56,12 @@ if sys.platform == "win32":
         It also pickles the options to be unpickled by mypy.
         """
         command = [sys.executable, "-m", "mypy.dmypy", "--status-file", status_file, "daemon"]
-        pickled_options = pickle.dumps((options.snapshot(), timeout, log_file))
+        pickled_options = pickle.dumps(options.snapshot())
         command.append(f'--options-data="{base64.b64encode(pickled_options).decode()}"')
+        if timeout:
+            command.append(f"--timeout={timeout}")
+        if log_file:
+            command.append(f"--log-file={log_file}")
         if not mypy.options._based:
             command.append("--legacy")
         info = STARTUPINFO()
@@ -328,7 +332,7 @@ class Server:
                         header=argparse.SUPPRESS,
                     )
             # Signal that we need to restart if the options have changed
-            if self.options_snapshot != options.snapshot():
+            if not options.compare_stable(self.options_snapshot):
                 return {"restart": "configuration changed"}
             if __based_version__ != version:
                 return {"restart": "mypy version changed"}
@@ -854,6 +858,21 @@ class Server:
             path = source.path
             assert path
             removed.append((source.module, path))
+
+        # Always add modules that were (re-)added, since they may be detected as not changed by
+        # fswatcher (if they were actually not changed), but they may still need to be checked
+        # in case they had errors before they were deleted from sources on previous runs.
+        previous_modules = {source.module for source in self.previous_sources}
+        changed_set = set(changed)
+        changed.extend(
+            [
+                (source.module, source.path)
+                for source in sources
+                if source.path
+                and source.module not in previous_modules
+                and (source.module, source.path) not in changed_set
+            ]
+        )
 
         # Find anything that has had its module path change because of added or removed __init__s
         last = {s.path: s.module for s in self.previous_sources}

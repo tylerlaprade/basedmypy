@@ -20,6 +20,7 @@ from typing import (
     Any,
     Callable,
     Dict,
+    Final,
     Iterable,
     List,
     Mapping,
@@ -29,7 +30,7 @@ from typing import (
     Tuple,
     Union,
 )
-from typing_extensions import Final, TypeAlias as _TypeAlias
+from typing_extensions import TypeAlias as _TypeAlias
 
 from mypy import defaults
 from mypy.options import PER_MODULE_OPTIONS, Options
@@ -539,10 +540,7 @@ def split_directive(s: str) -> tuple[list[str], list[str]]:
 
 
 def mypy_comments_to_config_map(line: str, template: Options) -> tuple[dict[str, str], list[str]]:
-    """Rewrite the mypy comment syntax into ini file syntax.
-
-    Returns
-    """
+    """Rewrite the mypy comment syntax into ini file syntax."""
     options = {}
     entries, errors = split_directive(line)
     for entry in entries:

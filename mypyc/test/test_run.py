@@ -42,6 +42,8 @@ files = [
     "run-integers.test",
     "run-i64.test",
     "run-i32.test",
+    "run-i16.test",
+    "run-u8.test",
     "run-floats.test",
     "run-math.test",
     "run-bools.test",
@@ -64,10 +66,9 @@ files = [
     "run-dunders.test",
     "run-singledispatch.test",
     "run-attrs.test",
+    "run-python37.test",
+    "run-python38.test",
 ]
-
-files.append("run-python37.test")
-files.append("run-python38.test")
 
 if sys.version_info >= (3, 10):
     files.append("run-match.test")

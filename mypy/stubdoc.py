@@ -10,8 +10,8 @@ import contextlib
 import io
 import re
 import tokenize
-from typing import Any, MutableMapping, MutableSequence, NamedTuple, Sequence, Tuple
-from typing_extensions import Final, TypeAlias as _TypeAlias
+from typing import Any, Final, MutableMapping, MutableSequence, NamedTuple, Sequence, Tuple
+from typing_extensions import TypeAlias as _TypeAlias
 
 from mypy.util import safe
 
@@ -256,7 +256,7 @@ def infer_sig_from_docstring(docstr: str | None, name: str) -> list[FunctionSig]
         * docstr: docstring
         * name: name of function for which signatures are to be found
     """
-    if not docstr:
+    if not (isinstance(docstr, str) and docstr):
         return None
 
     state = DocStringParser(name)

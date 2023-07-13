@@ -59,9 +59,7 @@ cmds = {
         "mypy",
     ],
     # Lint
-    "lint": ["flake8", "-j3"],
-    "format-black": ["black", "."],
-    "format-isort": ["isort", "."],
+    "lint": ["pre-commit", "run", "--all-files"],
     # Fast test cases only (this is the bulk of the test suite)
     "pytest-fast": ["pytest", "-q", "-k", f"not ({' or '.join(ALL_NON_FAST)})"],
     # Test cases that invoke mypy (with small inputs)
