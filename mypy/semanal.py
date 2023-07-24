@@ -58,13 +58,18 @@ from mypy import errorcodes as codes, message_registry
 from mypy.constant_fold import constant_fold_expr
 from mypy.errorcodes import ErrorCode
 from mypy.errors import Errors, report_internal_error
-from mypy.exprtotype import TypeTranslationError, expr_to_unanalyzed_type
+from mypy.exprtotype import (
+    TypeTranslationError,
+    expr_to_unanalyzed_type,
+    TupleLiteralTypeTranslationError,
+)
 from mypy.messages import (
     SUGGESTED_TEST_FIXTURES,
     TYPES_FOR_UNIMPORTED_HINTS,
     MessageBuilder,
     best_matches,
     pretty_seq,
+    format_type_inner,
 )
 from mypy.mro import MroError, calculate_mro
 from mypy.nodes import (
@@ -3541,6 +3546,15 @@ class SemanticAnalyzer(
         global_scope = not self.type and not self.function_stack
         try:
             typ = expr_to_unanalyzed_type(rvalue, self.options, self.is_stub_file)
+        except TupleLiteralTypeTranslationError:
+            self.fail(
+                f"Invalid type alias: tuple literals are not currently supported in an alias",
+                rvalue,
+                code=codes.VALID_TYPE,
+            )
+            self.note(f"You should use tuple[T1, ..., Tn] instead of (T1, ..., Tn)", rvalue)
+            return None, [], set(), []
+
         except TypeTranslationError:
             self.fail(
                 "Invalid type alias: expression is not a valid type", rvalue, code=codes.VALID_TYPE

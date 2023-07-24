@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 ### Enhancements
+- Tuple literal types have improved error messages (#???)
 ### Fixes
 
 ## [2.0.0]

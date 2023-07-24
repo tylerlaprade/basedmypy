@@ -41,6 +41,10 @@ class TypeTranslationError(Exception):
     """Exception raised when an expression is not valid as a type."""
 
 
+class TupleLiteralTypeTranslationError(Exception):
+    """Exception raised when an expression is a tuple literal."""
+
+
 def _extract_argument_name(expr: Expression) -> str | None:
     if isinstance(expr, NameExpr) and expr.name == "None":
         return None
@@ -206,5 +210,7 @@ def expr_to_unanalyzed_type(
         return RawExpressionType(None, "builtins.complex", line=expr.line, column=expr.column)
     elif isinstance(expr, EllipsisExpr):
         return EllipsisType(expr.line)
+    elif isinstance(expr, TupleExpr):
+        raise TupleLiteralTypeTranslationError(expr)
     else:
         raise TypeTranslationError()

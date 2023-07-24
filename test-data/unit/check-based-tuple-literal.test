@@ -44,3 +44,35 @@ B: TypeAlias = (int, str)  # E: Invalid type alias: expression is not a valid ty
 [case testInvalidSyntax]
 a: int, str = 1, ""  # E: invalid syntax  [syntax]
 [builtins fixtures/tuple.pyi]
+
+
+[case testTypeOperation]
+# flags: --python-version 3.10
+from typing import Union
+from typing_extensions import TypeAlias
+
+a: (int,)
+b: (int,) | int  # E: "(int,)" is a tuple literal type and shouldn't be used in a type operation without "__future__.annotations"  [valid-type] \
+                 # N: Suggestion: Is there a spurious trailing comma?
+# https://github.com/python/mypy/issues/15756
+# A = int | (int,)  E: Invalid type alias: expression is not a valid type  [valid-type]
+B: TypeAlias = int | (int,)  # E: Invalid type alias: tuple literals are not currently supported in an alias  [valid-type] \
+                             # N: You should use tuple[T1, ..., Tn] instead of (T1, ..., Tn) \
+                             # E: Unsupported left operand type for | ("type[int]")  [operator]
+[builtins fixtures/tuple.pyi]
+
+
+[case testTypeOperationAnnotations]
+# flags: --python-version 3.10
+from __future__ import annotations
+from typing import Union
+from typing_extensions import TypeAlias
+
+a: (int,)
+b: (int,) | int
+# https://github.com/python/mypy/issues/15756
+# A = int | (int,)  E: Invalid type alias: expression is not a valid type  [valid-type]
+B: TypeAlias = int | (int,)  # E: Invalid type alias: tuple literals are not currently supported in an alias  [valid-type] \
+                             # N: You should use tuple[T1, ..., Tn] instead of (T1, ..., Tn) \
+                             # E: Unsupported left operand type for | ("type[int]")  [operator]
+[builtins fixtures/tuple.pyi]

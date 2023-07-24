@@ -1043,27 +1043,6 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
         return t
 
     def visit_tuple_type(self, t: TupleType) -> Type:
-        # Types such as (t1, t2, ...) only allowed in assignment statements. They'll
-        # generate errors elsewhere, and Tuple[t1, t2, ...] must be used instead.
-        if not mypy.options._based and t.implicit and not self.allow_tuple_literal:
-            self.fail("Syntax error in type annotation", t, code=codes.SYNTAX)
-            if len(t.items) == 0:
-                self.note(
-                    "Suggestion: Use Tuple[()] instead of () for an empty tuple, or "
-                    "None for a function without a return value",
-                    t,
-                    code=codes.SYNTAX,
-                )
-            elif len(t.items) == 1:
-                self.note("Suggestion: Is there a spurious trailing comma?", t, code=codes.SYNTAX)
-            else:
-                self.note(
-                    "Suggestion: Use Tuple[T1, ..., Tn] instead of (T1, ..., Tn)",
-                    t,
-                    code=codes.SYNTAX,
-                )
-            return AnyType(TypeOfAny.from_error)
-
         any_type = AnyType(TypeOfAny.special_form)
         # If the fallback isn't filled in yet, its type will be the falsey FakeInfo
         fallback = (
@@ -1071,7 +1050,38 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
             if t.partial_fallback.type
             else self.named_type("builtins.tuple", [any_type])
         )
-        return TupleType(self.anal_array(t.items), fallback, t.line)
+        result = TupleType(self.anal_array(t.items), fallback, t.line)
+        # Types such as (t1, t2, ...) only allowed in assignment statements. They'll
+        # generate errors elsewhere, and Tuple[t1, t2, ...] must be used instead.
+        if (
+            ((self.nesting_level and not self.future_annotations) or not mypy.options._based)
+            and t.implicit
+            and not self.allow_tuple_literal
+        ):
+            self.fail(
+                f'"{result}" is a tuple literal type and shouldn\'t be used in a type operation without'
+                ' "__future__.annotations"',
+                t,
+                code=codes.VALID_TYPE,
+            )
+            if len(t.items) == 0:
+                self.note(
+                    "Suggestion: Use tuple[()] instead of () for an empty tuple, or "
+                    "None for a function without a return value",
+                    t,
+                    code=codes.VALID_TYPE,
+                )
+            elif len(t.items) == 1:
+                self.note(
+                    "Suggestion: Is there a spurious trailing comma?", t, code=codes.VALID_TYPE
+                )
+            else:
+                self.note(
+                    "Suggestion: Use tuple[T1, ..., Tn] instead of (T1, ..., Tn)",
+                    t,
+                    code=codes.VALID_TYPE,
+                )
+        return result
 
     def visit_typeddict_type(self, t: TypedDictType) -> Type:
         items = {
@@ -1130,7 +1140,7 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
         if (
             self.nesting_level
             and t.bare_literal
-            and not (self.api.is_future_flag_set("annotations") or self.api.is_stub_file)
+            and not self.future_annotations
             and self.options.bare_literals
         ):
             self.fail(
@@ -1684,6 +1694,10 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
     def tuple_type(self, items: list[Type]) -> TupleType:
         any_type = AnyType(TypeOfAny.special_form)
         return TupleType(items, fallback=self.named_type("builtins.tuple", [any_type]))
+
+    @property
+    def future_annotations(self):
+        return self.api.is_future_flag_set("annotations") or self.api.is_stub_file
 
 
 TypeVarLikeList = List[Tuple[str, TypeVarLikeExpr]]
