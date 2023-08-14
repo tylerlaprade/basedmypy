@@ -1,9 +1,7 @@
 # Basedmypy Changelog
 
-## [Unreleased]
-### Added
-### Enhancements
-### Fixes
+## [2.1.0]
+- No changes
 
 ## [2.0.0]
 ### Added

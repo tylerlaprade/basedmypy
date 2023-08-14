@@ -992,7 +992,7 @@ def get_meminfo() -> dict[str, Any]:
                 factor = 1
             else:
                 factor = 1024  # Linux
-            res["memory_maxrss_mib"] = rusage.ru_maxrss * factor / MiB
+            res["memory_maxrss_mib"] = rusage.ru_maxrss * factor / MiB  # type: ignore[no-any-expr, unused-ignore]
     return res
 
 

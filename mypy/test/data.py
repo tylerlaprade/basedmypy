@@ -86,6 +86,7 @@ def parse_test_case(case: DataDrivenTestCase) -> None:
     # optionally followed by lines of text.
     item = first_item = test_items[0]
     test_modules.append("__main__")
+    ignore = "\n# mypy: disable-error-code=explicit-override\n"
     for item in test_items[1:]:
 
         def _item_fail(msg: str) -> NoReturn:
@@ -110,13 +111,13 @@ def parse_test_case(case: DataDrivenTestCase) -> None:
             assert item.arg is not None
             mpath = join(os.path.dirname(case.file), item.arg)
             with open(mpath, encoding="utf8") as f:
-                files.append((join(base_path, "builtins.pyi"), f.read()))
+                files.append((join(base_path, "builtins.pyi"), f.read() + ignore))
         elif item.id == "typing":
             # Use an alternative stub file for the typing module.
             assert item.arg is not None
             src_path = join(os.path.dirname(case.file), item.arg)
             with open(src_path, encoding="utf8") as f:
-                files.append((join(base_path, "typing.pyi"), f.read()))
+                files.append((join(base_path, "typing.pyi"), f.read() + ignore))
         elif item.id == "_typeshed":
             # Use an alternative stub file for the _typeshed module.
             assert item.arg is not None
