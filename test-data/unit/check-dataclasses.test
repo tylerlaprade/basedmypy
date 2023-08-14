@@ -744,6 +744,17 @@ s: str = a.bar()  # E: Incompatible types in assignment (expression has type "in
 
 [builtins fixtures/dataclasses.pyi]
 
+[case testDataclassGenericCovariant]
+from dataclasses import dataclass
+from typing import Generic, TypeVar
+
+T_co = TypeVar("T_co", covariant=True)
+
+@dataclass
+class MyDataclass(Generic[T_co]):
+    a: T_co
+
+[builtins fixtures/dataclasses.pyi]
 
 [case testDataclassUntypedGenericInheritance]
 # flags: --python-version 3.7
@@ -1544,6 +1555,35 @@ class Some:
 class Other:
     __slots__ = ('x',)
     x: int
+[builtins fixtures/dataclasses.pyi]
+
+
+[case testDataclassWithSlotsRuntimeAttr]
+# flags: --python-version 3.10
+from dataclasses import dataclass
+
+@dataclass(slots=True)
+class Some:
+    x: int
+    y: str
+    z: bool
+
+reveal_type(Some.__slots__)  # N: Revealed type is "Tuple[builtins.str, builtins.str, builtins.str]"
+
+@dataclass(slots=True)
+class Other:
+    x: int
+    y: str
+
+reveal_type(Other.__slots__)  # N: Revealed type is "Tuple[builtins.str, builtins.str]"
+
+
+@dataclass
+class NoSlots:
+    x: int
+    y: str
+
+NoSlots.__slots__  # E: "Type[NoSlots]" has no attribute "__slots__"
 [builtins fixtures/dataclasses.pyi]
 
 
@@ -2419,4 +2459,16 @@ class Test(Protocol):
     x: int
     def reset(self) -> None:
         self.x = DEFAULT
+[builtins fixtures/dataclasses.pyi]
+
+[case testProtocolNoCrashOnJoining]
+from dataclasses import dataclass
+from typing import Protocol
+
+@dataclass
+class MyDataclass(Protocol): ...
+
+a: MyDataclass
+b = [a, a]  # trigger joining the types
+
 [builtins fixtures/dataclasses.pyi]

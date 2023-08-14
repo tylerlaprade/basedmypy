@@ -1556,60 +1556,6 @@ takes_attrs_cls(A(1, ""))  # E: Argument 1 to "takes_attrs_cls" has incompatible
 takes_attrs_instance(A)  # E: Argument 1 to "takes_attrs_instance" has incompatible type "Type[A]"; expected "AttrsInstance" # N: ClassVar protocol member AttrsInstance.__attrs_attrs__ can never be matched by a class object
 [builtins fixtures/plugin_attrs.pyi]
 
-[case testAttrsFields]
-import attr
-from attrs import fields as f  # Common usage.
-
-@attr.define
-class A:
-    b: int
-    c: str
-
-reveal_type(f(A))  # N: Revealed type is "Tuple[attr.Attribute[builtins.int], attr.Attribute[builtins.str], fallback=__main__.A.____main___A_AttrsAttributes__]"
-reveal_type(f(A)[0])  # N: Revealed type is "attr.Attribute[builtins.int]"
-reveal_type(f(A).b)  # N: Revealed type is "attr.Attribute[builtins.int]"
-f(A).x  # E: "____main___A_AttrsAttributes__" has no attribute "x"
-
-[builtins fixtures/plugin_attrs.pyi]
-
-[case testAttrsGenericFields]
-from typing import TypeVar
-
-import attr
-from attrs import fields
-
-@attr.define
-class A:
-    b: int
-    c: str
-
-TA = TypeVar('TA', bound=A)
-
-def f(t: TA) -> None:
-    reveal_type(fields(t))  # N: Revealed type is "Tuple[attr.Attribute[builtins.int], attr.Attribute[builtins.str], fallback=__main__.A.____main___A_AttrsAttributes__]"
-    reveal_type(fields(t)[0])  # N: Revealed type is "attr.Attribute[builtins.int]"
-    reveal_type(fields(t).b)  # N: Revealed type is "attr.Attribute[builtins.int]"
-    fields(t).x  # E: "____main___A_AttrsAttributes__" has no attribute "x"
-
-
-[builtins fixtures/plugin_attrs.pyi]
-
-[case testNonattrsFields]
-# flags: --no-strict-optional
-from typing import Any, cast, Type
-from attrs import fields
-
-class A:
-    b: int
-    c: str
-
-fields(A)  # E: Argument 1 to "fields" has incompatible type "Type[A]"; expected an attrs class
-fields(None)  # E: Argument 1 to "fields" has incompatible type "None"; expected an attrs class
-fields(cast(Any, 42))
-fields(cast(Type[Any], 43))
-
-[builtins fixtures/plugin_attrs.pyi]
-
 [case testAttrsInitMethodAlwaysGenerates]
 from typing import Tuple
 import attr
@@ -1630,6 +1576,24 @@ reveal_type(A.__attrs_init__)  # N: Revealed type is "def (self: __main__.A, b: 
 
 [case testAttrsClassWithSlots]
 import attr
+
+@attr.define
+class Define:
+    b: int = attr.ib()
+
+    def __attrs_post_init__(self) -> None:
+        self.b = 1
+        self.c = 2  # E: Trying to assign name "c" that is not in "__slots__" of type "__main__.Define"
+
+
+@attr.define(slots=False)
+class DefineSlotsFalse:
+    b: int = attr.ib()
+
+    def __attrs_post_init__(self) -> None:
+        self.b = 1
+        self.c = 2
+
 
 @attr.s(slots=True)
 class A:
@@ -1656,6 +1620,33 @@ class C:
     def __attrs_post_init__(self) -> None:
         self.b = 1  # E: Trying to assign name "b" that is not in "__slots__" of type "__main__.C"
         self.c = 2  # E: Trying to assign name "c" that is not in "__slots__" of type "__main__.C"
+[builtins fixtures/plugin_attrs.pyi]
+
+[case testRuntimeSlotsAttr]
+from attr import dataclass
+
+@dataclass(slots=True)
+class Some:
+    x: int
+    y: str
+    z: bool
+
+reveal_type(Some.__slots__)  # N: Revealed type is "Tuple[builtins.str, builtins.str, builtins.str]"
+
+@dataclass(slots=True)
+class Other:
+    x: int
+    y: str
+
+reveal_type(Other.__slots__)  # N: Revealed type is "Tuple[builtins.str, builtins.str]"
+
+
+@dataclass
+class NoSlots:
+    x: int
+    y: str
+
+NoSlots.__slots__  # E: "Type[NoSlots]" has no attribute "__slots__"
 [builtins fixtures/plugin_attrs.pyi]
 
 [case testAttrsWithMatchArgs]

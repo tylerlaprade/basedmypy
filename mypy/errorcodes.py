@@ -244,6 +244,12 @@ USED_BEFORE_DEF: Final[ErrorCode] = ErrorCode(
 UNUSED_IGNORE: Final = ErrorCode(
     "unused-ignore", "Ensure that all type ignores are used", "General", default_enabled=False
 )
+EXPLICIT_OVERRIDE_REQUIRED: Final = ErrorCode(
+    "explicit-override",
+    "Require @override decorator if method is overriding a base class method",
+    "General",
+    default_enabled=False,
+)
 
 NO_ANY_EXPR: Final = ErrorCode("no-any-expr", "An expression contains Any", "General")
 NO_ANY_EXPLICIT: Final = ErrorCode("no-any-explicit", "Usage of the Any type", "General")

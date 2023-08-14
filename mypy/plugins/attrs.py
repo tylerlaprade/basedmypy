@@ -68,7 +68,6 @@ from mypy.types import (
     TupleType,
     Type,
     TypeOfAny,
-    TypeType,
     TypeVarType,
     UninhabitedType,
     UnionType,
@@ -294,6 +293,7 @@ def attr_class_maker_callback(
     ctx: mypy.plugin.ClassDefContext,
     auto_attribs_default: bool | None = False,
     frozen_default: bool = False,
+    slots_default: bool = False,
 ) -> bool:
     """Add necessary dunder methods to classes decorated with attr.s.
 
@@ -314,7 +314,7 @@ def attr_class_maker_callback(
     init = _get_decorator_bool_argument(ctx, "init", True)
     frozen = _get_frozen(ctx, frozen_default)
     order = _determine_eq_order(ctx)
-    slots = _get_decorator_bool_argument(ctx, "slots", False)
+    slots = _get_decorator_bool_argument(ctx, "slots", slots_default)
 
     auto_attribs = _get_decorator_optional_bool_argument(ctx, "auto_attribs", auto_attribs_default)
     kw_only = _get_decorator_bool_argument(ctx, "kw_only", False)
@@ -895,6 +895,13 @@ def _add_slots(ctx: mypy.plugin.ClassDefContext, attributes: list[Attribute]) ->
     # Unlike `@dataclasses.dataclass`, `__slots__` is rewritten here.
     ctx.cls.info.slots = {attr.name for attr in attributes}
 
+    # Also, inject `__slots__` attribute to class namespace:
+    slots_type = TupleType(
+        [ctx.api.named_type("builtins.str") for _ in attributes],
+        fallback=ctx.api.named_type("builtins.tuple"),
+    )
+    add_attribute_to_class(api=ctx.api, cls=ctx.cls, name="__slots__", typ=slots_type)
+
 
 def _add_match_args(ctx: mypy.plugin.ClassDefContext, attributes: list[Attribute]) -> None:
     if (
@@ -1063,44 +1070,3 @@ def evolve_function_sig_callback(ctx: mypy.plugin.FunctionSigContext) -> Callabl
         fallback=ctx.default_signature.fallback,
         name=f"{ctx.default_signature.name} of {inst_type_str}",
     )
-
-
-def fields_function_sig_callback(ctx: mypy.plugin.FunctionSigContext) -> CallableType:
-    """Provide the signature for `attrs.fields`."""
-    if len(ctx.args) != 1 or len(ctx.args[0]) != 1:
-        return ctx.default_signature
-
-    proper_type = get_proper_type(ctx.api.get_expression_type(ctx.args[0][0]))
-
-    # fields(Any) -> Any, fields(type[Any]) -> Any
-    if (
-        isinstance(proper_type, AnyType)
-        or isinstance(proper_type, TypeType)
-        and isinstance(proper_type.item, AnyType)
-    ):
-        return ctx.default_signature
-
-    cls = None
-    arg_types = ctx.default_signature.arg_types
-
-    if isinstance(proper_type, TypeVarType):
-        inner = get_proper_type(proper_type.upper_bound)
-        if isinstance(inner, Instance):
-            # We need to work arg_types to compensate for the attrs stubs.
-            arg_types = [proper_type]
-            cls = inner.type
-    elif isinstance(proper_type, CallableType):
-        cls = proper_type.type_object()
-
-    if cls is not None and MAGIC_ATTR_NAME in cls.names:
-        # This is a proper attrs class.
-        ret_type = cls.names[MAGIC_ATTR_NAME].type
-        assert ret_type is not None
-        return ctx.default_signature.copy_modified(arg_types=arg_types, ret_type=ret_type)
-
-    ctx.api.fail(
-        f'Argument 1 to "fields" has incompatible type "{format_type_bare(proper_type, ctx.api.options)}"; expected an attrs class',
-        ctx.context,
-    )
-
-    return ctx.default_signature

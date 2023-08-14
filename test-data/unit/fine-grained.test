@@ -9678,7 +9678,8 @@ reveal_type(z)
 [out]
 c.py:2: note: Revealed type is "a.A & a.B"
 ==
-c.py:2: note: Revealed type is "a.A"
+c.py:2: note: Revealed type is "Any"
+b.py:2: error: Cannot determine type of "y"
 
 [case testIsInstanceAdHocIntersectionFineGrainedIncrementalUnreachaableToIntersection]
 import c
@@ -9709,7 +9710,8 @@ from b import z
 reveal_type(z)
 [builtins fixtures/isinstance.pyi]
 [out]
-c.py:2: note: Revealed type is "a.A"
+b.py:2: error: Cannot determine type of "y"
+c.py:2: note: Revealed type is "Any"
 ==
 c.py:2: note: Revealed type is "a.A & a.B"
 

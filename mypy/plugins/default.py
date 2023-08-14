@@ -57,8 +57,6 @@ class DefaultPlugin(Plugin):
 
         if fullname in ("attr.evolve", "attrs.evolve", "attr.assoc", "attrs.assoc"):
             return attrs.evolve_function_sig_callback
-        elif fullname in ("attr.fields", "attrs.fields"):
-            return attrs.fields_function_sig_callback
         elif fullname == "dataclasses.replace":
             return dataclasses.replace_function_sig_callback
         return None
@@ -159,7 +157,9 @@ class DefaultPlugin(Plugin):
                 attrs.attr_class_maker_callback, auto_attribs_default=None, frozen_default=True
             )
         elif fullname in attrs.attr_define_makers:
-            return partial(attrs.attr_class_maker_callback, auto_attribs_default=None)
+            return partial(
+                attrs.attr_class_maker_callback, auto_attribs_default=None, slots_default=True
+            )
 
         return None
 
