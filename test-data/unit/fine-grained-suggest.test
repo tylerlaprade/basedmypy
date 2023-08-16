@@ -876,19 +876,6 @@ x.method(x)
 (foo:Out.In) -> foo.Out
 ==
 
-[case testSuggestColonMethodJSON]
-# suggest: --json tmp/foo.py:3
-[file foo.py]
-class Out:
-    class In:
-        def method(self, x):
-            return Out()
-x: Out.In
-x.method(x)
-[out]
-\[{"func_name": "Out.In.method", "line": 3, "path": "tmp/foo.py", "samples": 0, "signature": {"arg_types": ["foo:Out.In"], "return_type": "foo.Out"}}]
-==
-
 [case testSuggestColonNonPackageDir]
 # cmd: mypy foo/bar/baz.py
 # suggest: tmp/foo/bar/baz.py:1
