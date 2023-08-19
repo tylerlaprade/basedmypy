@@ -4,6 +4,9 @@
 ### Added
 ### Enhancements
 ### Fixes
+- Don't show "X defined here" when error context is hidden (#498)
+
+## [2.1.0]
 
 ## [2.0.0]
 ### Added
