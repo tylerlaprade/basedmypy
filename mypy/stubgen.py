@@ -1048,8 +1048,8 @@ class StubGenerator(mypy.traverser.TraverserVisitor):
                     field_names.append(field.value)
             else:
                 return None  # Invalid namedtuple fields type
-            # if field_names:
-            #     self.untyped
+            if not field_names:
+                return []
             incomplete = self.untyped
             return [(field_name, incomplete) for field_name in field_names]
         elif self.is_typed_namedtuple(call):
