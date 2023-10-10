@@ -10,7 +10,7 @@ class Pass(Base):
 class Normal(Base):
     def __exit__(self, x: object, y: object, z: object) -> bool: return True
 
-# def f1():    
+# def f1():
 #     with Swallow():
 #         raise Exception
 #     1
@@ -20,7 +20,7 @@ class Normal(Base):
 #         raise Exception
 #     1  # E: Statement is unreachable  [unreachable]
 
-def f3():    
+def f3():
     with Normal():
         raise Exception
     1
