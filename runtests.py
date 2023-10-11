@@ -57,6 +57,8 @@ cmds = {
         "--baseline-file=",
         "-p",
         "mypy",
+        "-p",
+        "mypyc",
     ],
     # Lint
     "lint": ["pre-commit", "run", "--all-files"],

@@ -285,6 +285,7 @@ from mypy.types import (
     is_named_instance,
     is_unannotated_any,
     remove_dups,
+    type_vars_as_args,
 )
 from mypy.types_utils import is_invalid_recursive_alias, store_argument_type
 from mypy.typevars import fill_typevars, fill_typevars_with_any
@@ -1225,7 +1226,16 @@ class SemanticAnalyzer(
             elif not non_overload_indexes:
                 self.handle_missing_overload_implementation(defn)
 
-        if types:
+        if types and not any(
+            # If some overload items are decorated with other decorators, then
+            # the overload type will be determined during type checking.
+            isinstance(it, Decorator) and len(it.decorators) > 1
+            for it in defn.items
+        ):
+            # TODO: should we enforce decorated overloads consistency somehow?
+            # Some existing code uses both styles:
+            #   * Put decorator only on implementation, use "effective" types in overloads
+            #   * Put decorator everywhere, use "bare" types in overloads.
             defn.type = Overloaded(types)
             defn.type.line = defn.line
 
@@ -1816,12 +1826,17 @@ class SemanticAnalyzer(
     def setup_alias_type_vars(self, defn: ClassDef) -> None:
         assert defn.info.special_alias is not None
         defn.info.special_alias.alias_tvars = list(defn.type_vars)
+        # It is a bit unfortunate that we need to inline some logic from TypeAlias constructor,
+        # but it is required, since type variables may change during semantic analyzer passes.
+        for i, t in enumerate(defn.type_vars):
+            if isinstance(t, TypeVarTupleType):
+                defn.info.special_alias.tvar_tuple_index = i
         target = defn.info.special_alias.target
         assert isinstance(target, ProperType)
         if isinstance(target, TypedDictType):
-            target.fallback.args = tuple(defn.type_vars)
+            target.fallback.args = type_vars_as_args(defn.type_vars)
         elif isinstance(target, TupleType):
-            target.partial_fallback.args = tuple(defn.type_vars)
+            target.partial_fallback.args = type_vars_as_args(defn.type_vars)
         else:
             assert False, f"Unexpected special alias type: {type(target)}"
 
@@ -2644,12 +2659,7 @@ class SemanticAnalyzer(
                 elif fullname in self.missing_modules:
                     missing_submodule = True
             # If it is still not resolved, check for a module level __getattr__
-            if (
-                module
-                and not node
-                and (module.is_stub or self.options.python_version >= (3, 7))
-                and "__getattr__" in module.names
-            ):
+            if module and not node and "__getattr__" in module.names:
                 # We store the fullname of the original definition so that we can
                 # detect whether two imported names refer to the same thing.
                 fullname = module_id + "." + id
@@ -3801,7 +3811,10 @@ class SemanticAnalyzer(
         """Prohibit and fix recursive type aliases that are invalid/unsupported."""
         messages = []
         if is_invalid_recursive_alias({current_node}, current_node.target):
-            messages.append("Invalid recursive alias: a union item of itself")
+            target = (
+                "tuple" if isinstance(get_proper_type(current_node.target), TupleType) else "union"
+            )
+            messages.append(f"Invalid recursive alias: a {target} item of itself")
         if detect_diverging_alias(
             current_node, current_node.target, self.lookup_qualified, self.tvar_scope
         ):
@@ -4336,6 +4349,7 @@ class SemanticAnalyzer(
         *,
         allow_unbound_tvars: bool = False,
         allow_param_spec_literals: bool = False,
+        allow_unpack: bool = False,
         report_invalid_typevar_arg: bool = True,
     ) -> ProperType | None:
         try:
@@ -4347,6 +4361,7 @@ class SemanticAnalyzer(
                 report_invalid_types=False,
                 allow_unbound_tvars=allow_unbound_tvars,
                 allow_param_spec_literals=allow_param_spec_literals,
+                allow_unpack=allow_unpack,
             )
             if analyzed is None:
                 # Type variables are special: we need to place them in the symbol table
@@ -4502,6 +4517,7 @@ class SemanticAnalyzer(
                     s,
                     allow_unbound_tvars=True,
                     report_invalid_typevar_arg=False,
+                    allow_unpack=True,
                 )
                 default = tv_arg or AnyType(TypeOfAny.from_error)
                 if not isinstance(default, UnpackType):
@@ -5419,23 +5435,24 @@ class SemanticAnalyzer(
         else:
             items = [index]
 
-        # whether param spec literals be allowed here
-        # TODO: should this be computed once and passed in?
-        #   or is there a better way to do this?
+        # TODO: this needs a clean-up.
+        # Probably always allow Parameters literals, and validate in semanal_typeargs.py
         base = expr.base
         if isinstance(base, RefExpr) and isinstance(base.node, TypeAlias):
+            allow_unpack = base.node.tvar_tuple_index is not None
             alias = base.node
-            target = get_proper_type(alias.target)
-            if isinstance(target, Instance):
-                has_param_spec = target.type.has_param_spec_type
-                num_args = len(target.type.type_vars)
+            if any(isinstance(t, ParamSpecType) for t in alias.alias_tvars):
+                has_param_spec = True
+                num_args = len(alias.alias_tvars)
             else:
                 has_param_spec = False
                 num_args = -1
-        elif isinstance(base, NameExpr) and isinstance(base.node, TypeInfo):
+        elif isinstance(base, RefExpr) and isinstance(base.node, TypeInfo):
+            allow_unpack = base.node.has_type_var_tuple_type
             has_param_spec = base.node.has_param_spec_type
             num_args = len(base.node.type_vars)
         else:
+            allow_unpack = False
             has_param_spec = False
             num_args = -1
 
@@ -5453,6 +5470,7 @@ class SemanticAnalyzer(
                 allow_unbound_tvars=self.allow_unbound_tvars,
                 allow_placeholder=True,
                 allow_param_spec_literals=has_param_spec,
+                allow_unpack=allow_unpack,
             )
             if analyzed is None:
                 return None
@@ -5584,11 +5602,8 @@ class SemanticAnalyzer(
                 blocker=True,
             )
         elif self.function_stack[-1].is_coroutine:
-            if self.options.python_version < (3, 6):
-                self.fail('"yield" in async function', e, serious=True, blocker=True)
-            else:
-                self.function_stack[-1].is_generator = True
-                self.function_stack[-1].is_async_generator = True
+            self.function_stack[-1].is_generator = True
+            self.function_stack[-1].is_async_generator = True
         else:
             self.function_stack[-1].is_generator = True
         if e.expr:
@@ -5601,7 +5616,12 @@ class SemanticAnalyzer(
             # support top level awaits.
             self.fail('"await" outside function', expr, serious=True, code=codes.TOP_LEVEL_AWAIT)
         elif not self.function_stack[-1].is_coroutine:
-            self.fail('"await" outside coroutine ("async def")', expr, serious=True, blocker=True)
+            self.fail(
+                '"await" outside coroutine ("async def")',
+                expr,
+                serious=True,
+                code=codes.AWAIT_NOT_ASYNC,
+            )
         expr.expr.accept(self)
 
     #
@@ -5859,9 +5879,7 @@ class SemanticAnalyzer(
                 sym = SymbolTableNode(GDEF, self.modules[fullname])
             elif self.is_incomplete_namespace(module):
                 self.record_incomplete_ref()
-            elif "__getattr__" in names and (
-                node.is_stub or self.options.python_version >= (3, 7)
-            ):
+            elif "__getattr__" in names:
                 gvar = self.create_getattr_var(names["__getattr__"], name, fullname)
                 if gvar:
                     sym = SymbolTableNode(GDEF, gvar)
@@ -6622,6 +6640,7 @@ class SemanticAnalyzer(
         allow_type_any: bool = False,
         allow_unbound_tvars: bool = False,
         allow_param_spec_literals: bool = False,
+        allow_unpack: bool = False,
     ) -> Type | None:
         if isinstance(expr, CallExpr):
             # This is a legacy syntax intended mostly for Python 2, we keep it for
@@ -6652,6 +6671,7 @@ class SemanticAnalyzer(
             allow_type_any=allow_type_any,
             allow_unbound_tvars=allow_unbound_tvars,
             allow_param_spec_literals=allow_param_spec_literals,
+            allow_unpack=allow_unpack,
         )
 
     def analyze_type_expr(self, expr: Expression) -> None:
@@ -6673,6 +6693,7 @@ class SemanticAnalyzer(
         allow_placeholder: bool = False,
         allow_required: bool = False,
         allow_param_spec_literals: bool = False,
+        allow_unpack: bool = False,
         report_invalid_types: bool = True,
         prohibit_self_type: str | None = None,
         allow_type_any: bool = False,
@@ -6691,6 +6712,7 @@ class SemanticAnalyzer(
             allow_placeholder=allow_placeholder,
             allow_required=allow_required,
             allow_param_spec_literals=allow_param_spec_literals,
+            allow_unpack=allow_unpack,
             prohibit_self_type=prohibit_self_type,
             allow_type_any=allow_type_any,
         )
@@ -6711,6 +6733,7 @@ class SemanticAnalyzer(
         allow_placeholder: bool = False,
         allow_required: bool = False,
         allow_param_spec_literals: bool = False,
+        allow_unpack: bool = False,
         report_invalid_types: bool = True,
         prohibit_self_type: str | None = None,
         allow_type_any: bool = False,
@@ -6748,6 +6771,7 @@ class SemanticAnalyzer(
             allow_placeholder=allow_placeholder,
             allow_required=allow_required,
             allow_param_spec_literals=allow_param_spec_literals,
+            allow_unpack=allow_unpack,
             report_invalid_types=report_invalid_types,
             prohibit_self_type=prohibit_self_type,
             allow_type_any=allow_type_any,

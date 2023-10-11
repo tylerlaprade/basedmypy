@@ -117,6 +117,7 @@ from mypy.types import (
     TypeOfAny,
     UnboundType,
     UnionType,
+    UnpackType,
     UntypedType,
 )
 from mypy.util import bytes_to_human_readable_repr, safe, unnamed_function
@@ -1010,6 +1011,8 @@ class ASTConverter:
             # FuncDef overrides set_line -- can't use self.set_line
             func_def.set_line(lineno, n.col_offset, end_line, end_column)
             retval = func_def
+        if self.options.include_docstrings:
+            func_def.docstring = ast3.get_docstring(n, clean=False)
         self.class_and_function_stack.pop()
         return retval
 
@@ -1123,6 +1126,8 @@ class ASTConverter:
         cdef.line = n.lineno
         cdef.deco_line = n.decorator_list[0].lineno if n.decorator_list else None
 
+        if self.options.include_docstrings:
+            cdef.docstring = ast3.get_docstring(n, clean=False)
         cdef.column = n.col_offset
         cdef.end_line = getattr(n, "end_lineno", None)
         cdef.end_column = getattr(n, "end_col_offset", None)
@@ -1537,6 +1542,12 @@ class ASTConverter:
         # Don't make unnecessary join call if there is only one str to join
         if len(strs_to_join.items) == 1:
             return self.set_line(strs_to_join.items[0], n)
+        elif len(strs_to_join.items) > 1:
+            last = strs_to_join.items[-1]
+            if isinstance(last, StrExpr) and last.value == "":
+                # 3.12 can add an empty literal at the end. Delete it for consistency
+                # between Python versions.
+                del strs_to_join.items[-1:]
         join_method = MemberExpr(empty_string, "join")
         join_method.set_line(empty_string)
         result_expression = CallExpr(join_method, [strs_to_join], [ARG_POS], [None])
@@ -1722,6 +1733,7 @@ class TypeConverter:
         self.override_column = override_column
         self.node_stack: list[AST] = []
         self.is_evaluated = is_evaluated
+        self.allow_unpack = False
 
     def convert_column(self, column: int) -> int:
         """Apply column override if defined; otherwise return column.
@@ -2015,10 +2027,20 @@ class TypeConverter:
         else:
             return self.invalid_type(n)
 
+    # Used for Callable[[X *Ys, Z], R]
+    def visit_Starred(self, n: ast3.Starred) -> Type:
+        return UnpackType(self.visit(n.value))
+
     # List(expr* elts, expr_context ctx)
     def visit_List(self, n: ast3.List) -> Type:
         assert isinstance(n.ctx, ast3.Load)
-        return self.translate_argument_list(n.elts)
+        old_allow_unpack = self.allow_unpack
+        # We specifically only allow starred expressions in a list to avoid
+        # confusing errors for top-level unpacks (e.g. in base classes).
+        self.allow_unpack = True
+        result = self.translate_argument_list(n.elts)
+        self.allow_unpack = old_allow_unpack
+        return result
 
 
 def stringify_name(n: AST) -> str | None:

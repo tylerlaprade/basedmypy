@@ -55,6 +55,7 @@ def main() -> None:
                 "--index",
                 "--directory=mypy/typeshed",
                 "--exclude=**/tests/**",
+                "--exclude=**/test_cases/**",
                 diff_file,
             ],
             check=True,

@@ -130,10 +130,10 @@ class TypesSuite(Suite):
         )
         assert_equal(str(c3), "def (X? =, *Y?) -> Any")
 
-    def test_tuple_type(self) -> None:
+    def test_tuple_type_upper(self) -> None:
         options = Options()
         options.force_uppercase_builtins = True
-        assert_equal(TupleType([], self.fx.std_tuple).str_with_options(options), "Tuple[]")
+        assert_equal(TupleType([], self.fx.std_tuple).str_with_options(options), "Tuple[()]")
         assert_equal(TupleType([self.x], self.fx.std_tuple).str_with_options(options), "Tuple[X?]")
         assert_equal(
             TupleType(
@@ -1502,7 +1502,7 @@ def make_call(*items: tuple[str, str | None]) -> CallExpr:
 class TestExpandTypeLimitGetProperType(TestCase):
     # WARNING: do not increase this number unless absolutely necessary,
     # and you understand what you are doing.
-    ALLOWED_GET_PROPER_TYPES = 11
+    ALLOWED_GET_PROPER_TYPES = 10
 
     @skipUnless(mypy.expandtype.__file__.endswith(".py"), "Skip for compiled mypy")
     def test_count_get_proper_type(self) -> None:
