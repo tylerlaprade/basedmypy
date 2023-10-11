@@ -21,7 +21,7 @@ from mypy.test.helpers import (
 from mypy.util import safe
 
 try:
-    import lxml  # type: ignore[import]
+    import lxml  # type: ignore[import-untyped]
 except ImportError:
     lxml = None
 

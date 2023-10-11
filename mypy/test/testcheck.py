@@ -27,7 +27,7 @@ from mypy.test.update_data import update_testcase_output
 from mypy.util import safe
 
 try:
-    import lxml  # type: ignore[import]
+    import lxml  # type: ignore[import-untyped]
 except ImportError:
     lxml = None
 
@@ -46,6 +46,8 @@ if sys.version_info < (3, 10):
     typecheck_files.remove("check-python310.test")
 if sys.version_info < (3, 11):
     typecheck_files.remove("check-python311.test")
+if sys.version_info < (3, 12):
+    typecheck_files.remove("check-python312.test")
 
 # Special tests for platforms with case-insensitive filesystems.
 if sys.platform not in ("darwin", "win32"):
