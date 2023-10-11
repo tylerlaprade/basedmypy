@@ -1,6 +1,8 @@
 # Basedmypy Changelog
 
 ## [Unreleased]
+
+## [2.2.0]
 ### Added
 - type-guards have been reworked from the ground up (#516)
 - `TypeGuard` is retained in inferred types (#504)
