@@ -164,6 +164,10 @@ class FineGrainedSuite(DataSuite):
 
         return options
 
+    def fixup(self, output: list[str]) -> list[str]:
+        # HACK: for some reason, macs can use this privatetmp folder
+        return [line.replace("/privatetmp/", "tmp/") for line in output]
+
     def run_check(self, server: Server, sources: list[BuildSource]) -> list[str]:
         response = server.check(sources, export_types=True, is_tty=False, terminal_width=-1)
         out = response["out"] or response["err"]
@@ -324,7 +328,7 @@ class FineGrainedSuite(DataSuite):
                 val = val.replace(os.path.realpath(tmp_dir) + os.path.sep, "")
                 val = val.replace(os.path.abspath(tmp_dir) + os.path.sep, "")
             output.extend(val.strip().split("\n"))
-        return normalize_messages(output)
+        return self.fixup(normalize_messages(output))
 
     def maybe_inspect(self, step: int, server: Server, src: str) -> list[str]:
         output: list[str] = []
