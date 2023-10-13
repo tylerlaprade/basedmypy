@@ -1,5 +1,9 @@
 # Basedmypy Changelog
 
+## [2.2.1]
+### Fixes
+- explicit-override is re-enabled by default
+
 ## [2.2.0]
 ### Added
 - type-guards have been reworked from the ground up (#516)
