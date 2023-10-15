@@ -24,12 +24,13 @@ Based features include:
 - Support for `Intersection` types
 - Default return type of `None` instead of `Any`
 - Generic `TypeVar` bounds
+- Based type-guards
 - Infer parameter type from default value
 - Infer overload types
 - Bare literals
 - Tuple literal types
 
-See the [features](#features) for a more information.
+See the [features](#features) for more information, or [the docs](https://kotlinisland.github.io/basedmypy/based_features.html) for a comprehensive list.
 
 ## Usage
 
@@ -49,9 +50,12 @@ Basedmypy is installed as an alternative to, and in place of, the `mypy` install
 
 ## Features
 
-Have you ever tried to use Pythons type system and thought to yourself "This doesn't seem based"?
+Have you ever tried to use Python's type system and thought to yourself "This doesn't seem based"?
 
 Well fret no longer as basedmypy has got you covered!
+
+You can find a comprehensive list in [the docs](https://kotlinisland.github.io/basedmypy/based_features.html).
+
 
 ### Baseline
 
@@ -143,6 +147,35 @@ def foo(i: I, e: E) -> I:
 
 reveal_type(foo(["based"], "mypy"))  # N: Revealed type is "list[str]"
 reveal_type(foo({1, 2}, 3))  # N: Revealed type is "set[int]"
+```
+
+### Based type-guards
+
+Type-guards have been re-designed from the ground up:
+
+```py
+# The target parameter of the typeguard can be specified
+def guard(name: str, x: object) -> x is int: ...
+
+# impossible type-guards show an error
+def bad(x: str) -> x is int: ...  # error: A type-guard's type must be assignable to its parameter's type. (guard has type "int", parameter has type "str")
+
+class A: ...
+class B: ...
+def is_b(x: object) -> x is B: ...
+
+x = A()
+assert is_b(x)
+# type-guards narrow instead of resetting the type
+reveal_type(x)  # A & B
+
+# type-guards work on instance parameters
+class Foo:
+    def guard(self) -> self is int: ...
+
+f = Foo()
+assert f.guard()
+reveal_type(f)  # Foo & int
 ```
 
 ### Overload Implementation Inference
