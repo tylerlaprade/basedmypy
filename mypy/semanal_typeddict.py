@@ -102,6 +102,8 @@ class TypedDictAnalyzer:
             fields, types, statements, required_keys = self.analyze_typeddict_classdef_fields(defn)
             if fields is None:
                 return True, None  # Defer
+            if self.api.is_func_scope() and "@" not in defn.name:
+                defn.name += "@" + str(defn.line)
             info = self.build_typeddict_typeinfo(
                 defn.name, fields, types, required_keys, defn.line, existing_info
             )
@@ -229,10 +231,7 @@ class TypedDictAnalyzer:
                 self.fail("Invalid TypedDict type argument", ctx)
                 return None
             analyzed = self.api.anal_type(
-                type,
-                allow_required=True,
-                allow_placeholder=not self.options.disable_recursive_aliases
-                and not self.api.is_func_scope(),
+                type, allow_required=True, allow_placeholder=not self.api.is_func_scope()
             )
             if analyzed is None:
                 return None
@@ -308,8 +307,7 @@ class TypedDictAnalyzer:
                     analyzed = self.api.anal_type(
                         stmt.type,
                         allow_required=True,
-                        allow_placeholder=not self.options.disable_recursive_aliases
-                        and not self.api.is_func_scope(),
+                        allow_placeholder=not self.api.is_func_scope(),
                         prohibit_self_type="TypedDict item type",
                     )
                     if analyzed is None:
@@ -367,7 +365,13 @@ class TypedDictAnalyzer:
         name, items, types, total, tvar_defs, ok = res
         if not ok:
             # Error. Construct dummy return value.
-            info = self.build_typeddict_typeinfo("TypedDict", [], [], set(), call.line, None)
+            if var_name:
+                name = var_name
+                if is_func_scope:
+                    name += "@" + str(call.line)
+            else:
+                name = var_name = "TypedDict@" + str(call.line)
+            info = self.build_typeddict_typeinfo(name, [], [], set(), call.line, None)
         else:
             if var_name is not None and name != var_name:
                 self.fail(
@@ -396,9 +400,9 @@ class TypedDictAnalyzer:
                 name, items, types, required_keys, call.line, existing_info
             )
             info.line = node.line
-            # Store generated TypeInfo under both names, see semanal_namedtuple for more details.
-            if name != var_name or is_func_scope:
-                self.api.add_symbol_skip_local(name, info)
+        # Store generated TypeInfo under both names, see semanal_namedtuple for more details.
+        if name != var_name or is_func_scope:
+            self.api.add_symbol_skip_local(name, info)
         if var_name:
             self.api.add_symbol(var_name, info, node)
         call.analyzed = TypedDictExpr(info)
@@ -499,8 +503,7 @@ class TypedDictAnalyzer:
             analyzed = self.api.anal_type(
                 type,
                 allow_required=True,
-                allow_placeholder=not self.options.disable_recursive_aliases
-                and not self.api.is_func_scope(),
+                allow_placeholder=not self.api.is_func_scope(),
                 prohibit_self_type="TypedDict item type",
             )
             if analyzed is None:

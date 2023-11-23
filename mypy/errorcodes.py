@@ -261,6 +261,12 @@ EXPLICIT_OVERRIDE_REQUIRED: Final = ErrorCode(
     "General",
     default_enabled=False,
 )
+UNIMPORTED_REVEAL: Final = ErrorCode(
+    "unimported-reveal",
+    "Require explicit import from typing or typing_extensions for reveal_type",
+    "General",
+    default_enabled=False,
+)
 
 NO_ANY_EXPR: Final = ErrorCode("no-any-expr", "An expression contains Any", "General")
 NO_ANY_EXPLICIT: Final = ErrorCode("no-any-explicit", "Usage of the Any type", "General")
@@ -294,3 +300,10 @@ del error_codes[FILE.code]
 
 # This is a catch-all for remaining uncategorized errors.
 MISC: Final = ErrorCode("misc", "Miscellaneous other checks", "General")
+
+OVERLOAD_OVERLAP: Final[ErrorCode] = ErrorCode(
+    "overload-overlap",
+    "Warn if multiple @overload variants overlap in unsafe ways",
+    "General",
+    sub_code_of=MISC,
+)

@@ -42,6 +42,7 @@ from mypy.types import (
     IntersectionType,
     LiteralType,
     NoneType,
+    NormalizedCallableType,
     Overloaded,
     Parameters,
     ParamSpecType,
@@ -109,16 +110,14 @@ def tuple_fallback(typ: TupleType) -> Instance:
         if isinstance(item, UnpackType):
             unpacked_type = get_proper_type(item.type)
             if isinstance(unpacked_type, TypeVarTupleType):
-                items.append(unpacked_type.upper_bound)
-            elif (
+                unpacked_type = get_proper_type(unpacked_type.upper_bound)
+            if (
                 isinstance(unpacked_type, Instance)
                 and unpacked_type.type.fullname == "builtins.tuple"
             ):
                 items.append(unpacked_type.args[0])
-            elif isinstance(unpacked_type, (AnyType, UninhabitedType)):
-                continue
             else:
-                raise NotImplementedError(unpacked_type)
+                raise NotImplementedError
         else:
             items.append(item)
     # TODO: we should really use a union here, tuple types are special.
@@ -258,6 +257,10 @@ def supported_self_type(typ: ProperType) -> bool:
     """
     if isinstance(typ, TypeType):
         return supported_self_type(typ.item)
+    if isinstance(typ, CallableType):
+        # Special case: allow class callable instead of Type[...] as cls annotation,
+        # as well as callable self for callback protocols.
+        return True
     return isinstance(typ, TypeVarType) or (
         isinstance(typ, Instance) and typ != fill_typevars(typ.type)
     )
@@ -335,7 +338,7 @@ def bind_self(method: F, original_type: Type | None = None, is_classmethod: bool
             )
 
         # Update the method signature with the solutions found.
-        # Technically, some constraints might be unsolvable, make them <nothing>.
+        # Technically, some constraints might be unsolvable, make them Never.
         to_apply = [t if t is not None else UninhabitedType() for t in typeargs]
         func = expand_type(func, {tv.id: arg for tv, arg in zip(self_vars, to_apply)})
         variables = [v for v in func.variables if v not in self_vars]
@@ -367,7 +370,7 @@ def erase_to_bound(t: Type) -> Type:
 
 
 def callable_corresponding_argument(
-    typ: CallableType | Parameters, model: FormalArgument
+    typ: NormalizedCallableType | Parameters, model: FormalArgument
 ) -> FormalArgument | None:
     """Return the argument a function that corresponds to `model`"""
 
@@ -739,8 +742,7 @@ def erase_def_to_union_or_bound(tdef: TypeVarLikeType) -> Type:
     # TODO(PEP612): fix for ParamSpecType
     if isinstance(tdef, ParamSpecType):
         return AnyType(TypeOfAny.from_error)
-    assert isinstance(tdef, TypeVarType)
-    if tdef.values:
+    if isinstance(tdef, TypeVarType) and tdef.values:
         return make_simplified_union(tdef.values)
     else:
         return tdef.upper_bound
@@ -1063,7 +1065,7 @@ def custom_special_method(typ: Type, name: str, check_all: bool = False) -> bool
         method = typ.type.get(name)
         if method and isinstance(method.node, (SYMBOL_FUNCBASE_TYPES, Decorator, Var)):
             if method.node.info:
-                return not method.node.info.fullname.startswith("builtins.")
+                return not method.node.info.fullname.startswith(("builtins.", "typing."))
         return False
     if isinstance(typ, UnionType):
         if check_all:
@@ -1073,7 +1075,7 @@ def custom_special_method(typ: Type, name: str, check_all: bool = False) -> bool
         return any(custom_special_method(t, name, check_all) for t in typ.items)
     if isinstance(typ, TupleType):
         return custom_special_method(tuple_fallback(typ), name, check_all)
-    if isinstance(typ, CallableType) and typ.is_type_obj():
+    if isinstance(typ, FunctionLike) and typ.is_type_obj():
         # Look up __method__ on the metaclass for class objects.
         return custom_special_method(typ.fallback, name, check_all)
     if isinstance(typ, AnyType):

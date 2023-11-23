@@ -111,7 +111,7 @@ class TypeIndirectionVisitor(TypeVisitor[Set[str]]):
     def visit_union_type(self, t: types.UnionType) -> set[str]:
         return self._visit(t.items)
 
-    def visit_intersection_type(self, t: types.IntersectionType) -> Set[str]:
+    def visit_intersection_type(self, t: types.IntersectionType) -> set[str]:
         return self._visit(t.items)
 
     def visit_partial_type(self, t: types.PartialType) -> set[str]:

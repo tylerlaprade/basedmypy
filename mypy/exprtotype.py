@@ -114,7 +114,10 @@ def expr_to_unanalyzed_type(
                 return expr_to_unanalyzed_type(args[0], options, allow_new_syntax, expr)
             else:
                 base.args = tuple(
-                    expr_to_unanalyzed_type(arg, options, allow_new_syntax, expr) for arg in args
+                    expr_to_unanalyzed_type(
+                        arg, options, allow_new_syntax, expr, allow_unpack=True
+                    )
+                    for arg in args
                 )
             if not base.args:
                 base.empty_tuple_index = True
@@ -213,6 +216,8 @@ def expr_to_unanalyzed_type(
     elif isinstance(expr, EllipsisExpr):
         return EllipsisType(expr.line)
     elif allow_unpack and isinstance(expr, StarExpr):
-        return UnpackType(expr_to_unanalyzed_type(expr.expr, options, allow_new_syntax))
+        return UnpackType(
+            expr_to_unanalyzed_type(expr.expr, options, allow_new_syntax), from_star_syntax=True
+        )
     else:
         raise TypeTranslationError()

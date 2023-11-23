@@ -67,6 +67,7 @@ OPTIONS_AFFECTING_CACHE: Final = (
     | {
         "platform",
         "bazel",
+        "old_type_inference",
         "plugins",
         "disable_bytearray_promotion",
         "disable_memoryview_promotion",
@@ -95,10 +96,12 @@ def flip_if_legacy(b: bool) -> bool:
     return not b if _legacy else b
 
 
-# Features that are currently incomplete/experimental
+# Features that are currently (or were recently) incomplete/experimental
 TYPE_VAR_TUPLE: Final = "TypeVarTuple"
 UNPACK: Final = "Unpack"
-INCOMPLETE_FEATURES: Final = frozenset((TYPE_VAR_TUPLE, UNPACK))
+PRECISE_TUPLE_TYPES: Final = "PreciseTupleTypes"
+INCOMPLETE_FEATURES: Final = frozenset((PRECISE_TUPLE_TYPES,))
+COMPLETE_FEATURES: Final = frozenset((TYPE_VAR_TUPLE, UNPACK))
 
 
 class Options:
@@ -351,7 +354,6 @@ class Options:
         self.dump_type_stats = False
         self.dump_inference_stats = False
         self.dump_build_stats = False
-        self.enable_incomplete_features = False  # deprecated
         self.enable_incomplete_feature: list[str] = []
         self.timing_stats: str | None = None
         self.line_checking_stats: str | None = None
@@ -404,12 +406,10 @@ class Options:
         # skip most errors after this many messages have been reported.
         # -1 means unlimited.
         self.many_errors_threshold = defaults.MANY_ERRORS_THRESHOLD
-        # Enable new experimental type inference algorithm.
-        self.new_type_inference = False
-        # Disable recursive type aliases (currently experimental)
-        self.disable_recursive_aliases = False
+        # Disable new experimental type inference algorithm.
+        self.old_type_inference = False
         # Deprecated reverse version of the above, do not use.
-        self.enable_recursive_aliases = False
+        self.new_type_inference = False
         # Export line-level, limited, fine-grained dependency information in cache data
         # (undocumented feature).
         self.export_ref_info = False
@@ -429,6 +429,9 @@ class Options:
         if self.python_version >= (3, 10):
             return not self.force_union_syntax
         return False
+
+    def use_star_unpack(self) -> bool:
+        return self.python_version >= (3, 11)
 
     # To avoid breaking plugin compatibility, keep providing new_semantic_analyzer
     @property
@@ -604,5 +607,5 @@ class Options:
             result[opt] = val
         return result
 
-    def per_module(self, module: str) -> "Options":
+    def per_module(self, module: str) -> Options:
         return self._final_per_module_cache.get(module, self)

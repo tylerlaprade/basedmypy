@@ -8,4 +8,4 @@ Before you raise this, consider if it's better suited to a discussion: https://g
 
 <!-- Please explain why this feature is based -->
 
-<!-- Please include a full usage example of this feature  -->
+<!-- Please explain why this feature should be implemented and how it would be used. Please include a full usage example. -->

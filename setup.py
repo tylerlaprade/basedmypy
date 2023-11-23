@@ -8,7 +8,7 @@ import os.path
 import sys
 from typing import TYPE_CHECKING, Any
 
-if sys.version_info < (3, 8, 0):
+if sys.version_info < (3, 8, 0):  # noqa: UP036
     sys.stderr.write("ERROR: You need Python 3.8 or later to use basedmypy.\n")
     exit(1)
 
@@ -310,7 +310,6 @@ if USE_MYPYC:
             "stubtest.py",
             "stubgenc.py",
             "stubdoc.py",
-            "stubutil.py",
         )
     ) + (
         # Don't want to grab this accidentally
@@ -398,7 +397,7 @@ setup(
     description=description,
     long_description=long_description,
     author="KotlinIsland",
-    license="MIT License",
+    license="MIT",
     py_modules=[],
     ext_modules=ext_modules,
     packages=find_packages(),
@@ -422,7 +421,12 @@ setup(
         "tomli>=1.1.0; python_version<'3.11'",
     ],
     # Same here.
-    extras_require={"dmypy": "psutil >= 4.0", "reports": "lxml", "install-types": "pip"},
+    extras_require={
+        "dmypy": "psutil >= 4.0",
+        "mypyc": "setuptools >= 50",
+        "reports": "lxml",
+        "install-types": "pip",
+    },
     python_requires=">=3.8",
     include_package_data=True,
     project_urls={

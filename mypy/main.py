@@ -23,7 +23,7 @@ from mypy.errors import CompileError
 from mypy.find_sources import InvalidSourceList, create_source_list
 from mypy.fscache import FileSystemCache
 from mypy.modulefinder import BuildSource, FindModuleCache, SearchPaths, get_search_dirs, mypy_path
-from mypy.options import INCOMPLETE_FEATURES, BuildType, Options
+from mypy.options import COMPLETE_FEATURES, INCOMPLETE_FEATURES, BuildType, Options
 from mypy.split_namespace import SplitNamespace
 from mypy.version import __based_version__, __version__
 
@@ -34,7 +34,7 @@ MEM_PROFILE: Final = False  # If True, dump memory profile
 def stat_proxy(path: str) -> os.stat_result:
     try:
         st = orig_stat(path)
-    except os.error as err:
+    except OSError as err:
         print(f"stat({path!r}) -> {err}")
         raise
     else:
@@ -215,8 +215,7 @@ def run_build(
         and not options.non_interactive
     ):
         print(
-            "Warning: unused section(s) in %s: %s"
-            % (
+            "Warning: unused section(s) in {}: {}".format(
                 options.config_file,
                 get_config_module_names(
                     options.config_file,
@@ -1090,18 +1089,13 @@ def process_options(
         help="Use a custom typing module",
     )
     internals_group.add_argument(
-        "--new-type-inference",
+        "--old-type-inference",
         action="store_true",
-        help="Enable new experimental type inference algorithm",
-    )
-    internals_group.add_argument(
-        "--disable-recursive-aliases",
-        action="store_true",
-        help="Disable experimental support for recursive type aliases",
+        help="Disable new experimental type inference algorithm",
     )
     # Deprecated reverse variant of the above.
     internals_group.add_argument(
-        "--enable-recursive-aliases", action="store_true", help=argparse.SUPPRESS
+        "--new-type-inference", action="store_true", help=argparse.SUPPRESS
     )
     parser.add_argument(
         "--enable-incomplete-feature",
@@ -1250,10 +1244,7 @@ def process_options(
     # --debug-serialize will run tree.serialize() even if cache generation is disabled.
     # Useful for mypy_primer to detect serialize errors earlier.
     parser.add_argument("--debug-serialize", action="store_true", help=argparse.SUPPRESS)
-    # This one is deprecated, but we will keep it for few releases.
-    parser.add_argument(
-        "--enable-incomplete-features", action="store_true", help=argparse.SUPPRESS
-    )
+
     parser.add_argument(
         "--disable-bytearray-promotion", action="store_true", help=argparse.SUPPRESS
     )
@@ -1465,14 +1456,10 @@ def process_options(
 
     # Validate incomplete features.
     for feature in options.enable_incomplete_feature:
-        if feature not in INCOMPLETE_FEATURES:
+        if feature not in INCOMPLETE_FEATURES | COMPLETE_FEATURES:
             parser.error(f"Unknown incomplete feature: {feature}")
-    if options.enable_incomplete_features:
-        print(
-            "Warning: --enable-incomplete-features is deprecated, use"
-            " --enable-incomplete-feature=FEATURE instead"
-        )
-        options.enable_incomplete_feature = list(INCOMPLETE_FEATURES)
+        if feature in COMPLETE_FEATURES:
+            print(f"Warning: {feature} is already enabled by default")
 
     # Compute absolute path for custom typeshed (if present).
     if options.custom_typeshed_dir is not None:
@@ -1485,7 +1472,7 @@ def process_options(
             parser.error("Can only find occurrences of class members.")
         if len(_find_occurrences) != 2:
             parser.error("Can only find occurrences of non-nested class members.")
-        state.find_occurrences = _find_occurrences  # type: ignore[assignment]
+        state.find_occurrences = _find_occurrences
 
     # Set reports.
     for flag, val in vars(special_opts).items():
@@ -1518,11 +1505,12 @@ def process_options(
     if options.logical_deps:
         options.cache_fine_grained = True
 
-    if options.enable_recursive_aliases:
+    if options.new_type_inference:
         print(
-            "Warning: --enable-recursive-aliases is deprecated;"
-            " recursive types are enabled by default"
+            "Warning: --new-type-inference flag is deprecated;"
+            " new type inference algorithm is already enabled by default"
         )
+
     if options.strict_concatenate and not strict_option_set:
         print("Warning: --strict-concatenate is deprecated; use --extra-checks instead")
 

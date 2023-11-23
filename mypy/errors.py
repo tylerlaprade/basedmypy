@@ -129,7 +129,7 @@ class ErrorInfo:
     hidden = False
 
     # Any note messages that are associated with this error
-    notes: list["ErrorInfo"]
+    notes: list[ErrorInfo]
 
     def __init__(
         self,
@@ -559,7 +559,7 @@ class Errors:
         self.error_info_map[file].append(info)
         if info.blocker:
             self.has_blockers.add(file)
-        if info.code is IMPORT:
+        if info.code in (IMPORT, IMPORT_UNTYPED, IMPORT_NOT_FOUND):
             self.seen_import_error = True
 
     def _filter_error(self, file: str, info: ErrorInfo) -> bool:

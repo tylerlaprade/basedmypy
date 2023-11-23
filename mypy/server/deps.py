@@ -1099,7 +1099,7 @@ class TypeTriggersVisitor(TypeVisitor[List[str]]):
             triggers.extend(self.get_type_triggers(item))
         return triggers
 
-    def visit_intersection_type(self, typ: IntersectionType) -> List[str]:
+    def visit_intersection_type(self, typ: IntersectionType) -> list[str]:
         triggers = []
         for item in typ.items:
             triggers.extend(self.get_type_triggers(item))

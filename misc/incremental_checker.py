@@ -169,7 +169,7 @@ def filter_daemon_stats(output: str) -> tuple[str, dict[str, Any]]:
     for line in lines:
         m = re.match(r"(\w+)\s+:\s+(.*)", line)
         if m:
-            key, value = [g for g in m.groups()]
+            key, value = m.groups()
             stats[key] = value
         else:
             output_lines.append(line)
