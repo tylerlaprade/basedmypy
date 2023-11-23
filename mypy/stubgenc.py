@@ -226,6 +226,7 @@ class InspectionStubGenerator(BaseStubGenerator):
         export_less: bool = False,
         include_docstrings: bool = False,
         module: ModuleType | None = None,
+        legacy=False,
     ) -> None:
         self.doc_dir = doc_dir
         if module is None:
@@ -235,7 +236,7 @@ class InspectionStubGenerator(BaseStubGenerator):
         self.is_c_module = is_c_module(self.module)
         self.known_modules = known_modules
         self.resort_members = self.is_c_module
-        super().__init__(_all_, include_private, export_less, include_docstrings)
+        super().__init__(_all_, include_private, export_less, include_docstrings, legacy=legacy)
         self.module_name = module_name
 
     def get_default_function_sig(self, func: object, ctx: FunctionContext) -> FunctionSig:
@@ -686,7 +687,8 @@ class InspectionStubGenerator(BaseStubGenerator):
 
     def get_type_fullname(self, typ: type) -> str:
         """Given a type, return a string representation"""
-        if typ is Any:
+        # typ is a TypeForm, not a type
+        if typ is Any:  # type: ignore[comparison-overlap, unused-ignore]
             return "Any"
         typename = getattr(typ, "__qualname__", typ.__name__)
         module_name = self.get_obj_module(typ)

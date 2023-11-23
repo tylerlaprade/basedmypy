@@ -164,7 +164,7 @@ def is_user(a: Dict[str, object]) -> TypeGuard[User]:
     return isinstance(a.get("name"), str) and isinstance(a.get("id"), int)
 def main(a: Dict[str, object]) -> None:
     if is_user(a):
-        reveal_type(a)  # N: Revealed type is "<nothing>"
+        reveal_type(a)  # N: Revealed type is "Never"
 [builtins fixtures/dict.pyi]
 [typing fixtures/typing-typeddict.pyi]
 

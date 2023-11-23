@@ -258,6 +258,7 @@ __all__ = []
 __author__ = ''
 __version__ = ''
 [out]
+__version__: str
 
 [case testBaseClass]
 class A: ...
@@ -1626,10 +1627,8 @@ class A:
         pass
 
 [out]
-from basedtyping import Untyped
-
 def f(x): ...
-def g(x, y: str) -> Untyped: ...
+def g(x, y: str): ...
 
 class A:
     def f(self, x): ...
@@ -1645,10 +1644,9 @@ def h(x: Any) -> str:
     pass
 
 [out]
-from basedtyping import Untyped
 from typing import Any
 
-def f(x: Any) -> Untyped: ...
+def f(x: Any): ...
 def g(x, y: Any) -> str: ...
 def h(x: Any) -> str: ...
 
@@ -2259,7 +2257,10 @@ __uri__ = ''
 __version__ = ''
 
 [out]
+from m import __version__ as __version__
+
 class A: ...
+
 
 [case testHideDunderModuleAttributesWithAll_import]
 from m import (
@@ -2288,6 +2289,7 @@ __uri__ = ''
 __version__ = ''
 
 [out]
+from m import __version__ as __version__
 
 [case testAttrsClass_semanal]
 import attr
@@ -2345,9 +2347,9 @@ y: b.Y
 z: p.a.X
 
 [out]
+import p.a
 import p.a as a
 import p.b as b
-import p.a
 
 x: a.X
 y: b.Y
@@ -2360,7 +2362,7 @@ from p import a
 x: a.X
 
 [out]
-from p import a as a
+from p import a
 
 x: a.X
 
@@ -2382,7 +2384,7 @@ from p import a
 x: a.X
 
 [out]
-from p import a as a
+from p import a
 
 x: a.X
 
@@ -2468,7 +2470,6 @@ class A:
     @overload
     def f(self, x: Tuple[int, int]) -> int: ...
 
-
 @overload
 def f(x: int, y: int) -> int: ...
 @overload
@@ -2530,7 +2531,6 @@ class A:
     @classmethod
     def g(cls, x: typing.Tuple[int, int]) -> int: ...
 
-
 @typing.overload
 def f(x: int, y: int) -> int: ...
 @typing.overload
@@ -2539,6 +2539,7 @@ def f(x: typing.Tuple[int, int]) -> int: ...
 
 [case testOverload_importTypingAs]
 import typing as t
+import typing_extensions as te
 
 class A:
     @t.overload
@@ -2578,8 +2579,21 @@ def f(*args: t.Union[int, t.Tuple[int, int]]) -> int:
     pass
 
 
+
+@te.overload
+def g(x: int, y: int) -> int:
+    ...
+
+@te.overload
+def g(x: t.Tuple[int, int]) -> int:
+    ...
+
+def g(*args: t.Union[int, t.Tuple[int, int]]) -> int:
+    pass
+
 [out]
 import typing as t
+import typing_extensions as te
 
 class A:
     @t.overload
@@ -2593,11 +2607,15 @@ class A:
     @classmethod
     def g(cls, x: t.Tuple[int, int]) -> int: ...
 
-
 @t.overload
 def f(x: int, y: int) -> int: ...
 @t.overload
 def f(x: t.Tuple[int, int]) -> int: ...
+@te.overload
+def g(x: int, y: int) -> int: ...
+@te.overload
+def g(x: t.Tuple[int, int]) -> int: ...
+
 
 [case testProtocol_semanal]
 from typing import Protocol, TypeVar
@@ -2626,9 +2644,7 @@ class PT(Protocol[T, T2]):
 [case testNonDefaultKeywordOnlyArgAfterAsterisk]
 def func(*, non_default_kwarg: bool, default_kwarg: bool = True): ...
 [out]
-from basedtyping import Untyped
-
-def func(*, non_default_kwarg: bool, default_kwarg: bool = ...) -> Untyped: ...
+def func(*, non_default_kwarg: bool, default_kwarg: bool = ...): ...
 
 [case testNestedGenerator]
 def f():

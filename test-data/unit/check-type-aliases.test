@@ -201,10 +201,16 @@ from typing import Type, Callable, Union
 
 def test() -> None:
     A = Union[A, int]  # E: Cannot resolve name "A" (possible cyclic definition) \
+                       # N: Recursive types are not allowed at function scope \
+                       # E: Cannot resolve name "A" (possible cyclic definition) \
                        # N: Recursive types are not allowed at function scope
     B = Callable[[B], int]  # E: Cannot resolve name "B" (possible cyclic definition) \
+                            # N: Recursive types are not allowed at function scope \
+                            # E: Cannot resolve name "B" (possible cyclic definition) \
                             # N: Recursive types are not allowed at function scope
     C = Type[C]  # E: Cannot resolve name "C" (possible cyclic definition) \
+                 # N: Recursive types are not allowed at function scope \
+                 # E: Cannot resolve name "C" (possible cyclic definition) \
                  # N: Recursive types are not allowed at function scope
 
 [case testRecursiveAliasesErrors2]
@@ -221,9 +227,11 @@ def test() -> None:
 main:5: error: Cannot resolve name "A" (possible cyclic definition)
 main:5: note: Recursive types are not allowed at function scope
 main:5: error: Cannot resolve name "B" (possible cyclic definition)
+main:5: note: Recursive types are not allowed at function scope
 main:6: error: Cannot resolve name "B" (possible cyclic definition)
 main:6: note: Recursive types are not allowed at function scope
 main:6: error: Cannot resolve name "C" (possible cyclic definition)
+main:6: note: Recursive types are not allowed at function scope
 main:7: error: Cannot resolve name "C" (possible cyclic definition)
 main:7: note: Recursive types are not allowed at function scope
 main:9: note: Revealed type is "Union[Any, builtins.int]"
@@ -256,6 +264,10 @@ def test() -> None:
     x: JSON  # E: Cannot resolve name "JSON" (possible cyclic definition)  \
              # N: Recursive types are not allowed at function scope
     JSON = Union[int, str, List[JSON], Dict[str, JSON]]  # E: Cannot resolve name "JSON" (possible cyclic definition) \
+                                                         # N: Recursive types are not allowed at function scope \
+                                                         # E: Cannot resolve name "JSON" (possible cyclic definition) \
+                                                         # N: Recursive types are not allowed at function scope \
+                                                         # E: Cannot resolve name "JSON" (possible cyclic definition) \
                                                          # N: Recursive types are not allowed at function scope
     reveal_type(x) # N: Revealed type is "Any"
     if isinstance(x, list):

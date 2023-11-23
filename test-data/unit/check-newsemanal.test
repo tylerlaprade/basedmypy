@@ -1513,6 +1513,7 @@ main:5: note: Recursive types are not allowed at function scope
 main:6: error: Cannot resolve name "B" (possible cyclic definition)
 main:6: note: Recursive types are not allowed at function scope
 main:6: error: Cannot resolve name "C" (possible cyclic definition)
+main:6: note: Recursive types are not allowed at function scope
 main:9: note: Revealed type is "Any"
 main:10: note: Revealed type is "Any"
 
@@ -2138,6 +2139,7 @@ main:6: note: Revealed type is "Any"
 main:8: error: Cannot resolve name "D" (possible cyclic definition)
 main:8: note: Recursive types are not allowed at function scope
 main:8: error: Cannot resolve name "C" (possible cyclic definition)
+main:8: note: Recursive types are not allowed at function scope
 main:9: error: Argument 2 to NewType(...) must be a valid type
 main:9: error: Cannot resolve name "B" (possible cyclic definition)
 main:9: note: Recursive types are not allowed at function scope

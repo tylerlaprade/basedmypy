@@ -349,9 +349,15 @@ def _infer_constraints(
     #     T :> U2", but they are not equivalent to the constraint solver,
     #     which never introduces new Union types (it uses join() instead).
     if isinstance(template, TypeVarType):
-        return _infer_constraints(template.upper_bound, actual, direction, skip_neg_op) + [
-            Constraint(template, direction, actual)
-        ]
+        if not isinstance(get_proper_type(template.upper_bound), CallableType):
+            generic_bound = _infer_constraints(
+                template.upper_bound, actual, direction, skip_neg_op
+            )
+        else:
+            # HACK: Disregard CallableType because `(*Any, **Any) -> object`
+            #  will produce unwanted constraints
+            generic_bound = []
+        return generic_bound + [Constraint(template, direction, actual)]
 
     if (
         isinstance(actual, TypeVarType)
@@ -360,7 +366,7 @@ def _infer_constraints(
     ):
         # Unless template is also a type variable (or a union that contains one), using the upper
         # bound for inference will usually give better result for actual that is a type variable.
-        if not isinstance(template, UnionType) or not any(
+        if not isinstance(template, (UnionType, IntersectionType)) or not any(
             isinstance(t, TypeVarType) for t in template.items
         ):
             actual = get_proper_type(actual.upper_bound)

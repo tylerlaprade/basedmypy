@@ -127,7 +127,7 @@ class FunctionSig(NamedTuple):
             args.append(arg_def)
 
         retfield = ""
-        ret_type = self.ret_type if self.ret_type else any_val
+        ret_type = self.ret_type or any_val
         if ret_type is not None:
             retfield = " -> " + ret_type
 

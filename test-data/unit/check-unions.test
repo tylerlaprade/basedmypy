@@ -1007,6 +1007,8 @@ from typing import List, Union
 
 def test() -> None:
     MYTYPE = List[Union[str, "MYTYPE"]]  # E: Cannot resolve name "MYTYPE" (possible cyclic definition) \
+                                         # N: Recursive types are not allowed at function scope \
+                                         # E: Cannot resolve name "MYTYPE" (possible cyclic definition) \
                                          # N: Recursive types are not allowed at function scope
 [builtins fixtures/list.pyi]
 
