@@ -422,7 +422,7 @@ class ASTStubGenerator(BaseStubGenerator, mypy.traverser.TraverserVisitor):
         include_docstrings: bool = False,
         legacy: bool = False,
     ) -> None:
-        super().__init__(_all_, include_private, export_less, include_docstrings)
+        super().__init__(_all_, include_private, export_less, include_docstrings, legacy=legacy)
         self._decorators: list[str] = []
         # Stack of defined variables (per scope).
         self._vars: list[list[str]] = [[]]
@@ -431,8 +431,6 @@ class ASTStubGenerator(BaseStubGenerator, mypy.traverser.TraverserVisitor):
         self._current_class: ClassDef | None = None
         # Was the tree semantically analysed before?
         self.analyzed = analyzed
-        # Don't use based features?
-        self.legacy = legacy
         # Short names of methods defined in the body of the current class
         self.method_names: set[str] = set()
         self.processing_dataclass = False
@@ -539,10 +537,10 @@ class ASTStubGenerator(BaseStubGenerator, mypy.traverser.TraverserVisitor):
         if o.abstract_status == IS_ABSTRACT or o.name in METHODS_WITH_RETURN_VALUE:
             # Always assume abstract methods return Any unless explicitly annotated. Also
             # some dunder methods should not have a None return type.
-            return None  # implicit Any
+            return None if self.legacy else self.add_name("_typeshed.Incomplete")  # implicit Any
         retname = infer_method_ret_type(o.name)
         if not self.legacy and retname == "None":
-            retname = ""
+            return None
         if retname is not None:
             return retname
         if has_yield_expression(o) or has_yield_from_expression(o):
@@ -561,9 +559,12 @@ class ASTStubGenerator(BaseStubGenerator, mypy.traverser.TraverserVisitor):
             if has_return_statement(o):
                 return_name = self.add_name("_typeshed.Incomplete")
             return f"{generator_name}[{yield_name}, {send_name}, {return_name}]"
+        if o.is_property:
+            return None
+
         if not has_return_statement(o) and o.abstract_status == NOT_ABSTRACT:
-            return "None"
-        return None
+            return "None" if self.legacy else None
+        return None if self.legacy else self.add_name("_typeshed.Incomplete")
 
     def _get_func_docstring(self, node: FuncDef) -> str | None:
         if not node.body.body:

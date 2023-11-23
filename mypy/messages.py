@@ -1371,7 +1371,7 @@ class MessageBuilder:
         ):
             self.note(f'Consider declaring "{name}" in {target} without "async"', context)
             self.note(
-                "See https://mypy.readthedocs.io/en/stable/more_types.html#asynchronous-iterators",
+                "See https://kotlinisland.github.io/basedmypy/more_types.html#asynchronous-iterators",
                 context,
             )
 
@@ -2470,7 +2470,9 @@ def quote_type_string(type_string: str) -> str:
     """Quotes a type representation for use in messages."""
     no_quote_regex = r"^<(tuple|union): \d+ items>$"
     if (
-        type_string in ["Module", "overloaded function", "Never", "<deleted>"]
+        # erm, "Never" should "Never" be unquoted!
+        type_string in ["Module", "overloaded function", "<deleted>"]
+        # type_string in ["Module", "overloaded function", "Never", "<deleted>"]
         or type_string.startswith("Module ")
         or re.match(no_quote_regex, type_string) is not None
         or type_string.endswith("?")

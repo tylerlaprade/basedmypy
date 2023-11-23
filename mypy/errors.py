@@ -242,20 +242,20 @@ class ErrorWatcher:
 class StoredBaselineError(TypedDict):
     """Structure of an error while stored in a baseline file"""
 
-    code: Optional[str]
+    code: str | None
     column: int
     message: str
     offset: int
-    target: Optional[str]
+    target: str | None
     src: str
 
 
 class BaselineError(TypedDict):
-    code: Optional[str]
+    code: str | None
     column: int
     line: int
     message: str
-    target: Optional[str]
+    target: str | None
     src: str
 
 

@@ -1635,7 +1635,12 @@ def are_parameters_compatible(
         # (*Any) a supertype of all callables with positional arguments. This is needed in
         # particular because we often refuse to try type inference if actual type is not
         # a subtype of erased template type.
-        if all(k.is_positional() for k in left.arg_kinds) and ignore_pos_arg_names:
+        # HACK: working around upstream issues:
+        #  https://github.com/python/mypy/issues/16567
+        #  https://github.com/python/mypy/issues/16568
+        #  https://github.com/python/mypy/issues/16569
+        # if all(k.is_positional() for k in left.arg_kinds) and ignore_pos_arg_names:
+        if all(k.is_positional() for k in left.arg_kinds):
             return True
 
     # Match up corresponding arguments and check them for compatibility. In

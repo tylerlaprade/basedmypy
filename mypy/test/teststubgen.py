@@ -825,7 +825,9 @@ class StubgencSuite(unittest.TestCase):
     def test_generate_class_stub_no_crash_for_object(self) -> None:
         output: list[str] = []
         mod = ModuleType("module", "")  # any module is fine
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
 
         gen.generate_class_stub("alias", object, output)
         assert_equal(gen.get_imports().splitlines(), [])
@@ -838,7 +840,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType("module", "")  # any module is fine
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_class_stub("C", TestClassVariableCls, output)
         assert_equal(gen.get_imports().splitlines(), ["from typing import ClassVar"])
         assert_equal(output, ["class C:", "    x: ClassVar[int] = ..."])
@@ -849,7 +853,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType("module, ")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_class_stub("C", TestClass, output)
         assert_equal(output, ["class C(KeyError): ..."])
         assert_equal(gen.get_imports().splitlines(), [])
@@ -857,7 +863,9 @@ class StubgencSuite(unittest.TestCase):
     def test_generate_c_type_inheritance_same_module(self) -> None:
         output: list[str] = []
         mod = ModuleType(TestBaseClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_class_stub("C", TestClass, output)
         assert_equal(output, ["class C(TestBaseClass): ..."])
         assert_equal(gen.get_imports().splitlines(), [])
@@ -870,7 +878,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType("module", "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_class_stub("C", TestClass, output)
         assert_equal(output, ["class C(argparse.Action): ..."])
         assert_equal(gen.get_imports().splitlines(), ["import argparse"])
@@ -881,7 +891,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType("module", "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_class_stub("C", TestClass, output)
         assert_equal(output, ["class C(type): ..."])
         assert_equal(gen.get_imports().splitlines(), [])
@@ -895,7 +907,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(TestClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub(
             "test",
             TestClass.test,
@@ -914,7 +928,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(TestClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub(
             "test",
             TestClass.test,
@@ -932,7 +948,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(TestClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub(
             "test",
             TestClass.test,
@@ -954,7 +972,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(TestClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub(
             "test",
             TestClass.test,
@@ -983,7 +1003,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(TestClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub(
             "test",
             TestClass.test,
@@ -1005,7 +1027,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(self.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub("test", test, output=output)
         assert_equal(output, ["def test(arg0: argparse.Action) -> Any: ..."])
         assert_equal(gen.get_imports().splitlines(), ["import argparse"])
@@ -1024,7 +1048,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType("argparse", "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub("test", test, output=output)
         assert_equal(output, ["def test(arg0: Action) -> Action: ..."])
         assert_equal(gen.get_imports().splitlines(), [])
@@ -1039,7 +1065,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(self.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub("test", test, output=output)
         assert_equal(output, ["def test(arg0: argparse.Action) -> argparse.Action: ..."])
         assert_equal(gen.get_imports().splitlines(), ["import argparse"])
@@ -1058,7 +1086,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType("argparse", "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub("test", test, output=output)
         assert_equal(output, ["def test(arg0: list[Action]) -> list[Action]: ..."])
         assert_equal(gen.get_imports().splitlines(), [])
@@ -1077,7 +1107,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType("argparse", "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub("test", test, output=output)
         assert_equal(output, ["def test(arg0: Union[Action, None]) -> Tuple[Action, None]: ..."])
         assert_equal(gen.get_imports().splitlines(), [])
@@ -1094,7 +1126,7 @@ class StubgencSuite(unittest.TestCase):
         output: list[str] = []
         mod = ModuleType(self.__module__, "")
         gen = InspectionStubGenerator(
-            mod.__name__, known_modules=["foo", "foo.spangle", "bar"], module=mod
+            mod.__name__, known_modules=["foo", "foo.spangle", "bar"], module=mod, legacy=True
         )
         gen.generate_function_stub("test", test, output=output)
         assert_equal(output, ["def test(arg0: foo.bar.Action) -> other.Thing: ..."])
@@ -1108,7 +1140,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(self.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub("test", test, output=output)
         assert_equal(output, ["def test(*args, **kwargs): ..."])
         assert_equal(gen.get_imports().splitlines(), [])
@@ -1127,7 +1161,9 @@ class StubgencSuite(unittest.TestCase):
         readwrite_properties: list[str] = []
         readonly_properties: list[str] = []
         mod = ModuleType("module", "")  # any module is fine
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_property_stub(
             "attribute",
             TestClass.__dict__["attribute"],
@@ -1155,7 +1191,9 @@ class StubgencSuite(unittest.TestCase):
         readwrite_properties: list[str] = []
         readonly_properties: list[str] = []
         mod = ModuleType("module", "")  # any module is fine
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_property_stub(
             "attribute",
             TestClass.__dict__["attribute"],
@@ -1176,7 +1214,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(TestClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub(
             "test",
             TestClass.test,
@@ -1195,7 +1235,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(TestClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub(
             "test",
             TestClass.test,
@@ -1214,7 +1256,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(TestClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub(
             "test",
             TestClass.test,
@@ -1233,7 +1277,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(TestClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub(
             "test",
             TestClass.test,
@@ -1252,7 +1298,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(TestClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub(
             "test",
             TestClass.test,
@@ -1276,7 +1324,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(TestClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub(
             "__init__",
             TestClass.__init__,
@@ -1308,7 +1358,9 @@ class StubgencSuite(unittest.TestCase):
 
         output: list[str] = []
         mod = ModuleType(TestClass.__module__, "")
-        gen = InspectionStubGenerator(mod.__name__, known_modules=[mod.__name__], module=mod)
+        gen = InspectionStubGenerator(
+            mod.__name__, known_modules=[mod.__name__], module=mod, legacy=True
+        )
         gen.generate_function_stub(
             "__init__",
             TestClass.__init__,

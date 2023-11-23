@@ -558,7 +558,10 @@ class BaseStubGenerator:
         include_private: bool = False,
         export_less: bool = False,
         include_docstrings: bool = False,
+        legacy=False,
     ):
+        self.legacy = legacy
+
         # Best known value of __all__.
         self._all_ = _all_
         self._include_private = include_private
@@ -594,6 +597,9 @@ class BaseStubGenerator:
 
         The import will be internal to the stub (i.e don't reexport).
         """
+
+        if fullname == "_typeshed.Incomplete" and not self.legacy:
+            fullname = "basedtyping.Untyped"
         module, name = fullname.rsplit(".", 1)
         alias = "_" + name if name in self.defined_names else None
         self.import_tracker.add_import_from(module, [(name, alias)], require=require)

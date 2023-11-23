@@ -225,6 +225,7 @@ class Server:
                     data = receive(server)
                     sys.stdout = WriteToConn(server, "stdout")  # type: ignore[assignment]
                     sys.stderr = WriteToConn(server, "stderr")  # type: ignore[assignment]
+                    self.options.color_output = False  # needed so that initialize_unix_colors doesn't try to get the `fileno` of the WriteToConn
                     resp: dict[str, Any] = {}
                     if "command" not in data:
                         resp = {"error": "No command found in request"}

@@ -1518,7 +1518,7 @@ x = []
 y = ""
 x.append(y) if bool() else x.append(y)
 z = x.append(y) if bool() else x.append(y) # E: "append" of "list" does not return a value (it only ever returns None) \
- # E: "append" of "list" does not return a value
+                                           # E: "append" of "list" does not return a value (it only ever returns None)
 [builtins fixtures/list.pyi]
 
 -- Special cases

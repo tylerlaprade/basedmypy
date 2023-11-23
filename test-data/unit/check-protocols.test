@@ -1454,7 +1454,7 @@ class P2(Protocol):
 T = TypeVar('T')
 def f(x: Callable[[T, T], None]) -> T: pass
 def g(x: P, y: P2) -> None: pass
-x = f(g)  # E: "f" does not return a value
+x = f(g)  # E: "f" does not return a value (it only ever returns None)
 reveal_type(x)  # N: Revealed type is "None"
 
 [case testMeetProtocolWithNormal]

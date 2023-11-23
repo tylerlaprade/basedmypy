@@ -740,7 +740,8 @@ from typing import List, NamedTuple, Union
 def test() -> None:
     Exp = Union['A', 'B']  # E: Cannot resolve name "Exp" (possible cyclic definition) \
                            # N: Recursive types are not allowed at function scope \
-                           # E: Cannot resolve name "A" (possible cyclic definition)
+                           # E: Cannot resolve name "A" (possible cyclic definition) \
+                           # N: Recursive types are not allowed at function scope
     class A(NamedTuple('A', [('attr', List[Exp])])): pass
     class B(NamedTuple('B', [('val', object)])): pass
 
