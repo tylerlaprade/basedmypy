@@ -7417,8 +7417,9 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         if type_map is None:
             self.binder.unreachable()
         else:
-            for expr, type in type_map.items():
-                self.binder.put(expr, type)
+            with self.binder.collect_artificial_keys():
+                for expr, type in type_map.items():
+                    self.binder.put(expr, type)
 
     def infer_issubclass_maps(self, node: CallExpr, expr: Expression) -> tuple[TypeMap, TypeMap]:
         """Infer type restrictions for an expression in issubclass call."""

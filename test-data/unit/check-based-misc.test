@@ -179,14 +179,15 @@ def f3(): ...
 a = f3()
 
 
-[case testDoubleTYPE_CHECKING]
+[case testDoubleAlwaysTrue]
 # testing that it doesn't become "True" after a condition
-from typing import TYPE_CHECKING
+# mypy: always-true=a
+a = False
 
-if TYPE_CHECKING:
-    a = 1
-if TYPE_CHECKING:
-    a = 1
+if a:
+    b = 1
+if a:
+    b = 1
 
 
 [case testRedundantExprOnWhileTrue]

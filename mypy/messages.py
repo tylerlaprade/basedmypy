@@ -1371,7 +1371,7 @@ class MessageBuilder:
         ):
             self.note(f'Consider declaring "{name}" in {target} without "async"', context)
             self.note(
-                "See https://mypy.readthedocs.io/en/stable/more_types.html#asynchronous-iterators",
+                "See https://kotlinisland.github.io/basedmypy/more_types.html#asynchronous-iterators",
                 context,
             )
 

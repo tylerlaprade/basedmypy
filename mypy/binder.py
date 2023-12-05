@@ -121,6 +121,18 @@ class ConditionalTypeBinder:
         self.try_frames: set[int] = set()
         self.break_frames: list[int] = []
         self.continue_frames: list[int] = []
+        self.artificial_values: set[Key] = set()
+        self._collect_artificial_keys = False
+
+    @contextmanager
+    def collect_artificial_keys(self) -> Iterator[None]:
+        collect_artificial_keys = self._collect_artificial_keys
+        self._collect_artificial_keys = True
+        self.artificial_values = set()
+        try:
+            yield
+        finally:
+            self._collect_artificial_keys = collect_artificial_keys
 
     def _get_id(self) -> int:
         self.next_id += 1
@@ -142,6 +154,8 @@ class ConditionalTypeBinder:
         return f
 
     def _put(self, key: Key, type: Type, index: int = -1) -> None:
+        if self._collect_artificial_keys:
+            self.artificial_values.add(key)
         self.frames[index].types[key] = type
 
     def _get(self, key: Key, index: int = -1) -> Type | None:
@@ -203,7 +217,8 @@ class ConditionalTypeBinder:
         options are the same.
         """
 
-        frames = [f for f in frames if f.unreachable == 0]
+        artificial = any([f.unreachable == 2 for f in frames])
+        frames = [f for f in frames if not f.unreachable]
         changed = False
         keys = {key for f in frames for key in f.types}
 
@@ -246,7 +261,10 @@ class ConditionalTypeBinder:
                         if simplified == self.declarations[key]:
                             type = simplified
             if current_value is None or not is_same_type(type, current_value):
-                self._put(key, type)
+                if not (artificial and key in self.artificial_values):
+                    # if any frames were artificially unreachable,
+                    #  we don't want to narrow any types
+                    self._put(key, type)
                 changed = True
 
         self.frames[-1].unreachable = not frames
@@ -396,7 +414,7 @@ class ConditionalTypeBinder:
         for f in self.frames[index + 1 :]:
             frame.types.update(f.types)
             if f.unreachable:
-                frame.unreachable = True
+                frame.unreachable = f.unreachable
         self.options_on_return[index].append(frame)
 
     def handle_break(self) -> None:
