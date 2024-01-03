@@ -3222,6 +3222,8 @@ class TypeType(ProperType):
     assumption).
     """
 
+    name = "type"
+
     __slots__ = ("item",)
 
     # This can't be everything, but it can be a class reference,
@@ -3276,6 +3278,27 @@ class TypeType(ProperType):
     def deserialize(cls, data: JsonDict) -> Type:
         assert data[".class"] == "TypeType"
         return TypeType.make_normalized(deserialize_type(data["item"]))
+
+class TypeFormType(TypeType):
+    name = "TypeForm"
+    def serialize(self) -> JsonDict:
+        return {".class": "TypeFormType", "item": self.item.serialize()}
+
+    @classmethod
+    def deserialize(cls, data: JsonDict) -> Type:
+        assert data[".class"] == "TypeFormType"
+        return cls(deserialize_type(data["item"]))
+
+class SpecialFormType(TypeType):
+
+    name = "SpecialForm"
+    def serialize(self) -> JsonDict:
+        return {".class": "SpecialFormType", "item": self.item.serialize()}
+
+    @classmethod
+    def deserialize(cls, data: JsonDict) -> Type:
+        assert data[".class"] == "SpecialFormType"
+        return cls(deserialize_type(data["item"]))
 
 
 class PlaceholderType(ProperType):
@@ -3729,8 +3752,9 @@ class TypeStrVisitor(SyntheticTypeVisitor[str]):
 
     def visit_type_type(self, t: TypeType) -> str:
         if not mypy.options._based:
-            return f"Type[{t.item.accept(self)}]"
-        return f"type[{t.item.accept(self)}]"
+            name = t.name.title()
+            return f"{name}[{t.item.accept(self)}]"
+        return f"{t.name}[{t.item.accept(self)}]"
 
     def visit_placeholder_type(self, t: PlaceholderType) -> str:
         return f"<placeholder {t.fullname}>"

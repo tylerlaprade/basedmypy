@@ -94,7 +94,7 @@ from mypy.types import (
     UnionType,
     UnpackType,
     get_proper_type,
-    get_proper_types,
+    get_proper_types, TypeFormType, SpecialFormType,
 )
 from mypy.typetraverser import TypeTraverserVisitor
 from mypy.util import plural_s, unmangle
@@ -2740,7 +2740,7 @@ def format_type_inner(
         else:
             return "Never"
     elif isinstance(typ, TypeType):
-        type_name = "type" if options.use_lowercase_names() else "Type"
+        type_name = typ.name if options.use_lowercase_names() else typ.name.title()
         return f"{type_name}[{format(typ.item)}]"
     elif isinstance(typ, FunctionLike):
         func = typ
