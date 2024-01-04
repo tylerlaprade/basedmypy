@@ -1123,8 +1123,7 @@ f() + a     # E: "f" does not return a value (it only ever returns None)  \
             # E: Unsupported left operand type for + ("None")
 a + f()     # E: "f" does not return a value (it only ever returns None) \
             # E: Unsupported operand types for + ("A" and "None")
-f() == a    # E: "f" does not return a value (it only ever returns None) \
-            # E: Unsupported left operand type for == ("None")
+f() == a    # E: "f" does not return a value (it only ever returns None)
 a != f()    # E: Unsupported left operand type for != ("A") \
             # E: "f" does not return a value (it only ever returns None)
 cast(A, f())

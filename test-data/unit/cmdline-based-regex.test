@@ -215,7 +215,7 @@ reveal_type(m.group(1))  # N: Revealed type is "str | None"
 == Return code: 0
 
 [case testRegexSub]
-# cmd: mypy main.py --hide-column-numbers
+# cmd: mypy main.py --hide-column-numbers --hide-error-context
 [file main.py]
 import re
 
