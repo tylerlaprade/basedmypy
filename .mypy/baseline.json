@@ -15,7 +15,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 339,
+        "offset": 341,
         "src": "plugin_data: Any  # config data from plugins",
         "target": "mypy.build"
       },
@@ -2033,7 +2033,7 @@
         "code": "redundant-expr",
         "column": 11,
         "message": "Condition is always true",
-        "offset": 307,
+        "offset": 306,
         "src": "if isinstance(override, FunctionLike):",
         "target": "mypy.checker.TypeChecker.check_override"
       },
@@ -2065,7 +2065,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_import_from\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
-        "offset": 133,
+        "offset": 136,
         "src": "def visit_import_from(self, node: ImportFrom) -> None:",
         "target": "mypy.checker.TypeChecker.visit_import_from"
       },
@@ -2129,7 +2129,7 @@
         "code": "no-any-expr",
         "column": 11,
         "message": "Expression type contains \"Any\" (has type \"Any | None\")",
-        "offset": 238,
+        "offset": 254,
         "src": "if getattr(lvalue, \"node\", None):",
         "target": "mypy.checker.TypeChecker.is_assignable_slot"
       },
@@ -2385,7 +2385,7 @@
         "code": "redundant-expr",
         "column": 19,
         "message": "Condition is always false",
-        "offset": 520,
+        "offset": 529,
         "src": "if type_being_compared is not None:",
         "target": "mypy.checker.TypeChecker.find_type_equals_check"
       },
@@ -2457,7 +2457,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"get_expression_type\" is not using @override but is overriding a method in class \"mypy.plugin.CheckerPluginInterface\"",
-        "offset": 367,
+        "offset": 368,
         "src": "def get_expression_type(self, node: Expression, type_context: Type | None = None) -> Type:",
         "target": "mypy.checker.TypeChecker.get_expression_type"
       },
@@ -2659,15 +2659,7 @@
         "code": "possibly-undefined",
         "column": 23,
         "message": "Name \"actual_types\" may be undefined",
-        "offset": 1724,
-        "src": "assert len(actual_types) == len(actuals) == len(actual_kinds)",
-        "target": "mypy.checkexpr"
-      },
-      {
-        "code": "possibly-undefined",
-        "column": 60,
-        "message": "Name \"actual_kinds\" may be undefined",
-        "offset": 0,
+        "offset": 1718,
         "src": "assert len(actual_types) == len(actuals) == len(actual_kinds)",
         "target": "mypy.checkexpr"
       },
@@ -2843,7 +2835,7 @@
         "code": "possibly-undefined",
         "column": 16,
         "message": "Name \"left_map\" may be undefined",
-        "offset": 541,
+        "offset": 552,
         "src": "and left_map is None",
         "target": "mypy.checkexpr"
       },
@@ -2979,7 +2971,7 @@
         "code": "no-any-expr",
         "column": 23,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 59,
+        "offset": 60,
         "src": "if called_type.items[0].def_extras.get(\"first_arg\") == target:",
         "target": "mypy.checkexpr.ExpressionChecker.visit_lambda_expr"
       },
@@ -3219,7 +3211,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_callable_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeTranslator\"",
-        "offset": 122,
+        "offset": 127,
         "src": "def visit_callable_type(self, t: CallableType) -> Type:",
         "target": "mypy.checkexpr.PolyTranslator.visit_callable_type"
       },
@@ -3267,7 +3259,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_callable_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.BoolTypeQuery\"",
-        "offset": 44,
+        "offset": 45,
         "src": "def visit_callable_type(self, t: CallableType) -> bool:",
         "target": "mypy.checkexpr.ArgInferSecondPassQuery.visit_callable_type"
       },
@@ -3491,15 +3483,15 @@
         "code": "no-any-expr",
         "column": 26,
         "message": "Expression has type \"Any\"",
-        "offset": 151,
+        "offset": 163,
         "src": "\"exclude\": lambda s: [s.strip()],",
-        "target": "mypy.config_parser"
+        "target": ""
       },
       {
         "code": "no-any-expr",
         "column": 32,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 58,
+        "offset": 59,
         "src": "toml_data = tomllib.load(f)",
         "target": "mypy.config_parser.parse_config_file"
       },
@@ -4495,7 +4487,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_tuple_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 172,
+        "offset": 161,
         "src": "def visit_tuple_type(self, template: TupleType) -> list[Constraint]:",
         "target": "mypy.constraints.ConstraintBuilderVisitor.visit_tuple_type"
       },
@@ -5593,10 +5585,26 @@
       },
       {
         "code": "no-any-expr",
-        "column": 12,
-        "message": "Expression has type \"Any\"",
+        "column": 13,
+        "message": "Expression type contains \"Any\" (has type \"(None, Any)\")",
         "offset": 1,
-        "src": "messages,",
+        "src": "{None: messages} if messages else {},",
+        "target": "mypy.dmypy.client.check_output"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 19,
+        "message": "Expression has type \"Any\"",
+        "offset": 0,
+        "src": "{None: messages} if messages else {},",
+        "target": "mypy.dmypy.client.check_output"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 32,
+        "message": "Expression has type \"Any\"",
+        "offset": 0,
+        "src": "{None: messages} if messages else {},",
         "target": "mypy.dmypy.client.check_output"
       },
       {
@@ -6117,7 +6125,7 @@
         "code": "no-any-expr",
         "column": 14,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 39,
+        "offset": 44,
         "src": "res = self.increment_output(messages, sources, is_tty, terminal_width)",
         "target": "mypy.dmypy_server.Server.cmd_recheck"
       },
@@ -6133,7 +6141,7 @@
         "code": "no-any-expr",
         "column": 15,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 1,
+        "offset": 2,
         "src": "return res",
         "target": "mypy.dmypy_server.Server.cmd_recheck"
       },
@@ -6149,7 +6157,7 @@
         "code": "no-any-expr",
         "column": 18,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 10,
+        "offset": 11,
         "src": "res = self.initialize_fine_grained(sources, is_tty, terminal_width)",
         "target": "mypy.dmypy_server.Server.check"
       },
@@ -6157,7 +6165,7 @@
         "code": "no-any-expr",
         "column": 26,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 8,
+        "offset": 10,
         "src": "self.update_stats(res)",
         "target": "mypy.dmypy_server.Server.check"
       },
@@ -6165,7 +6173,7 @@
         "code": "no-any-expr",
         "column": 15,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 1,
+        "offset": 2,
         "src": "return res",
         "target": "mypy.dmypy_server.Server.check"
       },
@@ -6261,7 +6269,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 263,
+        "offset": 275,
         "src": "def increment_output(",
         "target": "mypy.dmypy_server.Server.increment_output"
       },
@@ -6757,7 +6765,7 @@
         "code": "redundant-expr",
         "column": 13,
         "message": "Condition is always true",
-        "offset": 225,
+        "offset": 232,
         "src": "elif callable(self._filter):",
         "target": "mypy.errors.ErrorWatcher.on_error"
       },
@@ -6765,7 +6773,7 @@
         "code": "truthy-bool",
         "column": 11,
         "message": "Member \"options\" has type \"Options\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
-        "offset": 517,
+        "offset": 518,
         "src": "if self.options:",
         "target": "mypy.errors.Errors.is_error_code_enabled"
       },
@@ -7273,7 +7281,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_type_var_tuple\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeTranslator\"",
-        "offset": 25,
+        "offset": 26,
         "src": "def visit_type_var_tuple(self, t: TypeVarTupleType) -> Type:",
         "target": "mypy.expandtype.ExpandTypeVisitor.visit_type_var_tuple"
       },
@@ -10969,7 +10977,7 @@
         "code": "helpful-string",
         "column": 12,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 218,
+        "offset": 222,
         "src": "\"Warning: unused section(s) in {}: {}\".format(",
         "target": "mypy.main.run_build"
       },
@@ -11233,7 +11241,7 @@
         "code": "no-any-expr",
         "column": 67,
         "message": "Expression type contains \"Any\" (has type \"list[Any]\")",
-        "offset": 284,
+        "offset": 290,
         "src": "\"--package-root\", metavar=\"ROOT\", action=\"append\", default=[], help=argparse.SUPPRESS",
         "target": "mypy.main.process_options"
       },
@@ -11879,10 +11887,18 @@
       },
       {
         "code": "no-any-expr",
-        "column": 66,
+        "column": 16,
         "message": "Expression has type \"Any\"",
-        "offset": 7,
-        "src": "td, serious, messages, options.junit_xml, py_version, options.platform",
+        "offset": 19,
+        "src": "options.platform,",
+        "target": "mypy.main.maybe_write_junit_xml"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 78,
+        "message": "Expression has type \"Any\"",
+        "offset": 5,
+        "src": "td, serious, messages_by_file, options.junit_xml, py_version, options.platform",
         "target": "mypy.main.maybe_write_junit_xml"
       }
     ],
@@ -11891,7 +11907,7 @@
         "code": "helpful-string",
         "column": 38,
         "message": "The type \"type[mypy.types.ProperType]\" doesn't define a __format__, __str__ or __repr__ method",
-        "offset": 577,
+        "offset": 588,
         "src": "assert type(left) != type(right), f\"{type(left)} vs {type(right)}\"",
         "target": "mypy.meet.is_overlapping_types"
       },
@@ -12431,7 +12447,7 @@
         "code": "helpful-string",
         "column": 12,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 44,
+        "offset": 51,
         "src": "'{} gets multiple values for keyword argument \"{}\"'.format(",
         "target": "mypy.messages.MessageBuilder.duplicate_argument_value"
       },
@@ -13144,18 +13160,10 @@
     ],
     "mypy/nodes.py": [
       {
-        "code": "redundant-expr",
-        "column": 3,
-        "message": "Condition is always true",
-        "offset": 77,
-        "src": "if TYPE_CHECKING:",
-        "target": "mypy.nodes"
-      },
-      {
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 7,
+        "offset": 84,
         "src": "JsonDict: _TypeAlias = Dict[str, Any]",
         "target": "mypy.nodes"
       },
@@ -13307,7 +13315,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"name\" is not using @override but is overriding a method in class \"mypy.nodes.FuncBase\"",
-        "offset": 89,
+        "offset": 91,
         "src": "def name(self) -> str:",
         "target": "mypy.nodes"
       },
@@ -14307,7 +14315,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"name\" is not using @override but is overriding a method in class \"mypy.nodes.SymbolNode\"",
-        "offset": 300,
+        "offset": 305,
         "src": "def name(self) -> str:",
         "target": "mypy.nodes"
       },
@@ -14781,7 +14789,7 @@
         "code": "no-any-explicit",
         "column": 8,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 267,
+        "offset": 269,
         "src": "self.transform_source: Callable[[Any], Any] | None = None",
         "target": "mypy.options.Options.__init__"
       },
@@ -17001,7 +17009,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"type\" is not using @override but is overriding a method in class \"mypy.semanal_shared.SemanticAnalyzerCoreInterface\"",
-        "offset": 474,
+        "offset": 475,
         "src": "def type(self) -> TypeInfo | None:",
         "target": "mypy.semanal"
       },
@@ -17113,7 +17121,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_class_def\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
-        "offset": 100,
+        "offset": 103,
         "src": "def visit_class_def(self, defn: ClassDef) -> None:",
         "target": "mypy.semanal.SemanticAnalyzer.visit_class_def"
       },
@@ -17129,7 +17137,7 @@
         "code": "no-any-expr",
         "column": 43,
         "message": "Expression type contains \"Any\" (has type \"set[Any]\")",
-        "offset": 210,
+        "offset": 219,
         "src": "if not set(all_tvars).issubset(set(declared_tvars)):",
         "target": "mypy.semanal.SemanticAnalyzer.clean_up_bases_and_infer_type_variables"
       },
@@ -17209,7 +17217,7 @@
         "code": "truthy-bool",
         "column": 11,
         "message": "Member \"rvalue\" has type \"Expression\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
-        "offset": 375,
+        "offset": 376,
         "src": "if s.rvalue:",
         "target": "mypy.semanal.SemanticAnalyzer.analyze_lvalues"
       },
@@ -18171,7 +18179,7 @@
         "code": "helpful-string",
         "column": 40,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 157,
+        "offset": 160,
         "src": "self.fail_enum_call_arg(f'Unexpected keyword argument \"{arg_name}\"', call)",
         "target": "mypy.semanal_enum.EnumCallAnalyzer.parse_enum_call_args"
       },
@@ -18215,7 +18223,7 @@
         "code": "redundant-expr",
         "column": 19,
         "message": "Condition is always true",
-        "offset": 392,
+        "offset": 400,
         "src": "if not is_StrExpr_list(listexpr.items):",
         "target": "mypy.semanal_namedtuple.NamedTupleAnalyzer.parse_namedtuple_args"
       },
@@ -18447,7 +18455,7 @@
         "code": "helpful-string",
         "column": 16,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 431,
+        "offset": 450,
         "src": "f'Unexpected keyword argument \"{call.arg_names[2]}\" for \"TypedDict\"', call",
         "target": "mypy.semanal_typeddict.TypedDictAnalyzer.parse_typeddict_args"
       }
@@ -20201,7 +20209,7 @@
         "code": "possibly-undefined",
         "column": 23,
         "message": "Name \"solvable_tv\" may be undefined",
-        "offset": 212,
+        "offset": 216,
         "src": "s_batch.remove(solvable_tv)",
         "target": "mypy.solve"
       },
@@ -22305,7 +22313,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"__repr__\" is not using @override but is overriding a method in class \"builtins.object\"",
-        "offset": 51,
+        "offset": 59,
         "src": "def __repr__(self) -> str:",
         "target": "mypy.stubdoc.ArgSig.__repr__"
       },
@@ -22515,7 +22523,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_func_def\" is not using @override but is overriding a method in class \"mypy.traverser.TraverserVisitor\"",
-        "offset": 131,
+        "offset": 137,
         "src": "def visit_func_def(self, o: FuncDef) -> None:",
         "target": "mypy.stubgen.ASTStubGenerator.visit_func_def"
       },
@@ -22587,7 +22595,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"should_reexport\" is not using @override but is overriding a method in class \"mypy.stubutil.BaseStubGenerator\"",
-        "offset": 138,
+        "offset": 202,
         "src": "def should_reexport(self, name: str, full_module: str, name_is_alias: bool) -> bool:",
         "target": "mypy.stubgen.ASTStubGenerator.should_reexport"
       },
@@ -22603,7 +22611,7 @@
         "code": "no-any-expr",
         "column": 16,
         "message": "Expression type contains \"Any\" (has type \"list[Any]\")",
-        "offset": 466,
+        "offset": 467,
         "src": "default=[],",
         "target": "mypy.stubgen.parse_options"
       },
@@ -22853,7 +22861,7 @@
         "code": "no-any-expr",
         "column": 26,
         "message": "Expression type contains \"Any\" (has type \"FullArgSpec\")",
-        "offset": 122,
+        "offset": 144,
         "src": "argspec = inspect.getfullargspec(func)",
         "target": "mypy.stubgenc.InspectionStubGenerator.get_default_function_sig"
       },
@@ -23459,9 +23467,25 @@
       },
       {
         "code": "no-any-expr",
-        "column": 86,
+        "column": 11,
         "message": "Expression has type \"Any\"",
         "offset": 30,
+        "src": "if docstring:",
+        "target": "mypy.stubgenc.InspectionStubGenerator.generate_function_stub"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 47,
+        "message": "Expression has type \"Any\"",
+        "offset": 1,
+        "src": "docstring = self._indent_docstring(docstring)",
+        "target": "mypy.stubgenc.InspectionStubGenerator.generate_function_stub"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 86,
+        "message": "Expression has type \"Any\"",
+        "offset": 1,
         "src": "output.extend(self.format_func_def(inferred, decorators=decorators, docstring=docstring))",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_function_stub"
       },
@@ -23469,7 +23493,7 @@
         "code": "no-any-expr",
         "column": 34,
         "message": "Expression type contains \"Any\" (has type \"MappingProxyType[str, Any]\")",
-        "offset": 13,
+        "offset": 31,
         "src": "and \"__iter__\" not in ctx.class_info.cls.__dict__",
         "target": "mypy.stubgenc.InspectionStubGenerator._fix_iter"
       },
@@ -23534,7 +23558,7 @@
         "column": 16,
         "message": "Expression has type \"Any\"",
         "offset": 1,
-        "src": "docstring += alt_docstr",
+        "src": "docstring += \"\\n\" + alt_docstr",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_property_stub"
       },
       {
@@ -23542,7 +23566,15 @@
         "column": 29,
         "message": "Expression has type \"Any\"",
         "offset": 0,
-        "src": "docstring += alt_docstr",
+        "src": "docstring += \"\\n\" + alt_docstr",
+        "target": "mypy.stubgenc.InspectionStubGenerator.generate_property_stub"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 36,
+        "message": "Expression has type \"Any\"",
+        "offset": 0,
+        "src": "docstring += \"\\n\" + alt_docstr",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_property_stub"
       },
       {
@@ -23868,10 +23900,18 @@
         "target": "mypy.stubtest.Missing.__repr__"
       },
       {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"__repr__\" is not using @override but is overriding a method in class \"builtins.object\"",
+        "offset": 13,
+        "src": "def __repr__(self) -> str:",
+        "target": "mypy.stubtest.Unrepresentable.__repr__"
+      },
+      {
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 12,
+        "offset": 10,
         "src": "def _style(message: str, **kwargs: Any) -> str:",
         "target": "mypy.stubtest._style"
       },
@@ -23909,17 +23949,33 @@
       },
       {
         "code": "no-any-expr",
-        "column": 59,
+        "column": 49,
+        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
+        "offset": 4,
+        "src": "runtime_sig = safe_inspect_signature(runtime_object)",
+        "target": "mypy.stubtest.Error.__init__"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 51,
         "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
         "offset": 2,
-        "src": "self.runtime_desc = runtime_desc or _truncate(repr(runtime_object), 100)",
+        "src": "self.runtime_desc = _truncate(repr(runtime_object), 100)",
+        "target": "mypy.stubtest.Error.__init__"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 63,
+        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
+        "offset": 2,
+        "src": "runtime_is_async = inspect.iscoroutinefunction(runtime_object)",
         "target": "mypy.stubtest.Error.__init__"
       },
       {
         "code": "no-any-expr",
         "column": 26,
         "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 36,
+        "offset": 40,
         "src": "if not isinstance(self.runtime_object, Missing):",
         "target": "mypy.stubtest.Error.get_description"
       },
@@ -24285,9 +24341,25 @@
       },
       {
         "code": "no-any-expr",
+        "column": 26,
+        "message": "Expression type contains \"Any\" (has type \"type[Any] | Missing\")",
+        "offset": 6,
+        "src": "if not isinstance(runtime, Missing):",
+        "target": "mypy.stubtest.verify_typeinfo"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 16,
+        "message": "Expression type contains \"Any\" (has type \"type[Any]\")",
+        "offset": 5,
+        "src": "runtime,",
+        "target": "mypy.stubtest.verify_typeinfo"
+      },
+      {
+        "code": "no-any-expr",
         "column": 18,
         "message": "Expression type contains \"Any\" (has type \"type[Any] | Missing\")",
-        "offset": 3,
+        "offset": 5,
         "src": "if isinstance(runtime, Missing):",
         "target": "mypy.stubtest.verify_typeinfo"
       },
@@ -24559,7 +24631,15 @@
         "code": "no-any-expr",
         "column": 24,
         "message": "Expression has type \"Any\"",
-        "offset": 3,
+        "offset": 2,
+        "src": "and runtime_arg.default is not UNREPRESENTABLE",
+        "target": "mypy.stubtest._verify_arg_default_value"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 24,
+        "message": "Expression has type \"Any\"",
+        "offset": 2,
         "src": "stub_default != runtime_arg.default",
         "target": "mypy.stubtest._verify_arg_default_value"
       },
@@ -25127,7 +25207,7 @@
         "code": "no-any-expr",
         "column": 18,
         "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 3,
+        "offset": 4,
         "src": "if isinstance(runtime, Missing):",
         "target": "mypy.stubtest.verify_overloadedfuncdef"
       },
@@ -25583,7 +25663,7 @@
         "code": "no-any-expr",
         "column": 1,
         "message": "Expression type contains \"Any\" (has type \"_SingleDispatchCallable[Iterator[Error], (stub: Node | Missing, runtime: Any | Missing, object_path: list[str]) -> Iterator[Error]]\")",
-        "offset": 53,
+        "offset": 60,
         "src": "@verify.register(nodes.Decorator)",
         "target": "mypy.stubtest"
       },
@@ -25621,9 +25701,25 @@
       },
       {
         "code": "no-any-expr",
+        "column": 26,
+        "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
+        "offset": 6,
+        "src": "if not isinstance(runtime, Missing):",
+        "target": "mypy.stubtest.verify_decorator"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 16,
+        "message": "Expression has type \"Any\"",
+        "offset": 5,
+        "src": "runtime,",
+        "target": "mypy.stubtest.verify_decorator"
+      },
+      {
+        "code": "no-any-expr",
         "column": 18,
         "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 3,
+        "offset": 5,
         "src": "if isinstance(runtime, Missing):",
         "target": "mypy.stubtest.verify_decorator"
       },
@@ -25823,7 +25919,7 @@
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 89,
+        "offset": 88,
         "src": "def is_probably_a_function(runtime: Any) -> bool:",
         "target": "mypy.stubtest.is_probably_a_function"
       },
@@ -25869,17 +25965,89 @@
       },
       {
         "code": "no-any-expr",
-        "column": 33,
+        "column": 37,
         "message": "Expression has type \"Any\"",
-        "offset": 2,
+        "offset": 3,
         "src": "return inspect.signature(runtime)",
+        "target": "mypy.stubtest.safe_inspect_signature"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 24,
+        "message": "Expression has type \"Any\"",
+        "offset": 3,
+        "src": "hasattr(runtime, \"__text_signature__\")",
+        "target": "mypy.stubtest.safe_inspect_signature"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 43,
+        "message": "Expression has type \"Any\"",
+        "offset": 1,
+        "src": "and \"<unrepresentable>\" in runtime.__text_signature__",
+        "target": "mypy.stubtest.safe_inspect_signature"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 22,
+        "message": "Expression has type \"Any\"",
+        "offset": 4,
+        "src": "sig = runtime.__text_signature__.replace(\"<unrepresentable>\", \"...\")",
+        "target": "mypy.stubtest.safe_inspect_signature"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 68,
+        "message": "Expression has type \"Any\"",
+        "offset": 1,
+        "src": "sig = inspect._signature_fromstr(inspect.Signature, runtime, sig)  # type: ignore[attr-defined]",
+        "target": "mypy.stubtest.safe_inspect_signature"
+      },
+      {
+        "code": null,
+        "column": 68,
+        "message": "Error code \"no-any-expr\" not covered by \"type: ignore\" comment",
+        "offset": 0,
+        "src": "sig = inspect._signature_fromstr(inspect.Signature, runtime, sig)  # type: ignore[attr-defined]",
+        "target": null
+      },
+      {
+        "code": "no-any-expr",
+        "column": 77,
+        "message": "Expression has type \"Any\"",
+        "offset": 0,
+        "src": "sig = inspect._signature_fromstr(inspect.Signature, runtime, sig)  # type: ignore[attr-defined]",
+        "target": "mypy.stubtest.safe_inspect_signature"
+      },
+      {
+        "code": null,
+        "column": 77,
+        "message": "Error code \"no-any-expr\" not covered by \"type: ignore\" comment",
+        "offset": 0,
+        "src": "sig = inspect._signature_fromstr(inspect.Signature, runtime, sig)  # type: ignore[attr-defined]",
+        "target": null
+      },
+      {
+        "code": "no-any-expr",
+        "column": 34,
+        "message": "Expression has type \"Any\"",
+        "offset": 1,
+        "src": "assert isinstance(sig, inspect.Signature)",
+        "target": "mypy.stubtest.safe_inspect_signature"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 23,
+        "message": "Expression has type \"Any\"",
+        "offset": 3,
+        "src": "if parameter.default is ...",
         "target": "mypy.stubtest.safe_inspect_signature"
       },
       {
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 32,
+        "offset": 42,
         "src": "def get_mypy_type_of_runtime_value(runtime: Any) -> mypy.types.Type | None:",
         "target": "mypy.stubtest.get_mypy_type_of_runtime_value"
       },
@@ -26259,7 +26427,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 780,
+        "offset": 792,
         "src": "def report(*args: Any) -> None:",
         "target": "mypy.subtypes.unify_generic_callable"
       },
@@ -27241,8 +27409,8 @@
         "code": "no-any-expr",
         "column": 19,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 93,
-        "src": "response = server.check(sources, export_types=True, is_tty=False, terminal_width=-1)",
+        "offset": 94,
+        "src": "response = server.check(sources, export_types=False, is_tty=False, terminal_width=-1)",
         "target": "mypy.test.testfinegrained.FineGrainedSuite.run_check"
       },
       {
@@ -27618,6 +27786,16 @@
         "target": "mypy.test.testinfer.OperandComparisonGroupingSuite.test_empty_pair_list"
       }
     ],
+    "mypy/test/testipc.py": [
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"setUp\" is not using @override but is overriding a method in class \"unittest.case.TestCase\"",
+        "offset": 38,
+        "src": "def setUp(self) -> None:",
+        "target": "mypy.test.testipc.IPCTests.setUp"
+      }
+    ],
     "mypy/test/testmerge.py": [
       {
         "code": "explicit-override",
@@ -27985,7 +28163,7 @@
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 184,
+        "offset": 186,
         "src": "def collect_cases(fn: Callable[..., Iterator[Case]]) -> Callable[..., None]:",
         "target": "mypy.test.teststubtest.collect_cases"
       },
@@ -28137,7 +28315,7 @@
         "code": "no-any-expr",
         "column": 5,
         "message": "Expression type contains \"Any\" (has type \"(fn: (...) -> Iterator[Case]) -> (...) -> None\")",
-        "offset": 52,
+        "offset": 62,
         "src": "@collect_cases",
         "target": "mypy.test.teststubtest"
       },
@@ -28201,7 +28379,7 @@
         "code": "no-any-expr",
         "column": 5,
         "message": "Expression type contains \"Any\" (has type \"(fn: (...) -> Iterator[Case]) -> (...) -> None\")",
-        "offset": 54,
+        "offset": 72,
         "src": "@collect_cases",
         "target": "mypy.test.teststubtest"
       },
@@ -28646,10 +28824,26 @@
         "target": "mypy.test.teststubtest"
       },
       {
+        "code": "no-any-expr",
+        "column": 5,
+        "message": "Expression type contains \"Any\" (has type \"(fn: (...) -> Iterator[Case]) -> (...) -> None\")",
+        "offset": 66,
+        "src": "@collect_cases",
+        "target": "mypy.test.teststubtest"
+      },
+      {
+        "code": "no-any-decorated",
+        "column": 4,
+        "message": "Type of decorated function contains type \"Any\" (\"(...) -> None\")",
+        "offset": 1,
+        "src": "def test_type_check_only(self) -> Iterator[Case]:",
+        "target": "mypy.test.teststubtest"
+      },
+      {
         "code": "no-any-explicit",
         "column": 8,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 226,
+        "offset": 225,
         "src": "def f(a: int, b: int, *, c: int, d: int = 0, **kwargs: Any) -> None:",
         "target": "mypy.test.teststubtest.StubtestMiscUnit.test_signature"
       },
@@ -31649,7 +31843,7 @@
         "code": "redundant-expr",
         "column": 19,
         "message": "Condition is always true",
-        "offset": 481,
+        "offset": 485,
         "src": "if extra_attrs_set is None:",
         "target": "mypy.typeops.make_simplified_union"
       },
@@ -31705,7 +31899,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 364,
+        "offset": 371,
         "src": "sum_types: dict[str, tuple[set[Any], list[int]]] = {}",
         "target": "mypy.typeops.try_contracting_literals_in_union"
       },
@@ -31835,7 +32029,7 @@
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 125,
+        "offset": 131,
         "src": "_dummy: Final[Any] = object()",
         "target": "mypy.types"
       },
@@ -35513,7 +35707,7 @@
         "code": "no-any-expr",
         "column": 32,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 354,
+        "offset": 394,
         "src": "new.__dict__ = dict(old.__dict__)",
         "target": "mypy.util.replace_object_state"
       },
@@ -38083,17 +38277,17 @@
     "mypyc/build.py": [
       {
         "code": "no-any-expr",
-        "column": 78,
+        "column": 12,
         "message": "Expression has type \"Any\"",
-        "offset": 108,
-        "src": "write_junit_xml(dt, serious, messages, options.junit_xml, py_version, options.platform)",
+        "offset": 114,
+        "src": "options.platform,",
         "target": "mypyc.build.emit_messages"
       },
       {
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 291,
+        "offset": 292,
         "src": "def mypyc_build(",
         "target": "mypyc.build.mypyc_build"
       },
@@ -42150,14 +42344,14 @@
         "column": 4,
         "message": "Method \"visit_func_def\" is not using @override but is overriding a method in class \"mypy.traverser.ExtendedTraverserVisitor\"",
         "offset": 27,
-        "src": "def visit_func_def(self, fdef: FuncItem) -> None:",
+        "src": "def visit_func_def(self, fdef: FuncDef) -> None:",
         "target": "mypyc.irbuild.prebuildvisitor.PreBuildVisitor.visit_func_def"
       },
       {
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_lambda_expr\" is not using @override but is overriding a method in class \"mypy.traverser.ExtendedTraverserVisitor\"",
-        "offset": 4,
+        "offset": 5,
         "src": "def visit_lambda_expr(self, expr: LambdaExpr) -> None:",
         "target": "mypyc.irbuild.prebuildvisitor.PreBuildVisitor.visit_lambda_expr"
       },
@@ -43245,7 +43439,7 @@
         "code": "no-any-expr",
         "column": 16,
         "message": "Expression has type \"Untyped\"",
-        "offset": 46,
+        "offset": 44,
         "src": "bench = testcase.config.getoption(\"--bench\", False) and \"Benchmark\" in testcase.name",
         "target": "mypyc.test.test_run.TestRun.run_case_step"
       },
