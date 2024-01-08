@@ -1,6 +1,8 @@
 # Basedmypy Changelog
 
-## [Unreleased]
+## [2.4.0]
+
+## [2.3.0]
 ### Added
 - f-string format specs are checked (#543)
 - Narrow type on initial assignment (#547)
