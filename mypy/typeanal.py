@@ -69,12 +69,14 @@ from mypy.types import (
     ProperType,
     RawExpressionType,
     RequiredType,
+    SpecialFormType,
     SyntheticTypeVisitor,
     TrivialSyntheticTypeTranslator,
     TupleType,
     Type,
     TypeAliasType,
     TypedDictType,
+    TypeFormType,
     TypeGuardType,
     TypeList,
     TypeOfAny,
@@ -93,7 +95,7 @@ from mypy.types import (
     flatten_nested_tuples,
     flatten_nested_unions,
     get_proper_type,
-    has_type_vars, SpecialFormType, TypeFormType,
+    has_type_vars,
 )
 from mypy.types_utils import is_bad_type_type_item
 from mypy.typevars import fill_typevars
@@ -584,10 +586,10 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
         elif fullname == "basedtyping.Intersection":
             items = self.anal_array(t.args)
             return IntersectionType.make_intersection(items)
-        elif fullname == "test.SpecialForm": # TODO:  "basedtyping.SpecialForm
+        elif fullname == "test.SpecialForm":  # TODO:  "basedtyping.SpecialForm
             item = self.anal_type(t.args[0])
             return SpecialFormType(item, line=t.line, column=t.column)
-        elif fullname == "test.TypeForm": # TODO:  "basedtyping.TypeForm
+        elif fullname == "test.TypeForm":  # TODO:  "basedtyping.TypeForm
             item = self.anal_type(t.args[0])
             return TypeFormType(item, line=t.line, column=t.column)
         elif fullname == "typing.Optional":

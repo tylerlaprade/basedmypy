@@ -3279,8 +3279,10 @@ class TypeType(ProperType):
         assert data[".class"] == "TypeType"
         return TypeType.make_normalized(deserialize_type(data["item"]))
 
+
 class TypeFormType(TypeType):
     name = "TypeForm"
+
     def serialize(self) -> JsonDict:
         return {".class": "TypeFormType", "item": self.item.serialize()}
 
@@ -3289,9 +3291,10 @@ class TypeFormType(TypeType):
         assert data[".class"] == "TypeFormType"
         return cls(deserialize_type(data["item"]))
 
-class SpecialFormType(TypeType):
 
+class SpecialFormType(TypeType):
     name = "SpecialForm"
+
     def serialize(self) -> JsonDict:
         return {".class": "SpecialFormType", "item": self.item.serialize()}
 

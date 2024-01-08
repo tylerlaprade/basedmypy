@@ -94,7 +94,7 @@ from mypy.types import (
     UnionType,
     UnpackType,
     get_proper_type,
-    get_proper_types, TypeFormType, SpecialFormType,
+    get_proper_types,
 )
 from mypy.typetraverser import TypeTraverserVisitor
 from mypy.util import plural_s, unmangle
