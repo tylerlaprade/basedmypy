@@ -710,7 +710,7 @@ class ExpressionChecker(ExpressionVisitor[Type]):
             not allow_none_return
             and isinstance(ret_type, NoneType)
             # field lies about its return type and must be special-cased
-            and fullname != "dataclasses.field"
+            and fullname not in {"dataclasses.field", "pydantic.fields.Field"}
         ):
             self.chk.msg.does_not_return_value(callee_type, e)
         return ret_type
