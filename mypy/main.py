@@ -64,7 +64,7 @@ def main(
     util.check_python_version("mypy")
     t0 = time.time()
     # To log stat() calls: os.stat = stat_proxy
-    sys.setrecursionlimit(2**14)
+    sys.setrecursionlimit(2600 if sys.platform == "win32" else 2**14)
     if args is None:
         args = sys.argv[1:]
 
