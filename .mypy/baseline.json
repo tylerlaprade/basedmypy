@@ -15,7 +15,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 341,
+        "offset": 342,
         "src": "plugin_data: Any  # config data from plugins",
         "target": "mypy.build"
       },
@@ -455,7 +455,7 @@
         "code": "helpful-string",
         "column": 22,
         "message": "The string for \"object\" isn't helpful in a user-facing or semantic string",
-        "offset": 103,
+        "offset": 101,
         "src": "print(f\"{key + ':':24}{value}\")",
         "target": "mypy.build.BuildManager.dump_stats"
       },
@@ -1977,7 +1977,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_overloaded_func_def\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
-        "offset": 192,
+        "offset": 190,
         "src": "def visit_overloaded_func_def(self, defn: OverloadedFuncDef, do_items=True) -> None:",
         "target": "mypy.checker.TypeChecker.visit_overloaded_func_def"
       },
@@ -1985,7 +1985,7 @@
         "code": "redundant-expr",
         "column": 17,
         "message": "Condition is always true",
-        "offset": 101,
+        "offset": 102,
         "src": "elif isinstance(defn.impl, Decorator):",
         "target": "mypy.checker.TypeChecker.check_overlapping_overloads"
       },
@@ -1993,7 +1993,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_func_def\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
-        "offset": 283,
+        "offset": 275,
         "src": "def visit_func_def(self, defn: FuncDef) -> None:",
         "target": "mypy.checker.TypeChecker.visit_func_def"
       },
@@ -2001,39 +2001,15 @@
         "code": "redundant-expr",
         "column": 31,
         "message": "Condition is always true",
-        "offset": 483,
+        "offset": 499,
         "src": "if new_frame is None:",
         "target": "mypy.checker.TypeChecker.check_func_def"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 12,
-        "message": "Expression type contains \"Any\" (has type \"tuple[Any, ...]\")",
-        "offset": 586,
-        "src": "for substitutions in itertools.product(*subst):",
-        "target": "mypy.checker.TypeChecker.expand_typevars"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 33,
-        "message": "Expression type contains \"Any\" (has type \"product[tuple[Any, ...]]\")",
-        "offset": 0,
-        "src": "for substitutions in itertools.product(*subst):",
-        "target": "mypy.checker.TypeChecker.expand_typevars"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 31,
-        "message": "Expression type contains \"Any\" (has type \"tuple[Any, ...]\")",
-        "offset": 1,
-        "src": "mapping = dict(substitutions)",
-        "target": "mypy.checker.TypeChecker.expand_typevars"
       },
       {
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_class_def\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
-        "offset": 434,
+        "offset": 1038,
         "src": "def visit_class_def(self, defn: ClassDef) -> None:",
         "target": "mypy.checker.TypeChecker.visit_class_def"
       },
@@ -2105,7 +2081,7 @@
         "code": "truthy-bool",
         "column": 24,
         "message": "\"rvalue_type\" has type \"Type\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
-        "offset": 220,
+        "offset": 222,
         "src": "and rvalue_type",
         "target": "mypy.checker.TypeChecker.check_assignment"
       },
@@ -2217,7 +2193,7 @@
         "code": "truthy-bool",
         "column": 11,
         "message": "\"var\" has type \"Var\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
-        "offset": 360,
+        "offset": 362,
         "src": "if var and not self.current_node_deferred:",
         "target": "mypy.checker.TypeChecker.set_inferred_type"
       },
@@ -2377,7 +2353,7 @@
         "code": "redundant-expr",
         "column": 19,
         "message": "Condition is always false",
-        "offset": 529,
+        "offset": 559,
         "src": "if type_being_compared is not None:",
         "target": "mypy.checker.TypeChecker.find_type_equals_check"
       },
@@ -2393,7 +2369,7 @@
         "code": "no-any-expr",
         "column": 27,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 139,
+        "offset": 189,
         "src": "if called_type.items[0].def_extras.get(\"first_arg\"):",
         "target": "mypy.checker.TypeChecker.find_isinstance_check_helper"
       },
@@ -2433,7 +2409,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"named_generic_type\" is not using @override but is overriding a method in class \"mypy.plugin.CheckerPluginInterface\"",
-        "offset": 566,
+        "offset": 564,
         "src": "def named_generic_type(self, name: str, args: list[Type]) -> Instance:",
         "target": "mypy.checker.TypeChecker.named_generic_type"
       },
@@ -2449,7 +2425,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"get_expression_type\" is not using @override but is overriding a method in class \"mypy.plugin.CheckerPluginInterface\"",
-        "offset": 368,
+        "offset": 376,
         "src": "def get_expression_type(self, node: Expression, type_context: Type | None = None) -> Type:",
         "target": "mypy.checker.TypeChecker.get_expression_type"
       },
@@ -2465,7 +2441,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"type\" is not using @override but is overriding a method in class \"mypy.treetransform.TransformVisitor\"",
-        "offset": 349,
+        "offset": 347,
         "src": "def type(self, type: Type) -> Type:",
         "target": "mypy.checker.TypeTransformVisitor.type"
       },
@@ -2635,7 +2611,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_call_expr\" is not using @override but is overriding a method in class \"mypy.visitor.ExpressionVisitor\"",
-        "offset": 113,
+        "offset": 116,
         "src": "def visit_call_expr(self, e: CallExpr, allow_none_return: bool = False) -> Type:",
         "target": "mypy.checkexpr.ExpressionChecker.visit_call_expr"
       },
@@ -2643,7 +2619,7 @@
         "code": "truthy-bool",
         "column": 34,
         "message": "\"item_name_expr\" has type \"Expression\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
-        "offset": 409,
+        "offset": 419,
         "src": "key_context = item_name_expr or item_arg",
         "target": "mypy.checkexpr.ExpressionChecker.validate_typeddict_kwargs"
       },
@@ -2651,7 +2627,7 @@
         "code": "possibly-undefined",
         "column": 23,
         "message": "Name \"actual_types\" may be undefined",
-        "offset": 1723,
+        "offset": 1732,
         "src": "assert len(actual_types) == len(actuals) == len(actual_kinds)",
         "target": "mypy.checkexpr"
       },
@@ -2723,7 +2699,7 @@
         "code": "helpful-string",
         "column": 19,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 620,
+        "offset": 621,
         "src": "name = f\"{context.callee.name} of {object_type}\"",
         "target": "mypy.checkexpr.ExpressionChecker.check_intersection_call"
       },
@@ -2827,7 +2803,7 @@
         "code": "possibly-undefined",
         "column": 16,
         "message": "Name \"left_map\" may be undefined",
-        "offset": 552,
+        "offset": 550,
         "src": "and left_map is None",
         "target": "mypy.checkexpr"
       },
@@ -2883,7 +2859,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_cast_expr\" is not using @override but is overriding a method in class \"mypy.visitor.ExpressionVisitor\"",
-        "offset": 294,
+        "offset": 298,
         "src": "def visit_cast_expr(self, expr: CastExpr) -> Type:",
         "target": "mypy.checkexpr.ExpressionChecker.visit_cast_expr"
       },
@@ -2923,7 +2899,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_list_expr\" is not using @override but is overriding a method in class \"mypy.visitor.ExpressionVisitor\"",
-        "offset": 164,
+        "offset": 175,
         "src": "def visit_list_expr(self, e: ListExpr) -> Type:",
         "target": "mypy.checkexpr.ExpressionChecker.visit_list_expr"
       },
@@ -3075,7 +3051,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_temp_node\" is not using @override but is overriding a method in class \"mypy.visitor.ExpressionVisitor\"",
-        "offset": 69,
+        "offset": 59,
         "src": "def visit_temp_node(self, e: TempNode) -> Type:",
         "target": "mypy.checkexpr.ExpressionChecker.visit_temp_node"
       },
@@ -3155,7 +3131,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_any\" is not using @override but is overriding a method in class \"mypy.type_visitor.BoolTypeQuery\"",
-        "offset": 85,
+        "offset": 83,
         "src": "def visit_any(self, t: AnyType) -> bool:",
         "target": "mypy.checkexpr.HasAnyType.visit_any"
       },
@@ -3298,18 +3274,10 @@
     ],
     "mypy/checkmember.py": [
       {
-        "code": "possibly-undefined",
-        "column": 26,
-        "message": "Name \"impl\" may be undefined",
-        "offset": 372,
-        "src": "if isinstance(impl.type, CallableType)",
-        "target": "mypy.checkmember"
-      },
-      {
         "code": "truthy-bool",
         "column": 7,
         "message": "\"result\" has type \"Type\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
-        "offset": 498,
+        "offset": 877,
         "src": "if result and not mx.is_lvalue and not implicit:",
         "target": "mypy.checkmember.analyze_var"
       },
@@ -3331,9 +3299,17 @@
       },
       {
         "code": "unreachable",
+        "column": 48,
+        "message": "Right operand of \"and\" is never evaluated",
+        "offset": 3,
+        "src": "isinstance(node.node, FuncBase) and node.node.is_static",
+        "target": "mypy.checkmember.analyze_class_attribute_access"
+      },
+      {
+        "code": "unreachable",
         "column": 8,
         "message": "Statement is unreachable",
-        "offset": 43,
+        "offset": 47,
         "src": "typ = function_type(node.node, mx.named_type(\"builtins.function\"))",
         "target": "mypy.checkmember.analyze_class_attribute_access"
       },
@@ -3341,7 +3317,7 @@
         "code": "redundant-expr",
         "column": 7,
         "message": "Condition is always false",
-        "offset": 234,
+        "offset": 242,
         "src": "if isinstance(n, FuncBase):",
         "target": "mypy.checkmember.is_valid_constructor"
       },
@@ -3407,7 +3383,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_starred_pattern\" is not using @override but is overriding a method in class \"mypy.visitor.PatternVisitor\"",
-        "offset": 215,
+        "offset": 214,
         "src": "def visit_starred_pattern(self, o: StarredPattern) -> PatternType:",
         "target": "mypy.checkpattern.PatternChecker.visit_starred_pattern"
       },
@@ -4471,7 +4447,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_callable_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 303,
+        "offset": 304,
         "src": "def visit_callable_type(self, template: CallableType) -> list[Constraint]:",
         "target": "mypy.constraints.ConstraintBuilderVisitor.visit_callable_type"
       },
@@ -4479,7 +4455,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_tuple_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 161,
+        "offset": 173,
         "src": "def visit_tuple_type(self, template: TupleType) -> list[Constraint]:",
         "target": "mypy.constraints.ConstraintBuilderVisitor.visit_tuple_type"
       },
@@ -6391,7 +6367,7 @@
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 16,
+        "offset": 18,
         "src": "def receive(connection: IPCBase) -> Any:",
         "target": "mypy.dmypy_util.receive"
       },
@@ -6452,10 +6428,146 @@
         "target": "mypy.dmypy_util.send"
       },
       {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"__enter__\" is not using @override but is overriding a method in class \"typing.TextIO\"",
+        "offset": 11,
+        "src": "def __enter__(self) -> TextIO:",
+        "target": "mypy.dmypy_util.WriteToConn.__enter__"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"__exit__\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def __exit__(",
+        "target": "mypy.dmypy_util.WriteToConn.__exit__"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"__iter__\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 8,
+        "src": "def __iter__(self) -> Iterator[str]:",
+        "target": "mypy.dmypy_util.WriteToConn.__iter__"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"__next__\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def __next__(self) -> str:",
+        "target": "mypy.dmypy_util.WriteToConn.__next__"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"close\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def close(self) -> None:",
+        "target": "mypy.dmypy_util.WriteToConn.close"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"fileno\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def fileno(self) -> int:",
+        "target": "mypy.dmypy_util.WriteToConn.fileno"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"flush\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def flush(self) -> None:",
+        "target": "mypy.dmypy_util.WriteToConn.flush"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"isatty\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def isatty(self) -> bool:",
+        "target": "mypy.dmypy_util.WriteToConn.isatty"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"read\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def read(self, n: int = 0) -> str:",
+        "target": "mypy.dmypy_util.WriteToConn.read"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"readable\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def readable(self) -> bool:",
+        "target": "mypy.dmypy_util.WriteToConn.readable"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"readline\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def readline(self, limit: int = 0) -> str:",
+        "target": "mypy.dmypy_util.WriteToConn.readline"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"readlines\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def readlines(self, hint: int = 0) -> list[str]:",
+        "target": "mypy.dmypy_util.WriteToConn.readlines"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"seek\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def seek(self, offset: int, whence: int = 0) -> int:",
+        "target": "mypy.dmypy_util.WriteToConn.seek"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"seekable\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def seekable(self) -> bool:",
+        "target": "mypy.dmypy_util.WriteToConn.seekable"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"tell\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def tell(self) -> int:",
+        "target": "mypy.dmypy_util.WriteToConn.tell"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"truncate\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def truncate(self, size: int | None = 0) -> int:",
+        "target": "mypy.dmypy_util.WriteToConn.truncate"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"write\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def write(self, output: str) -> int:",
+        "target": "mypy.dmypy_util.WriteToConn.write"
+      },
+      {
         "code": "no-any-explicit",
         "column": 8,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 11,
+        "offset": 1,
         "src": "resp: dict[str, Any] = {}",
         "target": "mypy.dmypy_util.WriteToConn.write"
       },
@@ -6474,6 +6586,22 @@
         "offset": 1,
         "src": "send(self.server, resp)",
         "target": "mypy.dmypy_util.WriteToConn.write"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"writable\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def writable(self) -> bool:",
+        "target": "mypy.dmypy_util.WriteToConn.writable"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"writelines\" is not using @override but is overriding a method in class \"typing.IO\"",
+        "offset": 3,
+        "src": "def writelines(self, lines: Iterable[str]) -> None:",
+        "target": "mypy.dmypy_util.WriteToConn.writelines"
       }
     ],
     "mypy/erasetype.py": [
@@ -6807,7 +6935,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_int_expr\" is not using @override but is overriding a method in class \"mypy.visitor.ExpressionVisitor\"",
-        "offset": 19,
+        "offset": 20,
         "src": "def visit_int_expr(self, o: mypy.nodes.IntExpr) -> int:",
         "target": "mypy.evalexpr._NodeEvaluator.visit_int_expr"
       },
@@ -7177,7 +7305,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_callable_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.BoolTypeQuery\"",
-        "offset": 151,
+        "offset": 146,
         "src": "def visit_callable_type(self, t: CallableType) -> bool:",
         "target": "mypy.expandtype.HasGenericCallable.visit_callable_type"
       },
@@ -7201,7 +7329,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_unbound_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeTranslator\"",
-        "offset": 13,
+        "offset": 14,
         "src": "def visit_unbound_type(self, t: UnboundType) -> Type:",
         "target": "mypy.expandtype.ExpandTypeVisitor.visit_unbound_type"
       },
@@ -7265,7 +7393,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_param_spec\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeTranslator\"",
-        "offset": 12,
+        "offset": 20,
         "src": "def visit_param_spec(self, t: ParamSpecType) -> Type:",
         "target": "mypy.expandtype.ExpandTypeVisitor.visit_param_spec"
       },
@@ -7289,7 +7417,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_parameters\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeTranslator\"",
-        "offset": 35,
+        "offset": 37,
         "src": "def visit_parameters(self, t: Parameters) -> Type:",
         "target": "mypy.expandtype.ExpandTypeVisitor.visit_parameters"
       },
@@ -7297,7 +7425,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_callable_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeTranslator\"",
-        "offset": 23,
+        "offset": 31,
         "src": "def visit_callable_type(self, t: CallableType) -> CallableType:",
         "target": "mypy.expandtype.ExpandTypeVisitor.visit_callable_type"
       },
@@ -7305,7 +7433,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_overloaded\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeTranslator\"",
-        "offset": 57,
+        "offset": 59,
         "src": "def visit_overloaded(self, t: Overloaded) -> Type:",
         "target": "mypy.expandtype.ExpandTypeVisitor.visit_overloaded"
       },
@@ -7485,31 +7613,15 @@
         "code": "no-any-expr",
         "column": 15,
         "message": "Expression has type \"Any\"",
-        "offset": 50,
+        "offset": 47,
         "src": "tree = ASTConverter(",
-        "target": "mypy.fastparse.parse"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 8,
-        "message": "Expression has type \"Any\"",
-        "offset": 7,
-        "src": "tree.path = fnam",
-        "target": "mypy.fastparse.parse"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 8,
-        "message": "Expression has type \"Any\"",
-        "offset": 1,
-        "src": "tree.is_stub = is_stub_file",
         "target": "mypy.fastparse.parse"
       },
       {
         "code": "no-any-expr",
         "column": 22,
         "message": "Expression has type \"Any\"",
-        "offset": 25,
+        "offset": 28,
         "src": "assert isinstance(tree, MypyFile)",
         "target": "mypy.fastparse.parse"
       },
@@ -7517,7 +7629,7 @@
         "code": "no-any-explicit",
         "column": 8,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 139,
+        "offset": 141,
         "src": "self.visitor_cache: dict[type, Callable[[AST | None], Any]] = {}",
         "target": "mypy.fastparse.ASTConverter.__init__"
       },
@@ -7525,7 +7637,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 17,
+        "offset": 21,
         "src": "def visit(self, node: AST | None) -> Any:",
         "target": "mypy.fastparse.ASTConverter.visit"
       },
@@ -7613,7 +7725,7 @@
         "code": "unreachable",
         "column": 16,
         "message": "Right operand of \"and\" is never evaluated",
-        "offset": 144,
+        "offset": 143,
         "src": "current_overload_name is not None",
         "target": "mypy.fastparse.ASTConverter.fix_function_overloads"
       },
@@ -7677,7 +7789,7 @@
         "code": "no-any-expr",
         "column": 24,
         "message": "Expression has type \"Any\"",
-        "offset": 235,
+        "offset": 240,
         "src": "and func_type_ast.argtypes[0].value is Ellipsis",
         "target": "mypy.fastparse.ASTConverter.do_func_def"
       },
@@ -9437,7 +9549,7 @@
         "code": "no-any-expr",
         "column": 22,
         "message": "Expression type contains \"Any\" (has type \"Any | None\")",
-        "offset": 18,
+        "offset": 16,
         "src": "visitor = getattr(self, method, None)",
         "target": "mypy.fastparse.TypeConverter.visit"
       },
@@ -9541,7 +9653,7 @@
         "code": "no-any-expr",
         "column": 61,
         "message": "Expression type contains \"Any\" (has type \"Any | int\")",
-        "offset": 32,
+        "offset": 38,
         "src": "numeric_value, type_name, line=self.line, column=getattr(n, \"col_offset\", -1)",
         "target": "mypy.fastparse.TypeConverter.numeric_type"
       },
@@ -9881,7 +9993,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_overloaded\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 10,
+        "offset": 12,
         "src": "def visit_overloaded(self, t: Overloaded) -> None:",
         "target": "mypy.fixup.TypeFixer.visit_overloaded"
       },
@@ -10373,7 +10485,7 @@
         "code": "redundant-expr",
         "column": 15,
         "message": "Condition is always true",
-        "offset": 170,
+        "offset": 175,
         "src": "if best is None or is_better(res, best):",
         "target": "mypy.join.InstanceJoiner.join_instances_via_supertype"
       },
@@ -10389,7 +10501,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_unbound_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 157,
+        "offset": 155,
         "src": "def visit_unbound_type(self, t: UnboundType) -> ProperType:",
         "target": "mypy.join.TypeJoinVisitor.visit_unbound_type"
       },
@@ -11017,8 +11129,8 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 49,
-        "src": "def __init__(self, *args: Any, **kwargs: Any):",
+        "offset": 48,
+        "src": "def __init__(self, *args: Any, **kwargs: Any) -> None:",
         "target": "mypy.main.CapturableArgumentParser.__init__"
       },
       {
@@ -11177,7 +11289,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 32,
+        "offset": 31,
         "src": "def __call__(",
         "target": "mypy.main.CapturableVersionAction.__call__"
       },
@@ -11233,7 +11345,7 @@
         "code": "no-any-expr",
         "column": 67,
         "message": "Expression type contains \"Any\" (has type \"list[Any]\")",
-        "offset": 290,
+        "offset": 292,
         "src": "\"--package-root\", metavar=\"ROOT\", action=\"append\", default=[], help=argparse.SUPPRESS",
         "target": "mypy.main.process_options"
       },
@@ -12343,7 +12455,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 567,
+        "offset": 568,
         "src": "def unsupported_operand_types(",
         "target": "mypy.messages.MessageBuilder.unsupported_operand_types"
       },
@@ -12455,7 +12567,7 @@
         "code": "helpful-string",
         "column": 26,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 503,
+        "offset": 506,
         "src": "self.note(f\"    {k}: {v.accept(visitor) if v is not None else None}\", context)",
         "target": "mypy.messages.MessageBuilder.reveal_locals"
       },
@@ -12463,7 +12575,7 @@
         "code": "redundant-expr",
         "column": 15,
         "message": "Condition is always false",
-        "offset": 374,
+        "offset": 385,
         "src": "if not isinstance(subtype.partial_fallback, Instance):",
         "target": "mypy.messages.MessageBuilder.report_protocol_problems"
       },
@@ -12559,7 +12671,7 @@
         "code": "redundant-expr",
         "column": 9,
         "message": "Condition is always false",
-        "offset": 274,
+        "offset": 276,
         "src": "elif typ is None:",
         "target": "mypy.messages.format_type_inner"
       },
@@ -12633,7 +12745,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"getmtime\" is not using @override but is overriding a method in class \"mypy.metastore.MetadataStore\"",
-        "offset": 84,
+        "offset": 83,
         "src": "def getmtime(self, name: str) -> float:",
         "target": "mypy.metastore.FilesystemMetadataStore.getmtime"
       },
@@ -12949,7 +13061,7 @@
         "code": "redundant-expr",
         "column": 13,
         "message": "Condition is always true",
-        "offset": 91,
+        "offset": 84,
         "src": "elif self is ModuleNotFoundReason.APPROVED_STUBS_NOT_INSTALLED:",
         "target": "mypy.modulefinder.ModuleNotFoundReason.error_message_templates"
       },
@@ -12963,33 +13075,9 @@
       },
       {
         "code": "no-any-expr",
-        "column": 23,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 459,
-        "src": "metadata = tomllib.load(f)",
-        "target": "mypy.modulefinder.FindModuleCache._is_compatible_stub_package"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 20,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 1,
-        "src": "return bool(metadata.get(\"python3\", True))",
-        "target": "mypy.modulefinder.FindModuleCache._is_compatible_stub_package"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 20,
-        "message": "Expression has type \"Any\"",
-        "offset": 0,
-        "src": "return bool(metadata.get(\"python3\", True))",
-        "target": "mypy.modulefinder.FindModuleCache._is_compatible_stub_package"
-      },
-      {
-        "code": "no-any-expr",
         "column": 1,
         "message": "Expression type contains \"Any\" (has type \"[_T] ((...) -> _T) -> _lru_cache_wrapper[_T]\")",
-        "offset": 156,
+        "offset": 603,
         "src": "@functools.lru_cache(maxsize=None)",
         "target": "mypy.modulefinder"
       },
@@ -13843,7 +13931,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"accept\" is not using @override but is overriding a method in class \"mypy.nodes.Expression\"",
-        "offset": 62,
+        "offset": 65,
         "src": "def accept(self, visitor: ExpressionVisitor[T]) -> T:",
         "target": "mypy.nodes.NameExpr.accept"
       },
@@ -14781,7 +14869,7 @@
         "code": "no-any-explicit",
         "column": 8,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 269,
+        "offset": 273,
         "src": "self.transform_source: Callable[[Any], Any] | None = None",
         "target": "mypy.options.Options.__init__"
       },
@@ -14879,7 +14967,7 @@
         "code": "no-any-expr",
         "column": 7,
         "message": "Expression type contains \"Any\" (has type \"(Any) -> Any | None\")",
-        "offset": 18,
+        "offset": 23,
         "src": "if options.transform_source is not None:",
         "target": "mypy.parse.parse"
       }
@@ -15171,7 +15259,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"accept\" is not using @override but is overriding a method in class \"mypy.patterns.Pattern\"",
-        "offset": 16,
+        "offset": 18,
         "src": "def accept(self, visitor: PatternVisitor[T]) -> T:",
         "target": "mypy.patterns.MappingPattern.accept"
       },
@@ -15423,7 +15511,7 @@
         "code": "truthy-bool",
         "column": 19,
         "message": "\"init_type\" has type \"Type\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
-        "offset": 132,
+        "offset": 134,
         "src": "if init_type and self.init_type and self.converter.ret_type:",
         "target": "mypy.plugins.attrs.Attribute.argument"
       },
@@ -15431,7 +15519,7 @@
         "code": "no-any-expr",
         "column": 15,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 46,
+        "offset": 47,
         "src": "return {",
         "target": "mypy.plugins.attrs.Attribute.serialize"
       },
@@ -15439,7 +15527,7 @@
         "code": "no-any-expr",
         "column": 41,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 112,
+        "offset": 116,
         "src": "ctx.cls.info.metadata[\"attrs_tag\"] = {}",
         "target": "mypy.plugins.attrs.attr_tag_callback"
       },
@@ -15447,7 +15535,7 @@
         "code": "no-any-expr",
         "column": 37,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 59,
+        "offset": 61,
         "src": "ctx.cls.info.metadata[\"attrs\"] = {",
         "target": "mypy.plugins.attrs.attr_class_maker_callback"
       },
@@ -15471,7 +15559,7 @@
         "code": "no-any-expr",
         "column": 12,
         "message": "Expression has type \"Any\"",
-        "offset": 72,
+        "offset": 92,
         "src": "for data in super_info.metadata[\"attrs\"][\"attributes\"]:",
         "target": "mypy.plugins.attrs._analyze_class"
       },
@@ -15519,7 +15607,7 @@
         "code": "truthy-bool",
         "column": 12,
         "message": "Expression has type \"Expression\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
-        "offset": 193,
+        "offset": 205,
         "src": "and converter_expr.args[0]",
         "target": "mypy.plugins.attrs._parse_converter"
       },
@@ -15543,7 +15631,7 @@
         "code": "helpful-string",
         "column": 21,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 214,
+        "offset": 223,
         "src": "ctx.api.fail(f'\"{ctx.default_signature.name}\" has unexpected type annotation', ctx.context)",
         "target": "mypy.plugins.attrs.evolve_function_sig_callback"
       },
@@ -15561,7 +15649,7 @@
         "code": "redundant-expr",
         "column": 13,
         "message": "Condition is always true",
-        "offset": 135,
+        "offset": 136,
         "src": "elif of == \"__post_init__\":",
         "target": "mypy.plugins.dataclasses.DataclassAttribute.to_argument"
       },
@@ -15585,7 +15673,7 @@
         "code": "no-any-expr",
         "column": 37,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 210,
+        "offset": 216,
         "src": "info.metadata[\"dataclass\"] = {",
         "target": "mypy.plugins.dataclasses.DataclassTransformer.transform"
       },
@@ -15691,7 +15779,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"get_attribute_hook\" is not using @override but is overriding a method in class \"mypy.plugin.Plugin\"",
-        "offset": 44,
+        "offset": 46,
         "src": "def get_attribute_hook(self, fullname: str) -> Callable[[AttributeContext], Type] | None:",
         "target": "mypy.plugins.default.DefaultPlugin.get_attribute_hook"
       },
@@ -15715,7 +15803,7 @@
         "code": "redundant-expr",
         "column": 9,
         "message": "Condition is always false",
-        "offset": 360,
+        "offset": 371,
         "src": "elif isinstance(ctx.type, LiteralType):",
         "target": "mypy.plugins.default.tuple_mul_callback"
       },
@@ -15741,7 +15829,7 @@
         "code": "redundant-expr",
         "column": 19,
         "message": "Condition is always true",
-        "offset": 187,
+        "offset": 188,
         "src": "if underlying_type is not None:",
         "target": "mypy.plugins.enums.enum_value_callback"
       }
@@ -15751,7 +15839,7 @@
         "code": "redundant-expr",
         "column": 19,
         "message": "Condition is always false",
-        "offset": 91,
+        "offset": 92,
         "src": "if isinstance(node, FuncItem) and isinstance(node.type, CallableType):",
         "target": "mypy.plugins.functools._analyze_class"
       },
@@ -17009,7 +17097,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"type\" is not using @override but is overriding a method in class \"mypy.semanal_shared.SemanticAnalyzerCoreInterface\"",
-        "offset": 475,
+        "offset": 477,
         "src": "def type(self) -> TypeInfo | None:",
         "target": "mypy.semanal"
       },
@@ -17065,7 +17153,7 @@
         "code": "redundant-expr",
         "column": 19,
         "message": "Condition is always true",
-        "offset": 15,
+        "offset": 21,
         "src": "if isinstance(defn, FuncDef):",
         "target": "mypy.semanal.SemanticAnalyzer.analyze_func_def"
       },
@@ -17142,10 +17230,34 @@
         "target": "mypy.semanal.SemanticAnalyzer.clean_up_bases_and_infer_type_variables"
       },
       {
+        "code": "redundant-expr",
+        "column": 15,
+        "message": "Condition is always false",
+        "offset": 23,
+        "src": "if last_tvar_name_with_default is not None and not tvar_def.has_default():",
+        "target": "mypy.semanal.SemanticAnalyzer.clean_up_bases_and_infer_type_variables"
+      },
+      {
+        "code": "unreachable",
+        "column": 59,
+        "message": "Right operand of \"and\" is never evaluated",
+        "offset": 0,
+        "src": "if last_tvar_name_with_default is not None and not tvar_def.has_default():",
+        "target": "mypy.semanal.SemanticAnalyzer.clean_up_bases_and_infer_type_variables"
+      },
+      {
+        "code": "unreachable",
+        "column": 16,
+        "message": "Statement is unreachable",
+        "offset": 1,
+        "src": "self.msg.tvar_without_default_type(",
+        "target": "mypy.semanal.SemanticAnalyzer.clean_up_bases_and_infer_type_variables"
+      },
+      {
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"get_and_bind_all_tvars\" is not using @override but is overriding a method in class \"mypy.semanal_shared.SemanticAnalyzerInterface\"",
-        "offset": 114,
+        "offset": 107,
         "src": "def get_and_bind_all_tvars(self, type_exprs: list[Expression]) -> list[TypeVarLikeType]:",
         "target": "mypy.semanal.SemanticAnalyzer.get_and_bind_all_tvars"
       },
@@ -17153,7 +17265,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_import\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
-        "offset": 420,
+        "offset": 428,
         "src": "def visit_import(self, i: Import) -> None:",
         "target": "mypy.semanal.SemanticAnalyzer.visit_import"
       },
@@ -17217,7 +17329,7 @@
         "code": "truthy-bool",
         "column": 11,
         "message": "Member \"rvalue\" has type \"Expression\" which does not implement __bool__ or __len__ so it could always be true in boolean context",
-        "offset": 376,
+        "offset": 390,
         "src": "if s.rvalue:",
         "target": "mypy.semanal.SemanticAnalyzer.analyze_lvalues"
       },
@@ -17246,10 +17358,34 @@
         "target": "mypy.semanal"
       },
       {
+        "code": "redundant-expr",
+        "column": 19,
+        "message": "Condition is always false",
+        "offset": 44,
+        "src": "if last_tvar_name_with_default is not None and not tvar_def.has_default():",
+        "target": "mypy.semanal.SemanticAnalyzer.analyze_alias"
+      },
+      {
+        "code": "unreachable",
+        "column": 63,
+        "message": "Right operand of \"and\" is never evaluated",
+        "offset": 0,
+        "src": "if last_tvar_name_with_default is not None and not tvar_def.has_default():",
+        "target": "mypy.semanal.SemanticAnalyzer.analyze_alias"
+      },
+      {
+        "code": "unreachable",
+        "column": 20,
+        "message": "Statement is unreachable",
+        "offset": 1,
+        "src": "self.msg.tvar_without_default_type(",
+        "target": "mypy.semanal.SemanticAnalyzer.analyze_alias"
+      },
+      {
         "code": "helpful-string",
         "column": 20,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 768,
+        "offset": 846,
         "src": "f'{message_registry.TYPEVAR_UNEXPECTED_ARGUMENT}: \"{param_name}\"', context",
         "target": "mypy.semanal.SemanticAnalyzer.process_typevar_parameters"
       },
@@ -17489,7 +17625,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_super_expr\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
-        "offset": 18,
+        "offset": 16,
         "src": "def visit_super_expr(self, expr: SuperExpr) -> None:",
         "target": "mypy.semanal.SemanticAnalyzer.visit_super_expr"
       },
@@ -17601,7 +17737,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_member_expr\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
-        "offset": 104,
+        "offset": 111,
         "src": "def visit_member_expr(self, expr: MemberExpr) -> None:",
         "target": "mypy.semanal.SemanticAnalyzer.visit_member_expr"
       },
@@ -18363,7 +18499,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_placeholder_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.BoolTypeQuery\"",
-        "offset": 367,
+        "offset": 366,
         "src": "def visit_placeholder_type(self, t: PlaceholderType) -> bool:",
         "target": "mypy.semanal_shared.HasPlaceholders.visit_placeholder_type"
       }
@@ -18455,7 +18591,7 @@
         "code": "helpful-string",
         "column": 16,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 450,
+        "offset": 458,
         "src": "f'Unexpected keyword argument \"{call.arg_names[2]}\" for \"TypedDict\"', call",
         "target": "mypy.semanal_typeddict.TypedDictAnalyzer.parse_typeddict_args"
       }
@@ -22347,7 +22483,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"__repr__\" is not using @override but is overriding a method in class \"builtins.object\"",
-        "offset": 237,
+        "offset": 240,
         "src": "def __repr__(self) -> str:",
         "target": "mypy.stubgen.StubSource.__repr__"
       },
@@ -22371,7 +22507,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_name_expr\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
-        "offset": 5,
+        "offset": 13,
         "src": "def visit_name_expr(self, node: NameExpr) -> str:",
         "target": "mypy.stubgen.AliasPrinter.visit_name_expr"
       },
@@ -22379,7 +22515,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_member_expr\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
-        "offset": 4,
+        "offset": 3,
         "src": "def visit_member_expr(self, o: MemberExpr) -> str:",
         "target": "mypy.stubgen.AliasPrinter.visit_member_expr"
       },
@@ -22387,7 +22523,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_str_expr\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
-        "offset": 11,
+        "offset": 3,
         "src": "def visit_str_expr(self, node: StrExpr) -> str:",
         "target": "mypy.stubgen.AliasPrinter.visit_str_expr"
       },
@@ -22403,7 +22539,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_tuple_expr\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
-        "offset": 7,
+        "offset": 14,
         "src": "def visit_tuple_expr(self, node: TupleExpr) -> str:",
         "target": "mypy.stubgen.AliasPrinter.visit_tuple_expr"
       },
@@ -22442,8 +22578,16 @@
       {
         "code": "explicit-override",
         "column": 4,
+        "message": "Method \"visit_star_expr\" is not using @override but is overriding a method in class \"mypy.visitor.NodeVisitor\"",
+        "offset": 3,
+        "src": "def visit_star_expr(self, o: StarExpr) -> str:",
+        "target": "mypy.stubgen.AliasPrinter.visit_star_expr"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
         "message": "Method \"visit_class_def\" is not using @override but is overriding a method in class \"mypy.traverser.TraverserVisitor\"",
-        "offset": 19,
+        "offset": 25,
         "src": "def visit_class_def(self, o: ClassDef) -> None:",
         "target": "mypy.stubgen.DefinitionFinder.visit_class_def"
       },
@@ -22454,6 +22598,14 @@
         "offset": 4,
         "src": "def visit_func_def(self, o: FuncDef) -> None:",
         "target": "mypy.stubgen.DefinitionFinder.visit_func_def"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_assignment_stmt\" is not using @override but is overriding a method in class \"mypy.traverser.TraverserVisitor\"",
+        "offset": 4,
+        "src": "def visit_assignment_stmt(self, o: AssignmentStmt) -> None:",
+        "target": "mypy.stubgen.DefinitionFinder.visit_assignment_stmt"
       },
       {
         "code": "explicit-override",
@@ -22523,7 +22675,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_func_def\" is not using @override but is overriding a method in class \"mypy.traverser.TraverserVisitor\"",
-        "offset": 137,
+        "offset": 134,
         "src": "def visit_func_def(self, o: FuncDef) -> None:",
         "target": "mypy.stubgen.ASTStubGenerator.visit_func_def"
       },
@@ -22539,7 +22691,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_class_def\" is not using @override but is overriding a method in class \"mypy.traverser.TraverserVisitor\"",
-        "offset": 73,
+        "offset": 64,
         "src": "def visit_class_def(self, o: ClassDef) -> None:",
         "target": "mypy.stubgen.ASTStubGenerator.visit_class_def"
       },
@@ -22563,7 +22715,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_if_stmt\" is not using @override but is overriding a method in class \"mypy.traverser.TraverserVisitor\"",
-        "offset": 238,
+        "offset": 243,
         "src": "def visit_if_stmt(self, o: IfStmt) -> None:",
         "target": "mypy.stubgen.ASTStubGenerator.visit_if_stmt"
       },
@@ -22681,18 +22833,10 @@
       },
       {
         "code": "no-any-expr",
-        "column": 26,
+        "column": 16,
         "message": "Expression has type \"Any\"",
         "offset": 4,
-        "src": "if not os.path.exists(ns.output_dir):",
-        "target": "mypy.stubgen.parse_options"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 20,
-        "message": "Expression has type \"Any\"",
-        "offset": 1,
-        "src": "os.makedirs(ns.output_dir)",
+        "src": "os.makedirs(ns.output_dir, exist_ok=True)",
         "target": "mypy.stubgen.parse_options"
       },
       {
@@ -23203,34 +23347,34 @@
       },
       {
         "code": "no-any-expr",
-        "column": 35,
+        "column": 31,
         "message": "Expression type contains \"Any\" (has type \"(str, Any)\")",
         "offset": 6,
-        "src": "self.set_defined_names(set([name for name, obj in all_items if not inspect.ismodule(obj)]))",
+        "src": "self.set_defined_names({name for name, obj in all_items if not inspect.ismodule(obj)})",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_module"
       },
       {
         "code": "no-any-expr",
-        "column": 35,
+        "column": 31,
         "message": "Expression has type \"Any\"",
         "offset": 0,
-        "src": "self.set_defined_names(set([name for name, obj in all_items if not inspect.ismodule(obj)]))",
+        "src": "self.set_defined_names({name for name, obj in all_items if not inspect.ismodule(obj)})",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_module"
       },
       {
         "code": "no-any-expr",
-        "column": 58,
+        "column": 54,
         "message": "Expression type contains \"Any\" (has type \"list[(str, Any)]\")",
         "offset": 0,
-        "src": "self.set_defined_names(set([name for name, obj in all_items if not inspect.ismodule(obj)]))",
+        "src": "self.set_defined_names({name for name, obj in all_items if not inspect.ismodule(obj)})",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_module"
       },
       {
         "code": "no-any-expr",
-        "column": 92,
+        "column": 88,
         "message": "Expression has type \"Any\"",
         "offset": 0,
-        "src": "self.set_defined_names(set([name for name, obj in all_items if not inspect.ismodule(obj)]))",
+        "src": "self.set_defined_names({name for name, obj in all_items if not inspect.ismodule(obj)})",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_module"
       },
       {
@@ -23371,25 +23515,57 @@
       },
       {
         "code": "no-any-expr",
-        "column": 60,
+        "column": 50,
         "message": "Expression type contains \"Any\" (has type \"type[Any]\")",
         "offset": 10,
-        "src": "return \"type[{}]\".format(self.get_type_fullname(obj))",
+        "src": "return f\"type[{self.get_type_fullname(obj)}]\"",
         "target": "mypy.stubgenc.InspectionStubGenerator.get_type_annotation"
       },
       {
+        "code": "no-any-explicit",
+        "column": 12,
+        "message": "Explicit \"Any\" is not allowed",
+        "offset": 38,
+        "src": "raw_lookup: Mapping[str, Any] = getattr(class_info.cls, \"__dict__\")  # noqa: B009",
+        "target": "mypy.stubgenc.InspectionStubGenerator.is_staticmethod"
+      },
+      {
         "code": "no-any-expr",
-        "column": 16,
+        "column": 24,
+        "message": "Expression type contains \"Any\" (has type \"Mapping[str, Any]\")",
+        "offset": 1,
+        "src": "raw_value = raw_lookup.get(name, obj)",
+        "target": "mypy.stubgenc.InspectionStubGenerator.is_staticmethod"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 24,
         "message": "Expression has type \"Any\"",
-        "offset": 39,
-        "src": "inspect.getattr_static(class_info.cls, name), staticmethod",
+        "offset": 0,
+        "src": "raw_value = raw_lookup.get(name, obj)",
+        "target": "mypy.stubgenc.InspectionStubGenerator.is_staticmethod"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 30,
+        "message": "Expression has type \"Any\"",
+        "offset": 1,
+        "src": "return isinstance(raw_value, staticmethod)",
+        "target": "mypy.stubgenc.InspectionStubGenerator.is_staticmethod"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 30,
+        "message": "Expression has type \"Any\"",
+        "offset": 2,
+        "src": "return isinstance(inspect.getattr_static(class_info.cls, name), staticmethod)",
         "target": "mypy.stubgenc.InspectionStubGenerator.is_staticmethod"
       },
       {
         "code": "no-any-expr",
         "column": 15,
         "message": "Expression type contains \"Any\" (has type \"Any | bool\")",
-        "offset": 5,
+        "offset": 4,
         "src": "return getattr(obj, \"__abstractmethod__\", False)",
         "target": "mypy.stubgenc.InspectionStubGenerator.is_abstract_method"
       },
@@ -23618,11 +23794,11 @@
         "target": "mypy.stubgenc.InspectionStubGenerator.get_type_fullname"
       },
       {
-        "code": "no-any-expr",
-        "column": 21,
-        "message": "Expression has type \"Any\"",
+        "code": "no-any-explicit",
+        "column": 8,
+        "message": "Explicit \"Any\" is not allowed",
         "offset": 26,
-        "src": "raw_lookup = getattr(cls, \"__dict__\")  # noqa: B009",
+        "src": "raw_lookup: Mapping[str, Any] = getattr(cls, \"__dict__\")  # noqa: B009",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_class_stub"
       },
       {
@@ -23659,26 +23835,26 @@
       },
       {
         "code": "no-any-expr",
-        "column": 19,
+        "column": 16,
         "message": "Expression type contains \"Any\" (has type \"(str, Any)\")",
         "offset": 1,
-        "src": "names = set(x[0] for x in items)",
+        "src": "names = {x[0] for x in items}",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_class_stub"
       },
       {
         "code": "no-any-expr",
-        "column": 20,
+        "column": 17,
         "message": "Expression type contains \"Any\" (has type \"(str, Any)\")",
         "offset": 0,
-        "src": "names = set(x[0] for x in items)",
+        "src": "names = {x[0] for x in items}",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_class_stub"
       },
       {
         "code": "no-any-expr",
-        "column": 34,
+        "column": 31,
         "message": "Expression type contains \"Any\" (has type \"list[(str, Any)]\")",
         "offset": 0,
-        "src": "names = set(x[0] for x in items)",
+        "src": "names = {x[0] for x in items}",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_class_stub"
       },
       {
@@ -23724,8 +23900,16 @@
       {
         "code": "no-any-expr",
         "column": 24,
-        "message": "Expression has type \"Any\"",
+        "message": "Expression type contains \"Any\" (has type \"Mapping[str, Any]\")",
         "offset": 2,
+        "src": "raw_value = raw_lookup.get(attr, value)",
+        "target": "mypy.stubgenc.InspectionStubGenerator.generate_class_stub"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 24,
+        "message": "Expression has type \"Any\"",
+        "offset": 0,
         "src": "raw_value = raw_lookup.get(attr, value)",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_class_stub"
       },
@@ -23755,10 +23939,18 @@
       },
       {
         "code": "no-any-expr",
-        "column": 57,
+        "column": 58,
         "message": "Expression has type \"Any\"",
         "offset": 11,
-        "src": "if self.is_classmethod(class_info, attr, value):",
+        "src": "if self.is_staticmethod(class_info, attr, value):",
+        "target": "mypy.stubgenc.InspectionStubGenerator.generate_class_stub"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 59,
+        "message": "Expression has type \"Any\"",
+        "offset": 2,
+        "src": "elif self.is_classmethod(class_info, attr, value):",
         "target": "mypy.stubgenc.InspectionStubGenerator.generate_class_stub"
       },
       {
@@ -23887,7 +24079,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"__repr__\" is not using @override but is overriding a method in class \"builtins.object\"",
-        "offset": 49,
+        "offset": 50,
         "src": "def __repr__(self) -> str:",
         "target": "mypy.stubtest.Missing.__repr__"
       },
@@ -24070,8 +24262,16 @@
       {
         "code": "no-any-expr",
         "column": 1,
+        "message": "Expression type contains \"Any\" (has type overloaded function)",
+        "offset": 32,
+        "src": "@functools.lru_cache",
+        "target": "mypy.stubtest"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 1,
         "message": "Expression type contains \"Any\" (has type \"_SingleDispatchCallable[Iterator[Error], def (stub: Node | Missing, runtime: Any | Missing, object_path: list[str]) -> Iterator[Error]]\")",
-        "offset": 64,
+        "offset": 18,
         "src": "@verify.register(nodes.MypyFile)",
         "target": "mypy.stubtest"
       },
@@ -24111,7 +24311,7 @@
         "code": "no-any-expr",
         "column": 14,
         "message": "Expression has type \"Any\"",
-        "offset": 19,
+        "offset": 17,
         "src": "obj = getattr(r, attr)",
         "target": "mypy.stubtest.verify_mypyfile"
       },
@@ -24125,23 +24325,15 @@
       },
       {
         "code": "no-any-expr",
-        "column": 20,
+        "column": 22,
         "message": "Expression has type \"Any\"",
-        "offset": 2,
-        "src": "if callable(obj):",
-        "target": "mypy.stubtest.verify_mypyfile"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 26,
-        "message": "Expression has type \"Any\"",
-        "offset": 4,
+        "offset": 22,
         "src": "obj_mod = obj.__module__",
         "target": "mypy.stubtest.verify_mypyfile"
       },
       {
         "code": "no-any-expr",
-        "column": 30,
+        "column": 26,
         "message": "Expression has type \"Any\"",
         "offset": 4,
         "src": "if isinstance(obj_mod, str):",
@@ -24151,7 +24343,7 @@
         "code": "no-any-expr",
         "column": 28,
         "message": "Expression type contains \"Any\" (has type \"Any | Missing\")",
-        "offset": 30,
+        "offset": 28,
         "src": "runtime_entry = getattr(runtime, entry, MISSING)",
         "target": "mypy.stubtest.verify_mypyfile"
       },
@@ -24600,7 +24792,7 @@
         "column": 20,
         "message": "Expression type contains \"Any\" (has type \"type[Any]\")",
         "offset": 12,
-        "src": "and type(runtime_arg.default) != object",
+        "src": "and type(runtime_arg.default) is not object",
         "target": "mypy.stubtest._verify_arg_default_value"
       },
       {
@@ -24608,7 +24800,7 @@
         "column": 25,
         "message": "Expression has type \"Any\"",
         "offset": 0,
-        "src": "and type(runtime_arg.default) != object",
+        "src": "and type(runtime_arg.default) is not object",
         "target": "mypy.stubtest._verify_arg_default_value"
       },
       {
@@ -24807,7 +24999,7 @@
         "code": "no-any-expr",
         "column": 65,
         "message": "Expression type contains \"Any\" (has type \"set[Any]\")",
-        "offset": 198,
+        "offset": 204,
         "src": "if runtime.varkw is None or not set(runtime.kwonly).issubset(set(stub.kwonly)):",
         "target": "mypy.stubtest._verify_signature"
       },
@@ -24815,15 +25007,23 @@
         "code": "no-any-expr",
         "column": 44,
         "message": "Expression type contains \"Any\" (has type \"set[str | Any]\")",
-        "offset": 31,
+        "offset": 32,
         "src": "if not set(runtime.kwonly).issubset(set(stub.kwonly) | stub_pos_names):",
         "target": "mypy.stubtest._verify_signature"
       },
       {
         "code": "no-any-expr",
+        "column": 12,
+        "message": "Expression has type \"Any\"",
+        "offset": 10,
+        "src": "and arg.default is not inspect.Parameter.empty",
+        "target": "mypy.stubtest._is_private_parameter"
+      },
+      {
+        "code": "no-any-expr",
         "column": 1,
         "message": "Expression type contains \"Any\" (has type \"_SingleDispatchCallable[Iterator[Error], def (stub: Node | Missing, runtime: Any | Missing, object_path: list[str]) -> Iterator[Error]]\")",
-        "offset": 6,
+        "offset": 4,
         "src": "@verify.register(nodes.FuncItem)",
         "target": "mypy.stubtest"
       },
@@ -25151,7 +25351,7 @@
         "code": "helpful-string",
         "column": 29,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 6,
+        "offset": 13,
         "src": "object_path, f\"variable differs from runtime type {runtime_type}\", stub, runtime",
         "target": "mypy.stubtest.verify_var"
       },
@@ -25919,7 +26119,7 @@
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 88,
+        "offset": 89,
         "src": "def is_probably_a_function(runtime: Any) -> bool:",
         "target": "mypy.stubtest.is_probably_a_function"
       },
@@ -26037,9 +26237,9 @@
       },
       {
         "code": "no-any-expr",
-        "column": 23,
+        "column": 27,
         "message": "Expression has type \"Any\"",
-        "offset": 3,
+        "offset": 4,
         "src": "if parameter.default is ...",
         "target": "mypy.stubtest.safe_inspect_signature"
       },
@@ -26047,7 +26247,7 @@
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 42,
+        "offset": 43,
         "src": "def get_mypy_type_of_runtime_value(runtime: Any) -> mypy.types.Type | None:",
         "target": "mypy.stubtest.get_mypy_type_of_runtime_value"
       },
@@ -26183,7 +26383,7 @@
         "code": "no-any-expr",
         "column": 16,
         "message": "Expression type contains \"Any\" (has type \"list[Any]\")",
-        "offset": 372,
+        "offset": 370,
         "src": "default=[],",
         "target": "mypy.stubtest.parse_options"
       }
@@ -26193,7 +26393,7 @@
         "code": "helpful-string",
         "column": 10,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 129,
+        "offset": 149,
         "src": "print(f\"{mod}: Failed to import, skipping{message}\")",
         "target": "mypy.stubutil.report_missing"
       },
@@ -26201,7 +26401,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_any\" is not using @override but is overriding a method in class \"mypy.types.TypeStrVisitor\"",
-        "offset": 93,
+        "offset": 91,
         "src": "def visit_any(self, t: AnyType) -> str:",
         "target": "mypy.stubutil.AnnotationPrinter.visit_any"
       },
@@ -26217,7 +26417,7 @@
         "code": "possibly-undefined",
         "column": 15,
         "message": "Name \"arg_module\" may be undefined",
-        "offset": 13,
+        "offset": 20,
         "src": "if arg_module not in self.local_modules:",
         "target": "mypy.stubutil"
       },
@@ -26225,7 +26425,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_none_type\" is not using @override but is overriding a method in class \"mypy.types.TypeStrVisitor\"",
-        "offset": 12,
+        "offset": 14,
         "src": "def visit_none_type(self, t: NoneType) -> str:",
         "target": "mypy.stubutil.AnnotationPrinter.visit_none_type"
       },
@@ -26251,7 +26451,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_unbound_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 431,
+        "offset": 434,
         "src": "def visit_unbound_type(self, left: UnboundType) -> bool:",
         "target": "mypy.subtypes.SubtypeVisitor.visit_unbound_type"
       },
@@ -26307,7 +26507,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_type_var\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 176,
+        "offset": 192,
         "src": "def visit_type_var(self, left: TypeVarType) -> bool:",
         "target": "mypy.subtypes.SubtypeVisitor.visit_type_var"
       },
@@ -26355,7 +26555,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_tuple_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 64,
+        "offset": 91,
         "src": "def visit_tuple_type(self, left: TupleType) -> bool:",
         "target": "mypy.subtypes.SubtypeVisitor.visit_tuple_type"
       },
@@ -26427,7 +26627,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 801,
+        "offset": 804,
         "src": "def report(*args: Any) -> None:",
         "target": "mypy.subtypes.unify_generic_callable"
       },
@@ -26482,50 +26682,10 @@
         "target": "mypy.suggestions.ArgUseFinder.visit_call_expr"
       },
       {
-        "code": "no-any-expr",
-        "column": 18,
-        "message": "Expression type contains \"Any\" (has type \"islice[tuple[Any, ...]]\")",
-        "offset": 234,
-        "src": "product = itertools.islice(itertools.product(*options), 0, self.max_guesses)",
-        "target": "mypy.suggestions.SuggestionEngine.get_guesses"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 35,
-        "message": "Expression type contains \"Any\" (has type \"product[tuple[Any, ...]]\")",
-        "offset": 0,
-        "src": "product = itertools.islice(itertools.product(*options), 0, self.max_guesses)",
-        "target": "mypy.suggestions.SuggestionEngine.get_guesses"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 15,
-        "message": "Expression type contains \"Any\" (has type \"tuple[Any, ...]\")",
-        "offset": 1,
-        "src": "return [refine_callable(base, base.copy_modified(arg_types=list(x))) for x in product]",
-        "target": "mypy.suggestions.SuggestionEngine.get_guesses"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 72,
-        "message": "Expression type contains \"Any\" (has type \"tuple[Any, ...]\")",
-        "offset": 0,
-        "src": "return [refine_callable(base, base.copy_modified(arg_types=list(x))) for x in product]",
-        "target": "mypy.suggestions.SuggestionEngine.get_guesses"
-      },
-      {
-        "code": "no-any-expr",
-        "column": 86,
-        "message": "Expression type contains \"Any\" (has type \"islice[tuple[Any, ...]]\")",
-        "offset": 0,
-        "src": "return [refine_callable(base, base.copy_modified(arg_types=list(x))) for x in product]",
-        "target": "mypy.suggestions.SuggestionEngine.get_guesses"
-      },
-      {
         "code": "possibly-undefined",
         "column": 24,
         "message": "Name \"arg\" may be undefined",
-        "offset": 118,
+        "offset": 353,
         "src": "args.append(arg)",
         "target": "mypy.suggestions"
       },
@@ -26846,9 +27006,9 @@
       {
         "code": "no-any-expr",
         "column": 19,
-        "message": "Expression has type \"Untyped\"",
+        "message": "Expression has type \"Any (from unimported type)\"",
         "offset": 11,
-        "src": "return DataSuiteCollector.from_parent(  # type: ignore[unused-ignore, no-untyped-call]",
+        "src": "return DataSuiteCollector.from_parent(parent=collector, name=name)  # type: ignore[no-untyped-call, unused-ignore]",
         "target": "mypy.test.data.pytest_pycollect_makeitem"
       },
       {
@@ -26856,22 +27016,30 @@
         "column": 19,
         "message": "Error code \"no-any-expr\" not covered by \"type: ignore\" comment",
         "offset": 0,
-        "src": "return DataSuiteCollector.from_parent(  # type: ignore[unused-ignore, no-untyped-call]",
+        "src": "return DataSuiteCollector.from_parent(parent=collector, name=name)  # type: ignore[no-untyped-call, unused-ignore]",
         "target": null
       },
       {
         "code": "no-any-expr",
-        "column": 23,
+        "column": 57,
         "message": "Expression has type \"Any\"",
-        "offset": 1,
-        "src": "parent=collector, name=name",
+        "offset": 0,
+        "src": "return DataSuiteCollector.from_parent(parent=collector, name=name)  # type: ignore[no-untyped-call, unused-ignore]",
         "target": "mypy.test.data.pytest_pycollect_makeitem"
+      },
+      {
+        "code": null,
+        "column": 57,
+        "message": "Error code \"no-any-expr\" not covered by \"type: ignore\" comment",
+        "offset": 0,
+        "src": "return DataSuiteCollector.from_parent(parent=collector, name=name)  # type: ignore[no-untyped-call, unused-ignore]",
+        "target": null
       },
       {
         "code": "no-any-expr",
         "column": 14,
-        "message": "Expression has type \"Untyped\"",
-        "offset": 43,
+        "message": "Expression has type \"Any (from unimported type)\"",
+        "offset": 42,
         "src": "yield DataDrivenTestCase.from_parent(  # type: ignore[unused-ignore, no-untyped-call]",
         "target": "mypy.test.data.split_test_cases"
       },
@@ -26908,25 +27076,17 @@
         "target": "mypy.test.data"
       },
       {
-        "code": "no-untyped-usage",
-        "column": 8,
-        "message": "Usage of untyped name \"collector\" in typed context",
+        "code": "no-any-expr",
+        "column": 20,
+        "message": "Expression has type \"Any (from unimported type)\"",
         "offset": 3,
         "src": "collector = super().from_parent(parent, name=name)",
         "target": "mypy.test.data.DataFileCollector.from_parent"
       },
       {
         "code": "no-any-expr",
-        "column": 20,
-        "message": "Expression has type \"Untyped\"",
-        "offset": 0,
-        "src": "collector = super().from_parent(parent, name=name)",
-        "target": "mypy.test.data.DataFileCollector.from_parent"
-      },
-      {
-        "code": "no-any-expr",
         "column": 26,
-        "message": "Expression has type \"Untyped\"",
+        "message": "Expression has type \"Any (from unimported type)\"",
         "offset": 1,
         "src": "assert isinstance(collector, DataFileCollector)",
         "target": "mypy.test.data.DataFileCollector.from_parent"
@@ -27179,7 +27339,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"run_case\" is not using @override but is overriding a method in class \"mypy.test.data.DataSuite\"",
-        "offset": 61,
+        "offset": 62,
         "src": "def run_case(self, testcase: DataDrivenTestCase) -> None:",
         "target": "mypy.test.testcheck.TypeCheckSuite.run_case"
       },
@@ -27195,7 +27355,7 @@
         "code": "no-any-expr",
         "column": 11,
         "message": "Expression type contains \"Any\" (has type \"False | Untyped\")",
-        "offset": 140,
+        "offset": 142,
         "src": "if output != a and testcase.config.getoption(\"--update-data\", False):",
         "target": "mypy.test.testcheck.TypeCheckSuite.run_case_once"
       },
@@ -27383,7 +27543,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"run_case\" is not using @override but is overriding a method in class \"mypy.test.data.DataSuite\"",
-        "offset": 17,
+        "offset": 18,
         "src": "def run_case(self, testcase: DataDrivenTestCase) -> None:",
         "target": "mypy.test.testerrorstream.ErrorStreamSuite.run_case"
       }
@@ -27853,7 +28013,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"run_case\" is not using @override but is overriding a method in class \"mypy.test.data.DataSuite\"",
-        "offset": 27,
+        "offset": 28,
         "src": "def run_case(self, testcase: DataDrivenTestCase) -> None:",
         "target": "mypy.test.testparse.ParserSuite.run_case"
       },
@@ -27861,7 +28021,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"run_case\" is not using @override but is overriding a method in class \"mypy.test.data.DataSuite\"",
-        "offset": 47,
+        "offset": 58,
         "src": "def run_case(self, testcase: DataDrivenTestCase) -> None:",
         "target": "mypy.test.testparse.ParseErrorSuite.run_case"
       }
@@ -27907,7 +28067,7 @@
         "code": "no-any-expr",
         "column": 24,
         "message": "Expression has type \"Any (from unimported type)\"",
-        "offset": 18,
+        "offset": 19,
         "src": "@pytest.mark.skipif(lxml is None, reason=\"Cannot import lxml. Is it installed?\")",
         "target": "mypy.test.testreports"
       },
@@ -28009,7 +28169,7 @@
         "code": "no-any-expr",
         "column": 5,
         "message": "Expression type contains \"Any\" (has type \"[_FT: (...) -> Any] (_FT) -> _FT\")",
-        "offset": 51,
+        "offset": 53,
         "src": "@unittest.skipIf(sys.platform == \"win32\", \"clean up fails on Windows\")",
         "target": "mypy.test.teststubgen"
       },
@@ -28097,7 +28257,7 @@
         "code": "no-any-expr",
         "column": 32,
         "message": "Expression type contains \"Any\" (has type \"def (self: Any) -> str\")",
-        "offset": 458,
+        "offset": 459,
         "src": "test.__doc__ = property(lambda self: \"test(arg0: str) -> None\")  # type: ignore[assignment]",
         "target": "mypy.test.teststubgen.StubgencSuite.test_generate_c_function_no_crash_for_non_str_docstring"
       },
@@ -28163,7 +28323,7 @@
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 189,
+        "offset": 193,
         "src": "def collect_cases(fn: Callable[..., Iterator[Case]]) -> FunctionType[..., None]:",
         "target": "mypy.test.teststubtest.collect_cases"
       },
@@ -28195,7 +28355,7 @@
         "code": "no-any-expr",
         "column": 11,
         "message": "Expression type contains \"Any\" (has type \"def (*args: Any, **kwargs: Any) -> None\")",
-        "offset": 24,
+        "offset": 30,
         "src": "return test",
         "target": "mypy.test.teststubtest.collect_cases"
       },
@@ -28292,6 +28452,22 @@
         "column": 4,
         "message": "Type of decorated function contains type \"Any\" (\"def (...) -> None\")",
         "offset": 1,
+        "src": "def test_private_parameters(self) -> Iterator[Case]:",
+        "target": "mypy.test.teststubtest"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 5,
+        "message": "Expression type contains \"Any\" (has type \"def (fn: (...) -> Iterator[Case]) -> def (...) -> None\")",
+        "offset": 71,
+        "src": "@collect_cases",
+        "target": "mypy.test.teststubtest"
+      },
+      {
+        "code": "no-any-decorated",
+        "column": 4,
+        "message": "Type of decorated function contains type \"Any\" (\"def (...) -> None\")",
+        "offset": 1,
         "src": "def test_default_presence(self) -> Iterator[Case]:",
         "target": "mypy.test.teststubtest"
       },
@@ -28379,7 +28555,7 @@
         "code": "no-any-expr",
         "column": 5,
         "message": "Expression type contains \"Any\" (has type \"def (fn: (...) -> Iterator[Case]) -> def (...) -> None\")",
-        "offset": 72,
+        "offset": 122,
         "src": "@collect_cases",
         "target": "mypy.test.teststubtest"
       },
@@ -28443,7 +28619,7 @@
         "code": "no-any-expr",
         "column": 5,
         "message": "Expression type contains \"Any\" (has type \"def (fn: (...) -> Iterator[Case]) -> def (...) -> None\")",
-        "offset": 98,
+        "offset": 117,
         "src": "@collect_cases",
         "target": "mypy.test.teststubtest"
       },
@@ -28540,6 +28716,22 @@
         "column": 5,
         "message": "Expression type contains \"Any\" (has type \"def (fn: (...) -> Iterator[Case]) -> def (...) -> None\")",
         "offset": 8,
+        "src": "@collect_cases",
+        "target": "mypy.test.teststubtest"
+      },
+      {
+        "code": "no-any-decorated",
+        "column": 4,
+        "message": "Type of decorated function contains type \"Any\" (\"def (...) -> None\")",
+        "offset": 1,
+        "src": "def test_missing_no_runtime_all_terrible(self) -> Iterator[Case]:",
+        "target": "mypy.test.teststubtest"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 5,
+        "message": "Expression type contains \"Any\" (has type \"def (fn: (...) -> Iterator[Case]) -> def (...) -> None\")",
+        "offset": 17,
         "src": "@collect_cases",
         "target": "mypy.test.teststubtest"
       },
@@ -30844,8 +31036,32 @@
       {
         "code": "explicit-override",
         "column": 4,
+        "message": "Method \"visit_type_var\" is not using @override but is overriding a method in class \"mypy.typetraverser.TypeTraverserVisitor\"",
+        "offset": 29,
+        "src": "def visit_type_var(self, t: TypeVarType) -> None:",
+        "target": "mypy.tvar_scope.TypeVarLikeNamespaceSetter.visit_type_var"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_param_spec\" is not using @override but is overriding a method in class \"mypy.typetraverser.TypeTraverserVisitor\"",
+        "offset": 4,
+        "src": "def visit_param_spec(self, t: ParamSpecType) -> None:",
+        "target": "mypy.tvar_scope.TypeVarLikeNamespaceSetter.visit_param_spec"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_type_var_tuple\" is not using @override but is overriding a method in class \"mypy.typetraverser.TypeTraverserVisitor\"",
+        "offset": 4,
+        "src": "def visit_type_var_tuple(self, t: TypeVarTupleType) -> None:",
+        "target": "mypy.tvar_scope.TypeVarLikeNamespaceSetter.visit_type_var_tuple"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
         "message": "Method \"__str__\" is not using @override but is overriding a method in class \"builtins.object\"",
-        "offset": 148,
+        "offset": 133,
         "src": "def __str__(self) -> str:",
         "target": "mypy.tvar_scope.TypeVarLikeScope.__str__"
       }
@@ -31497,7 +31713,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_unbound_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 270,
+        "offset": 282,
         "src": "def visit_unbound_type(self, t: UnboundType, defining_literal: bool = False) -> Type:",
         "target": "mypy.typeanal.TypeAnalyser.visit_unbound_type"
       },
@@ -31505,7 +31721,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_any\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 673,
+        "offset": 692,
         "src": "def visit_any(self, t: AnyType) -> Type:",
         "target": "mypy.typeanal.TypeAnalyser.visit_any"
       },
@@ -31625,7 +31841,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_overloaded\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 153,
+        "offset": 171,
         "src": "def visit_overloaded(self, t: Overloaded) -> Type:",
         "target": "mypy.typeanal.TypeAnalyser.visit_overloaded"
       },
@@ -31721,7 +31937,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"analyze_callable_args\" is not using @override but is overriding a method in class \"mypy.plugin.TypeAnalyzerPluginInterface\"",
-        "offset": 173,
+        "offset": 186,
         "src": "def analyze_callable_args(",
         "target": "mypy.typeanal.TypeAnalyser.analyze_callable_args"
       },
@@ -31753,31 +31969,23 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"named_type\" is not using @override but is overriding a method in class \"mypy.plugin.TypeAnalyzerPluginInterface\"",
-        "offset": 189,
+        "offset": 203,
         "src": "def named_type(",
         "target": "mypy.typeanal.TypeAnalyser.named_type"
       },
       {
-        "code": "explicit-override",
-        "column": 4,
-        "message": "Method \"visit_unbound_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeQuery\"",
-        "offset": 358,
-        "src": "def visit_unbound_type(self, t: UnboundType) -> TypeVarLikeList:",
-        "target": "mypy.typeanal.TypeVarLikeQuery.visit_unbound_type"
-      },
-      {
-        "code": "explicit-override",
-        "column": 4,
-        "message": "Method \"visit_callable_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeQuery\"",
-        "offset": 33,
-        "src": "def visit_callable_type(self, t: CallableType) -> TypeVarLikeList:",
-        "target": "mypy.typeanal.TypeVarLikeQuery.visit_callable_type"
+        "code": "redundant-expr",
+        "column": 19,
+        "message": "Condition is always true",
+        "offset": 155,
+        "src": "if any_type is None:",
+        "target": "mypy.typeanal.fix_instance"
       },
       {
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_type_alias_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeTranslator\"",
-        "offset": 22,
+        "offset": 250,
         "src": "def visit_type_alias_type(self, t: TypeAliasType) -> Type:",
         "target": "mypy.typeanal.DivergingAliasDetector.visit_type_alias_type"
       },
@@ -31833,9 +32041,241 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_unbound_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.BoolTypeQuery\"",
-        "offset": 97,
+        "offset": 105,
         "src": "def visit_unbound_type(self, t: UnboundType) -> bool:",
         "target": "mypy.typeanal.HasSelfType.visit_unbound_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_unbound_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 37,
+        "src": "def visit_unbound_type(self, t: UnboundType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_unbound_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_type_list\" is not using @override but is overriding a method in class \"mypy.type_visitor.SyntheticTypeVisitor\"",
+        "offset": 37,
+        "src": "def visit_type_list(self, t: TypeList) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_type_list"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_callable_argument\" is not using @override but is overriding a method in class \"mypy.type_visitor.SyntheticTypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_callable_argument(self, t: CallableArgument) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_callable_argument"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_any\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_any(self, t: AnyType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_any"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_uninhabited_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_uninhabited_type(self, t: UninhabitedType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_uninhabited_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_none_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_none_type(self, t: NoneType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_none_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_erased_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_erased_type(self, t: ErasedType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_erased_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_deleted_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_deleted_type(self, t: DeletedType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_deleted_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_type_var\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_type_var(self, t: TypeVarType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_type_var"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_param_spec\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_param_spec(self, t: ParamSpecType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_param_spec"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_type_var_tuple\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_type_var_tuple(self, t: TypeVarTupleType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_type_var_tuple"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_unpack_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_unpack_type(self, t: UnpackType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_unpack_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_parameters\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_parameters(self, t: Parameters) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_parameters"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_partial_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_partial_type(self, t: PartialType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_partial_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_instance\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_instance(self, t: Instance) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_instance"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_callable_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_callable_type(self, t: CallableType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_callable_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_tuple_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 5,
+        "src": "def visit_tuple_type(self, t: TupleType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_tuple_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_typeddict_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_typeddict_type(self, t: TypedDictType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_typeddict_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_raw_expression_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.SyntheticTypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_raw_expression_type(self, t: RawExpressionType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_raw_expression_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_literal_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_literal_type(self, t: LiteralType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_literal_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_union_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_union_type(self, t: UnionType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_union_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_intersection_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_intersection_type(self, t: IntersectionType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_intersection_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_overloaded\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_overloaded(self, t: Overloaded) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_overloaded"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_type_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_type_type(self, t: TypeType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_type_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_ellipsis_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.SyntheticTypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_ellipsis_type(self, t: EllipsisType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_ellipsis_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_placeholder_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.SyntheticTypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_placeholder_type(self, t: PlaceholderType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_placeholder_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_type_alias_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
+        "offset": 3,
+        "src": "def visit_type_alias_type(self, t: TypeAliasType) -> None:",
+        "target": "mypy.typeanal.FindTypeVarVisitor.visit_type_alias_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_unbound_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeTranslator\"",
+        "offset": 29,
+        "src": "def visit_unbound_type(self, t: UnboundType) -> Type:",
+        "target": "mypy.typeanal.TypeVarDefaultTranslator.visit_unbound_type"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_type_alias_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeTranslator\"",
+        "offset": 14,
+        "src": "def visit_type_alias_type(self, t: TypeAliasType) -> Type:",
+        "target": "mypy.typeanal.TypeVarDefaultTranslator.visit_type_alias_type"
       }
     ],
     "mypy/typeops.py": [
@@ -31843,7 +32283,7 @@
         "code": "redundant-expr",
         "column": 19,
         "message": "Condition is always true",
-        "offset": 492,
+        "offset": 498,
         "src": "if extra_attrs_set is None:",
         "target": "mypy.typeops.make_simplified_union"
       },
@@ -31929,25 +32369,25 @@
       },
       {
         "code": "no-any-expr",
-        "column": 24,
+        "column": 28,
         "message": "Expression type contains \"Any\" (has type \"set[Any]\")",
-        "offset": 1,
+        "offset": 2,
         "src": "set(typ.fallback.get_enum_values())",
         "target": "mypy.typeops.try_contracting_literals_in_union"
       },
       {
         "code": "no-any-expr",
-        "column": 29,
+        "column": 33,
         "message": "Expression type contains \"Any\" (has type \"set[Any]\")",
         "offset": 2,
-        "src": "else {True, False},",
+        "src": "else {True, False}",
         "target": "mypy.typeops.try_contracting_literals_in_union"
       },
       {
         "code": "no-any-expr",
         "column": 36,
         "message": "Expression type contains \"Any\" (has type \"dict[str, (set[Any], list[int])]\")",
-        "offset": 3,
+        "offset": 4,
         "src": "literals, indexes = sum_types[fullname]",
         "target": "mypy.typeops.try_contracting_literals_in_union"
       },
@@ -32029,7 +32469,7 @@
         "code": "no-any-explicit",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 131,
+        "offset": 140,
         "src": "_dummy: Final[Any] = object()",
         "target": "mypy.types"
       },
@@ -33299,10 +33739,10 @@
       },
       {
         "code": "no-any-expr",
-        "column": 39,
+        "column": 60,
         "message": "Expression has type \"Any\"",
         "offset": 4,
-        "src": "if last_known_value is not _dummy",
+        "src": "last_known_value if last_known_value is not _dummy else self.last_known_value",
         "target": "mypy.types.Instance.copy_modified"
       },
       {
@@ -33317,7 +33757,7 @@
         "code": "no-any-expr",
         "column": 43,
         "message": "Expression has type \"Any\"",
-        "offset": 125,
+        "offset": 131,
         "src": "arg_types: Bogus[Sequence[Type]] = _dummy,",
         "target": "mypy.types.Parameters.copy_modified"
       },
@@ -33565,7 +34005,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 47,
+        "offset": 48,
         "src": "def __init__(",
         "target": "mypy.types.CallableType.__init__"
       },
@@ -33573,7 +34013,7 @@
         "code": "no-any-expr",
         "column": 11,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any] | None\")",
-        "offset": 52,
+        "offset": 53,
         "src": "if def_extras:",
         "target": "mypy.types.CallableType.__init__"
       },
@@ -33597,7 +34037,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 13,
+        "offset": 14,
         "src": "def copy_modified(",
         "target": "mypy.types.CallableType.copy_modified"
       },
@@ -33719,6 +34159,14 @@
         "message": "Expression has type \"Any\"",
         "offset": 1,
         "src": "type_guard: Bogus[TypeGuardType | None] = _dummy,",
+        "target": "mypy.types.CallableType.copy_modified"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 38,
+        "message": "Expression has type \"Any\"",
+        "offset": 1,
+        "src": "type_is: Bogus[Type | None] = _dummy,",
         "target": "mypy.types.CallableType.copy_modified"
       },
       {
@@ -33895,6 +34343,14 @@
         "message": "Expression has type \"Any\"",
         "offset": 1,
         "src": "type_guard=type_guard if type_guard is not _dummy else self.type_guard,",
+        "target": "mypy.types.CallableType.copy_modified"
+      },
+      {
+        "code": "no-any-expr",
+        "column": 46,
+        "message": "Expression has type \"Any\"",
+        "offset": 1,
+        "src": "type_is=type_is if type_is is not _dummy else self.type_is,",
         "target": "mypy.types.CallableType.copy_modified"
       },
       {
@@ -34077,7 +34533,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"deserialize\" is not using @override but is overriding a method in class \"mypy.types.Type\"",
-        "offset": 8,
+        "offset": 9,
         "src": "def deserialize(cls, data: JsonDict) -> CallableType:",
         "target": "mypy.types"
       },
@@ -34165,7 +34621,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"items\" is not using @override but is overriding a method in class \"mypy.types.FunctionLike\"",
-        "offset": 38,
+        "offset": 39,
         "src": "def items(self) -> list[CallableType]:",
         "target": "mypy.types"
       },
@@ -34821,7 +35277,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"accept\" is not using @override but is overriding a method in class \"mypy.types.Type\"",
-        "offset": 26,
+        "offset": 24,
         "src": "def accept(self, visitor: TypeVisitor[T]) -> T:",
         "target": "mypy.types.IntersectionType.accept"
       },
@@ -35013,7 +35469,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_unbound_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 93,
+        "offset": 90,
         "src": "def visit_unbound_type(self, t: UnboundType) -> str:",
         "target": "mypy.types.TypeStrVisitor.visit_unbound_type"
       },
@@ -35197,7 +35653,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_overloaded\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 108,
+        "offset": 110,
         "src": "def visit_overloaded(self, t: Overloaded) -> str:",
         "target": "mypy.types.TypeStrVisitor.visit_overloaded"
       },
@@ -35293,7 +35749,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_placeholder_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.SyntheticTypeVisitor\"",
-        "offset": 5,
+        "offset": 7,
         "src": "def visit_placeholder_type(self, t: PlaceholderType) -> str:",
         "target": "mypy.types.TypeStrVisitor.visit_placeholder_type"
       },
@@ -35585,7 +36041,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_tuple_type\" is not using @override but is overriding a method in class \"mypy.type_visitor.TypeVisitor\"",
-        "offset": 6,
+        "offset": 12,
         "src": "def visit_tuple_type(self, t: TupleType) -> None:",
         "target": "mypy.typetraverser.TypeTraverserVisitor.visit_tuple_type"
       },
@@ -35707,7 +36163,7 @@
         "code": "no-any-expr",
         "column": 32,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 394,
+        "offset": 395,
         "src": "new.__dict__ = dict(old.__dict__)",
         "target": "mypy.util.replace_object_state"
       },
@@ -37129,7 +37585,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"__str__\" is not using @override but is overriding a method in class \"builtins.object\"",
-        "offset": 74,
+        "offset": 75,
         "src": "def __str__(self) -> str:",
         "target": "mypyc.analysis.dataflow.CFG.__str__"
       },
@@ -37292,6 +37748,14 @@
         "offset": 3,
         "src": "def visit_call_c(self, op: CallC) -> GenAndKill[T]:",
         "target": "mypyc.analysis.dataflow.BaseAnalysisVisitor.visit_call_c"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_primitive_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_primitive_op(self, op: PrimitiveOp) -> GenAndKill[T]:",
+        "target": "mypyc.analysis.dataflow.BaseAnalysisVisitor.visit_primitive_op"
       },
       {
         "code": "explicit-override",
@@ -37643,7 +38107,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"__eq__\" is not using @override but is overriding a method in class \"builtins.object\"",
-        "offset": 77,
+        "offset": 79,
         "src": "def __eq__(self, other: object) -> bool:",
         "target": "mypyc.analysis.ircheck.FnError.__eq__"
       },
@@ -37882,6 +38346,14 @@
       {
         "code": "explicit-override",
         "column": 4,
+        "message": "Method \"visit_primitive_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_primitive_op(self, op: PrimitiveOp) -> None:",
+        "target": "mypyc.analysis.ircheck.OpChecker.visit_primitive_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
         "message": "Method \"visit_truncate\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
         "offset": 3,
         "src": "def visit_truncate(self, op: Truncate) -> None:",
@@ -37997,7 +38469,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_goto\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
-        "offset": 67,
+        "offset": 68,
         "src": "def visit_goto(self, op: Goto) -> GenAndKill:",
         "target": "mypyc.analysis.selfleaks.SelfLeakedVisitor.visit_goto"
       },
@@ -38168,6 +38640,14 @@
         "offset": 3,
         "src": "def visit_call_c(self, op: CallC) -> GenAndKill:",
         "target": "mypyc.analysis.selfleaks.SelfLeakedVisitor.visit_call_c"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_primitive_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_primitive_op(self, op: PrimitiveOp) -> GenAndKill:",
+        "target": "mypyc.analysis.selfleaks.SelfLeakedVisitor.visit_primitive_op"
       },
       {
         "code": "explicit-override",
@@ -38389,7 +38869,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_goto\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
-        "offset": 195,
+        "offset": 196,
         "src": "def visit_goto(self, op: Goto) -> None:",
         "target": "mypyc.codegen.emitfunc.FunctionEmitterVisitor.visit_goto"
       },
@@ -38525,7 +39005,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_inc_ref\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
-        "offset": 47,
+        "offset": 45,
         "src": "def visit_inc_ref(self, op: IncRef) -> None:",
         "target": "mypyc.codegen.emitfunc.FunctionEmitterVisitor.visit_inc_ref"
       },
@@ -38596,8 +39076,16 @@
       {
         "code": "explicit-override",
         "column": 4,
-        "message": "Method \"visit_truncate\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "message": "Method \"visit_primitive_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
         "offset": 8,
+        "src": "def visit_primitive_op(self, op: PrimitiveOp) -> None:",
+        "target": "mypyc.codegen.emitfunc.FunctionEmitterVisitor.visit_primitive_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_truncate\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 5,
         "src": "def visit_truncate(self, op: Truncate) -> None:",
         "target": "mypyc.codegen.emitfunc.FunctionEmitterVisitor.visit_truncate"
       },
@@ -38711,7 +39199,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"report_config_data\" is not using @override but is overriding a method in class \"mypy.plugin.Plugin\"",
-        "offset": 123,
+        "offset": 126,
         "src": "def report_config_data(self, ctx: ReportConfigContext) -> tuple[str | None, list[str]] | None:",
         "target": "mypyc.codegen.emitmodule.MypycPlugin.report_config_data"
       },
@@ -38775,7 +39263,7 @@
         "code": "no-any-expr",
         "column": 17,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 211,
+        "offset": 212,
         "src": "cache_data = {",
         "target": "mypyc.codegen.emitmodule.load_scc_from_cache"
       },
@@ -39096,30 +39584,30 @@
         "column": 12,
         "message": "Expression type contains \"Any\" (has type \"(str, list[Any] | None)\")",
         "offset": 1,
-        "src": "\"children\": [cir.fullname for cir in self.children]",
+        "src": "\"children\": (",
         "target": "mypyc.ir.class_ir.ClassIR.serialize"
       },
       {
         "code": "no-any-expr",
-        "column": 24,
+        "column": 16,
         "message": "Expression type contains \"Any\" (has type \"list[Any]\")",
-        "offset": 0,
-        "src": "\"children\": [cir.fullname for cir in self.children]",
+        "offset": 1,
+        "src": "[cir.fullname for cir in self.children] if self.children is not None else None",
         "target": "mypyc.ir.class_ir.ClassIR.serialize"
       },
       {
         "code": "no-any-expr",
-        "column": 24,
+        "column": 16,
         "message": "Expression type contains \"Any\" (has type \"list[Any] | None\")",
         "offset": 0,
-        "src": "\"children\": [cir.fullname for cir in self.children]",
+        "src": "[cir.fullname for cir in self.children] if self.children is not None else None",
         "target": "mypyc.ir.class_ir.ClassIR.serialize"
       },
       {
         "code": "no-any-expr",
         "column": 12,
         "message": "Expression type contains \"Any\" (has type \"(str, list[Any])\")",
-        "offset": 4,
+        "offset": 3,
         "src": "\"attrs_with_defaults\": sorted(self.attrs_with_defaults),",
         "target": "mypyc.ir.class_ir.ClassIR.serialize"
       },
@@ -40052,6 +40540,38 @@
       {
         "code": "explicit-override",
         "column": 4,
+        "message": "Method \"__repr__\" is not using @override but is overriding a method in class \"builtins.object\"",
+        "offset": 46,
+        "src": "def __repr__(self) -> str:",
+        "target": "mypyc.ir.ops.PrimitiveDescription.__repr__"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"sources\" is not using @override but is overriding a method in class \"mypyc.ir.ops.Op\"",
+        "offset": 23,
+        "src": "def sources(self) -> list[Value]:",
+        "target": "mypyc.ir.ops.PrimitiveOp.sources"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"stolen\" is not using @override but is overriding a method in class \"mypyc.ir.ops.Op\"",
+        "offset": 3,
+        "src": "def stolen(self) -> list[Value]:",
+        "target": "mypyc.ir.ops.PrimitiveOp.stolen"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"accept\" is not using @override but is overriding a method in class \"mypyc.ir.ops.Op\"",
+        "offset": 8,
+        "src": "def accept(self, visitor: OpVisitor[T]) -> T:",
+        "target": "mypyc.ir.ops.PrimitiveOp.accept"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
         "message": "Method \"sources\" is not using @override but is overriding a method in class \"mypyc.ir.ops.Op\"",
         "offset": 24,
         "src": "def sources(self) -> list[Value]:",
@@ -40541,7 +41061,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"sources\" is not using @override but is overriding a method in class \"mypyc.ir.ops.Op\"",
-        "offset": 36,
+        "offset": 37,
         "src": "def sources(self) -> list[Value]:",
         "target": "mypyc.ir.ops.Unborrow.sources"
       },
@@ -40567,7 +41087,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"visit_goto\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
-        "offset": 73,
+        "offset": 74,
         "src": "def visit_goto(self, op: Goto) -> str:",
         "target": "mypyc.ir.pprint.IRPrettyPrintVisitor.visit_goto"
       },
@@ -40758,8 +41278,32 @@
       {
         "code": "explicit-override",
         "column": 4,
-        "message": "Method \"visit_truncate\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "message": "Method \"visit_primitive_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
         "offset": 7,
+        "src": "def visit_primitive_op(self, op: PrimitiveOp) -> str:",
+        "target": "mypyc.ir.pprint.IRPrettyPrintVisitor.visit_primitive_op"
+      },
+      {
+        "code": "redundant-expr",
+        "column": 15,
+        "message": "Condition is always true",
+        "offset": 5,
+        "src": "if arg_type:",
+        "target": "mypyc.ir.pprint.IRPrettyPrintVisitor.visit_primitive_op"
+      },
+      {
+        "code": "unreachable",
+        "column": 16,
+        "message": "Statement is unreachable",
+        "offset": 4,
+        "src": "assert op.type_args",
+        "target": "mypyc.ir.pprint.IRPrettyPrintVisitor.visit_primitive_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_truncate\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 10,
         "src": "def visit_truncate(self, op: Truncate) -> str:",
         "target": "mypyc.ir.pprint.IRPrettyPrintVisitor.visit_truncate"
       },
@@ -41435,7 +41979,7 @@
         "code": "no-any-expr",
         "column": 13,
         "message": "Expression has type \"Any\"",
-        "offset": 248,
+        "offset": 247,
         "src": "with self.catch_errors(node.line):",
         "target": "mypyc.irbuild.builder.IRBuilder.accept"
       },
@@ -41443,7 +41987,7 @@
         "code": "helpful-string",
         "column": 22,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 297,
+        "offset": 294,
         "src": "error_msg=f'value for final name \"{error_name}\" was not set',",
         "target": "mypyc.irbuild.builder.IRBuilder.load_final_static"
       },
@@ -41499,7 +42043,7 @@
         "code": "no-any-explicit",
         "column": 4,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 309,
+        "offset": 308,
         "src": "def catch_errors(self, line: int) -> Any:",
         "target": "mypyc.irbuild.builder.IRBuilder.catch_errors"
       }
@@ -41625,7 +42169,7 @@
         "code": "no-any-expr",
         "column": 45,
         "message": "Expression has type \"Any\"",
-        "offset": 214,
+        "offset": 220,
         "src": "index = builder.builder.load_int(fields.index(expr.name))",
         "target": "mypyc.irbuild.expression.transform_member_expr"
       },
@@ -41641,7 +42185,7 @@
         "code": "redundant-expr",
         "column": 13,
         "message": "Condition is always true",
-        "offset": 255,
+        "offset": 249,
         "src": "elif isinstance(rhs, Expression):",
         "target": "mypyc.irbuild.expression.translate_printf_style_formatting"
       }
@@ -41651,7 +42195,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"need_cleanup\" is not using @override but is overriding a method in class \"mypyc.irbuild.for_helpers.ForGenerator\"",
-        "offset": 551,
+        "offset": 580,
         "src": "def need_cleanup(self) -> bool:",
         "target": "mypyc.irbuild.for_helpers.ForIterable.need_cleanup"
       },
@@ -41927,7 +42471,7 @@
         "code": "redundant-expr",
         "column": 13,
         "message": "Condition is always true",
-        "offset": 489,
+        "offset": 488,
         "src": "elif is_uint8_rprimitive(target_type):",
         "target": "mypyc.irbuild.ll_builder.LowLevelIRBuilder.coerce_int_to_fixed_width"
       },
@@ -42031,7 +42575,7 @@
         "code": "redundant-expr",
         "column": 19,
         "message": "Condition is always true",
-        "offset": 457,
+        "offset": 350,
         "src": "if result is None:",
         "target": "mypyc.irbuild.ll_builder.LowLevelIRBuilder.make_dict"
       },
@@ -42055,7 +42599,7 @@
         "code": "redundant-expr",
         "column": 19,
         "message": "Condition is always false",
-        "offset": 280,
+        "offset": 274,
         "src": "if matching:",
         "target": "mypyc.irbuild.ll_builder.LowLevelIRBuilder.matching_call_c"
       },
@@ -42069,9 +42613,25 @@
       },
       {
         "code": "redundant-expr",
+        "column": 19,
+        "message": "Condition is always false",
+        "offset": 96,
+        "src": "if matching:",
+        "target": "mypyc.irbuild.ll_builder.LowLevelIRBuilder.matching_primitive_op"
+      },
+      {
+        "code": "unreachable",
+        "column": 20,
+        "message": "Statement is unreachable",
+        "offset": 1,
+        "src": "assert matching.priority != desc.priority, \"Ambiguous:\\n1) {}\\n2) {}\".format(",
+        "target": "mypyc.irbuild.ll_builder.LowLevelIRBuilder.matching_primitive_op"
+      },
+      {
+        "code": "redundant-expr",
         "column": 17,
         "message": "Condition is always true",
-        "offset": 107,
+        "offset": 106,
         "src": "elif is_uint8_rprimitive(type):",
         "target": "mypyc.irbuild.ll_builder.LowLevelIRBuilder.fixed_width_int_op"
       },
@@ -42087,7 +42647,7 @@
         "code": "possibly-undefined",
         "column": 36,
         "message": "Name \"false_block\" may be undefined",
-        "offset": 195,
+        "offset": 194,
         "src": "self.activate_block(false_block)",
         "target": "mypyc.irbuild.ll_builder"
       }
@@ -42253,7 +42813,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"gen_break\" is not using @override but is overriding a method in class \"mypyc.irbuild.nonlocalcontrol.NonlocalControl\"",
-        "offset": 36,
+        "offset": 35,
         "src": "def gen_break(self, builder: IRBuilder, line: int) -> None:",
         "target": "mypyc.irbuild.nonlocalcontrol.CleanupNonlocalControl.gen_break"
       },
@@ -43300,7 +43860,7 @@
         "column": 19,
         "message": "Condition is always false",
         "offset": 35,
-        "src": "if isinstance(ops, CFunctionDescription):",
+        "src": "if isinstance(old_ops, CFunctionDescription):",
         "target": "mypyc.test.test_cheader.TestHeaderInclusion.test_primitives_included_in_header"
       },
       {
@@ -43308,7 +43868,7 @@
         "column": 20,
         "message": "Statement is unreachable",
         "offset": 1,
-        "src": "ops = [ops]",
+        "src": "old_ops = [old_ops]",
         "target": "mypyc.test.test_cheader.TestHeaderInclusion.test_primitives_included_in_header"
       }
     ],
@@ -43345,7 +43905,7 @@
         "code": "explicit-override",
         "column": 4,
         "message": "Method \"setUp\" is not using @override but is overriding a method in class \"unittest.case.TestCase\"",
-        "offset": 802,
+        "offset": 804,
         "src": "def setUp(self) -> None:",
         "target": "mypyc.test.test_emitfunc.TestGenerateFunction.setUp"
       }
@@ -43416,6 +43976,42 @@
         "target": "mypyc.test.test_ircheck.TestIrcheck.setUp"
       }
     ],
+    "mypyc/test/test_lowering.py": [
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"run_case\" is not using @override but is overriding a method in class \"mypy.test.data.DataSuite\"",
+        "offset": 33,
+        "src": "def run_case(self, testcase: DataDrivenTestCase) -> None:",
+        "target": "mypyc.test.test_lowering.TestLowering.run_case"
+      }
+    ],
+    "mypyc/test/test_optimizations.py": [
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"run_case\" is not using @override but is overriding a method in class \"mypy.test.data.DataSuite\"",
+        "offset": 35,
+        "src": "def run_case(self, testcase: DataDrivenTestCase) -> None:",
+        "target": "mypyc.test.test_optimizations.OptimizationSuite.run_case"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"do_optimizations\" is not using @override but is overriding a method in class \"mypyc.test.test_optimizations.OptimizationSuite\"",
+        "offset": 25,
+        "src": "def do_optimizations(self, fn: FuncIR) -> None:",
+        "target": "mypyc.test.test_optimizations.TestCopyPropagation.do_optimizations"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"do_optimizations\" is not using @override but is overriding a method in class \"mypyc.test.test_optimizations.OptimizationSuite\"",
+        "offset": 7,
+        "src": "def do_optimizations(self, fn: FuncIR) -> None:",
+        "target": "mypyc.test.test_optimizations.TestFlagElimination.do_optimizations"
+      }
+    ],
     "mypyc/test/test_refcount.py": [
       {
         "code": "explicit-override",
@@ -43455,7 +44051,7 @@
         "code": "no-any-expr",
         "column": 12,
         "message": "Expression has type \"Any\"",
-        "offset": 46,
+        "offset": 45,
         "src": "self.get_separate(\"\\n\".join(testcase.input), incremental_step)",
         "target": "mypyc.test.test_run.TestRun.run_case_step"
       },
@@ -44280,6 +44876,662 @@
         "offset": 0,
         "src": "if expected_output != actual and testcase.config.getoption(\"--update-data\", False):",
         "target": "mypyc.test.testutil.assert_test_output"
+      }
+    ],
+    "mypyc/transform/copy_propagation.py": [
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_assign\" is not using @override but is overriding a method in class \"mypyc.transform.ir_transform.IRTransform\"",
+        "offset": 91,
+        "src": "def visit_assign(self, op: Assign) -> Value | None:",
+        "target": "mypyc.transform.copy_propagation.CopyPropagationTransform.visit_assign"
+      }
+    ],
+    "mypyc/transform/flag_elimination.py": [
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_assign\" is not using @override but is overriding a method in class \"mypyc.transform.ir_transform.IRTransform\"",
+        "offset": 80,
+        "src": "def visit_assign(self, op: Assign) -> None:",
+        "target": "mypyc.transform.flag_elimination.FlagEliminationTransform.visit_assign"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_goto\" is not using @override but is overriding a method in class \"mypyc.transform.ir_transform.IRTransform\"",
+        "offset": 19,
+        "src": "def visit_goto(self, op: Goto) -> None:",
+        "target": "mypyc.transform.flag_elimination.FlagEliminationTransform.visit_goto"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_branch\" is not using @override but is overriding a method in class \"mypyc.transform.ir_transform.IRTransform\"",
+        "offset": 4,
+        "src": "def visit_branch(self, op: Branch) -> None:",
+        "target": "mypyc.transform.flag_elimination.FlagEliminationTransform.visit_branch"
+      }
+    ],
+    "mypyc/transform/ir_transform.py": [
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_goto\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 109,
+        "src": "def visit_goto(self, op: Goto) -> None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_goto"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_branch\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_branch(self, op: Branch) -> None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_branch"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_return\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_return(self, op: Return) -> None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_return"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_unreachable\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_unreachable(self, op: Unreachable) -> None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_unreachable"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_assign\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_assign(self, op: Assign) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_assign"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_assign_multi\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_assign_multi(self, op: AssignMulti) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_assign_multi"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_load_error_value\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_load_error_value(self, op: LoadErrorValue) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_load_error_value"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_load_literal\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_load_literal(self, op: LoadLiteral) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_load_literal"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_get_attr\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_get_attr(self, op: GetAttr) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_get_attr"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_set_attr\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_set_attr(self, op: SetAttr) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_set_attr"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_load_static\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_load_static(self, op: LoadStatic) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_load_static"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_init_static\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_init_static(self, op: InitStatic) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_init_static"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_tuple_get\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_tuple_get(self, op: TupleGet) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_tuple_get"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_tuple_set\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_tuple_set(self, op: TupleSet) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_tuple_set"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_inc_ref\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_inc_ref(self, op: IncRef) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_inc_ref"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_dec_ref\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_dec_ref(self, op: DecRef) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_dec_ref"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_call\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_call(self, op: Call) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_call"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_method_call\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_method_call(self, op: MethodCall) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_method_call"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_cast\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_cast(self, op: Cast) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_cast"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_box\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_box(self, op: Box) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_box"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_unbox\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_unbox(self, op: Unbox) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_unbox"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_raise_standard_error\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_raise_standard_error(self, op: RaiseStandardError) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_raise_standard_error"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_call_c\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_call_c(self, op: CallC) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_call_c"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_primitive_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_primitive_op(self, op: PrimitiveOp) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_primitive_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_truncate\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_truncate(self, op: Truncate) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_truncate"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_extend\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_extend(self, op: Extend) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_extend"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_load_global\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_load_global(self, op: LoadGlobal) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_load_global"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_int_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_int_op(self, op: IntOp) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_int_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_comparison_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_comparison_op(self, op: ComparisonOp) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_comparison_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_float_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_float_op(self, op: FloatOp) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_float_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_float_neg\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_float_neg(self, op: FloatNeg) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_float_neg"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_float_comparison_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_float_comparison_op(self, op: FloatComparisonOp) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_float_comparison_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_load_mem\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_load_mem(self, op: LoadMem) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_load_mem"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_set_mem\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_set_mem(self, op: SetMem) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_set_mem"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_get_element_ptr\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_get_element_ptr(self, op: GetElementPtr) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_get_element_ptr"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_load_address\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_load_address(self, op: LoadAddress) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_load_address"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_keep_alive\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_keep_alive(self, op: KeepAlive) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_keep_alive"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_unborrow\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_unborrow(self, op: Unborrow) -> Value | None:",
+        "target": "mypyc.transform.ir_transform.IRTransform.visit_unborrow"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_goto\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 19,
+        "src": "def visit_goto(self, op: Goto) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_goto"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_branch\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_branch(self, op: Branch) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_branch"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_return\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 5,
+        "src": "def visit_return(self, op: Return) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_return"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_unreachable\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_unreachable(self, op: Unreachable) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_unreachable"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_assign\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_assign(self, op: Assign) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_assign"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_assign_multi\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_assign_multi(self, op: AssignMulti) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_assign_multi"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_load_error_value\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_load_error_value(self, op: LoadErrorValue) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_load_error_value"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_load_literal\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_load_literal(self, op: LoadLiteral) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_load_literal"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_get_attr\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_get_attr(self, op: GetAttr) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_get_attr"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_set_attr\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_set_attr(self, op: SetAttr) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_set_attr"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_load_static\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 4,
+        "src": "def visit_load_static(self, op: LoadStatic) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_load_static"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_init_static\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_init_static(self, op: InitStatic) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_init_static"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_tuple_get\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_tuple_get(self, op: TupleGet) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_tuple_get"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_tuple_set\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_tuple_set(self, op: TupleSet) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_tuple_set"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_inc_ref\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_inc_ref(self, op: IncRef) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_inc_ref"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_dec_ref\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_dec_ref(self, op: DecRef) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_dec_ref"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_call\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_call(self, op: Call) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_call"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_method_call\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_method_call(self, op: MethodCall) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_method_call"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_cast\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 4,
+        "src": "def visit_cast(self, op: Cast) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_cast"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_box\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_box(self, op: Box) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_box"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_unbox\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_unbox(self, op: Unbox) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_unbox"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_raise_standard_error\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_raise_standard_error(self, op: RaiseStandardError) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_raise_standard_error"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_call_c\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 4,
+        "src": "def visit_call_c(self, op: CallC) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_call_c"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_primitive_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_primitive_op(self, op: PrimitiveOp) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_primitive_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_truncate\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_truncate(self, op: Truncate) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_truncate"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_extend\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_extend(self, op: Extend) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_extend"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_load_global\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_load_global(self, op: LoadGlobal) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_load_global"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_int_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_int_op(self, op: IntOp) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_int_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_comparison_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 4,
+        "src": "def visit_comparison_op(self, op: ComparisonOp) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_comparison_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_float_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 4,
+        "src": "def visit_float_op(self, op: FloatOp) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_float_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_float_neg\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 4,
+        "src": "def visit_float_neg(self, op: FloatNeg) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_float_neg"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_float_comparison_op\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_float_comparison_op(self, op: FloatComparisonOp) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_float_comparison_op"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_load_mem\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 4,
+        "src": "def visit_load_mem(self, op: LoadMem) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_load_mem"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_set_mem\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_set_mem(self, op: SetMem) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_set_mem"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_get_element_ptr\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 4,
+        "src": "def visit_get_element_ptr(self, op: GetElementPtr) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_get_element_ptr"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_load_address\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_load_address(self, op: LoadAddress) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_load_address"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_keep_alive\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 6,
+        "src": "def visit_keep_alive(self, op: KeepAlive) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_keep_alive"
+      },
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_unborrow\" is not using @override but is overriding a method in class \"mypyc.ir.ops.OpVisitor\"",
+        "offset": 3,
+        "src": "def visit_unborrow(self, op: Unborrow) -> None:",
+        "target": "mypyc.transform.ir_transform.PatchVisitor.visit_unborrow"
+      }
+    ],
+    "mypyc/transform/lower.py": [
+      {
+        "code": "explicit-override",
+        "column": 4,
+        "message": "Method \"visit_primitive_op\" is not using @override but is overriding a method in class \"mypyc.transform.ir_transform.IRTransform\"",
+        "offset": 28,
+        "src": "def visit_primitive_op(self, op: PrimitiveOp) -> Value:",
+        "target": "mypyc.transform.lower.LoweringVisitor.visit_primitive_op"
       }
     ]
   },

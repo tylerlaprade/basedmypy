@@ -880,9 +880,8 @@ x: List[collections.defaultdict]
 
 [out]
 import collections
-from typing import List
 
-x: List[collections.defaultdict]
+x: list[collections.defaultdict]
 
 
 [case testAnnotationFwRefs]
@@ -1553,9 +1552,9 @@ funcs: Dict[Any, Any]
 f = funcs[a.f]
 [out]
 from basedtyping import Untyped
-from typing import Any, Dict
+from typing import Any
 
-funcs: Dict[Any, Any]
+funcs: dict[Any, Any]
 f: Untyped
 
 [case testAbstractMethodNameExpr]
@@ -2492,18 +2491,18 @@ def f(*args: Union[int, Tuple[int, int]]) -> int:
 
 
 [out]
-from typing import Tuple, overload
+from typing import overload
 
 class A:
     @overload
     def f(self, x: int, y: int) -> int: ...
     @overload
-    def f(self, x: Tuple[int, int]) -> int: ...
+    def f(self, x: tuple[int, int]) -> int: ...
 
 @overload
 def f(x: int, y: int) -> int: ...
 @overload
-def f(x: Tuple[int, int]) -> int: ...
+def f(x: tuple[int, int]) -> int: ...
 
 [case testOverload_importTyping]
 import typing
@@ -2553,18 +2552,18 @@ class A:
     @typing.overload
     def f(self, x: int, y: int) -> int: ...
     @typing.overload
-    def f(self, x: typing.Tuple[int, int]) -> int: ...
+    def f(self, x: tuple[int, int]) -> int: ...
     @typing.overload
     @classmethod
     def g(cls, x: int, y: int) -> int: ...
     @typing.overload
     @classmethod
-    def g(cls, x: typing.Tuple[int, int]) -> int: ...
+    def g(cls, x: tuple[int, int]) -> int: ...
 
 @typing.overload
 def f(x: int, y: int) -> int: ...
 @typing.overload
-def f(x: typing.Tuple[int, int]) -> int: ...
+def f(x: tuple[int, int]) -> int: ...
 
 
 [case testOverload_importTypingAs]
@@ -2629,22 +2628,22 @@ class A:
     @t.overload
     def f(self, x: int, y: int) -> int: ...
     @t.overload
-    def f(self, x: t.Tuple[int, int]) -> int: ...
+    def f(self, x: tuple[int, int]) -> int: ...
     @t.overload
     @classmethod
     def g(cls, x: int, y: int) -> int: ...
     @t.overload
     @classmethod
-    def g(cls, x: t.Tuple[int, int]) -> int: ...
+    def g(cls, x: tuple[int, int]) -> int: ...
 
 @t.overload
 def f(x: int, y: int) -> int: ...
 @t.overload
-def f(x: t.Tuple[int, int]) -> int: ...
+def f(x: tuple[int, int]) -> int: ...
 @te.overload
 def g(x: int, y: int) -> int: ...
 @te.overload
-def g(x: t.Tuple[int, int]) -> int: ...
+def g(x: tuple[int, int]) -> int: ...
 
 
 [case testProtocol_semanal]

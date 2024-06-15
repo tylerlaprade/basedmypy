@@ -3,7 +3,7 @@ name: Tests
 on:
   workflow_dispatch:
   push:
-    branches: [main, master, 'release*', 'rebase-master']
+    branches: [main, master, 'release*', 'merge-mypy-*']
     tags: ['*']
   pull_request:
     paths-ignore:
@@ -116,7 +116,7 @@ jobs:
       PYTEST_ADDOPTS: --color=yes
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python }}
         architecture: ${{ matrix.arch }}
