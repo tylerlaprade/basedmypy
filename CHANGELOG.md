@@ -1,6 +1,6 @@
 # Basedmypy Changelog
 
-## [Unreleased]
+## [2.5.0]
 ### Added
 - `Callable` syntax (`(int) -> str`) (#619)
 - `FunctionType` syntax (`def (int) -> str`) (#619)
