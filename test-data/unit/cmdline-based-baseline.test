@@ -9,6 +9,9 @@
 a
 [out]
 pkg/a.py:1:1: error: Name "a" is not defined  [name-defined]
+
+baseline:
+
 Found 1 error (1 new error) in 1 file (checked 1 source file)
 Baseline successfully written to a/b
 == Return code: 0
@@ -602,3 +605,54 @@ a
         "file:a.py"
     ]
 }
+
+
+[case testBaselineAllow]
+# cmd: mypy --write-baseline --baseline-allow=operator a.py
+[file a.py]
+a
+1 + ""
+[out]
+a.py:1:1: error: Name "a" is not defined  [name-defined]
+a.py:2:5: error: Unsupported operand types for + ("int" and "str")  [operator]
+
+
+
+[case testBaselineAllowUpdate]
+# cmd: mypy --write-baseline --baseline-allow=operator a.py
+[file a.py]
+a
+1 + ""
+[file .mypy/baseline.json]
+{
+    "files": {
+        "a.py": [
+            {
+                "code": "name-defined",
+                "column": 0,
+                "message": "Name \"a\" is not defined",
+                "offset": 1,
+                "src": "a",
+                "target": "a"
+            }
+        ]
+    },
+    "format": "1.7",
+    "targets": [
+        "file:a.py"
+    ]
+}
+[out]
+a.py:2:5: error: Unsupported operand types for + ("int" and "str")  [operator]
+Baseline successfully written to .mypy/baseline.json
+
+
+[case testBaselineBan]
+# cmd: mypy --write-baseline --baseline-ban operator a.py
+[file a.py]
+a
+1 + ""
+[out]
+a.py:1:1: error: Unsupported operand types for + ("int" and "str")  [name-defined]
+a.py:2:5: error: Unsupported operand types for + ("int" and "str")  [operator]
+Baseline successfully written to .mypy/baseline.json
