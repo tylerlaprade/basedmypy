@@ -1091,7 +1091,7 @@ def save_baseline(manager: BuildManager):
         file.parent.mkdir(parents=True)
     data: BaselineType = {
         "files": new_baseline,
-        "format": "1.7",
+        "format": "2.6",
         "targets": manager.options._targets,
     }
     with file.open("w") as f:
@@ -1159,7 +1159,7 @@ def load_baseline(options: Options, errors: Errors, stdout: TextIO) -> None:
 
     if baseline_format is None and error():
         return
-    elif baseline_format != "1.7":
+    elif baseline_format != "2.6":
         if not options.write_baseline:
             error(
                 f"error: Baseline file '{file}' was generated with an old version of basedmypy.\n"

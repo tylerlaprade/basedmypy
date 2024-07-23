@@ -9,6 +9,7 @@ import sys
 import time
 from collections import defaultdict
 from gettext import gettext
+from operator import itemgetter
 from typing import IO, Any, Final, NoReturn, Sequence, TextIO
 
 import mypy.options
@@ -134,8 +135,8 @@ def main(
                     all_errors[error.code.code] += 1
             if all_errors:
                 max_code_name_length = max(len(code_name) for code_name in all_errors)
-                for code_name, count in all_errors.items():
-                    stdout.write(f"  {code_name:<{max_code_name_length}} {count:>5}\n")
+                for error_code, count in sorted(all_errors.items(), key=itemgetter(1)):
+                    stdout.write(f"  {error_code:<{max_code_name_length}} {count:>5}\n")
         if options.write_baseline and res:
             n_files = len(res.manager.errors.all_errors)
             stats = res.manager.errors.baseline_stats
@@ -144,7 +145,8 @@ def main(
             new_errors = n_errors - rejected
             previous = res.manager.errors.original_baseline
             stdout.write(formatter.style("baseline:\n", color="none", bold=True))
-            stdout.write(f"  {new_errors} new error{plural_s(new_errors)}\n")
+            if new_errors >= 0:
+                stdout.write(f"  {new_errors} new error{plural_s(new_errors)}\n")
             stdout.write(f"  {total} error{plural_s(total)} in baseline\n")
             difference = (
                 len(
@@ -653,7 +655,7 @@ def process_options(
     )
     add_invertible_flag(
         "--no-summary",
-        default=False,
+        default=True,
         help="don't show an error code summary at the end",
         group=based_group,
     )

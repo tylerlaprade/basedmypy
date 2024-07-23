@@ -1389,7 +1389,7 @@ class Errors:
             return unduplicated_result
 
         allowed = self.options.baseline_allows
-        banned = self.options.baseline_allows
+        banned = self.options.baseline_bans
         rejected = []
         error_list = []
 
@@ -1404,7 +1404,7 @@ class Errors:
             if allowed:
                 return yes_no(error.code in allowed)
             if banned:
-                return yes_no(error.code in banned)
+                return yes_no(error.code not in banned)
             return yes_no(True)
 
         result = {
