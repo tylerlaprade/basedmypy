@@ -172,6 +172,8 @@ def main(
                 n_errors, n_files, len(sources), blockers=blockers, use_color=options.color_output
             )
             stdout.write(summary + "\n")
+        if n_errors >= 100 and not options.write_baseline:
+            stdout.write("That's a lot of errors, perhaps you would want to write an error baseline (`--write-baseline`)\n")
         # Only notes should also output success
         elif not messages or n_notes == len(messages):
             stdout.write(formatter.format_success(len(sources), options.color_output) + "\n")
