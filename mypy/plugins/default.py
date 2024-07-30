@@ -41,7 +41,7 @@ class DefaultPlugin(Plugin):
     """Type checker plugin that is enabled by default."""
 
     def get_function_hook(self, fullname: str) -> Callable[[FunctionContext], Type] | None:
-        from mypy.plugins import ctypes, re, singledispatch
+        from mypy.plugins import ctypes, enums, re, singledispatch
 
         if fullname == "_ctypes.Array":
             return ctypes.array_constructor_callback
@@ -60,6 +60,13 @@ class DefaultPlugin(Plugin):
             return re.split
         elif fullname == "re.findall":
             return re.findall
+        elif fullname == "functools.partial":
+            import mypy.plugins.functools
+
+            return mypy.plugins.functools.partial_new_callback
+        elif fullname == "enum.member":
+            return enums.enum_member_callback
+
         return None
 
     def get_function_signature_hook(
@@ -151,6 +158,10 @@ class DefaultPlugin(Plugin):
             return re.split
         elif fullname == "re.Pattern.findall":
             return re.findall
+        elif fullname == "functools.partial.__call__":
+            import mypy.plugins.functools
+
+            return mypy.plugins.functools.partial_call_callback
         return None
 
     def get_attribute_hook(self, fullname: str) -> Callable[[AttributeContext], Type] | None:
@@ -188,12 +199,13 @@ class DefaultPlugin(Plugin):
     def get_class_decorator_hook_2(
         self, fullname: str
     ) -> Callable[[ClassDefContext], bool] | None:
-        from mypy.plugins import attrs, dataclasses, functools
+        import mypy.plugins.functools
+        from mypy.plugins import attrs, dataclasses
 
         if fullname in dataclasses.dataclass_makers:
             return dataclasses.dataclass_class_maker_callback
-        elif fullname in functools.functools_total_ordering_makers:
-            return functools.functools_total_ordering_maker_callback
+        elif fullname in mypy.plugins.functools.functools_total_ordering_makers:
+            return mypy.plugins.functools.functools_total_ordering_maker_callback
         elif fullname in attrs.attr_class_makers:
             return attrs.attr_class_maker_callback
         elif fullname in attrs.attr_dataclass_makers:
@@ -522,7 +534,7 @@ def int_neg_callback(ctx: MethodContext, multiplier: int = -1) -> Type:
                 return ctx.type.copy_modified(
                     last_known_value=LiteralType(
                         value=multiplier * value,
-                        fallback=ctx.type,
+                        fallback=fallback,
                         line=ctx.type.line,
                         column=ctx.type.column,
                     )

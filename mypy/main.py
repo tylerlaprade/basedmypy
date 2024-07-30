@@ -19,6 +19,7 @@ from mypy.config_parser import (
     parse_version,
     validate_package_allow_list,
 )
+from mypy.error_formatter import OUTPUT_CHOICES
 from mypy.errorcodes import error_codes
 from mypy.errors import CompileError
 from mypy.find_sources import InvalidSourceList, create_source_list
@@ -74,7 +75,7 @@ def main(
         options.fast_exit = False
 
     formatter = util.FancyFormatter(
-        stdout, stderr, options.hide_error_codes, color=options.color_output
+        stdout, stderr, options.hide_error_codes, color=options.color_output, hide_success=bool(options.output)
     )
 
     if options.install_types and (stdout is not sys.stdout or stderr is not sys.stderr):
@@ -184,7 +185,9 @@ def run_build(
     stdout: TextIO,
     stderr: TextIO,
 ) -> tuple[build.BuildResult | None, list[str], bool]:
-    formatter = util.FancyFormatter(stdout, stderr, options.hide_error_codes)
+    formatter = util.FancyFormatter(
+        stdout, stderr, options.hide_error_codes, hide_success=bool(options.output)
+    )
 
     messages = []
     messages_by_file = defaultdict(list)
@@ -621,6 +624,14 @@ def process_options(
     )
     add_invertible_flag(
         "--ide", default=False, help="Best default for IDE integration.", group=based_group
+    )
+
+    general_group.add_argument(
+        "-O",
+        "--output",
+        metavar="FORMAT",
+        help="Set a custom output format",
+        choices=OUTPUT_CHOICES,
     )
 
     config_group = parser.add_argument_group(

@@ -31,7 +31,7 @@ from _typeshed import (
 )
 from collections.abc import Awaitable, Callable, Iterable, Iterator, MutableSet, Reversible, Set as AbstractSet, Sized
 from io import BufferedRandom, BufferedReader, BufferedWriter, FileIO, TextIOWrapper
-from types import CodeType, TracebackType, _Cell, BuiltinFunctionType
+from types import BuiltinFunctionType, CellType, CodeType, TracebackType
 
 # mypy crashes if any of {ByteString, Sequence, MutableSequence, Mapping, MutableMapping} are imported from collections.abc in builtins.pyi
 from typing import (  # noqa: Y022
@@ -66,6 +66,7 @@ from typing_extensions import (  # noqa: Y023
     Self,
     TypeAlias,
     TypeGuard,
+    TypeIs,
     TypeVarTuple,
     deprecated,
 )
@@ -445,7 +446,7 @@ class str(Sequence[str]):
     def expandtabs(self, tabsize: SupportsIndex = 8) -> str: ...  # type: ignore[misc]
     def find(self, sub: str, start: SupportsIndex | None = ..., end: SupportsIndex | None = ..., /) -> int: ...
     def format(self, *args: object, **kwargs: object) -> str: ...
-    def format_map(self, map: _FormatMapMapping) -> str: ...
+    def format_map(self, mapping: _FormatMapMapping, /) -> str: ...
     def index(self, sub: str, start: SupportsIndex | None = ..., end: SupportsIndex | None = ..., /) -> int: ...  # type: ignore[override]
     def isalnum(self) -> bool: ...
     def isalpha(self) -> bool: ...
@@ -464,7 +465,10 @@ class str(Sequence[str]):
     def lower(self) -> str: ...  # type: ignore[misc]
     def lstrip(self, chars: str | None = None, /) -> str: ...  # type: ignore[misc]
     def partition(self, sep: str, /) -> tuple[str, str, str]: ...  # type: ignore[misc]
-    def replace(self, old: str, new: str, count: SupportsIndex = -1, /) -> str: ...  # type: ignore[misc]
+    if sys.version_info >= (3, 13):
+        def replace(self, old: str, new: str, /, count: SupportsIndex = -1) -> str: ...  # type: ignore[misc]
+    else:
+        def replace(self, old: str, new: str, count: SupportsIndex = -1, /) -> str: ...  # type: ignore[misc]
     if sys.version_info >= (3, 9):
         def removeprefix(self, prefix: str, /) -> str: ...  # type: ignore[misc]
         def removesuffix(self, suffix: str, /) -> str: ...  # type: ignore[misc]
@@ -863,7 +867,7 @@ class tuple(Sequence[_T_co]):
 class function:
     # Make sure this class definition stays roughly in line with `types.FunctionType`
     @property
-    def __closure__(self) -> tuple[_Cell, ...] | None: ...
+    def __closure__(self) -> tuple[CellType, ...] | None: ...
     __code__: CodeType
     __defaults__: tuple[Any, ...] | None
     __dict__: dict[str, Any]
@@ -944,15 +948,25 @@ class dict(MutableMapping[_KT, _VT]):
     @overload
     def __init__(self) -> None: ...
     @overload
-    def __init__(self: dict[str, _VT], **kwargs: _VT) -> None: ...
+    def __init__(self: dict[str, _VT], **kwargs: _VT) -> None: ...  # pyright: ignore[reportInvalidTypeVarUse]  #11780
     @overload
     def __init__(self, map: SupportsKeysAndGetItem[_KT, _VT], /) -> None: ...
     @overload
-    def __init__(self: dict[str, _VT], map: SupportsKeysAndGetItem[str, _VT], /, **kwargs: _VT) -> None: ...
+    def __init__(
+        self: dict[str, _VT],  # pyright: ignore[reportInvalidTypeVarUse]  #11780
+        map: SupportsKeysAndGetItem[str, _VT],
+        /,
+        **kwargs: _VT,
+    ) -> None: ...
     @overload
     def __init__(self, iterable: Iterable[tuple[_KT, _VT]], /) -> None: ...
     @overload
-    def __init__(self: dict[str, _VT], iterable: Iterable[tuple[str, _VT]], /, **kwargs: _VT) -> None: ...
+    def __init__(
+        self: dict[str, _VT],  # pyright: ignore[reportInvalidTypeVarUse]  #11780
+        iterable: Iterable[tuple[str, _VT]],
+        /,
+        **kwargs: _VT,
+    ) -> None: ...
     # Next two overloads are for dict(string.split(sep) for string in iterable)
     # Cannot be Iterable[Sequence[_T]] or otherwise dict(["foo", "bar", "baz"]) is not an error
     @overload
@@ -1116,6 +1130,9 @@ class property:
     fset: Callable[[Any, Any], None] | None
     fdel: Callable[[Any], None] | None
     __isabstractmethod__: bool
+    if sys.version_info >= (3, 13):
+        __name__: str
+
     def __init__(
         self,
         fget: Callable[[Any], Any] | None = ...,
@@ -1153,7 +1170,7 @@ def ascii(obj: object, /) -> str: ...
 def bin(number: int | SupportsIndex, /) -> str: ...
 @_as_builtin
 def breakpoint(*args: Any, **kws: Any) -> None: ...
-callable: BuiltinFunctionType[[object], TypeGuard[Callable[..., object]]]
+callable: BuiltinFunctionType[[object], TypeIs[Callable[..., object]]]
 @_as_builtin
 def chr(i: int, /) -> str: ...
 
@@ -1246,13 +1263,37 @@ def divmod(x: _T_contra, y: SupportsRDivMod[_T_contra, _T_co], /) -> _T_co: ...
 
 # The `globals` argument to `eval` has to be `dict[str, Any]` rather than `dict[str, object]` due to invariance.
 # (The `globals` argument has to be a "real dict", rather than any old mapping, unlike the `locals` argument.)
-@_as_builtin
-def eval(
-    source: str | ReadableBuffer | CodeType, globals: dict[str, Any] | None = None, locals: Mapping[str, object] | None = None, /
-) -> Any: ...
+if sys.version_info >= (3, 13):
+    @_as_builtin
+    def eval(
+        source: str | ReadableBuffer | CodeType,
+        /,
+        globals: dict[str, Any] | None = None,
+        locals: Mapping[str, object] | None = None,
+    ) -> Any: ...
+
+else:
+    @_as_builtin
+    def eval(
+        source: str | ReadableBuffer | CodeType,
+        globals: dict[str, Any] | None = None,
+        locals: Mapping[str, object] | None = None,
+        /,
+    ) -> Any: ...
 
 # Comment above regarding `eval` applies to `exec` as well
-if sys.version_info >= (3, 11):
+if sys.version_info >= (3, 13):
+    @_as_builtin
+    def exec(
+        source: str | ReadableBuffer | CodeType,
+        /,
+        globals: dict[str, Any] | None = None,
+        locals: Mapping[str, object] | None = None,
+        *,
+        closure: tuple[CellType, ...] | None = None,
+    ) -> None: ...
+
+elif sys.version_info >= (3, 11):
     @_as_builtin
     def exec(
         source: str | ReadableBuffer | CodeType,
@@ -1260,7 +1301,7 @@ if sys.version_info >= (3, 11):
         locals: Mapping[str, object] | None = None,
         /,
         *,
-        closure: tuple[_Cell, ...] | None = None,
+        closure: tuple[CellType, ...] | None = None,
     ) -> None: ...
 
 else:
@@ -1280,6 +1321,8 @@ class filter(Iterator[_T]):
     def __new__(cls, function: None, iterable: Iterable[_T | None], /) -> Self: ...
     @overload
     def __new__(cls, function: Callable[[_S], TypeGuard[_T]], iterable: Iterable[_S], /) -> Self: ...
+    @overload
+    def __new__(cls, function: Callable[[_S], TypeIs[_T]], iterable: Iterable[_S], /) -> Self: ...
     @overload
     def __new__(cls, function: Callable[[_T], Any], iterable: Iterable[_T], /) -> Self: ...
     def __iter__(self) -> Self: ...
@@ -1618,10 +1661,10 @@ def pow(base: float, exp: complex | _SupportsSomeKindOfPow, mod: None = None) ->
 def pow(base: complex, exp: complex | _SupportsSomeKindOfPow, mod: None = None) -> complex: ...
 @_as_builtin
 @overload
-def pow(base: _SupportsPow2[_E, _T_co], exp: _E, mod: None = None) -> _T_co: ...
+def pow(base: _SupportsPow2[_E, _T_co], exp: _E, mod: None = None) -> _T_co: ...  # type: ignore[overload-overlap]
 @_as_builtin
 @overload
-def pow(base: _SupportsPow3NoneOnly[_E, _T_co], exp: _E, mod: None = None) -> _T_co: ...
+def pow(base: _SupportsPow3NoneOnly[_E, _T_co], exp: _E, mod: None = None) -> _T_co: ...  # type: ignore[overload-overlap]
 @_as_builtin
 @overload
 def pow(base: _SupportsPow3[_E, _M, _T_co], exp: _E, mod: _M) -> _T_co: ...
@@ -1791,7 +1834,7 @@ def __import__(
     level: int = 0,
 ) -> types.ModuleType: ...
 @_as_builtin
-def __build_class__(func: Callable[[], _Cell | Any], name: str, /, *bases: Any, metaclass: Any = ..., **kwds: Any) -> Any: ...
+def __build_class__(func: Callable[[], CellType | Any], name: str, /, *bases: Any, metaclass: Any = ..., **kwds: Any) -> Any: ...
 
 if sys.version_info >= (3, 10):
     from types import EllipsisType
@@ -2032,3 +2075,7 @@ if sys.version_info >= (3, 11):
         def split(
             self, condition: Callable[[_ExceptionT_co | Self], bool], /
         ) -> tuple[ExceptionGroup[_ExceptionT_co] | None, ExceptionGroup[_ExceptionT_co] | None]: ...
+
+if sys.version_info >= (3, 13):
+    class IncompleteInputError(SyntaxError): ...
+    class PythonFinalizationError(RuntimeError): ...

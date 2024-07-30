@@ -16,7 +16,7 @@ from mypy.types import (
     Type,
     TypedDictType,
     TypeType,
-    TypeVarType,
+    TypeVarLikeType,
     UnboundType,
     UninhabitedType,
     UnionType,
@@ -134,7 +134,7 @@ class Mapper:
             return object_rprimitive
         elif isinstance(typ, TypeType):
             return object_rprimitive
-        elif isinstance(typ, TypeVarType):
+        elif isinstance(typ, TypeVarLikeType):
             # Erase type variable to upper bound.
             # TODO: Erase to union if object has value restriction?
             return self.type_to_rtype(typ.upper_bound)

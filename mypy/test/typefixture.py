@@ -30,6 +30,7 @@ from mypy.types import (
     TypeAliasType,
     TypeOfAny,
     TypeType,
+    TypeVarId,
     TypeVarLikeType,
     TypeVarTupleType,
     TypeVarType,
@@ -57,7 +58,7 @@ class TypeFixture:
             return TypeVarType(
                 name,
                 name,
-                id,
+                TypeVarId(id),
                 values,
                 upper_bound,
                 AnyType(TypeOfAny.from_omitted_generics),
@@ -231,7 +232,7 @@ class TypeFixture:
             return TypeVarTupleType(
                 name,
                 name,
-                id,
+                TypeVarId(id),
                 upper_bound,
                 self.std_tuple,
                 AnyType(TypeOfAny.from_omitted_generics),
@@ -341,7 +342,7 @@ class TypeFixture:
                         TypeVarTupleType(
                             n,
                             n,
-                            id,
+                            TypeVarId(id),
                             self.std_tuple.copy_modified(args=[self.o]),
                             self.std_tuple.copy_modified(args=[self.o]),
                             AnyType(TypeOfAny.from_omitted_generics),
@@ -356,7 +357,7 @@ class TypeFixture:
                         TypeVarType(
                             n,
                             n,
-                            id,
+                            TypeVarId(id),
                             [],
                             self.o,
                             AnyType(TypeOfAny.from_omitted_generics),

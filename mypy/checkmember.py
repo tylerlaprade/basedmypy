@@ -126,6 +126,7 @@ class MemberContext:
         messages: MessageBuilder | None = None,
         self_type: Type | None = None,
         is_lvalue: bool | None = None,
+        original_type: Type | None = None,
     ) -> MemberContext:
         mx = MemberContext(
             self.is_lvalue,
@@ -145,6 +146,8 @@ class MemberContext:
             mx.self_type = self_type
         if is_lvalue is not None:
             mx.is_lvalue = is_lvalue
+        if original_type is not None:
+            mx.original_type = original_type
         return mx
 
 
@@ -665,7 +668,7 @@ def analyze_descriptor_access(descriptor_type: Type, mx: MemberContext) -> Type:
     Return:
         The return type of the appropriate ``__get__`` overload for the descriptor.
     """
-    instance_type = get_proper_type(mx.original_type)
+    instance_type = get_proper_type(mx.self_type)
     orig_descriptor_type = descriptor_type
     descriptor_type = get_proper_type(descriptor_type)
 
@@ -794,23 +797,10 @@ def analyze_var(
         if mx.is_lvalue and var.is_classvar:
             mx.msg.cant_assign_to_classvar(name, mx.context)
         t = freshen_all_functions_type_vars(typ)
-        if not (mx.is_self or mx.is_super) or supported_self_type(
-            get_proper_type(mx.original_type)
-        ):
-            t = expand_self_type(var, t, mx.original_type)
-        elif (
-            mx.is_self
-            and original_itype.type != var.info
-            # If an attribute with Self-type was defined in a supertype, we need to
-            # rebind the Self type variable to Self type variable of current class...
-            and original_itype.type.self_type is not None
-            # ...unless `self` has an explicit non-trivial annotation.
-            and original_itype == mx.chk.scope.active_self_type()
-        ):
-            t = expand_self_type(var, t, original_itype.type.self_type)
-        t = get_proper_type(expand_type_by_instance(t, itype))
+        t = expand_self_type_if_needed(t, mx, var, original_itype)
+        t = expand_type_by_instance(t, itype)
         freeze_all_type_vars(t)
-        result: Type = t
+        result = t
         typ = get_proper_type(typ)
 
         call_type: ProperType | None = None
@@ -881,6 +871,50 @@ def analyze_var(
             AttributeContext(get_proper_type(mx.original_type), result, mx.context, mx.chk)
         )
     return result
+
+
+def expand_self_type_if_needed(
+    t: Type, mx: MemberContext, var: Var, itype: Instance, is_class: bool = False
+) -> Type:
+    """Expand special Self type in a backwards compatible manner.
+
+    This should ensure that mixing old-style and new-style self-types work
+    seamlessly. Also, re-bind new style self-types in subclasses if needed.
+    """
+    original = get_proper_type(mx.self_type)
+    if not (mx.is_self or mx.is_super):
+        repl = mx.self_type
+        if is_class:
+            if isinstance(original, TypeType):
+                repl = original.item
+            elif isinstance(original, CallableType):
+                # Problematic access errors should have been already reported.
+                repl = erase_typevars(original.ret_type)
+            else:
+                repl = itype
+        return expand_self_type(var, t, repl)
+    elif supported_self_type(
+        # Support compatibility with plain old style T -> T and Type[T] -> T only.
+        get_proper_type(mx.self_type),
+        allow_instances=False,
+        allow_callable=False,
+    ):
+        repl = mx.self_type
+        if is_class and isinstance(original, TypeType):
+            repl = original.item
+        return expand_self_type(var, t, repl)
+    elif (
+        mx.is_self
+        and itype.type != var.info
+        # If an attribute with Self-type was defined in a supertype, we need to
+        # rebind the Self type variable to Self type variable of current class...
+        and itype.type.self_type is not None
+        # ...unless `self` has an explicit non-trivial annotation.
+        and itype == mx.chk.scope.active_self_type()
+    ):
+        return expand_self_type(var, t, itype.type.self_type)
+    else:
+        return t
 
 
 def freeze_all_type_vars(member_type: Type) -> None:
@@ -1085,12 +1119,11 @@ def analyze_class_attribute_access(
                     else:
                         message = message_registry.GENERIC_INSTANCE_VAR_CLASS_ACCESS
                     mx.msg.fail(message, mx.context)
-
+            t = expand_self_type_if_needed(t, mx, node.node, itype, is_class=True)
             # Erase non-mapped variables, but keep mapped ones, even if there is an error.
             # In the above example this means that we infer following types:
             #     C.x -> Any
             #     C[int].x -> int
-            t = get_proper_type(expand_self_type(node.node, t, itype))
             t = erase_typevars(expand_type_by_instance(t, isuper), {tv.id for tv in def_vars})
 
         is_classmethod = (is_decorated and cast(Decorator, node.node).func.is_class) or (
@@ -1169,9 +1202,20 @@ def analyze_enum_class_attribute_access(
     # Skip these since Enum will remove it
     if name in ENUM_REMOVED_PROPS:
         return report_missing_attribute(mx.original_type, itype, name, mx)
-    # For other names surrendered by underscores, we don't make them Enum members
-    if name.startswith("__") and name.endswith("__") and name.replace("_", "") != "":
+    # Dunders and private names are not Enum members
+    if name.startswith("__") and name.replace("_", "") != "":
         return None
+
+    node = itype.type.get(name)
+    if node and node.type:
+        proper = get_proper_type(node.type)
+        # Support `A = nonmember(1)` function call and decorator.
+        if (
+            isinstance(proper, Instance)
+            and proper.type.fullname == "enum.nonmember"
+            and proper.args
+        ):
+            return proper.args[0]
 
     enum_literal = LiteralType(name, fallback=itype)
     return itype.copy_modified(last_known_value=enum_literal)
