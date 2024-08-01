@@ -819,10 +819,11 @@ def analyze_var(
                         mx.msg.read_only_property(name, itype.type, mx.context)
                 else:
                     mx.msg.cant_assign_to_method(mx.context)
-
             if var.is_staticmethod:
-                assert isinstance(result, CallableType)
-                result = result.copy_modified(fallback=mx.named_type("typing._NamedCallable"))
+                assert isinstance(get_proper_type(result), CallableType)
+                result = cast(CallableType, result).copy_modified(
+                    fallback=mx.named_type("typing._NamedCallable")
+                )
             else:
                 # Class-level function objects and classmethods become bound methods:
                 # the former to the instance, the latter to the class.

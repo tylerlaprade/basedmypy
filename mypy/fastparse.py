@@ -355,7 +355,9 @@ def parse_type_string(
     string expression "blah" using this function.
     """
     try:
-        _, node = parse_type_comment(expr_string.strip().replace("\n", " "), line=line, column=column, errors=None)
+        _, node = parse_type_comment(
+            expr_string.strip().replace("\n", " "), line=line, column=column, errors=None
+        )
         return RawExpressionType(expr_string, expr_fallback_name, line, column, node=node)
     except (SyntaxError, ValueError):
         # Note: the parser will raise a `ValueError` instead of a SyntaxError if
@@ -2018,8 +2020,16 @@ class TypeConverter:
 
     def visit_IfExp(self, n: ast3.IfExp) -> Type:
         condition = self.visit(n.test)
-        true = self.visit(n.body)
-        false = self.visit(n.orelse)
+        true: Type = self.visit(n.body)
+        if isinstance(true, RawExpressionType) and true.node:
+            # if just the true branch part is quoted
+            true = true.node
+        assert isinstance(true, ProperType)
+        false: Type = self.visit(n.orelse)
+        if isinstance(false, RawExpressionType) and false.node:
+            # if just the false branch part is quoted
+            false = false.node
+        assert isinstance(false, ProperType)
         result = None
         if not (isinstance(condition, RawExpressionType) and condition.literal_value is True):
             result = self.invalid_type(n.test, note='The condition can only be "True"')
@@ -2115,7 +2125,7 @@ class TypeConverter:
                 sliceval.col_offset = sliceval.lower.col_offset
         else:
             assert isinstance(n.slice, ast3.ExtSlice)
-            dims = cast(List[ast3.expr], copy.deepcopy(n.slice.dims))
+            dims = cast(List[ast3.expr], copy.deepcopy(n.slice.dims))  # type: ignore[bad-cast]
             for s in dims:
                 # These fields don't actually have a col_offset attribute but we add
                 # it manually.

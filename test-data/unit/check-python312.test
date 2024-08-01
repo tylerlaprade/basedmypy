@@ -58,6 +58,7 @@ class Cls2[**P]: ...  # E: PEP 695 generics are not yet supported
 class Cls3[*Ts]: ...  # E: PEP 695 generics are not yet supported
 
 def func1[T: int](x: T) -> T: ...  # E: PEP 695 generics are not yet supported \
+                                   # E: Name "T" is not defined \
                                    # E: Name "T" is not defined
 
 def func2[**P](x: Callable[P, int]) -> Callable[P, str]: ...  # E: PEP 695 generics are not yet supported \
@@ -593,14 +594,15 @@ reveal_type(a)  # N: Revealed type is "Any"
 
 [case testPEP695TypeAliasInvalidType]
 # flags: --enable-incomplete-feature=NewGenericSyntax
-type A = int | 1  # E: Invalid type: try using Literal[1] instead? \
+type A = int | 1  # E: "1" is a bare literal and cannot be used here, try Literal[1] instead? \
                   # E: Unsupported operand types for | ("Type[int]" and "int")
 
 a: A
-reveal_type(a)  # N: Revealed type is "Union[builtins.int, Any]"
+reveal_type(a)  # N: Revealed type is "Union[builtins.int, Literal[1]]"
 type B = int + str  # E: Invalid type alias: expression is not a valid type
 b: B
 reveal_type(b)  # N: Revealed type is "Any"
+
 [builtins fixtures/type.pyi]
 
 [case testPEP695TypeAliasBoundForwardReference]
@@ -1199,7 +1201,8 @@ reveal_type(b)  # N: Revealed type is "Union[__main__.C[builtins.int], builtins.
 [case testPEP695BadRecursiveTypeAlias]
 # mypy: enable-incomplete-feature=NewGenericSyntax
 
-type A = A  # E: Cannot resolve name "A" (possible cyclic definition)
+type A = A  # E: Cannot resolve name "A" (possible cyclic definition) \
+            # E: Cannot resolve name "A" (possible cyclic definition)
 type B = B | int  # E: Invalid recursive alias: a union item of itself
 a: A
 reveal_type(a)  # N: Revealed type is "Any"
@@ -1545,10 +1548,10 @@ class D[T: T]:  # E: Name "T" is not defined
 # flags: --enable-incomplete-feature=NewGenericSyntax
 def f[T: 1](x: T) -> T: ...  # E: Invalid type: try using Literal[1] instead?
 class C[T: (int, (1 + 2))]: pass  # E: Invalid type comment or annotation
-type A = list[1]  # E: Invalid type: try using Literal[1] instead?
+type A = list[1]  # E: "1" is a bare literal and cannot be used here, try Literal[1] instead?
 type B = (1 + 2)  # E: Invalid type alias: expression is not a valid type
 a: A
-reveal_type(a)  # N: Revealed type is "builtins.list[Any]"
+reveal_type(a)  # N: Revealed type is "builtins.list[Literal[1]]"
 b: B
 reveal_type(b)  # N: Revealed type is "Any"
 

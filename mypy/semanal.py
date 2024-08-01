@@ -281,6 +281,7 @@ from mypy.types import (
     ParamSpecType,
     PlaceholderType,
     ProperType,
+    RawExpressionType,
     TrivialSyntheticTypeTranslator,
     TupleType,
     Type,
@@ -301,7 +302,7 @@ from mypy.types import (
     is_named_instance,
     is_unannotated_any,
     remove_dups,
-    type_vars_as_args, RawExpressionType,
+    type_vars_as_args,
 )
 from mypy.types_utils import is_invalid_recursive_alias, store_argument_type
 from mypy.typevars import fill_typevars, fill_typevars_with_any
@@ -6085,10 +6086,7 @@ class SemanticAnalyzer(
 
     def visit_cast_expr(self, expr: CastExpr) -> None:
         expr.expr.accept(self)
-        analyzed = self.anal_type(
-            expr.type,
-            runtime=isinstance(expr.type, RawExpressionType),
-        )
+        analyzed = self.anal_type(expr.type, runtime=not isinstance(expr.type, RawExpressionType))
         if analyzed is not None:
             expr.type = analyzed
 

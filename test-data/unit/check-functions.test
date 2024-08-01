@@ -42,8 +42,10 @@ class C(A):
 [out]
 main:10: error: Argument 1 of "f" is incompatible with supertype "A"; supertype defines the argument type as "str"
 main:10: note: This violates the Liskov substitution principle
-main:10: note: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+main:10: note: See https://kotlinisland.github.io/basedmypy/common_issues.html#incompatible-overrides
 main:10: error: Argument 2 of "f" is incompatible with supertype "A"; supertype defines the argument type as "int"
+main:10: note: This violates the Liskov substitution principle
+main:10: note: See https://kotlinisland.github.io/basedmypy/common_issues.html#incompatible-overrides
 
 [case testPositionalOverridingArgumentNameInsensitivity]
 import typing
@@ -3341,7 +3343,7 @@ class C:  # Note: Generic[T] missing
         self.x = x
 
     def nope(self, x: T) -> None:
-        self.x = x  # E: Incompatible types in assignment (expression has type "T@nope", variable has type "T@bad_idea")
+        self.x = x  # E: Incompatible types in assignment (expression has type "T", variable has type "T")
 
 [case testNoCrashOnBadCallablePropertyOverride]
 from typing import Callable, Union
@@ -3361,7 +3363,7 @@ class Bar(Foo):
     @property
     def method(self) -> Callable[[int, A], None]:  # E: Argument 2 of "method" is incompatible with supertype "Foo"; supertype defines the argument type as "Union[Callable[[C], None], Callable[[D], None]]" \
                                                    # N: This violates the Liskov substitution principle \
-                                                   # N: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+                                                   # N: See https://kotlinisland.github.io/basedmypy/common_issues.html#incompatible-overrides
         ...
 [builtins fixtures/property.pyi]
 
@@ -3403,7 +3405,7 @@ class C(B):
         self, *,
         y: int,  # E: Argument 1 of "meth" is incompatible with supertype "B"; supertype defines the argument type as "str" \
                  # N: This violates the Liskov substitution principle \
-                 # N: See https://mypy.readthedocs.io/en/stable/common_issues.html#incompatible-overrides
+                 # N: See https://kotlinisland.github.io/basedmypy/common_issues.html#incompatible-overrides
         x: int,
     ) -> None:
         ...

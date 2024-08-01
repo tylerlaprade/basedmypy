@@ -564,7 +564,12 @@ class FancyFormatter:
     """
 
     def __init__(
-        self, f_out: IO[str], f_err: IO[str], hide_error_codes: bool, hide_success: bool = False, color=True
+        self,
+        f_out: IO[str],
+        f_err: IO[str],
+        hide_error_codes: bool,
+        hide_success: bool = False,
+        color=True,
     ) -> None:
         self.hide_error_codes = hide_error_codes
         self.hide_success = hide_success
@@ -712,7 +717,7 @@ class FancyFormatter:
         if not os.environ.get("COLUMNS"):
             # Only wrap if there is actually a terminal
             try:
-                os.get_terminal_size(sys.__stdout__.fileno())
+                os.get_terminal_size(safe(sys.__stdout__).fileno())
             except (AttributeError, ValueError, OSError):
                 return messages
         width = fixed_terminal_width or get_terminal_width()

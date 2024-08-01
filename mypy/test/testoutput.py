@@ -9,6 +9,7 @@ from __future__ import annotations
 import os
 import os.path
 
+import mypy.options
 from mypy import api
 from mypy.defaults import PYTHON3_VERSION
 from mypy.test.config import test_temp_dir
@@ -24,7 +25,7 @@ class OutputJSONsuite(DataSuite):
 
 def test_output_json(testcase: DataDrivenTestCase) -> None:
     """Runs Mypy in a subprocess, and ensures that `--output=json` works as intended."""
-    mypy_cmdline = ["--output=json"]
+    mypy_cmdline = ["--output=json", "--no-strict", "--hide-error-code-links"]
     mypy_cmdline.append(f"--python-version={'.'.join(map(str, PYTHON3_VERSION))}")
 
     # Write the program to a file.
@@ -36,7 +37,12 @@ def test_output_json(testcase: DataDrivenTestCase) -> None:
 
     output = []
     # Type check the program.
+    mypy.options._based = False
+    os.environ["__MYPY_UNDER_TEST__"] = "2"
     out, err, returncode = api.run(mypy_cmdline)
+    os.environ["__MYPY_UNDER_TEST__"] = "1"
+    mypy.options._based = True
+
     # split lines, remove newlines, and remove directory of test case
     for line in (out + err).rstrip("\n").splitlines():
         if line.startswith(test_temp_dir + os.sep):

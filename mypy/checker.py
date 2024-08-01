@@ -183,7 +183,6 @@ from mypy.typeops import (
     fixup_partial_type,
     function_type,
     get_type_type_item,
-    get_type_vars,
     is_literal_type_like,
     is_singleton_type,
     make_simplified_intersection,

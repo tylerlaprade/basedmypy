@@ -3,7 +3,7 @@ name: Tests
 on:
   workflow_dispatch:
   push:
-    branches: [main, master, 'release*', 'merge-mypy-*']
+    branches: [main, master, 'release*', 'merge-mypy-*', 'merge-upstream']
     tags: ['*']
   pull_request:
     paths-ignore:

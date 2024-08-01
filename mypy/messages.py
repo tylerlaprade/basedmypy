@@ -2686,9 +2686,6 @@ def format_type_inner(
         return f"Unpack[{format(typ.type)}]"
     elif isinstance(typ, TypeVarType):
         # This is similar to non-generic instance types.
-        fullname = scoped_type_var_name(typ)
-        if verbosity >= 2 or (fullnames and fullname in fullnames):
-            return fullname
         if mypy.options._based and typ.scopename and typ not in disable_own_scope:
             return f"{typ.name}@{typ.scopename}"
         return typ.name

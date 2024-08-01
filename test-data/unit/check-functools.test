@@ -283,7 +283,8 @@ p1("a", "b")  # TODO: false negative
 import functools
 from typing_extensions import TypeGuard
 
-def is_str_list(val: list[object]) -> TypeGuard[list[str]]: ...  # E: "list" is not subscriptable, use "typing.List" instead
+def is_str_list(val: list[object]) -> TypeGuard[list[str]]: ...  # E: "list" is not subscriptable, use "typing.List" instead \
+                                                                 # E: "list" is not subscriptable, use "typing.List" instead
 
 reveal_type(functools.partial(is_str_list, [1, 2, 3]))  # N: Revealed type is "functools.partial[builtins.bool]"
 reveal_type(functools.partial(is_str_list, [1, 2, 3])())  # N: Revealed type is "builtins.bool"

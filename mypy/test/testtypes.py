@@ -730,6 +730,7 @@ class TypeOpsSuite(Suite):
 
 class JoinSuite(Suite):
     def setUp(self) -> None:
+        mypy.options._based = False
         self.fx = TypeFixture(INVARIANT)
         self.fx_co = TypeFixture(COVARIANT)
         self.fx_contra = TypeFixture(CONTRAVARIANT)

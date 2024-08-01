@@ -1180,10 +1180,11 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
         return ret
 
     def anal_type_guard(self, t: Type, first_arg: str | None = None) -> TypeGuardType | None:
+        t = t.resolve_string_annotation()
+
         proper = get_proper_type(t)
         if isinstance(proper, TypeGuardType):
-            t = t.resolve_string_annotation()
-            if not self.always_allow_new_syntax:
+            if not self.always_allow_new_syntax and proper.is_evaluated:
                 self.fail(
                     "You need to put quotes around the entire type-guard, or enable `__future__.annotations`",
                     t,
@@ -1331,7 +1332,7 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
         # Based: signatures like "foo(x: 20) -> None" are legal, this method
         # generates and returns an actual LiteralType instead.
         if t.node is not None:
-            with  self.string_type():
+            with self.string_type():
                 return t.node.accept(self)
 
         if self.report_invalid_types:
