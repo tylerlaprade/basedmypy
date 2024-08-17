@@ -222,6 +222,7 @@ class TypeTranslator(TypeVisitor[Type]):
             line=t.line,
             column=t.column,
             last_known_value=last_known_value,
+            extra_attrs=t.extra_attrs,
         )
         result.metadata = t.metadata
         return result

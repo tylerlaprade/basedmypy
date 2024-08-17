@@ -1135,15 +1135,18 @@ class AnyType(ProperType):
         # Mark with Bogus because _dummy is just an object (with type Any)
         type_of_any: int = _dummy_int,
         original_any: Bogus[AnyType | None] = _dummy,
+        missing_import_name: Bogus[str | None] = _dummy,
     ) -> AnyType:
         if type_of_any == _dummy_int:
             type_of_any = self.type_of_any
         if original_any is _dummy:
             original_any = self.source_any
+        if missing_import_name is _dummy:
+            missing_import_name = self.missing_import_name
         return AnyType(
             type_of_any=type_of_any,
             source_any=original_any,
-            missing_import_name=self.missing_import_name,
+            missing_import_name=missing_import_name,
             line=self.line,
             column=self.column,
         )
@@ -1585,8 +1588,7 @@ class Instance(ProperType):
         self._hash = -1
 
         # Additional attributes defined per instance of this type. For example modules
-        # have different attributes per instance of types.ModuleType. This is intended
-        # to be "short-lived", we don't serialize it, and even don't store as variable type.
+        # have different attributes per instance of types.ModuleType.
         self.extra_attrs = extra_attrs
         self.metadata: dict[str, object] = {}
 
@@ -3138,12 +3140,19 @@ class UnionType(ProperType):
             return [i for i in self.items if not isinstance(get_proper_type(i), NoneType)]
 
     def serialize(self) -> JsonDict:
-        return {".class": "UnionType", "items": [t.serialize() for t in self.items]}
+        return {
+            ".class": "UnionType",
+            "items": [t.serialize() for t in self.items],
+            "uses_pep604_syntax": self.uses_pep604_syntax,
+        }
 
     @classmethod
     def deserialize(cls, data: JsonDict) -> UnionType:
         assert data[".class"] == "UnionType"
-        return UnionType([deserialize_type(t) for t in data["items"]])
+        return UnionType(
+            [deserialize_type(t) for t in data["items"]],
+            uses_pep604_syntax=data["uses_pep604_syntax"],
+        )
 
 
 class IntersectionType(ProperType):
