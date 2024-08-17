@@ -1,6 +1,8 @@
 # Basedmypy Changelog
 
 ## [Unreleased]
+
+## [2.6.0]
 ### Added
 - Any parameter `_` will be inferred as `object` (#687)
 - `work_not_properly_function_names` made available to per module configuration (#699)
