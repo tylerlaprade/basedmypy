@@ -1372,6 +1372,8 @@ def process_options(
     )
 
     options = Options()
+    if not os.getenv("__MYPY_UNDER_TEST__"):
+        options.enable_incomplete_feature.append(mypy.options.NEW_GENERIC_SYNTAX)
     strict_option_set = False
 
     if not dummy.__dict__["special-opts:strict"]:
