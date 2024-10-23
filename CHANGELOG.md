@@ -3,6 +3,8 @@
 ## [Unreleased]
 ### Added
 - typed `functools.wraps` correctly
+### Fixes
+- fixed crash with `re` plugin
 
 ## [2.6.0]
 ### Added
