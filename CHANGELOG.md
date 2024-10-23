@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 - typed `functools.wraps` correctly
+- typed `builtins.ellipsis`/`types.EllipsisType` correctly
 ### Fixes
 - fixed crash with `re` plugin
 ### Enhancements

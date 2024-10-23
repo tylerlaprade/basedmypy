@@ -605,8 +605,7 @@ if sys.version_info >= (3, 10):
     # This annotation allows `NoneType` to be used as a value of `type[None]`
     NoneType: Final[type[None]] = ...
 
-    @final
-    class EllipsisType: ...
+    EllipsisType: type[ellipsis]
     from builtins import _NotImplementedType
 
     NotImplementedType = _NotImplementedType
