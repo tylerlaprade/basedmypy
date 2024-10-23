@@ -7,6 +7,7 @@
 - disable `bytearray` and `memoryview` promotions by default
 ### Fixes
 - fixed crash with `re` plugin
+- fixed crash with `Intersection` cache
 ### Enhancements
 - fixed default configuration in the docs
 
