@@ -5,6 +5,8 @@
 - typed `functools.wraps` correctly
 ### Fixes
 - fixed crash with `re` plugin
+### Enhancements
+- fixed default configuration in the docs
 
 ## [2.6.0]
 ### Added
