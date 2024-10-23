@@ -4,6 +4,7 @@
 ### Added
 - typed `functools.wraps` correctly
 - typed `builtins.ellipsis`/`types.EllipsisType` correctly
+- disable `bytearray` and `memoryview` promotions by default
 ### Fixes
 - fixed crash with `re` plugin
 ### Enhancements
