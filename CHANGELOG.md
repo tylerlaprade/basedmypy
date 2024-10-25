@@ -8,6 +8,7 @@
 - support `typing.type_check_only`
 - support default values on type parameters
 - support based type notation in type alias statements
+- support `basedtyping.FunctionType`
 ### Fixes
 - fixed crash with `re` plugin
 - fixed crash with `Intersection` cache

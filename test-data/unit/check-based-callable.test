@@ -41,13 +41,16 @@ reveal_type(f)  # N: Revealed type is "def () -> None"
 from types import FunctionType
 import future
 
-a: FunctionType[[int], str]  # E: Type parameters for "FunctionType" requires `from __future__ import annotations` or quoted types  [valid-type]
-Foo = FunctionType[[int], str]  # E: Type parameters for "FunctionType" requires `from __future__ import annotations` or quoted types  [valid-type]
+a: FunctionType[[int], str]  # E: Type parameters for "FunctionType" requires `from __future__ import annotations` or quoted types  [valid-type] \
+                             # N: Or you can use "basedtyping.FunctionType" instead
+Foo = FunctionType[[int], str]  # E: Type parameters for "FunctionType" requires `from __future__ import annotations` or quoted types  [valid-type] \
+                                # N: Or you can use "basedtyping.FunctionType" instead
 [file future.py]
 from __future__ import annotations
 from types import FunctionType
 a: FunctionType[[int], str]
-Foo = FunctionType[[int], str]  # E: Type parameters for "FunctionType" requires `from __future__ import annotations` or quoted types  [valid-type]
+Foo = FunctionType[[int], str]  # E: Type parameters for "FunctionType" requires `from __future__ import annotations` or quoted types  [valid-type] \
+                                # N: Or you can use "basedtyping.FunctionType" instead
 [builtins fixtures/tuple.pyi]
 
 
@@ -281,4 +284,12 @@ f = namedtuple("f", "")
 f.__repr__ = lambda _: ""  # E: "type[f]" has no attribute "__repr__"  [attr-defined] \
                            # E: Expression type contains "Any" (has type "def (_: Untyped) -> str")  [no-any-expr]
 reveal_type(f)  # N: Revealed type is "() -> tuple[(), fallback=__main__.f]"
+[builtins fixtures/tuple.pyi]
+
+
+[case testBasedtypingFunctionType]
+from basedtyping import FunctionType
+
+a: FunctionType[[], None]  # testing that it doesn't get an error here
+reveal_type(a)  # N: Revealed type is "def () -> None"
 [builtins fixtures/tuple.pyi]
