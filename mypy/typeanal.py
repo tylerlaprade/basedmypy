@@ -648,6 +648,8 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
         elif fullname == "basedtyping.Intersection":
             items = self.anal_array(t.args)
             return IntersectionType.make_intersection(items)
+        elif fullname == "basedtyping.FunctionType":
+            return self.analyze_callable_type(t, type_name="types.FunctionType")
         elif fullname == "typing.Optional":
             if len(t.args) != 1:
                 self.fail(
@@ -660,6 +662,8 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
             return self.analyze_callable_type(t)
         elif fullname == "typing._NamedCallable":
             return self.analyze_callable_type(t, fullname)
+        elif fullname in {"basedtyping.FunctionType", "basedtyping.BuiltinFunctionType"}:
+            return self.analyze_callable_type(t, type_name=fullname)
         elif fullname in {"types.FunctionType", "types.BuiltinFunctionType"}:
             if not self.always_allow_new_syntax and not self.python_3_12_type_alias:
                 name = fullname.rsplit(".")[-1]
@@ -668,6 +672,7 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
                     t,
                     code=codes.VALID_TYPE,
                 )
+                self.note('Or you can use "basedtyping.FunctionType" instead', t)
             return self.analyze_callable_type(t, type_name=fullname)
         elif fullname == "typing.Type" or (
             fullname == "builtins.type"
