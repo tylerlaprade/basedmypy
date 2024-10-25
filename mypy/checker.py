@@ -5761,8 +5761,8 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
 
     def visit_type_alias_stmt(self, o: TypeAliasStmt) -> None:
         # why would anyone ever want to do runtime analysis of a type alias?
-        # self.expr_checker.accept(o.value)
-        return None
+        with self.msg.filter_errors():
+            self.expr_checker.accept(o.value)
 
     def make_fake_typeinfo(
         self,

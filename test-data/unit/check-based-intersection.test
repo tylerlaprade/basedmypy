@@ -13,7 +13,7 @@ reveal_type(i)  # N: Revealed type is "int & str"
 
 
 [case testNoIntersectionSyntax]
-i: int & str  # E: "X & Y" syntax for intersections requires __future__.annotations or quoted types  [valid-type]
+i: int & str  # E: `X & Y` syntax for intersections requires `from __future__ import annotations` or quoted types  [valid-type]
 
 
 [case testIntersectionAttribute]
@@ -341,3 +341,32 @@ reveal_type(x)  # N: Revealed type is "__main__.A & __main__.B & __main__.C | __
 from basedtyping import Intersection
 A = Intersection[int, str]
 a: A
+
+
+[case testTypeApplication]
+import types
+from typing import Generic, TypeVar, List
+T = TypeVar("T")
+List[int & str]  # E: `X & Y` syntax for intersections requires `from __future__ import annotations` or quoted types  [valid-type]
+List[int | str]  # E: `X | Y` syntax for unions requires Python 3.10 or above  [valid-type]
+a: List[int & str]  # E: `X & Y` syntax for intersections requires `from __future__ import annotations` or quoted types  [valid-type]
+b: List[int | str]  # E: `X | Y` syntax for unions requires Python 3.10 or above  [valid-type]
+def f():
+    a: List[int & str]
+    b: List[int & str]
+
+import future
+[file future.py]
+from __future__ import annotations
+from typing import Generic, TypeVar, List
+T = TypeVar("T")
+List[int & str]  # E: `X & Y` syntax for intersections requires `from __future__ import annotations` or quoted types  [valid-type]
+List[int | str]  # E: `X | Y` syntax for unions requires Python 3.10 or above  [valid-type]
+a: List[int & str]
+b: List[int & str]
+def f():
+    a: List[int & str]
+    b: List[int & str]
+List[1 >> 2]  # E: Type expected within [...]  [misc] \
+              # E: Unsupported left operand type for >> ("int")  [operator]
+[builtins fixtures/tuple.pyi]

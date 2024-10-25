@@ -2682,8 +2682,9 @@ T = TypeVar("T")
 class Base(TypedDict, Generic[T]):
     x: T
 class Sub(Base[{}]):  # E: Invalid TypedDict type argument \
-                      # E: Type expected within [...] \
-                      # E: Invalid base class "Base"
+                      # E: Invalid base class "Base" \
+                      # E: Type expected within [...]
+
     y: int
 s: Sub
 reveal_type(s)  # N: Revealed type is "TypedDict('__main__.Sub', {'y': builtins.int})"

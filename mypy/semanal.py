@@ -6068,7 +6068,7 @@ class SemanticAnalyzer(
             try:
                 typearg = self.expr_to_unanalyzed_type(item, allow_unpack=True)
             except TypeTranslationError:
-                self.fail("Type expected within [...]", expr)
+                self.fail("Type expected within [...]", item)
                 return None
             analyzed = self.anal_type(
                 typearg,
@@ -6079,6 +6079,7 @@ class SemanticAnalyzer(
                 allow_placeholder=True,
                 allow_param_spec_literals=has_param_spec,
                 allow_unpack=allow_unpack,
+                runtime=True,
             )
             if analyzed is None:
                 return None

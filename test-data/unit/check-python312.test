@@ -594,8 +594,7 @@ reveal_type(a)  # N: Revealed type is "Any"
 
 [case testPEP695TypeAliasInvalidType]
 # flags: --enable-incomplete-feature=NewGenericSyntax
-type A = int | 1  # E: "1" is a bare literal and cannot be used here, try Literal[1] instead? \
-                  # E: Unsupported operand types for | ("Type[int]" and "int")
+type A = int | 1  # E: Invalid type: try using Literal[1] instead?
 
 a: A
 reveal_type(a)  # N: Revealed type is "Union[builtins.int, Literal[1]]"
@@ -1548,7 +1547,8 @@ class D[T: T]:  # E: Name "T" is not defined
 # flags: --enable-incomplete-feature=NewGenericSyntax
 def f[T: 1](x: T) -> T: ...  # E: Invalid type: try using Literal[1] instead?
 class C[T: (int, (1 + 2))]: pass  # E: Invalid type comment or annotation
-type A = list[1]  # E: "1" is a bare literal and cannot be used here, try Literal[1] instead?
+type A = list[1]  # E: "1" is a bare literal and cannot be used here, try Literal[1] instead? \
+                  # E: Invalid type: try using Literal[1] instead?
 type B = (1 + 2)  # E: Invalid type alias: expression is not a valid type
 a: A
 reveal_type(a)  # N: Revealed type is "builtins.list[Literal[1]]"

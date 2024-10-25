@@ -41,13 +41,13 @@ reveal_type(f)  # N: Revealed type is "def () -> None"
 from types import FunctionType
 import future
 
-a: FunctionType[[int], str]  # E: Type parameters for "FunctionType" requires __future__.annotations or quoted types  [valid-type]
-Foo = FunctionType[[int], str]  # E: Type parameters for "FunctionType" requires __future__.annotations or quoted types  [valid-type]
+a: FunctionType[[int], str]  # E: Type parameters for "FunctionType" requires `from __future__ import annotations` or quoted types  [valid-type]
+Foo = FunctionType[[int], str]  # E: Type parameters for "FunctionType" requires `from __future__ import annotations` or quoted types  [valid-type]
 [file future.py]
 from __future__ import annotations
 from types import FunctionType
 a: FunctionType[[int], str]
-Foo = FunctionType[[int], str]  # E: Type parameters for "FunctionType" requires __future__.annotations or quoted types  [valid-type]
+Foo = FunctionType[[int], str]  # E: Type parameters for "FunctionType" requires `from __future__ import annotations` or quoted types  [valid-type]
 [builtins fixtures/tuple.pyi]
 
 
