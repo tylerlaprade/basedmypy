@@ -125,26 +125,27 @@ def expr_to_unanalyzed_type(
             return base
         else:
             raise TypeTranslationError()
-    elif (
-        isinstance(expr, OpExpr)
-        and expr.op == "|"
-        and ((options and options.python_version >= (3, 10)) or allow_new_syntax)
-    ):
+    elif isinstance(expr, OpExpr) and expr.op == "|":
         return UnionType(
             [
                 expr_to_unanalyzed_type(expr.left, options, allow_new_syntax),
                 expr_to_unanalyzed_type(expr.right, options, allow_new_syntax),
             ],
+            is_evaluated=not allow_new_syntax,
             uses_pep604_syntax=True,
+            line=expr.line,
+            column=expr.column,
         )
-    elif isinstance(expr, OpExpr) and expr.op == "&" and allow_new_syntax:
+    elif isinstance(expr, OpExpr) and expr.op == "&":
         return IntersectionType(
             [
                 expr_to_unanalyzed_type(expr.left, options, allow_new_syntax),
                 expr_to_unanalyzed_type(expr.right, options, allow_new_syntax),
             ],
-            is_evaluated=False,
+            is_evaluated=not allow_new_syntax,
             uses_based_syntax=True,
+            line=expr.line,
+            column=expr.column,
         )
     elif isinstance(expr, CallExpr) and isinstance(_parent, ListExpr):
         c = expr.callee

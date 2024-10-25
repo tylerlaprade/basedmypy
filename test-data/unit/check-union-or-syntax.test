@@ -107,10 +107,9 @@ b: X  # E: Variable "__main__.X" is not valid as a type \
 # flags: --python-version 3.9
 from __future__ import annotations
 from typing import List
-T = int | str  # E: Invalid type alias: expression is not a valid type \
+T = int | str  # E: `X | Y` syntax for unions requires Python 3.10 or above \
                # E: Unsupported left operand type for | ("Type[int]")
-class C(List[int | str]):  # E: Type expected within [...] \
-                           # E: Invalid base class "List"
+class C(List[int | str]):  # E: `X | Y` syntax for unions requires Python 3.10 or above
     pass
 C()
 [builtins fixtures/tuple.pyi]
@@ -119,7 +118,7 @@ C()
 # flags: --python-version 3.9
 from __future__ import annotations
 from typing import cast
-cast(str | int, 'x')  # E: Cast target is not a type
+cast(str | int, 'x')  # E: `X | Y` syntax for unions requires Python 3.10 or above
 [builtins fixtures/tuple.pyi]
 [typing fixtures/typing-full.pyi]
 
@@ -133,7 +132,7 @@ x: int | None
 
 [case testUnionOrSyntaxMissingFutureImport]
 # flags: --python-version 3.9
-x: int | None  # E: X | Y syntax for unions requires Python 3.10
+x: int | None  # E: `X | Y` syntax for unions requires Python 3.10 or above
 
 [case testUnionOrSyntaxInStubFile]
 # flags: --python-version 3.9

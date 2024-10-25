@@ -664,7 +664,7 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
             if not self.always_allow_new_syntax and not self.python_3_12_type_alias:
                 name = fullname.rsplit(".")[-1]
                 self.fail(
-                    f'Type parameters for "{name}" requires __future__.annotations or quoted types',
+                    f'Type parameters for "{name}" requires `from __future__ import annotations` or quoted types',
                     t,
                     code=codes.VALID_TYPE,
                 )
@@ -1397,7 +1397,9 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
             and not self.always_allow_new_syntax
             and not self.options.python_version >= (3, 10)
         ):
-            self.fail("X | Y syntax for unions requires Python 3.10", t, code=codes.SYNTAX)
+            self.fail(
+                "`X | Y` syntax for unions requires Python 3.10 or above", t, code=codes.VALID_TYPE
+            )
         return UnionType(self.anal_array(t.items), t.line, uses_pep604_syntax=t.uses_pep604_syntax)
 
     def visit_intersection_type(self, t: IntersectionType) -> Type:
@@ -1408,7 +1410,7 @@ class TypeAnalyser(SyntheticTypeVisitor[Type], TypeAnalyzerPluginInterface):
             and not self.python_3_12_type_alias
         ):
             self.fail(
-                '"X & Y" syntax for intersections requires __future__.annotations or quoted types',
+                "`X & Y` syntax for intersections requires `from __future__ import annotations` or quoted types",
                 t,
                 code=codes.VALID_TYPE,
             )
