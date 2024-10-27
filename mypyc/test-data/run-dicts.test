@@ -157,7 +157,8 @@ else:
 try:
     clear_during_iter(d)
 except RuntimeError as e:
-    assert str(e) == "OrderedDict changed size during iteration"
+    import sys
+    assert str(e) == f"OrderedDict {'mutated' if sys.version_info >= (3, 12) else 'changed size'} during iteration", str(e)
 else:
     assert False
 
