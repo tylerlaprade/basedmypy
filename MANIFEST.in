@@ -41,10 +41,20 @@ include runtests.py
 include pytest.ini
 include tox.ini
 
-include LICENSE mypyc/README.md
-exclude .gitmodules CONTRIBUTING.md CREDITS ROADMAP.md CHANGELOG.md action.yml .editorconfig
+include LICENSE mypyc/README.md CHANGELOG.md
+exclude .gitmodules CONTRIBUTING.md CREDITS ROADMAP.md action.yml .editorconfig
 exclude mypy_self_check_strict.ini .mypy/baseline.json
 exclude .git-blame-ignore-revs .pre-commit-config.yaml
 
 global-exclude *.py[cod]
 global-exclude .DS_Store
+
+# some random stuff
+include pw.bat
+include pw.lock
+include pw
+exclude .idea/watcherTasks.xml
+exclude .vscode/extensions.json
+exclude .vscode/launch.json
+exclude .vscode/settings.json
+exclude .vscode/tasks.json
