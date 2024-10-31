@@ -48,3 +48,13 @@ exclude .git-blame-ignore-revs .pre-commit-config.yaml
 
 global-exclude *.py[cod]
 global-exclude .DS_Store
+
+# some random stuff
+include pw.bat
+include pw.lock
+include pw
+exclude .idea/watcherTasks.xml
+exclude .vscode/extensions.json
+exclude .vscode/launch.json
+exclude .vscode/settings.json
+exclude .vscode/tasks.json
