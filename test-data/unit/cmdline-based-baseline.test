@@ -602,3 +602,30 @@ a
         "file:a.py"
     ]
 }
+
+[case testBaselineCache]
+# cmd: mypy --python-version 3.13 _program.py
+a
+[file .mypy/baseline.json]
+{
+    "files": {
+        "_program.py": [
+            {
+                "code": "name-defined",
+                "column": 0,
+                "message": "Name \"a\" is not defined",
+                "offset": 3,
+                "src": "a",
+                "target": "_program"
+            }
+        ]
+    },
+    "format": "1.7",
+    "targets": [
+        "file:_program.py"
+    ]
+}
+[outfile-re .mypy_cache/3.13/_program.data.json]
+.+
+[outfile-re .mypy_cache/3.13/_program.meta.json]
+.+

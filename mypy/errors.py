@@ -79,6 +79,9 @@ original_error_codes: Final = {
 class ErrorInfo:
     """Representation of a single error message."""
 
+    def __repr__(self) -> str:
+        return f"{self.line}:{self.column}: {self.message}"
+
     # Description of a sequence of imports that refer to the source file
     # related to this error. Each item is a (path, line number) tuple.
     import_ctx: list[tuple[str, int]]
@@ -1001,6 +1004,16 @@ class Errors:
                         marker = f'^{"~" * (end_column - column - 1)}'
                     a.append(" " * (DEFAULT_SOURCE_OFFSET + column) + marker)
         return a
+
+    def filter_baseline_pre(self, path: str):
+        if path not in self.error_info_map:
+            return
+        source_lines = self.read_source and self.read_source(path)
+
+        error_info = self.error_info_map[path]
+        error_info = self.sort_messages(error_info)
+        if not self.filter_baseline(error_info, path, source_lines):
+            del self.error_info_map[path]
 
     def file_messages(self, path: str, formatter: ErrorFormatter | None = None) -> list[str]:
         """Return a string list of new error messages from a given file.
