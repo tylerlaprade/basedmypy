@@ -43,11 +43,7 @@ parser.add_argument(
     "--status-file", default=DEFAULT_STATUS_FILE, help="status file to retrieve daemon details"
 )
 parser.add_argument(
-    "-V",
-    "--version",
-    action="version",
-    version=f"Basedmypy-Daemon {__based_version__}\nBased on %(prog)s {__version__}",
-    help="Show program's version number and exit",
+    "-V", "--version", action="store_true", help="Show program's version number and exit"
 )
 subparsers = parser.add_subparsers()
 
@@ -274,6 +270,13 @@ def main(argv: list[str]) -> None:
     """The code is top-down."""
     check_python_version("dmypy")
     args = parser.parse_args(argv)
+    if args.version:
+        if "VSCODE_PID" in os.environ:
+            # vscode is looking for upstreams output
+            print(f"dmypy {__version__}")
+        else:
+            print(f"Basedmypy-Daemon {__based_version__}\nBased on dmypy {__version__}")
+        return
     if not args.action:
         parser.print_usage()
     else:
