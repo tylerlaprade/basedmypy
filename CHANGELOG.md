@@ -7,6 +7,7 @@
 ### Fixes
 - check type args on type aliases (#817)
 - cache modules that only have baseline errors
+- fix dmypy in vscode
 ### Docs
 - correct error code documentation regarding defaults
 
