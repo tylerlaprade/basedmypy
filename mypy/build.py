@@ -3605,6 +3605,8 @@ def process_stale_scc(graph: Graph, scc: list[str], manager: BuildManager) -> No
     for id in stale:
         graph[id].generate_unused_ignore_notes()
         graph[id].generate_ignore_without_code_notes()
+    for id in stale:
+        manager.errors.filter_baseline_pre(graph[id].xpath)
     if any(manager.errors.is_errors_for_file(graph[id].xpath) for id in stale):
         for id in stale:
             graph[id].transitive_error = True
