@@ -3831,8 +3831,17 @@ class TypeStrVisitor(SyntheticTypeVisitor[str]):
                         f"{name}{sep} {renderer(var.upper_bound)}{f' = {var.default.accept(self)}' if var.has_default() else ''}"
                     )
                 else:
+                    INVARIANT: Final = 0
+                    COVARIANT: Final = 1
+                    CONTRAVARIANT: Final = 2
+                    if var.variance == INVARIANT:
+                        v = "in out"
+                    elif var.variance == COVARIANT:
+                        v = "out"
+                    else:
+                        v = "in"
                     vs.append(
-                        f"{var.name}{f' = {var.default.accept(self)}' if var.has_default()  else ''}"
+                        f"{v} {var.name}{f' = {var.default.accept(self)}' if var.has_default()  else ''}"
                     )
             else:
                 # For other TypeVarLikeTypes, use the name and default
