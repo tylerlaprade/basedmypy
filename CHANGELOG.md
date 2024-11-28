@@ -1,5 +1,9 @@
 # Basedmypy Changelog
 
+## [Unreleased]
+### Docs
+- correct error code documentation regarding defaults
+
 ## [2.7.0]
 ### Added
 - typed `functools.wraps` correctly
