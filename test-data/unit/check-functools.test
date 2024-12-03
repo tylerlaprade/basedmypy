@@ -629,7 +629,8 @@ def h(x: T, y: T) -> T:
 fp = partial(f, 1)
 reveal_type(fp(1))  # N: Revealed type is "builtins.int"
 reveal_type(fp("a"))  # N: Revealed type is "builtins.str"
-fp(object())  # E: Value of type variable "T" of "f" cannot be "object"
+fp(object())  # E: Value of type variable "T" of "f" cannot be "object" \
+              # N: "T" of "f" is a constrained type variable, it is not generic
 
 gp = partial(g, 1)
 reveal_type(gp(1))  # N: Revealed type is "builtins.int"
