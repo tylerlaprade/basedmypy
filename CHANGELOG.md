@@ -1,6 +1,8 @@
 # Basedmypy Changelog
 
 ## [Unreleased]
+
+## [2.8.0]
 ### Added
 - ban variance on  `TypeVar` definitions (#817)
 - enforce `TypeVar` constraints on type applications (#817)
