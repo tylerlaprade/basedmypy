@@ -643,7 +643,7 @@ class ExpressionChecker(ExpressionVisitor[Type]):
                     if isinstance(e.callee, MemberExpr):
                         if e.callee.kind is None:
                             # class, kinda hacky
-                            it = get_proper_type(self.chk._type_maps[0][e.callee.expr])
+                            it = get_proper_type(self.chk._type_maps[0].get(e.callee.expr))
                             if isinstance(it, CallableType):
                                 # callable class reference
                                 ret_type_ = get_proper_type(it.ret_type)
