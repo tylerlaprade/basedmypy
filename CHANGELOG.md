@@ -1,6 +1,6 @@
 # Basedmypy Changelog
 
-## [Unreleased]
+## [2.8.1]
 ### Fixes
 - `stubtest`: the `__bool__` method of function parameter defaults will no longer be unnecessarily evaluated
 
