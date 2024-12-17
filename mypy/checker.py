@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import itertools
 from collections import defaultdict
-from contextlib import ExitStack, contextmanager
+from contextlib import ExitStack, contextmanager, nullcontext
 from typing import (
     AbstractSet,
     Callable,
@@ -249,7 +249,7 @@ DEFAULT_LAST_PASS: Final = 1  # Pass numbers start at 0
 # Maximum length of fixed tuple types inferred when narrowing from variadic tuples.
 MAX_PRECISE_TUPLE_SIZE: Final = 8
 
-DeferredNodeType: _TypeAlias = Union[FuncDef, LambdaExpr, OverloadedFuncDef, Decorator]
+DeferredNodeType: _TypeAlias = Union[FuncDef, LambdaExpr, OverloadedFuncDef, Decorator, AssignmentStmt]
 FineGrainedDeferredNodeType: _TypeAlias = Union[FuncDef, MypyFile, OverloadedFuncDef]
 
 
@@ -452,6 +452,9 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         # always the next if statement to have a redundant expression
         self.allow_redundant_expr = False
 
+        self.inferred_return_types = []
+        self.inferred_yield_types = []
+
     @property
     def type_context(self) -> list[Type | None]:
         return self.expr_checker.type_context
@@ -552,8 +555,14 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                     done.add(node)
                     with ExitStack() as stack:
                         if active_typeinfo:
-                            stack.enter_context(self.tscope.class_scope(active_typeinfo))
-                            stack.enter_context(self.scope.push_class(active_typeinfo))
+                            if isinstance(active_typeinfo, TypeInfo):
+                                stack.enter_context(self.tscope.class_scope(active_typeinfo))
+                                stack.enter_context(self.scope.push_class(active_typeinfo))
+                            else:
+                                stack.enter_context(self.scope.push_function(active_typeinfo))
+                                with self.tscope.function_scope(active_typeinfo):
+                                    self.check_partial(node)
+                                    continue
                         self.check_partial(node)
             return True
 
@@ -1572,6 +1581,10 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                                 new_frame = self.binder.push_frame()
                             new_frame.types[key] = narrowed_type
                             self.binder.declarations[key] = old_binder.declarations[key]
+                inferred_return_types = self.inferred_return_types
+                inferred_yield_types = self.inferred_yield_types
+                self.inferred_return_types = []
+                self.inferred_yield_types = []
                 with self.scope.push_function(defn):
                     # We suppress reachability warnings for empty generator functions
                     # (return; yield) which have a "yield" that's unreachable by definition
@@ -1586,6 +1599,20 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                     if _is_empty_generator_function(item) or len(expanded) >= 2:
                         self.binder.suppress_unreachable_warnings()
                     self.accept(item.body)
+                if not self.binder.is_unreachable():
+                    self.inferred_return_types.append(NoneType())
+                if item.type and isinstance(item.type.ret_type, UntypedType):
+                    ret_type = make_simplified_union(self.inferred_return_types)
+                    item.type = item.type.copy_modified(ret_type=ret_type)
+                    if self.inferred_yield_types:
+                        item.type.ret_type = Instance(self.lookup_typeinfo(
+                            "typing.Generator",),
+                            [make_simplified_union(self.inferred_yield_types),
+                             self.named_type("builtins.object"),
+                             item.type.ret_type]
+                        )
+                self.inferred_return_types = inferred_return_types
+                self.inferred_yield_types = inferred_yield_types
                 unreachable = self.binder.is_unreachable()
                 if new_frame is not None:
                     self.binder.pop_frame(True, 0)
@@ -1778,13 +1805,14 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                 if not fdef.arguments or (
                     len(fdef.arguments) == 1 and (fdef.arg_names[0] in ("self", "cls"))
                 ):
-                    self.fail(message_registry.RETURN_TYPE_EXPECTED, fdef)
-                    if not has_return_statement(fdef) and not fdef.is_generator:
-                        self.note(
-                            'Use "-> None" if function does not return a value',
-                            fdef,
-                            code=codes.NO_UNTYPED_DEF,
-                        )
+                    if not self.options.default_return:
+                        self.fail(message_registry.RETURN_TYPE_EXPECTED, fdef)
+                        if not has_return_statement(fdef) and not fdef.is_generator:
+                            self.note(
+                                'Use "-> None" if function does not return a value',
+                                fdef,
+                                code=codes.NO_UNTYPED_DEF,
+                            )
                 else:
                     self.fail(message_registry.FUNCTION_TYPE_EXPECTED, fdef)
             elif isinstance(fdef.type, CallableType):
@@ -3186,6 +3214,8 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
         # as X | Y.
         if not (s.is_alias_def and self.is_stub):
             with self.enter_final_context(s.is_final_def):
+                current_node_deferred = self.current_node_deferred
+                self.current_node_deferred = False
                 self.check_assignment(
                     s.lvalues[-1],
                     s.rvalue,
@@ -3193,6 +3223,9 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
                     s.new_syntax,
                     override_infer=s.unanalyzed_type is not None,
                 )
+                if self.current_node_deferred:
+                    self.defer_node(s, self.scope.top_function())
+                self.current_node_deferred = current_node_deferred
         if s.is_alias_def:
             self.check_type_alias_rvalue(s)
 
@@ -4971,6 +5004,9 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
 
                 if defn.is_async_generator:
                     self.fail(message_registry.RETURN_IN_ASYNC_GENERATOR, s)
+                    return
+                if not defn.type or isinstance(defn.type.ret_type, UntypedType) and defn.type.ret_type.type_of_any == 111:
+                    self.inferred_return_types.append(typ)
                     return
                 # Returning a value of type Any is always fine.
                 if isinstance(typ, AnyType):

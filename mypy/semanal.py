@@ -7866,8 +7866,8 @@ def infer_fdef_types_from_defaults(defn: FuncDef | Decorator, self: SemanticAnal
                     typ = self.named_type("builtins.object")
                 arg_types.append(typ or UntypedType())
         ret_type = None
-        if self.options.default_return and self.options.disallow_untyped_defs:
-            ret_type = NoneType()
+        if self.options.default_return and self.options.default_return:
+            ret_type = UntypedType()
         if any(not isinstance(get_proper_type(t), AnyType) for t in arg_types) or ret_type:
             defn.type = CallableType(
                 arg_types or [UntypedType() for _ in defn.arg_kinds],
@@ -7881,18 +7881,6 @@ def infer_fdef_types_from_defaults(defn: FuncDef | Decorator, self: SemanticAnal
                 implicit=not self.options.disallow_untyped_defs,
             )
     elif defn.type:
-        assert isinstance(defn.type, CallableType)
-        if (
-            self.options.default_return
-            and is_unannotated_any(defn.type.ret_type)
-            and (
-                isinstance(defn.unanalyzed_type, CallableType)
-                and not self.options.disallow_untyped_defs
-                and any(defn.unanalyzed_type.arg_types)
-                or self.options.disallow_untyped_defs
-            )
-        ):
-            defn.type.ret_type = NoneType()
         if self.options.infer_function_types:
             for i, arg in enumerate(defn.arguments):
                 ret = None
@@ -7905,7 +7893,12 @@ def infer_fdef_types_from_defaults(defn: FuncDef | Decorator, self: SemanticAnal
                         defn.type.arg_types[i] = ret
                     if all(char == "_" for char in arg.variable.name):
                         defn.type.arg_types[i] = self.named_type("builtins.object")
-
+    if not self.options.default_return or not defn.type:
+        return
+    if isinstance(defn.type.ret_type, UntypedType) and is_trivial_body(defn.body):
+        defn.type.ret_type = NoneType()
+    if isinstance(defn.type.ret_type, UntypedType):
+        defn.type.ret_type.type_of_any = 111
 
 def is_trivial_body(block: Block) -> bool:
     """Returns 'true' if the given body is "trivial" -- if it contains just a "pass",

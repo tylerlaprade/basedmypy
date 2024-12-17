@@ -1251,6 +1251,8 @@ class AnyType(ProperType):
                 return "from a limitation"
             elif type_of_any == TypeOfAny.suggestion_engine:
                 return "from a suggestion"
+            elif type_of_any == 111:
+                return "uninferred"
             assert False, f"unreachable: {type_of_any}"
 
         description = self.__class__.__name__.split("Type")[0]
