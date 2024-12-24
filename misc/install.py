@@ -21,5 +21,5 @@ def main(args: argparse.Namespace):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--python", rquired=True)
+    parser.add_argument("--python", required=True)
     main(parser.parse_args())

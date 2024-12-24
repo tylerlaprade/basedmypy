@@ -191,7 +191,7 @@ _promote = object()
 
 # N.B. Keep this definition in sync with typing_extensions._SpecialForm
 @final
-class _SpecialForm:
+class _SpecialForm(_Final):
     def __getitem__(self, parameters: Any) -> object: ...
     if sys.version_info >= (3, 10):
         def __or__(self, other: Any) -> _SpecialForm: ...
@@ -202,6 +202,7 @@ Generic: _SpecialForm
 Protocol: _SpecialForm
 
 @runtime_checkable
+# special cased: this paramspec is specified within a type list
 class Callable(Protocol[_P, _T_co]):
     @abstractmethod
     def __call__(self, *args: _P.args, **kwargs: _P.kwargs) -> _T_co: ...
@@ -223,8 +224,7 @@ Tuple: _SpecialForm
 Final: _SpecialForm
 
 Literal: _SpecialForm
-# TypedDict is a (non-subscriptable) special form.
-TypedDict: object
+TypedDict: _SpecialForm
 
 if sys.version_info >= (3, 11):
     Self: _SpecialForm
@@ -474,7 +474,11 @@ class Generator(Iterator[_YieldT_co], Generic[_YieldT_co, _SendT_contra, _Return
     @overload
     @abstractmethod
     def throw(self, typ: BaseException, val: None = None, tb: TracebackType | None = None, /) -> _YieldT_co: ...
-    def close(self) -> None: ...
+    if sys.version_info >= (3, 13):
+        def close(self) -> _ReturnT_co | None: ...
+    else:
+        def close(self) -> None: ...
+
     def __iter__(self) -> Generator[_YieldT_co, _SendT_contra, _ReturnT_co]: ...
     @property
     def gi_code(self) -> CodeType: ...
@@ -587,7 +591,7 @@ class Collection(Iterable[_T_co], Container[_T_co], Protocol[_T_co]):
     @abstractmethod
     def __len__(self) -> int: ...
 
-class Sequence(Collection[_T_co], Reversible[_T_co]):
+class Sequence(Reversible[_T_co], Collection[_T_co]):
     @overload
     @abstractmethod
     def __getitem__(self, index: int) -> _T_co: ...
@@ -671,7 +675,6 @@ class ItemsView(MappingView, AbstractSet[tuple[_KT_co, _VT_co]], Generic[_KT_co,
     def __rand__(self, other: Iterable[_T]) -> set[_T]: ...
     def __contains__(self, item: object) -> bool: ...
     def __iter__(self) -> Iterator[tuple[_KT_co, _VT_co]]: ...
-    def __reversed__(self) -> Iterator[tuple[_KT_co, _VT_co]]: ...
     def __or__(self, other: Iterable[_T]) -> set[tuple[_KT_co, _VT_co] | _T]: ...
     def __ror__(self, other: Iterable[_T]) -> set[tuple[_KT_co, _VT_co] | _T]: ...
     def __sub__(self, other: Iterable[Any]) -> set[tuple[_KT_co, _VT_co]]: ...
@@ -685,7 +688,6 @@ class KeysView(MappingView, AbstractSet[_KT_co]):
     def __rand__(self, other: Iterable[_T]) -> set[_T]: ...
     def __contains__(self, key: object) -> bool: ...
     def __iter__(self) -> Iterator[_KT_co]: ...
-    def __reversed__(self) -> Iterator[_KT_co]: ...
     def __or__(self, other: Iterable[_T]) -> set[_KT_co | _T]: ...
     def __ror__(self, other: Iterable[_T]) -> set[_KT_co | _T]: ...
     def __sub__(self, other: Iterable[Any]) -> set[_KT_co]: ...
@@ -697,7 +699,6 @@ class ValuesView(MappingView, Collection[_VT_co]):
     def __init__(self, mapping: Mapping[Any, _VT_co]) -> None: ...  # undocumented
     def __contains__(self, value: object) -> bool: ...
     def __iter__(self) -> Iterator[_VT_co]: ...
-    def __reversed__(self) -> Iterator[_VT_co]: ...
 
 class Mapping(Collection[_KT_co], Generic[_KT_co, _VT_co]):
     # TODO: We wish the key type could also be covariant, but that doesn't work,
@@ -709,6 +710,7 @@ class Mapping(Collection[_KT_co], Generic[_KT_co, _VT_co]):
     def __getitem__(self, key: _KT_co, /) -> _VT_co: ...  # type: ignore[unsafe-variance]
     # Mixin methods
     @overload
+    # in reality `key` is keyword, but `dict`s isn't, which sucks
     def get(self, key: _KT_co, /) -> _VT_co | None: ...  # type: ignore[unsafe-variance]
     @overload
     def get(self, key: _KT_co, /, default: _VT_co | _T) -> _VT_co | _T: ...  # type: ignore[unsafe-variance]
@@ -775,7 +777,7 @@ TYPE_CHECKING: bool
 # In stubs, the arguments of the IO class are marked as positional-only.
 # This differs from runtime, but better reflects the fact that in reality
 # classes deriving from IO use different names for the arguments.
-class IO(Iterator[AnyStr]):
+class IO(Generic[AnyStr]):
     # At runtime these are all abstract properties,
     # but making them abstract in the stub is hugely disruptive, for not much gain.
     # See #8726
@@ -988,7 +990,7 @@ class _TypedDict(Mapping[str, object], metaclass=ABCMeta):
         def __ior__(self, value: typing_extensions.Self, /) -> typing_extensions.Self: ...  # type: ignore[misc]
 
 @final
-class ForwardRef:
+class ForwardRef(_Final):
     __forward_arg__: str
     __forward_code__: CodeType
     __forward_evaluated__: bool

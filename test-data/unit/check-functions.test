@@ -1504,14 +1504,12 @@ else:
     def f(x: str) -> None: pass # E: Incompatible redefinition (redefinition with type "Callable[[str], None]", original type "Callable[[int], None]")
 
 [case testConditionalFunctionDefinitionUsingDecorator3]
-
-from typing import Callable
-
-def dec(f) -> Callable[[int], None]: pass
+from basedtyping import FunctionType
+def dec(f) -> FunctionType[[int], None]: pass
 
 x = int()
 if x:
-    def f(x: int) -> None: pass
+    def f(x: int, /) -> None: pass
 else:
     @dec
     def f(): pass
@@ -1526,9 +1524,12 @@ x = int()
 if x:
     def f(x: str) -> None: pass
 else:
-    # TODO: Complain about incompatible redefinition
     @dec
-    def f(): pass
+    def f(): pass   # E: All conditional function variants must have identical signatures \
+                    # N: Original: \
+                    # N:     def f(x: str) -> None \
+                    # N: Redefinition: \
+                    # N:     def f(int, /) -> None
 
 [case testConditionalFunctionDefinitionUnreachable]
 def bar() -> None:
@@ -1625,9 +1626,9 @@ f(1)  # E: "List[Any]" not callable
 [builtins fixtures/list.pyi]
 
 [case testDefineConditionallyAsImportedAndDecorated]
-from typing import Callable
+from basedtyping import FunctionType
 
-def dec(f: Callable[[], None]) -> Callable[[], None]: ...
+def dec(f: FunctionType[[], None]) -> FunctionType[[], None]: ...
 
 if int():
     from m import f
@@ -1636,7 +1637,7 @@ else:
     def f():
         yield
 [file m.py]
-def f(): pass
+def f() -> None: pass
 
 [case testDefineConditionallyAsImportedAndDecoratedWithInference]
 if int():

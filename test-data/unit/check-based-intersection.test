@@ -73,7 +73,7 @@ foo: A & Callable[[], int]
 reveal_type(foo())  # N: Revealed type is "int"
 foo("")  # E: No overload variant of "A & () -> int" matches argument type "str"  [call-overload] \
          # N: Possible overload variants: \
-         # N:     def __call__(self, a: int) -> None \
+         # N:     _NamedCallable & __call__(self, a: int) -> None \
          # N:     () -> int
 [builtins fixtures/tuple.pyi]
 
@@ -101,8 +101,8 @@ a[0]
 a["i"]
 a[None]  # E: No overload variant of "_NamedCallable & (int) -> str & _NamedCallable & (str) -> None" matches argument type "None"  [call-overload] \
          # N: Possible overload variants: \
-         # N:     def __getitem__(self, int, /) -> str \
-         # N:     def __getitem__(self, str, /) -> None
+         # N:     _NamedCallable & __getitem__(self, int, /) -> str \
+         # N:     _NamedCallable & __getitem__(self, str, /) -> None
 [builtins fixtures/list.pyi]
 
 
@@ -180,9 +180,9 @@ class B:
 x: A & B
 x.foo(None)  # E: No overload variant of "foo" of "__main__.A & __main__.B" matches argument type "None"  [call-overload] \
              # N: Possible overload variants: \
-             # N:     def foo(self) -> None \
-             # N:     def foo(self, x: int) -> None \
-             # N:     def foo(self, x: str) -> None
+             # N:     foo(self) -> None \
+             # N:     foo(self, x: int) -> None \
+             # N:     _NamedCallable & foo(self, x: str) -> None
 [builtins fixtures/tuple.pyi]
 
 

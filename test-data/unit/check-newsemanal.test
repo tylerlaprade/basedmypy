@@ -1902,9 +1902,9 @@ reveal_type(g) # N: Revealed type is "def (x: __main__.A)"
 class A: pass
 
 [case testNewAnalyzerConditionalDecoratedFunc]
-from typing import Callable
+from basedtyping import FunctionType
 
-def dec(f: Callable[[int], None]) -> Callable[[str], None]:
+def dec(f: FunctionType[[int], None]) -> FunctionType[[str], None]:
     pass
 
 if int():
@@ -1913,9 +1913,9 @@ else:
     @dec
     def f(x: int) -> None:
         1()  # E: "int" not callable
-reveal_type(f) # N: Revealed type is "def (x: builtins.str)"
+reveal_type(f) # N: Revealed type is "def (builtins.str)"
 [file m.py]
-def f(x: str) -> None: pass
+def f(x: str, /) -> None: pass
 
 [case testNewAnalyzerConditionallyDefineFuncOverVar]
 from typing import Callable
@@ -2074,6 +2074,7 @@ from enum import Enum
 
 A = Enum('A', ['x', 'y'])
 A = Enum('A', ['z', 't'])  # E: Name "A" already defined on line 3
+[builtins fixtures/tuple.pyi]
 
 [case testNewAnalyzerNewTypeRedefinition]
 from typing import NewType

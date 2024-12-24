@@ -5361,6 +5361,7 @@ c: C
 c = C.X
 if int():
     c = 1
+[builtins fixtures/enum.pyi]
 [out]
 ==
 ==
@@ -5392,6 +5393,7 @@ if int():
     n = C.X
     if int():
         n = c
+[builtins fixtures/enum.pyi]
 [out]
 ==
 ==
@@ -5416,6 +5418,7 @@ from enum import Enum
 
 class C(Enum):
     X = 0
+[builtins fixtures/tuple.pyi]
 [typing fixtures/typing-medium.pyi]
 [out]
 ==
@@ -5438,6 +5441,7 @@ from enum import Enum
 class C(Enum):
     X = 0
     Y = 1
+[builtins fixtures/enum.pyi]
 [out]
 ==
 a.py:4: error: Argument 1 to "f" has incompatible type "C"; expected "int"
@@ -5462,6 +5466,7 @@ c: C
 c = C.X
 if int():
    c = 1
+[builtins fixtures/tuple.pyi]
 [out]
 ==
 ==
@@ -5491,6 +5496,7 @@ if int():
     n: int
     n = C.X
 n = c
+[builtins fixtures/enum.pyi]
 [out]
 ==
 ==
@@ -5512,6 +5518,7 @@ C = Enum('C', 'X Y')
 from enum import Enum
 
 C = Enum('C', 'X')
+[builtins fixtures/tuple.pyi]
 [typing fixtures/typing-medium.pyi]
 [out]
 ==
@@ -5532,6 +5539,7 @@ class C:
 [file b.py.2]
 from enum import Enum
 C = Enum('C', [('X', 0), ('Y', 1)])
+[builtins fixtures/tuple.pyi]
 [out]
 ==
 a.py:4: error: Argument 1 to "f" has incompatible type "C"; expected "int"
@@ -10592,3 +10600,583 @@ m.py:9: error: Argument 1 to "foo" has incompatible type "int"; expected "str"
 m.py:9: error: Argument 2 to "foo" has incompatible type "str"; expected "int"
 m.py:10: error: Unexpected keyword argument "a" for "foo"
 partial.py:4: note: "foo" defined here
+
+[case testReplaceFunctionWithDecoratedFunctionIndirect]
+from b import f
+x: int = f()
+import b
+y: int = b.f()
+
+[file b.py]
+from a import f
+
+[file a.py]
+def f() -> int: ...
+
+[file a.py.2]
+from typing import Callable
+def d(t: Callable[[], str]) -> Callable[[], str]: ...
+
+@d
+def f() -> str: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+==
+main:2: error: Incompatible types in assignment (expression has type "str", variable has type "int")
+main:4: error: Incompatible types in assignment (expression has type "str", variable has type "int")
+
+[case testReplaceFunctionWithDecoratedFunctionIndirect2]
+from c import f
+x: int = f()
+import c
+y: int = c.f()
+
+[file c.py]
+from b import f
+
+[file b.py]
+from a import f
+
+[file a.py]
+def f() -> int: ...
+
+[file a.py.2]
+from typing import Callable
+def d(t: Callable[[], str]) -> Callable[[], str]: ...
+
+@d
+def f() -> str: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+==
+main:2: error: Incompatible types in assignment (expression has type "str", variable has type "int")
+main:4: error: Incompatible types in assignment (expression has type "str", variable has type "int")
+
+[case testReplaceFunctionWithClassIndirect]
+from b import f
+x: int = f()
+import b
+y: int = b.f()
+
+[file b.py]
+from a import f
+
+[file a.py]
+def f() -> int: ...
+
+[file a.py.2]
+class f: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+==
+main:2: error: Incompatible types in assignment (expression has type "f", variable has type "int")
+main:4: error: Incompatible types in assignment (expression has type "f", variable has type "int")
+
+[case testReplaceFunctionWithClassIndirect2]
+from c import f
+x: int = f()
+import c
+y: int = c.f()
+
+[file c.py]
+from b import f
+
+[file b.py]
+from a import f
+
+[file a.py]
+def f() -> int: ...
+
+[file a.py.2]
+class f: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+==
+main:2: error: Incompatible types in assignment (expression has type "f", variable has type "int")
+main:4: error: Incompatible types in assignment (expression has type "f", variable has type "int")
+
+
+[case testDeprecatedAddKeepChangeAndRemoveFunctionDeprecation]
+# flags: --enable-error-code=deprecated
+
+from a import f
+f()
+import a
+a.f()
+
+[file a.py]
+def f() -> None: ...
+
+[file a.py.2]
+from typing_extensions import deprecated
+@deprecated("use f2 instead")
+def f() -> None: ...
+
+[file a.py.3]
+from typing_extensions import deprecated
+@deprecated("use f2 instead")
+def f() -> None: ...
+
+[file a.py.4]
+from typing_extensions import deprecated
+@deprecated("use f3 instead")
+def f() -> None: ...
+
+[file a.py.5]
+def f() -> None: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+==
+main:3: error: function a.f is deprecated: use f2 instead
+main:6: error: function a.f is deprecated: use f2 instead
+==
+main:3: error: function a.f is deprecated: use f2 instead
+main:6: error: function a.f is deprecated: use f2 instead
+==
+main:3: error: function a.f is deprecated: use f3 instead
+main:6: error: function a.f is deprecated: use f3 instead
+==
+
+
+[case testDeprecatedRemoveFunctionDeprecation]
+# flags: --enable-error-code=deprecated
+from a import f
+f()
+import a
+a.f()
+
+[file a.py]
+from typing_extensions import deprecated
+@deprecated("use f2 instead")
+def f() -> None: ...
+
+[file a.py.2]
+def f() -> None: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+main:2: error: function a.f is deprecated: use f2 instead
+main:5: error: function a.f is deprecated: use f2 instead
+==
+
+[case testDeprecatedKeepFunctionDeprecation]
+# flags: --enable-error-code=deprecated
+from a import f
+f()
+import a
+a.f()
+
+[file a.py]
+from typing_extensions import deprecated
+@deprecated("use f2 instead")
+def f() -> None: ...
+
+[file a.py.2]
+from typing_extensions import deprecated
+@deprecated("use f2 instead")
+def f() -> None: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+main:2: error: function a.f is deprecated: use f2 instead
+main:5: error: function a.f is deprecated: use f2 instead
+==
+main:2: error: function a.f is deprecated: use f2 instead
+main:5: error: function a.f is deprecated: use f2 instead
+
+
+[case testDeprecatedAddFunctionDeprecationIndirectImport]
+# flags: --enable-error-code=deprecated
+from b import f
+f()
+import b
+b.f()
+
+[file b.py]
+from a import f
+
+[file a.py]
+def f() -> int: ...
+
+[file a.py.2]
+from typing_extensions import deprecated
+@deprecated("use f2 instead")
+def f() -> int: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+==
+b.py:1: error: function a.f is deprecated: use f2 instead
+main:2: error: function a.f is deprecated: use f2 instead
+main:5: error: function a.f is deprecated: use f2 instead
+
+
+[case testDeprecatedChangeFunctionDeprecationIndirectImport]
+# flags: --enable-error-code=deprecated
+from b import f
+f()
+import b
+b.f()
+
+[file b.py]
+from a import f
+
+[file a.py]
+from typing_extensions import deprecated
+@deprecated("use f1 instead")
+def f() -> int: ...
+
+[file a.py.2]
+from typing_extensions import deprecated
+@deprecated("use f2 instead")
+def f() -> int: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+b.py:1: error: function a.f is deprecated: use f1 instead
+main:2: error: function a.f is deprecated: use f1 instead
+main:5: error: function a.f is deprecated: use f1 instead
+==
+b.py:1: error: function a.f is deprecated: use f2 instead
+main:2: error: function a.f is deprecated: use f2 instead
+main:5: error: function a.f is deprecated: use f2 instead
+
+[case testDeprecatedRemoveFunctionDeprecationIndirectImport]
+# flags: --enable-error-code=deprecated
+from b import f
+f()
+import b
+b.f()
+
+[file b.py]
+from a import f
+
+[file a.py]
+from typing_extensions import deprecated
+@deprecated("use f1 instead")
+def f() -> int: ...
+
+[file a.py.2]
+def f() -> int: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+b.py:1: error: function a.f is deprecated: use f1 instead
+main:2: error: function a.f is deprecated: use f1 instead
+main:5: error: function a.f is deprecated: use f1 instead
+==
+
+
+[case testDeprecatedFunctionAlreadyDecorated1-only_when_cache]
+# flags: --enable-error-code=deprecated
+from b import f
+x: str = f()
+import b
+y: str = b.f()
+
+[file b.py]
+from a import f
+
+[file a.py]
+from typing import Callable
+
+def d(t: Callable[[], str]) -> Callable[[], str]: ...
+
+@d
+def f() -> str: ...
+
+[file a.py.2]
+from typing import Callable
+from typing_extensions import deprecated
+
+def d(t: Callable[[], str]) -> Callable[[], str]: ...
+
+@deprecated("deprecated decorated function")
+@d
+def f() -> str: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+==
+b.py:1: error: function a.f is deprecated: deprecated decorated function
+main:2: error: function a.f is deprecated: deprecated decorated function
+main:5: error: function a.f is deprecated: deprecated decorated function
+
+
+[case testDeprecatedFunctionAlreadyDecorated2-only_when_nocache]
+# flags: --enable-error-code=deprecated
+from b import f
+x: str = f()
+import b
+y: str = b.f()
+
+[file b.py]
+from a import f
+
+[file a.py]
+from typing import Callable
+
+def d(t: Callable[[], str]) -> Callable[[], str]: ...
+
+@d
+def f() -> str: ...
+
+[file a.py.2]
+from typing import Callable
+from typing_extensions import deprecated
+
+def d(t: Callable[[], str]) -> Callable[[], str]: ...
+
+@deprecated("deprecated decorated function")
+@d
+def f() -> str: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+==
+main:2: error: function a.f is deprecated: deprecated decorated function
+main:5: error: function a.f is deprecated: deprecated decorated function
+b.py:1: error: function a.f is deprecated: deprecated decorated function
+
+
+[case testDeprecatedAddClassDeprecationIndirectImport1-only_when_cache]
+# flags: --enable-error-code=deprecated
+from b import C
+x: C
+C()
+import b
+y: b.D
+b.D()
+
+[file b.py]
+from a import C
+from a import D
+
+[file a.py]
+class C: ...
+class D: ...
+
+[file a.py.2]
+from typing_extensions import deprecated
+
+@deprecated("use C2 instead")
+class C: ...
+
+@deprecated("use D2 instead")
+class D: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+==
+b.py:1: error: class a.C is deprecated: use C2 instead
+b.py:2: error: class a.D is deprecated: use D2 instead
+main:2: error: class a.C is deprecated: use C2 instead
+main:6: error: class a.D is deprecated: use D2 instead
+main:7: error: class a.D is deprecated: use D2 instead
+
+
+[case testDeprecatedAddClassDeprecationIndirectImport2-only_when_nocache]
+# flags: --enable-error-code=deprecated
+from b import C
+x: C
+C()
+import b
+y: b.D
+b.D()
+
+[file b.py]
+from a import C
+from a import D
+
+[file a.py]
+class C: ...
+class D: ...
+
+[file a.py.2]
+from typing_extensions import deprecated
+
+@deprecated("use C2 instead")
+class C: ...
+
+@deprecated("use D2 instead")
+class D: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+==
+main:2: error: class a.C is deprecated: use C2 instead
+main:6: error: class a.D is deprecated: use D2 instead
+main:7: error: class a.D is deprecated: use D2 instead
+b.py:1: error: class a.C is deprecated: use C2 instead
+b.py:2: error: class a.D is deprecated: use D2 instead
+
+
+[case testDeprecatedChangeClassDeprecationIndirectImport]
+# flags: --enable-error-code=deprecated
+from b import C
+x: C
+C()
+import b
+y: b.D
+b.D()
+
+[file b.py]
+from a import C
+from a import D
+
+[file a.py]
+from typing_extensions import deprecated
+
+@deprecated("use C1 instead")
+class C: ...
+@deprecated("use D1 instead")
+class D: ...
+
+[file a.py.2]
+from typing_extensions import deprecated
+
+@deprecated("use C2 instead")
+class C: ...
+
+@deprecated("use D2 instead")
+class D: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+b.py:1: error: class a.C is deprecated: use C1 instead
+b.py:2: error: class a.D is deprecated: use D1 instead
+main:2: error: class a.C is deprecated: use C1 instead
+main:6: error: class a.D is deprecated: use D1 instead
+main:7: error: class a.D is deprecated: use D1 instead
+==
+b.py:1: error: class a.C is deprecated: use C2 instead
+b.py:2: error: class a.D is deprecated: use D2 instead
+main:2: error: class a.C is deprecated: use C2 instead
+main:6: error: class a.D is deprecated: use D2 instead
+main:7: error: class a.D is deprecated: use D2 instead
+
+
+[case testDeprecatedRemoveClassDeprecationIndirectImport]
+# flags: --enable-error-code=deprecated
+from b import C
+x: C
+C()
+import b
+y: b.D
+b.D()
+
+[file b.py]
+from a import C
+from a import D
+
+[file a.py]
+from typing_extensions import deprecated
+
+@deprecated("use C1 instead")
+class C: ...
+@deprecated("use D1 instead")
+class D: ...
+
+[file a.py.2]
+class C: ...
+class D: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+b.py:1: error: class a.C is deprecated: use C1 instead
+b.py:2: error: class a.D is deprecated: use D1 instead
+main:2: error: class a.C is deprecated: use C1 instead
+main:6: error: class a.D is deprecated: use D1 instead
+main:7: error: class a.D is deprecated: use D1 instead
+==
+
+
+[case testDeprecatedAddClassDeprecationIndirectImportAlreadyDecorated1-only_when_cache]
+# flags: --enable-error-code=deprecated
+from b import C
+x: C
+C()
+import b
+y: b.D
+b.D()
+
+[file b.py]
+from a import C
+from a import D
+
+[file a.py]
+from typing import TypeVar
+
+T = TypeVar("T")
+def dec(x: T) -> T: ...
+
+@dec
+class C: ...
+@dec
+class D: ...
+
+[file a.py.2]
+from typing_extensions import deprecated
+
+@deprecated("use C2 instead")
+class C: ...
+
+@deprecated("use D2 instead")
+class D: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+==
+b.py:1: error: class a.C is deprecated: use C2 instead
+b.py:2: error: class a.D is deprecated: use D2 instead
+main:2: error: class a.C is deprecated: use C2 instead
+main:6: error: class a.D is deprecated: use D2 instead
+main:7: error: class a.D is deprecated: use D2 instead
+
+
+[case testDeprecatedAddClassDeprecationIndirectImportAlreadyDecorated2-only_when_nocache]
+# flags: --enable-error-code=deprecated
+from b import C
+x: C
+C()
+import b
+y: b.D
+b.D()
+
+[file b.py]
+from a import C
+from a import D
+
+[file a.py]
+from typing import TypeVar
+
+T = TypeVar("T")
+def dec(x: T) -> T: ...
+
+@dec
+class C: ...
+@dec
+class D: ...
+
+[file a.py.2]
+from typing_extensions import deprecated
+
+@deprecated("use C2 instead")
+class C: ...
+
+@deprecated("use D2 instead")
+class D: ...
+
+[builtins fixtures/tuple.pyi]
+[out]
+==
+main:2: error: class a.C is deprecated: use C2 instead
+main:6: error: class a.D is deprecated: use D2 instead
+main:7: error: class a.D is deprecated: use D2 instead
+b.py:1: error: class a.C is deprecated: use C2 instead
+b.py:2: error: class a.D is deprecated: use D2 instead

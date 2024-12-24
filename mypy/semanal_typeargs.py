@@ -15,7 +15,7 @@ from mypy.errors import Errors
 from mypy.message_registry import INVALID_PARAM_SPEC_LOCATION, INVALID_PARAM_SPEC_LOCATION_NOTE
 from mypy.messages import format_type
 from mypy.mixedtraverser import MixedTraverserVisitor
-from mypy.nodes import Block, ClassDef, Context, FakeInfo, FuncItem, MypyFile, TypeAliasStmt
+from mypy.nodes import Block, ClassDef, Context, FakeInfo, FuncItem, MypyFile
 from mypy.options import Options
 from mypy.scope import Scope
 from mypy.subtypes import is_same_type, is_subtype
@@ -102,10 +102,6 @@ class TypeArgumentAnalyzer(MixedTraverserVisitor):
             # If there was already an error for the alias itself, there is no point in checking
             # the expansion, most likely it will result in the same kind of error.
             get_proper_type(t).accept(self)
-
-    def visit_type_alias_stmt(self, s: TypeAliasStmt):
-        if s.type:
-            s.type.accept(self)
 
     def visit_tuple_type(self, t: TupleType) -> None:
         t.items = flatten_nested_tuples(t.items)

@@ -48,7 +48,7 @@ However, if you wish to do so, you can run the full test suite
 like this:
 
 ```bash
-python3 runtests.py
+python runtests.py
 ```
 
 Some useful commands for running specific tests include:

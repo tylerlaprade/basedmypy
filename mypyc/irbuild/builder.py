@@ -84,6 +84,7 @@ from mypyc.ir.ops import (
     IntOp,
     LoadStatic,
     Op,
+    PrimitiveDescription,
     RaiseStandardError,
     Register,
     SetAttr,
@@ -381,6 +382,9 @@ class IRBuilder:
     def call_c(self, desc: CFunctionDescription, args: list[Value], line: int) -> Value:
         return self.builder.call_c(desc, args, line)
 
+    def primitive_op(self, desc: PrimitiveDescription, args: list[Value], line: int) -> Value:
+        return self.builder.primitive_op(desc, args, line)
+
     def int_op(self, type: RType, lhs: Value, rhs: Value, op: int, line: int) -> Value:
         return self.builder.int_op(type, lhs, rhs, op, line)
 
@@ -400,7 +404,7 @@ class IRBuilder:
     ) -> None:
         # Add an attribute entry into the class dict of a non-extension class.
         key_unicode = self.load_str(key)
-        self.call_c(dict_set_item_op, [non_ext.dict, key_unicode, val], line)
+        self.primitive_op(dict_set_item_op, [non_ext.dict, key_unicode, val], line)
 
     def gen_import(self, id: str, line: int) -> None:
         self.imports[id] = None
@@ -431,7 +435,7 @@ class IRBuilder:
         # Python 3.7 has a nice 'PyImport_GetModule' function that we can't use :(
         mod_dict = self.call_c(get_module_dict_op, [], line)
         # Get module object from modules dict.
-        return self.call_c(dict_get_item_op, [mod_dict, self.load_str(module)], line)
+        return self.primitive_op(dict_get_item_op, [mod_dict, self.load_str(module)], line)
 
     def get_module_attr(self, module: str, attr: str, line: int) -> Value:
         """Look up an attribute of a module without storing it in the local namespace.
@@ -594,7 +598,7 @@ class IRBuilder:
             if isinstance(symbol, Decorator):
                 symbol = symbol.func
             if symbol is None:
-                # New semantic analyzer doesn't create ad-hoc Vars for special forms.
+                # Semantic analyzer doesn't create ad-hoc Vars for special forms.
                 assert lvalue.is_special_form
                 symbol = Var(lvalue.name)
             if not for_read and isinstance(symbol, Var) and symbol.is_cls:
@@ -691,7 +695,7 @@ class IRBuilder:
             else:
                 key = self.load_str(target.attr)
                 boxed_reg = self.builder.box(rvalue_reg)
-                self.call_c(py_setattr_op, [target.obj, key, boxed_reg], line)
+                self.primitive_op(py_setattr_op, [target.obj, key, boxed_reg], line)
         elif isinstance(target, AssignmentTargetIndex):
             target_reg2 = self.gen_method_call(
                 target.base, "__setitem__", [target.index, rvalue_reg], None, line
@@ -768,7 +772,7 @@ class IRBuilder:
     def process_iterator_tuple_assignment(
         self, target: AssignmentTargetTuple, rvalue_reg: Value, line: int
     ) -> None:
-        iterator = self.call_c(iter_op, [rvalue_reg], line)
+        iterator = self.primitive_op(iter_op, [rvalue_reg], line)
 
         # This may be the whole lvalue list if there is no starred value
         split_idx = target.star_idx if target.star_idx is not None else len(target.items)
@@ -794,7 +798,7 @@ class IRBuilder:
         # Assign the starred value and all values after it
         if target.star_idx is not None:
             post_star_vals = target.items[split_idx + 1 :]
-            iter_list = self.call_c(to_list, [iterator], line)
+            iter_list = self.primitive_op(to_list, [iterator], line)
             iter_list_len = self.builtin_len(iter_list, line)
             post_star_len = Integer(len(post_star_vals))
             condition = self.binary_op(post_star_len, iter_list_len, "<=", line)
@@ -813,7 +817,7 @@ class IRBuilder:
             self.activate_block(ok_block)
 
             for litem in reversed(post_star_vals):
-                ritem = self.call_c(list_pop_last, [iter_list], line)
+                ritem = self.primitive_op(list_pop_last, [iter_list], line)
                 self.assign(litem, ritem, line)
 
             # Assign the starred value
@@ -979,17 +983,13 @@ class IRBuilder:
 
     def is_native_module(self, module: str) -> bool:
         """Is the given module one compiled by mypyc?"""
-        return module in self.mapper.group_map
+        return self.mapper.is_native_module(module)
 
     def is_native_ref_expr(self, expr: RefExpr) -> bool:
-        if expr.node is None:
-            return False
-        if "." in expr.node.fullname:
-            return self.is_native_module(expr.node.fullname.rpartition(".")[0])
-        return True
+        return self.mapper.is_native_ref_expr(expr)
 
     def is_native_module_ref_expr(self, expr: RefExpr) -> bool:
-        return self.is_native_ref_expr(expr) and expr.kind == GDEF
+        return self.mapper.is_native_module_ref_expr(expr)
 
     def is_synthetic_type(self, typ: TypeInfo) -> bool:
         """Is a type something other than just a class we've created?"""
@@ -1055,9 +1055,9 @@ class IRBuilder:
         # Handle data-driven special-cased primitive call ops.
         if callee.fullname and expr.arg_kinds == [ARG_POS] * len(arg_values):
             fullname = get_call_target_fullname(callee)
-            call_c_ops_candidates = function_ops.get(fullname, [])
-            target = self.builder.matching_call_c(
-                call_c_ops_candidates, arg_values, expr.line, self.node_type(expr)
+            primitive_candidates = function_ops.get(fullname, [])
+            target = self.builder.matching_primitive_op(
+                primitive_candidates, arg_values, expr.line, self.node_type(expr)
             )
             if target:
                 return target
@@ -1302,7 +1302,7 @@ class IRBuilder:
     def load_global_str(self, name: str, line: int) -> Value:
         _globals = self.load_globals_dict()
         reg = self.load_str(name)
-        return self.call_c(dict_get_item_op, [_globals, reg], line)
+        return self.primitive_op(dict_get_item_op, [_globals, reg], line)
 
     def load_globals_dict(self) -> Value:
         return self.add(LoadStatic(dict_rprimitive, "globals", self.module_name))

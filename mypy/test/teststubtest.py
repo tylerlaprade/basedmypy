@@ -1277,9 +1277,9 @@ class StubtestUnit(unittest.TestCase):
         yield Case(
             stub="""
             class X(enum.Enum):
-                a: int
-                b: str
-                c: str
+                a = ...
+                b = "asdf"
+                c = "oops"
             """,
             runtime="""
             class X(enum.Enum):
@@ -1292,8 +1292,8 @@ class StubtestUnit(unittest.TestCase):
         yield Case(
             stub="""
             class Flags1(enum.Flag):
-                a: int
-                b: int
+                a = ...
+                b = 2
             def foo(x: Flags1 = ...) -> None: ...
             """,
             runtime="""
@@ -1307,8 +1307,8 @@ class StubtestUnit(unittest.TestCase):
         yield Case(
             stub="""
             class Flags2(enum.Flag):
-                a: int
-                b: int
+                a = ...
+                b = 2
             def bar(x: Flags2 | None = None) -> None: ...
             """,
             runtime="""
@@ -1322,8 +1322,8 @@ class StubtestUnit(unittest.TestCase):
         yield Case(
             stub="""
             class Flags3(enum.Flag):
-                a: int
-                b: int
+                a = ...
+                b = 2
             def baz(x: Flags3 | None = ...) -> None: ...
             """,
             runtime="""
@@ -1356,8 +1356,8 @@ class StubtestUnit(unittest.TestCase):
         yield Case(
             stub="""
             class Flags4(enum.Flag):
-                a: int
-                b: int
+                a = 1
+                b = 2
             def spam(x: Flags4 | None = None) -> None: ...
             """,
             runtime="""
@@ -1372,7 +1372,7 @@ class StubtestUnit(unittest.TestCase):
             stub="""
             from typing_extensions import Final, Literal
             class BytesEnum(bytes, enum.Enum):
-                a: bytes
+                a = b'foo'
             FOO: Literal[BytesEnum.a]
             BAR: Final = BytesEnum.a
             BAZ: BytesEnum
@@ -1413,7 +1413,7 @@ class StubtestUnit(unittest.TestCase):
             runtime="""
             __all__ = []
             Z = 5""",
-            error=None,
+            error="__all__",
         )
 
     @collect_cases
@@ -1453,7 +1453,7 @@ class StubtestUnit(unittest.TestCase):
             runtime="",
             error="h",
         )
-        yield Case(stub="", runtime="__all__ = []", error=None)  # dummy case
+        yield Case(stub="", runtime="__all__ = []", error="__all__")  # dummy case
         yield Case(stub="", runtime="__all__ += ['y']\ny = 5", error="y")
         yield Case(stub="", runtime="__all__ += ['g']\ndef g(): pass", error="g")
         # Here we should only check that runtime has B, since the stub explicitly re-exports it
@@ -1907,7 +1907,7 @@ assert annotations
 
             import enum
             class Color(enum.Enum):
-                RED: int
+                RED = ...
 
             NUM: Literal[1]
             CHAR: Literal['a']

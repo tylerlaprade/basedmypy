@@ -220,9 +220,9 @@ class A:
 class B(A):
     def f(self, b: int): ...  # E: Signature of "f" incompatible with supertype "A"  [override] \
                               # N:      Superclass: \
-                              # N:          def f(self, a: int) -> None \
+                              # N:          f(self, a: int) -> None \
                               # N:      Subclass: \
-                              # N:          def f(self, b: int) -> None \
+                              # N:          f(self, b: int) -> None \
                               # E: Method "f" is not using @override but is overriding a method in class "__main__.A"  [explicit-override]
 
 [file other.py]

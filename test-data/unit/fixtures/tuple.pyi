@@ -29,6 +29,7 @@ class function:
 class ellipsis: pass
 class classmethod: pass
 
+class complex: pass
 # We need int and slice for indexing tuples.
 class int:
     def __neg__(self) -> 'int': pass

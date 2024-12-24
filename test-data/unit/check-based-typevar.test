@@ -35,7 +35,11 @@ A[int]()  # E: Value of type variable "T" of "A" cannot be "int"  [type-var]  \
 [case testConstrainedTypeAliasExtra-3.12]
 class A[T: (int, str)]: ...
 
-type BoolA[T: bool] = A[T]  # E: Type variable "T" not valid as type argument value for "A"  [type-var]
+type BoolA[T: bool] = A[T]
+BoolA[bool]  # E: Value of type variable "T" of "A" cannot be "bool"  [type-var] \
+             # N: "T" of "A" is a constrained type variable, it is not generic
+[typing fixtures/typing-full.pyi]
+[builtins fixtures/tuple.pyi]
 
 
 [case testConstraintAllowAny]

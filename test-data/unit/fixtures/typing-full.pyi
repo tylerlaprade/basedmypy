@@ -38,7 +38,7 @@ NoReturn = 0
 NewType = 0
 Self = 0
 Unpack = 0
-Callable: _SpecialForm
+TypeAlias = 0
 Union: _SpecialForm
 Literal: _SpecialForm
 
@@ -48,8 +48,9 @@ T_contra = TypeVar('T_contra', contravariant=True)
 U = TypeVar('U')
 V = TypeVar('V')
 S = TypeVar('S')
+P = ParamSpec("P")
 
-class Callable:
+class Callable(Protocol[P, T_co]):
     def __call__(self): pass
 class _NamedCallable(Callable):
     __name__: str

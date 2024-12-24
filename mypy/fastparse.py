@@ -1227,23 +1227,17 @@ class ASTConverter:
     def translate_type_params(self, type_params: list[Any]) -> list[TypeParam]:
         explicit_type_params = []
         for p in type_params:
-            bound = None
-            default: ProperType | None = None
+            bound: Type | None = None
             values: list[Type] = []
-            import mypy.options
-
-            if not mypy.options._based:
-                if sys.version_info >= (3, 13) and p.default_value is not None:
-                    self.fail(
-                        message_registry.TYPE_PARAM_DEFAULT_NOT_SUPPORTED,
-                        p.lineno,
-                        p.col_offset,
-                        blocker=False,
-                    )
+            default: Type | None = None
+            if sys.version_info >= (3, 13):
+                default = TypeConverter(self.errors, line=p.lineno).visit(p.default_value)
             if isinstance(p, ast_ParamSpec):  # type: ignore[misc]
-                explicit_type_params.append(TypeParam(p.name, PARAM_SPEC_KIND, None, []))
+                explicit_type_params.append(TypeParam(p.name, PARAM_SPEC_KIND, None, [], default))
             elif isinstance(p, ast_TypeVarTuple):  # type: ignore[misc]
-                explicit_type_params.append(TypeParam(p.name, TYPE_VAR_TUPLE_KIND, None, []))
+                explicit_type_params.append(
+                    TypeParam(p.name, TYPE_VAR_TUPLE_KIND, None, [], default)
+                )
             else:
                 if isinstance(p.bound, ast3.Tuple):
                     if len(p.bound.elts) < 2:
@@ -1259,8 +1253,6 @@ class ASTConverter:
                 elif p.bound is not None:
                     self.validate_type_param(p)
                     bound = TypeConverter(self.errors, line=p.lineno).visit(p.bound)
-                if sys.version_info >= (3, 13) and p.default_value is not None:
-                    default = TypeConverter(self.errors, line=p.lineno).visit(p.default_value)
                 explicit_type_params.append(
                     TypeParam(p.name, TYPE_VAR_KIND, bound, values, default)
                 )
@@ -2116,7 +2108,7 @@ class TypeConverter:
         if (
             isinstance(typ, RawExpressionType)
             # Use type() because we do not want to allow bools.
-            and type(typ.literal_value) is int  # noqa: E721
+            and type(typ.literal_value) is int
         ):
             if isinstance(n.op, USub):
                 typ.literal_value *= -1

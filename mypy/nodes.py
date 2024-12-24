@@ -573,18 +573,20 @@ class OverloadedFuncDef(FuncBase, SymbolNode, Statement):
     Overloaded variants must be consecutive in the source file.
     """
 
-    __slots__ = ("items", "unanalyzed_items", "impl", "is_mypy_only")
+    __slots__ = ("items", "unanalyzed_items", "impl", "is_mypy_only", "deprecated")
 
     items: list[OverloadPart]
     unanalyzed_items: list[OverloadPart]
     impl: OverloadPart | None
     is_mypy_only: bool
+    deprecated: str | None
 
     def __init__(self, items: list[OverloadPart]) -> None:
         super().__init__()
         self.items = items
         self.unanalyzed_items = items.copy()
         self.impl = None
+        self.deprecated = None
         if items:
             # TODO: figure out how to reliably set end position (we don't know the impl here).
             self.set_line(items[0].line, items[0].column)
@@ -610,6 +612,7 @@ class OverloadedFuncDef(FuncBase, SymbolNode, Statement):
             "fullname": self._fullname,
             "impl": None if self.impl is None else self.impl.serialize(),
             "flags": get_flags(self, FUNCBASE_FLAGS),
+            "deprecated": self.deprecated,
         }
 
     @classmethod
@@ -629,6 +632,7 @@ class OverloadedFuncDef(FuncBase, SymbolNode, Statement):
             res.type = typ
         res._fullname = data["fullname"]
         set_flags(res, data["flags"])
+        res.deprecated = data["deprecated"]
         # NOTE: res.info will be set in the fixup phase.
         return res
 
@@ -688,7 +692,7 @@ class TypeParam:
         kind: int,
         upper_bound: mypy.types.Type | None,
         values: list[mypy.types.Type],
-        default: mypy.types.Type | None = None,
+        default: mypy.types.Type | None,
     ) -> None:
         self.name = name
         self.kind = kind
@@ -796,9 +800,10 @@ class FuncDef(FuncItem, SymbolNode, Statement):
         "deco_line",
         "is_trivial_body",
         "is_mypy_only",
-        # Present only when a function is decorated with @typing.datasclass_transform or similar
+        # Present only when a function is decorated with @typing.dataclass_transform or similar
         "dataclass_transform_spec",
         "docstring",
+        "deprecated",
     )
 
     __match_args__ = ("name", "arguments", "type", "body")
@@ -828,6 +833,7 @@ class FuncDef(FuncItem, SymbolNode, Statement):
         self.is_mypy_only = False
         self.dataclass_transform_spec: DataclassTransformSpec | None = None
         self.docstring: str | None = None
+        self.deprecated: str | None = None
 
     @property
     def name(self) -> str:
@@ -858,6 +864,7 @@ class FuncDef(FuncItem, SymbolNode, Statement):
                 if self.dataclass_transform_spec is None
                 else self.dataclass_transform_spec.serialize()
             ),
+            "deprecated": self.deprecated,
         }
 
     @classmethod
@@ -885,6 +892,7 @@ class FuncDef(FuncItem, SymbolNode, Statement):
             if data["dataclass_transform_spec"] is not None
             else None
         )
+        ret.deprecated = data["deprecated"]
         # Leave these uninitialized so that future uses will trigger an error
         del ret.arguments
         del ret.max_pos
@@ -977,6 +985,7 @@ VAR_FLAGS: Final = [
     "is_classvar",
     "is_abstract_var",
     "is_final",
+    "is_index_var",
     "final_unset_in_class",
     "final_set_in_init",
     "explicit_self_type",
@@ -1013,6 +1022,7 @@ class Var(SymbolNode):
         "is_classvar",
         "is_abstract_var",
         "is_final",
+        "is_index_var",
         "final_unset_in_class",
         "final_set_in_init",
         "is_suppressed_import",
@@ -1047,6 +1057,7 @@ class Var(SymbolNode):
         self.is_settable_property = False
         self.is_classvar = False
         self.is_abstract_var = False
+        self.is_index_var = False
         # Set to true when this variable refers to a module we were unable to
         # parse for some reason (eg a silenced module)
         self.is_suppressed_import = False
@@ -1268,7 +1279,7 @@ class Block(Statement):
 
     __match_args__ = ("body", "is_unreachable")
 
-    def __init__(self, body: list[Statement]) -> None:
+    def __init__(self, body: list[Statement], *, is_unreachable: bool = False) -> None:
         super().__init__()
         self.body = body
         # True if we can determine that this block is not executed during semantic
@@ -1276,7 +1287,7 @@ class Block(Statement):
         # something like "if PY3:" when using Python 2. However, some code is
         # only considered unreachable during type checking and this is not true
         # in those cases.
-        self.is_unreachable = False
+        self.is_unreachable = is_unreachable
 
     def accept(self, visitor: StatementVisitor[T]) -> T:
         return visitor.visit_block(self)
@@ -1675,7 +1686,7 @@ class MatchStmt(Statement):
 
 
 class TypeAliasStmt(Statement):
-    __slots__ = ("name", "type_args", "value", "invalid_recursive_alias", "type")
+    __slots__ = ("name", "type_args", "value", "invalid_recursive_alias", "alias_node")
 
     __match_args__ = ("name", "type_args", "value")
 
@@ -1683,6 +1694,7 @@ class TypeAliasStmt(Statement):
     type_args: list[TypeParam]
     value: LambdaExpr  # Return value will get translated into a type
     invalid_recursive_alias: bool
+    alias_node: TypeAlias | None
 
     def __init__(self, name: NameExpr, type_args: list[TypeParam], value: LambdaExpr) -> None:
         super().__init__()
@@ -1690,7 +1702,7 @@ class TypeAliasStmt(Statement):
         self.type_args = type_args
         self.value = value
         self.invalid_recursive_alias = False
-        self.type: mypy.types.Type | None = None
+        self.alias_node = None
 
     def accept(self, visitor: StatementVisitor[T]) -> T:
         return visitor.visit_type_alias_stmt(self)
@@ -1739,7 +1751,7 @@ class StrExpr(Expression):
         return visitor.visit_str_expr(self)
 
 
-def is_StrExpr_list(seq: list[Expression]) -> TypeGuard[list[StrExpr]]:  # type: ignore[typeguard-subtype]
+def is_StrExpr_list(seq: list[Expression]) -> TypeGuard[list[StrExpr]]:  # type: ignore[typeguard-subtype]  # noqa: N802
     return all(isinstance(item, StrExpr) for item in seq)
 
 
@@ -2926,6 +2938,10 @@ EXCLUDED_PROTOCOL_ATTRIBUTES: Final = frozenset(
     }
 )
 
+# Attributes that can optionally be defined in the body of a subclass of
+# enum.Enum but are removed from the class __dict__ by EnumMeta.
+EXCLUDED_ENUM_ATTRIBUTES: Final = frozenset({"_ignore_", "_order_", "__order__"})
+
 
 class TypeInfo(SymbolNode):
     """The type structure of a single class.
@@ -2981,6 +2997,7 @@ class TypeInfo(SymbolNode):
         "self_type",
         "dataclass_transform_spec",
         "is_type_check_only",
+        "deprecated",
     )
 
     _fullname: str  # Fully qualified name
@@ -3134,6 +3151,9 @@ class TypeInfo(SymbolNode):
     # Is set to `True` when class is decorated with `@typing.type_check_only`
     is_type_check_only: bool
 
+    # The type's deprecation message (in case it is deprecated)
+    deprecated: str | None
+
     FLAGS: Final = [
         "is_abstract",
         "is_enum",
@@ -3192,6 +3212,7 @@ class TypeInfo(SymbolNode):
         self.self_type = None
         self.dataclass_transform_spec = None
         self.is_type_check_only = False
+        self.deprecated = None
 
     def add_type_vars(self) -> None:
         self.has_type_var_tuple_type = False
@@ -3248,6 +3269,19 @@ class TypeInfo(SymbolNode):
                         continue
                     members.add(name)
         return sorted(members)
+
+    @property
+    def enum_members(self) -> list[str]:
+        return [
+            name
+            for name, sym in self.names.items()
+            if (
+                isinstance(sym.node, Var)
+                and name not in EXCLUDED_ENUM_ATTRIBUTES
+                and not name.startswith("__")
+                and sym.node.has_explicit_value
+            )
+        ]
 
     def __getitem__(self, name: str) -> SymbolTableNode:
         n = self.get(name)
@@ -3414,6 +3448,7 @@ class TypeInfo(SymbolNode):
                 if self.dataclass_transform_spec is not None
                 else None
             ),
+            "deprecated": self.deprecated,
         }
         return data
 
@@ -3481,6 +3516,7 @@ class TypeInfo(SymbolNode):
             ti.dataclass_transform_spec = DataclassTransformSpec.deserialize(
                 data["dataclass_transform_spec"]
             )
+        ti.deprecated = data.get("deprecated")
         return ti
 
 
