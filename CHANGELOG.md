@@ -1,6 +1,8 @@
 # Basedmypy Changelog
 
 ## [Unreleased]
+
+## [2.9.0]
 ### Added
 - `collections.User*` should have `__repr__`
 ### Fixed
