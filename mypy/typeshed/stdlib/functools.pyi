@@ -62,7 +62,6 @@ class _LruCacheWrapperBase(Protocol[_out_TCallable]):
     __wrapped__: Final[_out_TCallable] = ... # type: ignore[misc]
     __call__: Final[_out_TCallable | _HashCallable] = ... # type: ignore[misc]
 
-
     def cache_info(self) -> _CacheInfo: ...
     def cache_clear(self) -> None: ...
     if sys.version_info >= (3, 9):
@@ -71,23 +70,26 @@ class _LruCacheWrapperBase(Protocol[_out_TCallable]):
     def __copy__(self) -> Self: ...
     def __deepcopy__(self, memo: Any, /) -> Self: ...
 
-@final
+# replace with `Method & X` once #856 is resolved
+@type_check_only
+class _LruCacheWrapperMethod(MethodType, _LruCacheWrapperBase[_out_TCallable]):
+    pass
+
 # actually defined in `_functools`
+@final
 class _lru_cache_wrapper(_LruCacheWrapperBase[_out_TCallable]):
     def __init__(self, user_function: Never, maxsize: Never, typed: Never, cache_info_type: Never): ...
 
-    # TODO: reintroduce this once mypy 1.14 fork is merged
-    # @overload
-    # def __get__(self, instance: None, owner: object) -> Self: ...
-    # @overload
+    @overload
+    def __get__(self, instance: None, owner: object) -> Self: ...
+    @overload
     def __get__(
         self: _lru_cache_wrapper[Callable[Concatenate[Never, _PWrapped], _RWrapped]],
         instance: object,
         owner: type[object] | None = None,
         /,
-        # ideally, we would capture the Callable here, and intersect with `MethodType`
-    ) ->  _LruCacheWrapperBase[Callable[_PWrapped, _RWrapped]]: ...
-
+    # ideally we could capture the `Callable` to account for subtypes and intersect with `MethodType`
+    ) -> _LruCacheWrapperMethod[Callable[_PWrapped, _RWrapped]]: ...
 
 @overload
 def lru_cache(maxsize: int | None = 128, typed: bool = False) -> FunctionType[[_TCallable], _lru_cache_wrapper[_TCallable]]: ...

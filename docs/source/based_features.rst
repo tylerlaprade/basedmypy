@@ -325,6 +325,12 @@ The defined type of a variable will be shown in the message for `reveal_type`:
     reveal_type(a)  # Revealed type is "int" (narrowed from "object")
 
 
+Typed ``functools.Cache``
+-------------------------
+
+
+
+
 Checked f-strings
 -----------------
 
