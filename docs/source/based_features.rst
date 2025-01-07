@@ -328,7 +328,21 @@ The defined type of a variable will be shown in the message for `reveal_type`:
 Typed ``functools.Cache``
 -------------------------
 
+In mypy, ``functools.cache`` is unsafe:
 
+.. code-block:: python
+
+    @cache
+    def f(): ...
+    f(1, 2, 3)  # no error
+
+This is resolved:
+
+.. code-block:: python
+
+    @cache
+    def f(): ...
+    f(1, 2, 3)  # error: expected no args
 
 
 Checked f-strings

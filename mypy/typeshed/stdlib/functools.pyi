@@ -58,9 +58,9 @@ class _HashCallable(Protocol):
     def __call__(self, /, *args: Hashable, **kwargs: Hashable) -> Never: ...
 
 @type_check_only
-class _LruCacheWrapperBase(Protocol[_out_TCallable]):
-    __wrapped__: Final[_out_TCallable] = ... # type: ignore[misc]
-    __call__: Final[_out_TCallable | _HashCallable] = ... # type: ignore[misc]
+class _LruCacheWrapperBase(Generic[_out_TCallable]):
+    __wrapped__: Final[_out_TCallable]  # type: ignore[misc]
+    __call__: Final[_out_TCallable | _HashCallable]  # type: ignore[misc]
 
     def cache_info(self) -> _CacheInfo: ...
     def cache_clear(self) -> None: ...
@@ -70,10 +70,12 @@ class _LruCacheWrapperBase(Protocol[_out_TCallable]):
     def __copy__(self) -> Self: ...
     def __deepcopy__(self, memo: Any, /) -> Self: ...
 
+
 # replace with `Method & X` once #856 is resolved
 @type_check_only
-class _LruCacheWrapperMethod(MethodType, _LruCacheWrapperBase[_out_TCallable]):
-    pass
+class _LruCacheWrapperMethod(MethodType, _LruCacheWrapperBase[_out_TCallable]):  # type: ignore[misc]
+    __call__: Final[_out_TCallable | _HashCallable]  # type: ignore[misc, assignment]
+
 
 # actually defined in `_functools`
 @final
