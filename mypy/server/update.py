@@ -118,7 +118,8 @@ import os
 import re
 import sys
 import time
-from typing import Callable, Final, NamedTuple, Optional, Sequence, Union, cast
+from collections.abc import Sequence
+from typing import Callable, Final, NamedTuple, Optional, Union, cast
 from typing_extensions import TypeAlias as _TypeAlias
 
 from mypy.build import (

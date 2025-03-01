@@ -16,8 +16,9 @@ import subprocess
 import sys
 import time
 import traceback
+from collections.abc import Sequence, Set as AbstractSet
 from contextlib import redirect_stderr, redirect_stdout
-from typing import AbstractSet, Any, Callable, Final, List, Sequence, Tuple
+from typing import Any, Callable, Final
 from typing_extensions import TypeAlias as _TypeAlias
 
 import mypy.build
@@ -163,9 +164,9 @@ def ignore_suppressed_imports(module: str) -> bool:
     return module.startswith("encodings.")
 
 
-ModulePathPair: _TypeAlias = Tuple[str, str]
-ModulePathPairs: _TypeAlias = List[ModulePathPair]
-ChangesAndRemovals: _TypeAlias = Tuple[ModulePathPairs, ModulePathPairs]
+ModulePathPair: _TypeAlias = tuple[str, str]
+ModulePathPairs: _TypeAlias = list[ModulePathPair]
+ChangesAndRemovals: _TypeAlias = tuple[ModulePathPairs, ModulePathPairs]
 
 
 class Server:
@@ -718,7 +719,7 @@ class Server:
             find_changes_time=t1 - t0,
             fg_update_time=t2 - t1,
             refresh_suppressed_time=t3 - t2,
-            find_added_supressed_time=t4 - t3,
+            find_added_suppressed_time=t4 - t3,
             cleanup_time=t5 - t4,
         )
 
@@ -1022,7 +1023,7 @@ def get_meminfo() -> dict[str, Any]:
         res["memory_rss_mib"] = meminfo.rss / MiB
         res["memory_vms_mib"] = meminfo.vms / MiB
         if sys.platform == "win32":
-            res["memory_maxrss_mib"] = meminfo.peak_wset / MiB  # type: ignore[no-any-expr, unused-ignore]
+            res["memory_maxrss_mib"] = meminfo.peak_wset / MiB  # type: ignore[any, unused-ignore]
         else:
             # See https://stackoverflow.com/questions/938733/total-memory-used-by-python-process
             import resource  # Since it doesn't exist on Windows.
@@ -1032,7 +1033,7 @@ def get_meminfo() -> dict[str, Any]:
                 factor = 1
             else:
                 factor = 1024  # Linux
-            res["memory_maxrss_mib"] = rusage.ru_maxrss * factor / MiB  # type: ignore[no-any-expr, unused-ignore]
+            res["memory_maxrss_mib"] = rusage.ru_maxrss * factor / MiB  # type: ignore[any, unused-ignore]
     return res
 
 

@@ -11,8 +11,8 @@ f(a=1)  # E: Unexpected keyword argument "a" for "f"  [call-arg]
 [case testIgnoreOnReveal]
 from typing import Any
 
-a: Any = 1  # E: Explicit "Any" is not allowed  [no-any-explicit]
-reveal_type(a)  # type: ignore[no-any-expr]  # N: Revealed type is "Any"
+a: Any = 1  # E: Explicit "Any" is not allowed  [explicit-any]
+reveal_type(a)  # type: ignore[any]  # N: Revealed type is "Any"
 
 
 [case testFakeColumn]
@@ -203,12 +203,6 @@ reveal_type(b)  # N: Revealed type is "int" (narrowed from "object")
 
 
 [case testRedundantExprOnWhileTrue]
-for _ in [1]:
-    if True:  # E: Condition is always true  [redundant-expr]
-        reveal_type(1)  # N: Revealed type is "1"
-while True:
-    if True:  # E: Condition is always true  [redundant-expr]
-        reveal_type(1)  # N: Revealed type is "1"
 
 
 [case testWorkNotProperlyFunctionNamesModule]

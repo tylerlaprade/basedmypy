@@ -31,8 +31,8 @@ All three lines here contain errors:
 
     > mypy demo.py
     demo.py:1: error: Missing type parameters for generic type "list"  [type-arg]
-    demo.py:2: error: Expression type contains "Any" (has type "List[Any]")  [no-any-expr]
-    demo.py:3: error: Expression type contains "Any" (has type "List[Any]")  [no-any-expr]
+    demo.py:2: error: Expression type contains "Any" (has type "List[Any]")  any
+    demo.py:3: error: Expression type contains "Any" (has type "List[Any]")  any
     Found 3 errors in 1 file (checked 1 source file)
 
 We can write these errors to a baseline file:
@@ -41,8 +41,8 @@ We can write these errors to a baseline file:
 
     > mypy --write-baseline demo.py
     demo.py:1: error: Missing type parameters for generic type "list"  [type-arg]
-    demo.py:2: error: Expression type contains "Any" (has type "List[Any]")  [no-any-expr]
-    demo.py:3: error: Expression type contains "Any" (has type "List[Any]")  [no-any-expr]
+    demo.py:2: error: Expression type contains "Any" (has type "List[Any]")  any
+    demo.py:3: error: Expression type contains "Any" (has type "List[Any]")  any
     Found 3 errors (3 new errors) in 1 file (checked 1 source file)
     Baseline successfully written to .mypy/baseline.json
 

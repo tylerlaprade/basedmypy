@@ -25,27 +25,23 @@ import stat
 import sys
 import time
 import types
+from collections.abc import Iterator, Mapping, Sequence, Set as AbstractSet
 from json import JSONDecodeError
 from pathlib import Path
 from sys import stderr
 from typing import (
     TYPE_CHECKING,
-    AbstractSet,
     Any,
     Callable,
     ClassVar,
-    Dict,
     Final,
-    Iterator,
-    List,
-    Mapping,
     NamedTuple,
     NoReturn,
-    Sequence,
     TextIO,
+    TypedDict,
     cast,
 )
-from typing_extensions import TypeAlias as _TypeAlias, TypedDict
+from typing_extensions import TypeAlias as _TypeAlias
 
 import mypy.semanal_main
 from mypy.checker import TypeChecker
@@ -126,7 +122,7 @@ CORE_BUILTIN_MODULES: Final = {
 }
 
 
-Graph: _TypeAlias = Dict[str, "State"]
+Graph: _TypeAlias = dict[str, "State"]
 
 
 # TODO: Get rid of BuildResult.  We might as well return a BuildManager.
@@ -226,8 +222,9 @@ def _build(
     extra_plugins: Sequence[Plugin],
 ) -> BuildResult:
     if platform.python_implementation() == "CPython":
-        # This seems the most reasonable place to tune garbage collection.
-        gc.set_threshold(150 * 1000)
+        # Run gc less frequently, as otherwise we can spent a large fraction of
+        # cpu in gc. This seems the most reasonable place to tune garbage collection.
+        gc.set_threshold(200 * 1000, 30, 30)
 
     data_dir = default_data_dir()
     fscache = fscache or FileSystemCache()
@@ -986,8 +983,10 @@ def write_deps_cache(
         if st.source_hash:
             hash = st.source_hash
         else:
-            assert st.meta, "Module must be either parsed or cached"
-            hash = st.meta.hash
+            if st.meta:
+                hash = st.meta.hash
+            else:
+                hash = ""
         meta_snapshot[id] = hash
 
     meta = {"snapshot": meta_snapshot, "deps_meta": fg_deps_meta}
@@ -1056,7 +1055,7 @@ def generate_deps_for_cache(manager: BuildManager, graph: Graph) -> dict[str, di
 
 
 #  Documenting baseline formats
-UnknownBaseline = Dict[str, object]
+UnknownBaseline = dict[str, object]
 
 
 class BaselineType(TypedDict):
@@ -1176,8 +1175,8 @@ def load_baseline(options: Options, errors: Errors, stdout: TextIO):
     if baseline_errors and targets:
         try:
             errors.initialize_baseline(
-                cast(Dict[str, List[StoredBaselineError]], baseline_errors),
-                cast(List[str], targets),
+                cast(dict[str, list[StoredBaselineError]], baseline_errors),
+                cast(list[str], targets),
             )
         except TypeError:
             if error():
@@ -2546,23 +2545,20 @@ class State:
             # We should always patch indirect dependencies, even in full (non-incremental) builds,
             # because the cache still may be written, and it must be correct.
             # TODO: find a more robust way to traverse *all* relevant types?
-            expr_types = set(self.type_map().values())
-            symbol_types = set()
+            all_types = list(self.type_map().values())
             for _, sym, _ in self.tree.local_definitions():
                 if sym.type is not None:
-                    symbol_types.add(sym.type)
+                    all_types.append(sym.type)
                 if isinstance(sym.node, TypeInfo):
                     # TypeInfo symbols have some extra relevant types.
-                    symbol_types.update(sym.node.bases)
+                    all_types.extend(sym.node.bases)
                     if sym.node.metaclass_type:
-                        symbol_types.add(sym.node.metaclass_type)
+                        all_types.append(sym.node.metaclass_type)
                     if sym.node.typeddict_type:
-                        symbol_types.add(sym.node.typeddict_type)
+                        all_types.append(sym.node.typeddict_type)
                     if sym.node.tuple_type:
-                        symbol_types.add(sym.node.tuple_type)
-            self._patch_indirect_dependencies(
-                self.type_checker().module_refs, expr_types | symbol_types
-            )
+                        all_types.append(sym.node.tuple_type)
+            self._patch_indirect_dependencies(self.type_checker().module_refs, all_types)
 
             if self.options.dump_inference_stats:
                 dump_type_stats(
@@ -2591,7 +2587,7 @@ class State:
             self._type_checker.reset()
             self._type_checker = None
 
-    def _patch_indirect_dependencies(self, module_refs: set[str], types: set[Type]) -> None:
+    def _patch_indirect_dependencies(self, module_refs: set[str], types: list[Type]) -> None:
         assert None not in types
         valid = self.valid_references()
 

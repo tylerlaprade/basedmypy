@@ -11,7 +11,7 @@ important to the project's success
 
 #### (1) Fork the mypy repository
 
-Within Github, navigate to <https://github.com/KotlinIsland/basedmypy> and fork the repository.
+Within GitHub, navigate to <https://github.com/KotlinIsland/basedmypy> and fork the repository.
 
 #### (2) Clone the mypy repository and enter into it
 
@@ -30,7 +30,7 @@ cd basedmypy
 ```
 
 > [!Note]
-> You'll need Python 3.8 or higher to install all requirements
+> You'll need Python 3.9 or higher to install all requirements
 > you can specify the version:
 >
 > ```shell

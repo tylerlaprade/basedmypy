@@ -12,20 +12,9 @@ import shutil
 import sys
 import time
 from builtins import getattr as builtins_getattr
+from collections.abc import Container, Iterable, Sequence, Sized
 from importlib import resources as importlib_resources
-from typing import (
-    IO,
-    Any,
-    Callable,
-    Container,
-    Final,
-    Iterable,
-    Sequence,
-    Sized,
-    TypeVar,
-    overload,
-)
-from typing_extensions import Literal
+from typing import IO, Any, Callable, Final, Literal, TypeVar, overload
 
 orjson: Any
 try:
@@ -43,15 +32,7 @@ except ImportError:
 
 T = TypeVar("T")
 
-if sys.version_info >= (3, 9):
-    TYPESHED_DIR: Final = str(importlib_resources.files("mypy") / "typeshed")
-else:
-    with importlib_resources.path(
-        "mypy",  # mypy-c doesn't support __package__
-        "py.typed",  # a marker file for type information, we assume typeshed to live in the same dir
-    ) as _resource:
-        TYPESHED_DIR = str(_resource.parent / "typeshed")
-
+TYPESHED_DIR: Final = str(importlib_resources.files("mypy") / "typeshed")
 
 ENCODING_RE: Final = re.compile(rb"([ \t\v]*#.*(\r\n?|\n))??[ \t\v]*#.*coding[:=][ \t]*([-\w.]+)")
 
@@ -503,10 +484,10 @@ def get_unique_redefinition_name(name: str, existing: Container[str]) -> str:
 def check_python_version(program: str) -> None:
     """Report issues with the Python used to run mypy, dmypy, or stubgen"""
     # Check for known bad Python versions.
-    if sys.version_info[:2] < (3, 8):  # noqa: UP036
+    if sys.version_info[:2] < (3, 9):  # noqa: UP036, RUF100
         sys.exit(
-            "Running {name} with Python 3.7 or lower is not supported; "
-            "please upgrade to 3.8 or newer".format(name=program)
+            "Running {name} with Python 3.8 or lower is not supported; "
+            "please upgrade to 3.9 or newer".format(name=program)
         )
 
 
@@ -682,7 +663,7 @@ class FancyFormatter:
             ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x4
             STD_OUTPUT_HANDLE = -11
             kernel32.SetConsoleMode(
-                kernel32.GetStdHandle(STD_OUTPUT_HANDLE),  # type: ignore[no-any-expr, unused-ignore]
+                kernel32.GetStdHandle(STD_OUTPUT_HANDLE),  # type: ignore[any, unused-ignore]
                 ENABLE_PROCESSED_OUTPUT
                 | ENABLE_WRAP_AT_EOL_OUTPUT
                 | ENABLE_VIRTUAL_TERMINAL_PROCESSING,
@@ -700,12 +681,12 @@ class FancyFormatter:
             # We override sys.stdout for the daemon API so if stdout doesn't have an fd,
             # just give it /dev/null.
             try:
-                fd = sys.stdout.fileno()
+                fd = sys.stdout.fileno()  # type: ignore[any, unused-ignore]
             except io.UnsupportedOperation:
                 with open("/dev/null", "rb") as f:
                     curses.setupterm(fd=f.fileno())
             else:
-                curses.setupterm(fd=fd)
+                curses.setupterm(fd=fd)  # type: ignore[any, unused-ignore]
         except curses.error:
             # Most likely terminfo not found.
             term = os.environ.get("TERM")

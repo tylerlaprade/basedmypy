@@ -15,28 +15,15 @@ if sys.version_info >= (3, 11):
 else:
     import tomli as tomllib
 
-from typing import (
-    Any,
-    Callable,
-    Dict,
-    Final,
-    Iterable,
-    List,
-    Mapping,
-    MutableMapping,
-    Sequence,
-    TextIO,
-    Tuple,
-    Union,
-    cast,
-)
+from collections.abc import Iterable, Mapping, MutableMapping, Sequence
+from typing import Any, Callable, Final, TextIO, Union, cast
 from typing_extensions import TypeAlias as _TypeAlias
 
 from mypy import defaults
 from mypy.options import PER_MODULE_OPTIONS, Options
 
 _CONFIG_VALUE_TYPES: _TypeAlias = Union[
-    str, bool, int, float, Dict[str, str], List[str], Tuple[int, int]
+    str, bool, int, float, dict[str, str], list[str], tuple[int, int]
 ]
 _INI_PARSER_CALLABLE: _TypeAlias = Callable[[Any], _CONFIG_VALUE_TYPES]
 
@@ -68,7 +55,7 @@ def parse_version(v: str | float) -> tuple[int, int]:
 def try_split(v: str | Sequence[str], split_regex: str = "[,]") -> list[str]:
     """Split and trim a str or list of str into a list of str"""
     if isinstance(v, str):
-        return [p.strip() for p in cast(List[str], re.split(split_regex, v))]
+        return [p.strip() for p in cast(list[str], re.split(split_regex, v))]
 
     return [p.strip() for p in v]
 

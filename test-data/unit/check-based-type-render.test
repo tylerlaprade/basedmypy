@@ -114,8 +114,8 @@ reveal_type(a.a)  # N: Revealed type is "int"
 
 [case testNarrowedFromPartial]
 a = []  # E: Need type annotation for "a" (hint: "a: list[<type>] = ...")  [var-annotated]
-reveal_type(a)  # E: Expression type contains "Any" (has type "list[Any (unannotated)]")  [no-any-expr] \
-                # E: Expression type contains "Any" (has type "list[Any (unannotated)]")  [no-any-expr] \
+reveal_type(a)  # E: Expression type contains "Any" (has type "list[Any (unannotated)]")  [any] \
+                # E: Expression type contains "Any" (has type "list[Any (unannotated)]")  [any] \
                 # N: Revealed type is "partially defined: list[?]"
 b = None  # E: Need type annotation for "b" (hint: "b: Optional[<type>] = ...")  [var-annotated]
 reveal_type(b)  # N: Revealed type is "None" (narrowed from "partially defined: ? | None")

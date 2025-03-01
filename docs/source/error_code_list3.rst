@@ -3,30 +3,23 @@
 Error codes unique to basedmypy
 ===============================
 
-.. _code-no-any-decorated:
+.. _code-decorated-any:
 
-Check that a decorated function isn't dynamic [no-any-decorated]
-----------------------------------------------------------------
+Check that a decorated function isn't dynamic [decorated-any]
+-------------------------------------------------------------
 
 From :confval:`disallow_any_decorated`
 
-.. _code-no-any-explicit:
+.. _code-any:
 
-Ban use of ``Any`` [no-any-explicit]
-------------------------------------
-
-From :confval:`disallow_any_explicit`
-
-.. _code-no-any-expr:
-
-Ban any expression that contains ``Any`` [no-any-expr]
-------------------------------------------------------
+Ban any expression that contains ``Any`` [any]
+----------------------------------------------
 
 From :confval:`disallow_any_expr`
 
-.. _code-no-subclass-any:
+.. _code-subclass-any:
 
-Don't subclass ``Any`` [no-subclass-any]
+Don't subclass ``Any`` [subclass-any]
 ----------------------------------------
 
 From :confval:`disallow_subclassing_any`
@@ -166,3 +159,14 @@ Something is being used in a runtime position that is not actually
 accessible or available at runtime.
 
 .. _code-reveal:
+
+# deprecated
+
+.. _code-no-any-decorated:
+
+.. _code-no-any-explicit:
+
+.. _code-no-any-expr:
+
+.. _code-no-subclass-any:
+

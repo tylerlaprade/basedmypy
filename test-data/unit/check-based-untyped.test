@@ -11,9 +11,9 @@ class A:
     b: Untyped
 a1: A
 del a1.b  # E: Usage of untyped name "b" in typed context  [no-untyped-usage]
-del a1.b[1]  # E: Expression has type "Untyped"  [no-any-expr] \
-             # E: Expression has type "Untyped"  [no-any-expr]
-del a1.b.c  # E: Expression has type "Untyped"  [no-any-expr] \
+del a1.b[1]  # E: Expression has type "Untyped"  [any] \
+             # E: Expression has type "Untyped"  [any]
+del a1.b.c  # E: Expression has type "Untyped"  [any] \
             # E: Usage of untyped name "c" in typed context  [no-untyped-usage]
 a2: A
 c = a1.b  # E: Usage of untyped name "b" in typed context  [no-untyped-usage]
@@ -34,7 +34,7 @@ b = B()
 b[0] = 1  # E: Untyped indexed-assignment to "b" in typed context  [no-untyped-usage]
 b.a[0] = 1  # E: Untyped indexed-assignment to "a" in typed context  [no-untyped-usage]
 c: Untyped
-c()[1] = 1  # E: Expression has type "Untyped"  [no-any-expr]
+c()[1] = 1  # E: Expression has type "Untyped"  [any]
 [builtins fixtures/list.pyi]
 
 

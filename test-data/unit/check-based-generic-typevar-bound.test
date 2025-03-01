@@ -19,9 +19,9 @@ P = ParamSpec('P')
 T = TypeVar("T")
 
 class C(Generic[P]): ...
-CT = TypeVar("CT", bound=C[...])  # type: ignore[no-any-explicit]
+CT = TypeVar("CT", bound=C[...])  # type: ignore[explicit-any]
 
-def f(ct: CT): ...  # E: Explicit "Any" is not allowed  [no-any-explicit]
+def f(ct: CT): ...  # E: Explicit "Any" is not allowed  [explicit-any]
 [builtins fixtures/tuple.pyi]
 
 

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from functools import lru_cache
-from typing import Optional, Tuple, cast
+from typing import Optional, cast
 
 from mypy import errorcodes
 from mypy.messages import MessageBuilder
@@ -24,7 +24,7 @@ from mypy.types import (
     get_proper_type,
 )
 
-Groups = Tuple[Tuple[Optional[str], bool], ...]
+Groups = tuple[tuple[Optional[str], bool], ...]
 
 
 def match(ctx: FunctionContext | MethodContext) -> Type:

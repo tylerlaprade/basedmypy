@@ -49,5 +49,5 @@ from typing_extensions import TypeAlias
 T = TypeVar("T", int, str)
 class A(Generic[T]): ...
 
-a = A[Any]()  # E: Expression type contains "Any" (has type "A[Any]")  [no-any-expr]
+a = A[Any]()  # E: Expression type contains "Any" (has type "A[Any]")  [any]
 [builtins fixtures/tuple.pyi]

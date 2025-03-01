@@ -5,20 +5,9 @@ import re
 import sys
 import traceback
 from collections import defaultdict
+from collections.abc import Iterable
 from copy import deepcopy
-from typing import (
-    Callable,
-    Dict,
-    Final,
-    Iterable,
-    List,
-    NoReturn,
-    Optional,
-    TextIO,
-    Tuple,
-    TypeVar,
-    cast,
-)
+from typing import Callable, Final, NoReturn, Optional, TextIO, TypeVar, cast
 from typing_extensions import Literal, TypeAlias as _TypeAlias, TypedDict
 
 from mypy import errorcodes as codes
@@ -73,6 +62,10 @@ original_error_codes: Final = {
     codes.NO_ANY_EXPLICIT: codes.MISC,
     codes.NO_SUBCLASS_ANY: codes.MISC,
     codes.NO_ANY_DECORATED: codes.MISC,
+    codes.ANY_EXPR: codes.NO_ANY_EXPR,
+    codes.EXPLICIT_ANY: codes.NO_ANY_EXPLICIT,
+    codes.SUBCLASS_ANY: codes.SUBCLASS_ANY,
+    codes.DECORATED_ANY: codes.NO_ANY_DECORATED,
 }
 
 
@@ -187,7 +180,7 @@ class ErrorInfo:
 
 # Type used internally to represent errors:
 #   (path, line, column, end_line, end_column, severity, message, allow_dups, code, target, src)
-ErrorTuple: _TypeAlias = Tuple[
+ErrorTuple: _TypeAlias = tuple[
     Optional[str], int, int, int, int, str, str, bool, Optional[ErrorCode], Optional[str], str
 ]
 
@@ -324,7 +317,7 @@ class Errors:
     show_column_numbers: bool = False
 
     # Set to True to show end line and end column in error messages.
-    # Ths implies `show_column_numbers`.
+    # This implies `show_column_numbers`.
     show_error_end: bool = False
 
     # Set to True to show absolute file paths in error messages.
@@ -636,7 +629,7 @@ class Errors:
                 old_code = original_error_codes[info.code].code
                 if old_code in ignored_codes:
                     msg = (
-                        f'Error code changed to {info.code.code}; "type: ignore" comment '
+                        f"Error code changed to '{info.code.code}'; \"type: ignore\" comment "
                         + "may be out of date"
                     )
             note = ErrorInfo(
@@ -1405,7 +1398,7 @@ class Errors:
                     previous = error["line"] = error["offset"] + previous  # type: ignore[typeddict-unknown-key]
                 except KeyError as err:
                     raise TypeError("baseline") from err
-        baseline_errors = cast(Dict[str, List[BaselineError]], errors)  # type: ignore[bad-cast]
+        baseline_errors = cast(dict[str, list[BaselineError]], errors)  # type: ignore[bad-cast]
         self.baseline = baseline_errors
         self.baseline_targets = targets
 
@@ -1444,7 +1437,7 @@ class Errors:
                         "target": error.target,
                         "src": self.read_source
                         and error.file == file
-                        and cast(List[str], self.read_source(file))[error.line - 1].strip(),
+                        and cast(list[str], self.read_source(file))[error.line - 1].strip(),
                     }
                     for error in remove_duplicates(errors)
                     # don't store reveal errors
@@ -1461,7 +1454,7 @@ class Errors:
                 previous = cast(int, error["line"])
                 del error["line"]
         final_result: dict[str, list[StoredBaselineError]] = cast(
-            Dict[str, List[StoredBaselineError]], result
+            dict[str, list[StoredBaselineError]], result
         )
         for file_name, errors in self.all_errors.items():
             if errors == "fresh":
@@ -1702,7 +1695,7 @@ class MypyError:
 
 
 # (file_path, line, column)
-_ErrorLocation = Tuple[str, int, int]
+_ErrorLocation = tuple[str, int, int]
 
 
 def create_errors(error_tuples: list[ErrorTuple]) -> list[MypyError]:

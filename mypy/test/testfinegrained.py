@@ -18,7 +18,7 @@ import os
 import re
 import sys
 import unittest
-from typing import Any, Dict, List, Tuple, cast
+from typing import Any, cast
 
 import pytest
 
@@ -311,7 +311,7 @@ class FineGrainedSuite(DataSuite):
             m = re.match("--max-guesses=([0-9]+)", flags)
             max_guesses = int(m.group(1)) if m else None
             res = cast(
-                Dict[str, Any],
+                dict[str, Any],
                 server.cmd_suggest(
                     target.strip(),
                     json=json,
@@ -353,7 +353,7 @@ class FineGrainedSuite(DataSuite):
             union_attrs = "--union-attrs" in flags
             force_reload = "--force-reload" in flags
             res = cast(
-                Dict[str, Any],
+                dict[str, Any],
                 server.cmd_inspect(
                     show,
                     location,
@@ -374,13 +374,13 @@ class FineGrainedSuite(DataSuite):
         step_bit = "1?" if incremental_step == 1 else str(incremental_step)
         regex = f"# suggest{step_bit}: (--[a-zA-Z0-9_\\-./=?^ ]+ )*([a-zA-Z0-9_.:/?^ ]+)$"
         m = re.findall(regex, program_text, flags=re.MULTILINE)
-        return cast(List[Tuple[str, str]], m)
+        return cast(list[tuple[str, str]], m)
 
     def get_inspect(self, program_text: str, incremental_step: int) -> list[tuple[str, str]]:
         step_bit = "1?" if incremental_step == 1 else str(incremental_step)
         regex = f"# inspect{step_bit}: (--[a-zA-Z0-9_\\-=?^ ]+ )*([a-zA-Z0-9_.:/?^ ]+)$"
         m = re.findall(regex, program_text, flags=re.MULTILINE)
-        return cast(List[Tuple[str, str]], m)
+        return cast(list[tuple[str, str]], m)
 
 
 def normalize_messages(messages: list[str]) -> list[str]:

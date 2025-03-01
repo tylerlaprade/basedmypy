@@ -15,7 +15,8 @@ import sys
 import time
 import traceback
 from argparse import RawTextHelpFormatter
-from typing import Any, Callable, Mapping, NoReturn
+from collections.abc import Mapping
+from typing import Any, Callable, NoReturn
 
 from mypy.dmypy_os import alive, kill
 from mypy.dmypy_util import DEFAULT_STATUS_FILE, receive, send
@@ -445,7 +446,7 @@ def do_status(args: argparse.Namespace) -> None:
     if args.verbose or "error" in response:
         show_stats(response)
     if "error" in response:
-        fail(f"Daemon is stuck; consider {sys.argv[0]} kill")
+        fail(f"Daemon may be busy processing; if this persists, consider {sys.argv[0]} kill")
     print("Daemon is up and running")
 
 
@@ -456,7 +457,7 @@ def do_stop(args: argparse.Namespace) -> None:
     response = request(args.status_file, "stop", timeout=5)
     if "error" in response:
         show_stats(response)
-        fail(f"Daemon is stuck; consider {sys.argv[0]} kill")
+        fail(f"Daemon may be busy processing; if this persists, consider {sys.argv[0]} kill")
     else:
         print("Daemon stopped")
 

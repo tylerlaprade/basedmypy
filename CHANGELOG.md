@@ -1,6 +1,8 @@
 # Basedmypy Changelog
 
 ## [Unreleased]
+### Changes
+- codes for `Any` related errors haves been adjusted
 
 ## [2.9.1]
 ### Fixed

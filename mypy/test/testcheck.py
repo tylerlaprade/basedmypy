@@ -39,8 +39,6 @@ typecheck_files = find_test_files(pattern="check-*.test", exclude=based_files)
 
 
 # Tests that use Python version specific features:
-if sys.version_info < (3, 9):
-    typecheck_files.remove("check-python39.test")
 if sys.version_info < (3, 10):
     typecheck_files.remove("check-python310.test")
 if sys.version_info < (3, 11):

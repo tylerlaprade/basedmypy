@@ -283,6 +283,10 @@ NO_SUBCLASS_ANY: Final = ErrorCode("no-subclass-any", "Usage of Any as a class b
 NO_ANY_DECORATED: Final = ErrorCode(
     "no-any-decorated", "Decorated function contains Any", "General"
 )
+
+ANY_EXPR: Final = ErrorCode("any", "An expression contains Any", "General")
+SUBCLASS_ANY: Final = ErrorCode("subclass-any", "Usage of Any as a class base", "General")
+DECORATED_ANY: Final = ErrorCode("decorated-any", "Decorated function contains Any", "General")
 TYPEGUARD_SUBTYPE: Final = ErrorCode(
     "typeguard-subtype",
     "A typeguard's type must be assignable to its parameter's type",
@@ -354,6 +358,10 @@ NARROWED_TYPE_NOT_SUBTYPE: Final[ErrorCode] = ErrorCode(
     "narrowed-type-not-subtype",
     "Warn if a TypeIs function's narrowed type is not a subtype of the original type",
     "General",
+)
+
+EXPLICIT_ANY: Final = ErrorCode(
+    "explicit-any", "Warn about explicit Any type annotations", "General"
 )
 
 DEPRECATED: Final = ErrorCode(

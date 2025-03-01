@@ -1,16 +1,13 @@
 """A "low-level" IR builder class.
 
-LowLevelIRBuilder provides core abstractions we use for constructing
-IR as well as a number of higher-level ones (accessing attributes,
-calling functions and methods, and coercing between types, for
-example). The core principle of the low-level IR builder is that all
-of its facilities operate solely on the IR level and not the AST
-level---it has *no knowledge* of mypy types or expressions.
+See the docstring of class LowLevelIRBuilder for more information.
+
 """
 
 from __future__ import annotations
 
-from typing import Callable, Final, Optional, Sequence, Tuple
+from collections.abc import Sequence
+from typing import Callable, Final, Optional
 
 from mypy.argmap import map_actuals_to_formals
 from mypy.nodes import ARG_POS, ARG_STAR, ARG_STAR2, ArgKind
@@ -184,7 +181,7 @@ from mypyc.rt_subtype import is_runtime_subtype
 from mypyc.sametype import is_same_type
 from mypyc.subtype import is_subtype
 
-DictEntry = Tuple[Optional[Value], Value]
+DictEntry = tuple[Optional[Value], Value]
 
 # If the number of items is less than the threshold when initializing
 # a list, we would inline the generate IR using SetMem and expanded
@@ -224,6 +221,22 @@ BOOL_BINARY_OPS: Final = {"&", "&=", "|", "|=", "^", "^=", "==", "!=", "<", "<="
 
 
 class LowLevelIRBuilder:
+    """A "low-level" IR builder class.
+
+    LowLevelIRBuilder provides core abstractions we use for constructing
+    IR as well as a number of higher-level ones (accessing attributes,
+    calling functions and methods, and coercing between types, for
+    example).
+
+    The core principle of the low-level IR builder is that all of its
+    facilities operate solely on the mypyc IR level and not the mypy AST
+    level---it has *no knowledge* of mypy types or expressions.
+
+    The mypyc.irbuilder.builder.IRBuilder class wraps an instance of this
+    class and provides additional functionality to transform mypy AST nodes
+    to IR.
+    """
+
     def __init__(self, errors: Errors | None, options: CompilerOptions) -> None:
         self.errors = errors
         self.options = options
@@ -427,7 +440,7 @@ class LowLevelIRBuilder:
 
         size = target_type.size
         if size < int_rprimitive.size:
-            # Add a range check when the target type is smaller than the source tyoe
+            # Add a range check when the target type is smaller than the source type
             fast2, fast3 = BasicBlock(), BasicBlock()
             upper_bound = 1 << (size * 8 - 1)
             if not target_type.is_signed:
@@ -497,10 +510,12 @@ class LowLevelIRBuilder:
         return res
 
     def coerce_short_int_to_fixed_width(self, src: Value, target_type: RType, line: int) -> Value:
-        if is_int64_rprimitive(target_type):
+        if is_int64_rprimitive(target_type) or (
+            PLATFORM_SIZE == 4 and is_int32_rprimitive(target_type)
+        ):
             return self.int_op(target_type, src, Integer(1, target_type), IntOp.RIGHT_SHIFT, line)
-        # TODO: i32
-        assert False, (src.type, target_type)
+        # TODO: i32 on 64-bit platform
+        assert False, (src.type, target_type, PLATFORM_SIZE)
 
     def coerce_fixed_width_to_int(self, src: Value, line: int) -> Value:
         if (

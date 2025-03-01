@@ -1,5 +1,6 @@
 # ruff: noqa: PYI036 # This is the module declaring BaseException
 import _ast
+import _sitebuiltins
 import _typeshed
 import sys
 import types
@@ -47,7 +48,6 @@ from typing import (  # noqa: Y022
     Mapping,
     MutableMapping,
     MutableSequence,
-    NoReturn,
     Protocol,
     Sequence,
     SupportsAbs,
@@ -1133,7 +1133,7 @@ class frozenset(AbstractSet[_T_co]):
     if sys.version_info >= (3, 9):
         def __class_getitem__(cls, item: Any, /) -> GenericAlias: ...
 
-class enumerate(Generic[_T]):
+class enumerate(Iterator[tuple[int, _T]]):
     def __new__(cls, iterable: Iterable[_T], start: int = 0) -> Self: ...
     def __iter__(self) -> Self: ...
     def __next__(self) -> tuple[int, _T]: ...
@@ -1284,11 +1284,10 @@ def compile(
     *,
     _feature_version: int = -1,
 ) -> Any: ...
-@_as_builtin
-def copyright() -> None: ...
-@_as_builtin
-def credits() -> None: ...
-@_as_builtin
+
+copyright: _sitebuiltins._Printer
+credits: _sitebuiltins._Printer
+
 def delattr(obj: object, name: str, /) -> None: ...
 @_as_builtin
 def dir(o: object = ..., /) -> list[str]: ...
@@ -1351,10 +1350,9 @@ else:
         /,
     ) -> None: ...
 
-@_as_builtin
-def exit(code: sys._ExitCode = None) -> NoReturn: ...
+exit: _sitebuiltins.Quitter
 
-class filter(Generic[_T]):
+class filter(Iterator[_T]):
     @overload
     def __new__(cls, function: None, iterable: Iterable[_T | None], /) -> Self: ...
     @overload
@@ -1376,9 +1374,9 @@ def globals() -> dict[str, object]: ...
 def hasattr(obj: object, name: str, /) -> bool: ...
 @_as_builtin
 def hash(obj: object, /) -> int: ...
-@_as_builtin
-def help(request: object = ...) -> None: ...
-@_as_builtin
+
+help: _sitebuiltins._Helper
+
 def hex(number: int | SupportsIndex, /) -> str: ...
 @_as_builtin
 def id(obj: object, /) -> int: ...
@@ -1413,25 +1411,26 @@ def isinstance(obj: object, class_or_tuple: _ClassInfo, /) -> bool: ...
 def issubclass(cls: type, class_or_tuple: _ClassInfo, /) -> bool: ...
 @_as_builtin
 def len(obj: Sized, /) -> int: ...
-@_as_builtin
-def license() -> None: ...
+
+license: _sitebuiltins._Printer
+
 @_as_builtin
 def locals() -> dict[str, object]: ...
 
-class map(Generic[_S]):
+class map(Iterator[_S]):
     @overload
-    def __new__(cls, func: Callable[[_T1], _S], iter1: Iterable[_T1], /) -> Self: ...
+    def __new__(cls, func: Callable[[_T1], _S], iterable: Iterable[_T1], /) -> Self: ...
     @overload
-    def __new__(cls, func: Callable[[_T1, _T2], _S], iter1: Iterable[_T1], iter2: Iterable[_T2], /) -> Self: ...
+    def __new__(cls, func: Callable[[_T1, _T2], _S], iterable: Iterable[_T1], iter2: Iterable[_T2], /) -> Self: ...
     @overload
     def __new__(
-        cls, func: Callable[[_T1, _T2, _T3], _S], iter1: Iterable[_T1], iter2: Iterable[_T2], iter3: Iterable[_T3], /
+        cls, func: Callable[[_T1, _T2, _T3], _S], iterable: Iterable[_T1], iter2: Iterable[_T2], iter3: Iterable[_T3], /
     ) -> Self: ...
     @overload
     def __new__(
         cls,
         func: Callable[[_T1, _T2, _T3, _T4], _S],
-        iter1: Iterable[_T1],
+        iterable: Iterable[_T1],
         iter2: Iterable[_T2],
         iter3: Iterable[_T3],
         iter4: Iterable[_T4],
@@ -1441,7 +1440,7 @@ class map(Generic[_S]):
     def __new__(
         cls,
         func: Callable[[_T1, _T2, _T3, _T4, _T5], _S],
-        iter1: Iterable[_T1],
+        iterable: Iterable[_T1],
         iter2: Iterable[_T2],
         iter3: Iterable[_T3],
         iter4: Iterable[_T4],
@@ -1452,7 +1451,7 @@ class map(Generic[_S]):
     def __new__(
         cls,
         func: Callable[..., _S],
-        iter1: Iterable[Any],
+        iterable: Iterable[Any],
         iter2: Iterable[Any],
         iter3: Iterable[Any],
         iter4: Iterable[Any],
@@ -1692,9 +1691,10 @@ def pow(base: _SupportsSomeKindOfPow, exp: float, mod: None = None) -> Any: ...
 @_as_builtin
 @overload
 def pow(base: _SupportsSomeKindOfPow, exp: complex, mod: None = None) -> complex: ...
-def quit(code: sys._ExitCode = None) -> NoReturn: ...
 
-class reversed(Generic[_T]):
+quit: _sitebuiltins.Quitter
+
+class reversed(Iterator[_T]):
     @overload
     def __new__(cls, sequence: Reversible[_T], /) -> Iterator[_T]: ...  # type: ignore[misc]
     @overload
@@ -1767,7 +1767,7 @@ def vars(object: type, /) -> types.MappingProxyType[str, Any]: ...
 @overload
 def vars(object: Any = ..., /) -> dict[str, Any]: ...
 
-class zip(Generic[_T_co]):
+class zip(Iterator[_T_co]):
     if sys.version_info >= (3, 10):
         @overload
         def __new__(cls, *, strict: bool = ...) -> zip[Any]: ...
@@ -1932,9 +1932,7 @@ class NameError(Exception):
 
 class ReferenceError(Exception): ...
 class RuntimeError(Exception): ...
-
-class StopAsyncIteration(Exception):
-    value: Any
+class StopAsyncIteration(Exception): ...
 
 class SyntaxError(Exception):
     msg: str

@@ -8,9 +8,9 @@ def f(fn: Callable[[], None]) -> int: ...
 def f(fn: object = 1) -> object: ...
 
 def n(x: object) -> None: ...
-a: Any  # type: ignore[no-any-explicit]
+a: Any  # type: ignore[explicit-any]
 x = f(lambda:
-      n(a))  # E: Expression has type "Any"  [no-any-expr]
+      n(a))  # E: Expression has type "Any"  [any]
 reveal_type(x)  # N: Revealed type is "int"
 
 
@@ -29,10 +29,10 @@ def f(fn: object=1) -> None: ...
 f(lambda x: reveal_type(x))  # N: Revealed type is "int"
 
 # do reveal real Any
-a: Any  # type: ignore[no-any-explicit]
+a: Any  # type: ignore[explicit-any]
 def noop(x: object) -> None: ...
-f(lambda x: noop(a))  # E: Expression has type "Any"  [no-any-expr]
-f(a)  # E: Expression has type "Any"  [no-any-expr]
+f(lambda x: noop(a))  # E: Expression has type "Any"  [any]
+f(a)  # E: Expression has type "Any"  [any]
 
 # don't reveal narrowed type
 o: object
