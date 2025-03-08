@@ -4756,7 +4756,7 @@ class TypeChecker(NodeVisitor[None], CheckerPluginInterface):
             if (
                 isinstance(get_proper_type(lvalue_type), UnionType)
                 # Skip literal types, as they have special logic (for better errors).
-                and not isinstance(get_proper_type(rvalue_type), LiteralType)
+                and not is_literal_type_like(rvalue_type)
                 and not self.simple_rvalue(rvalue)
             ):
                 # Try re-inferring r.h.s. in empty context, and use that if it
@@ -8959,6 +8959,11 @@ class InvalidInferredTypes(BoolTypeQuery):
         # This is needed to prevent leaking into partial types during
         # multi-step type inference.
         return t.id.is_meta_var()
+
+    def visit_tuple_type(self, t: TupleType, /) -> bool:
+        # Exclude fallback to avoid bogus "need type annotation" errors
+        # TODO: Maybe erase plain tuples used as fallback in TupleType constructor?
+        return self.query_types(t.items)
 
 
 class SetNothingToAny(TypeTranslator):

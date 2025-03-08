@@ -2031,9 +2031,17 @@
       },
       {
         "code": "any",
+        "column": 49,
+        "message": "Expression type contains \"Any\" (has type \"(Instance, Instance)\")",
+        "offset": 1309,
+        "src": "base_classes = _get_base_classes(instances[::-1])",
+        "target": "mypy.checker.TypeChecker.intersect_instances"
+      },
+      {
+        "code": "any",
         "column": 27,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 1828,
+        "offset": 519,
         "src": "if called_type.items[0].def_extras.get(\"first_arg\"):",
         "target": "mypy.checker.TypeChecker.find_isinstance_check_helper"
       },
@@ -2065,7 +2073,7 @@
         "code": "redundant-expr",
         "column": 9,
         "message": "Condition is always true",
-        "offset": 418,
+        "offset": 423,
         "src": "elif isinstance(func, FuncBase):",
         "target": "mypy.checker.is_static"
       }
@@ -2352,161 +2360,241 @@
         "target": ""
       },
       {
-        "code": "any",
-        "column": 32,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 59,
-        "src": "toml_data = tomllib.load(f)",
-        "target": "mypy.config_parser.parse_config_file"
+        "code": "explicit-any",
+        "column": 0,
+        "message": "Explicit \"Any\" is not allowed",
+        "offset": 29,
+        "src": "def _parse_individual_file(",
+        "target": "mypy.config_parser._parse_individual_file"
+      },
+      {
+        "code": "explicit-any",
+        "column": 4,
+        "message": "Explicit \"Any\" is not allowed",
+        "offset": 7,
+        "src": "parser: MutableMapping[str, Any]",
+        "target": "mypy.config_parser._parse_individual_file"
       },
       {
         "code": "any",
         "column": 28,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 2,
-        "src": "toml_data = toml_data.get(\"tool\", {})",
-        "target": "mypy.config_parser.parse_config_file"
+        "offset": 4,
+        "src": "toml_data = tomllib.load(f)",
+        "target": "mypy.config_parser._parse_individual_file"
       },
       {
         "code": "any",
-        "column": 50,
+        "column": 24,
+        "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
+        "offset": 2,
+        "src": "toml_data = toml_data.get(\"tool\", {})",
+        "target": "mypy.config_parser._parse_individual_file"
+      },
+      {
+        "code": "any",
+        "column": 46,
         "message": "Expression type contains \"Any\" (has type \"dict[Any, Any]\")",
         "offset": 0,
         "src": "toml_data = toml_data.get(\"tool\", {})",
-        "target": "mypy.config_parser.parse_config_file"
+        "target": "mypy.config_parser._parse_individual_file"
+      },
+      {
+        "code": "any",
+        "column": 29,
+        "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
+        "offset": 1,
+        "src": "if \"mypy\" not in toml_data:",
+        "target": "mypy.config_parser._parse_individual_file"
+      },
+      {
+        "code": "any",
+        "column": 25,
+        "message": "Expression type contains \"Any\" (has type \"(str, Any)\")",
+        "offset": 2,
+        "src": "toml_data = {\"mypy\": toml_data[\"mypy\"]}",
+        "target": "mypy.config_parser._parse_individual_file"
       },
       {
         "code": "any",
         "column": 33,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 1,
-        "src": "if \"mypy\" not in toml_data:",
-        "target": "mypy.config_parser.parse_config_file"
-      },
-      {
-        "code": "any",
-        "column": 29,
-        "message": "Expression type contains \"Any\" (has type \"(str, Any)\")",
-        "offset": 2,
-        "src": "toml_data = {\"mypy\": toml_data[\"mypy\"]}",
-        "target": "mypy.config_parser.parse_config_file"
-      },
-      {
-        "code": "any",
-        "column": 37,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
         "offset": 0,
         "src": "toml_data = {\"mypy\": toml_data[\"mypy\"]}",
-        "target": "mypy.config_parser.parse_config_file"
+        "target": "mypy.config_parser._parse_individual_file"
       },
       {
         "code": "any",
-        "column": 37,
+        "column": 33,
         "message": "Expression has type \"Any\"",
         "offset": 0,
         "src": "toml_data = {\"mypy\": toml_data[\"mypy\"]}",
-        "target": "mypy.config_parser.parse_config_file"
+        "target": "mypy.config_parser._parse_individual_file"
+      },
+      {
+        "code": "any",
+        "column": 43,
+        "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
+        "offset": 1,
+        "src": "parser = destructure_overrides(toml_data)",
+        "target": "mypy.config_parser._parse_individual_file"
+      },
+      {
+        "code": "any",
+        "column": 87,
+        "message": "Expression type contains \"Any\" (has type \"dict[str, Any] | RawConfigParser\")",
+        "offset": 11,
+        "src": "if os.path.basename(config_file) in defaults.SHARED_CONFIG_NAMES and \"mypy\" not in parser:",
+        "target": "mypy.config_parser._parse_individual_file"
+      },
+      {
+        "code": "any",
+        "column": 11,
+        "message": "Expression type contains \"Any\" (has type \"dict[str, Any] | RawConfigParser\")",
+        "offset": 3,
+        "src": "return parser, config_types, config_file",
+        "target": "mypy.config_parser._parse_individual_file"
+      },
+      {
+        "code": "any",
+        "column": 11,
+        "message": "Expression type contains \"Any\" (has type \"(dict[str, Any] | RawConfigParser, dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str)\")",
+        "offset": 0,
+        "src": "return parser, config_types, config_file",
+        "target": "mypy.config_parser._parse_individual_file"
       },
       {
         "code": "explicit-any",
-        "column": 16,
+        "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 1,
-        "src": "parser: MutableMapping[str, Any] = destructure_overrides(toml_data)",
-        "target": "mypy.config_parser.parse_config_file"
-      },
-      {
-        "code": "any",
-        "column": 73,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 0,
-        "src": "parser: MutableMapping[str, Any] = destructure_overrides(toml_data)",
-        "target": "mypy.config_parser.parse_config_file"
-      },
-      {
-        "code": "any",
-        "column": 77,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, Any] | RawConfigParser\")",
-        "offset": 9,
-        "src": "if config_file in defaults.SHARED_CONFIG_FILES and \"mypy\" not in parser:",
-        "target": "mypy.config_parser.parse_config_file"
-      },
-      {
-        "code": "any",
-        "column": 21,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, Any] | RawConfigParser\")",
-        "offset": 10,
-        "src": "if \"mypy\" not in parser:",
-        "target": "mypy.config_parser.parse_config_file"
-      },
-      {
-        "code": "possibly-undefined",
-        "column": 21,
-        "message": "Name \"parser\" may be undefined",
-        "offset": 0,
-        "src": "if \"mypy\" not in parser:",
-        "target": "mypy.config_parser"
-      },
-      {
-        "code": "possibly-undefined",
-        "column": 23,
-        "message": "Name \"file_read\" may be undefined",
-        "offset": 1,
-        "src": "if filename or file_read not in defaults.SHARED_CONFIG_FILES:",
-        "target": "mypy.config_parser"
-      },
-      {
-        "code": "any",
-        "column": 18,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, Any] | RawConfigParser\")",
         "offset": 3,
+        "src": "def _find_config_file(",
+        "target": "mypy.config_parser._find_config_file"
+      },
+      {
+        "code": "any",
+        "column": 18,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 9,
+        "src": "ret = _parse_individual_file(config_file, stderr)",
+        "target": "mypy.config_parser._find_config_file"
+      },
+      {
+        "code": "any",
+        "column": 15,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 1,
+        "src": "if ret is None:",
+        "target": "mypy.config_parser._find_config_file"
+      },
+      {
+        "code": "any",
+        "column": 19,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str)\")",
+        "offset": 2,
+        "src": "return ret",
+        "target": "mypy.config_parser._find_config_file"
+      },
+      {
+        "code": "any",
+        "column": 11,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 13,
+        "src": "if ret is None:",
+        "target": "mypy.config_parser._find_config_file"
+      },
+      {
+        "code": "any",
+        "column": 15,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str)\")",
+        "offset": 2,
+        "src": "return ret",
+        "target": "mypy.config_parser._find_config_file"
+      },
+      {
+        "code": "any",
+        "column": 8,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 22,
+        "src": "_parse_individual_file(filename, stderr)",
+        "target": "mypy.config_parser.parse_config_file"
+      },
+      {
+        "code": "any",
+        "column": 13,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 2,
+        "src": "else _find_config_file(stderr)",
+        "target": "mypy.config_parser.parse_config_file"
+      },
+      {
+        "code": "any",
+        "column": 7,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 2,
+        "src": "if ret is None:",
+        "target": "mypy.config_parser.parse_config_file"
+      },
+      {
+        "code": "any",
+        "column": 38,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str)\")",
+        "offset": 2,
+        "src": "parser, config_types, file_read = ret",
+        "target": "mypy.config_parser.parse_config_file"
+      },
+      {
+        "code": "any",
+        "column": 38,
+        "message": "Expression type contains \"Any\" (has type \"MutableMapping[str, Any]\")",
+        "offset": 0,
+        "src": "parser, config_types, file_read = ret",
+        "target": "mypy.config_parser.parse_config_file"
+      },
+      {
+        "code": "any",
+        "column": 21,
+        "message": "Expression type contains \"Any\" (has type \"MutableMapping[str, Any]\")",
+        "offset": 5,
+        "src": "if \"mypy\" not in parser:",
+        "target": "mypy.config_parser.parse_config_file"
+      },
+      {
+        "code": "any",
+        "column": 18,
+        "message": "Expression type contains \"Any\" (has type \"MutableMapping[str, Any]\")",
+        "offset": 4,
         "src": "section = parser[\"mypy\"]",
         "target": "mypy.config_parser.parse_config_file"
       },
       {
         "code": "any",
         "column": 18,
-        "message": "Expression type contains \"Any\" (has type \"Any | SectionProxy\")",
+        "message": "Expression has type \"Any\"",
         "offset": 0,
         "src": "section = parser[\"mypy\"]",
         "target": "mypy.config_parser.parse_config_file"
-      },
-      {
-        "code": "possibly-undefined",
-        "column": 19,
-        "message": "Name \"file_read\" may be undefined",
-        "offset": 1,
-        "src": "prefix = f\"{file_read}: [mypy]: \"",
-        "target": "mypy.config_parser"
       },
       {
         "code": "any",
         "column": 47,
-        "message": "Expression type contains \"Any\" (has type \"Any | SectionProxy\")",
-        "offset": 2,
+        "message": "Expression has type \"Any\"",
+        "offset": 3,
         "src": "prefix, options, set_strict_flags, section, config_types, stderr",
         "target": "mypy.config_parser.parse_config_file"
       },
       {
-        "code": "possibly-undefined",
-        "column": 56,
-        "message": "Name \"config_types\" may be undefined",
-        "offset": 0,
-        "src": "prefix, options, set_strict_flags, section, config_types, stderr",
-        "target": "mypy.config_parser"
-      },
-      {
         "code": "any",
         "column": 4,
-        "message": "Expression type contains \"Any\" (has type \"(str, Any) | (str, SectionProxy)\")",
+        "message": "Expression type contains \"Any\" (has type \"(str, Any)\")",
         "offset": 6,
         "src": "for name, section in parser.items():",
         "target": "mypy.config_parser.parse_config_file"
       },
       {
         "code": "any",
-        "column": 25,
-        "message": "Expression type contains \"Any\" (has type \"dict[str, Any] | RawConfigParser\")",
+        "column": 4,
+        "message": "Expression has type \"Any\"",
         "offset": 0,
         "src": "for name, section in parser.items():",
         "target": "mypy.config_parser.parse_config_file"
@@ -2514,7 +2602,15 @@
       {
         "code": "any",
         "column": 25,
-        "message": "Expression type contains \"Any\" (has type \"dict_items[str, Any] | ItemsView[str, SectionProxy]\")",
+        "message": "Expression type contains \"Any\" (has type \"MutableMapping[str, Any]\")",
+        "offset": 0,
+        "src": "for name, section in parser.items():",
+        "target": "mypy.config_parser.parse_config_file"
+      },
+      {
+        "code": "any",
+        "column": 25,
+        "message": "Expression type contains \"Any\" (has type \"ItemsView[str, Any]\")",
         "offset": 0,
         "src": "for name, section in parser.items():",
         "target": "mypy.config_parser.parse_config_file"
@@ -2522,18 +2618,10 @@
       {
         "code": "any",
         "column": 51,
-        "message": "Expression type contains \"Any\" (has type \"Any | SectionProxy\")",
+        "message": "Expression has type \"Any\"",
         "offset": 4,
         "src": "prefix, options, set_strict_flags, section, config_types, stderr",
         "target": "mypy.config_parser.parse_config_file"
-      },
-      {
-        "code": "possibly-undefined",
-        "column": 60,
-        "message": "Name \"config_types\" may be undefined",
-        "offset": 0,
-        "src": "prefix, options, set_strict_flags, section, config_types, stderr",
-        "target": "mypy.config_parser"
       },
       {
         "code": "explicit-any",
@@ -5356,7 +5444,7 @@
       {
         "code": "any",
         "column": 8,
-        "message": "Expression type contains \"Any\" (has type \"(int, (Any | arg, expr))\")",
+        "message": "Expression type contains \"Any\" (has type \"(int, (arg | Any, expr))\")",
         "offset": 3,
         "src": "for i, (a, d) in enumerate(zip(args_args[num_no_defaults:], args_defaults)):",
         "target": "mypy.fastparse.ASTConverter.transform_args"
@@ -5364,7 +5452,7 @@
       {
         "code": "any",
         "column": 8,
-        "message": "Expression type contains \"Any\" (has type \"(Any | arg, expr)\")",
+        "message": "Expression type contains \"Any\" (has type \"(arg | Any, expr)\")",
         "offset": 0,
         "src": "for i, (a, d) in enumerate(zip(args_args[num_no_defaults:], args_defaults)):",
         "target": "mypy.fastparse.ASTConverter.transform_args"
@@ -5372,7 +5460,7 @@
       {
         "code": "any",
         "column": 25,
-        "message": "Expression type contains \"Any\" (has type \"enumerate[(Any | arg, expr)]\")",
+        "message": "Expression type contains \"Any\" (has type \"enumerate[(arg | Any, expr)]\")",
         "offset": 0,
         "src": "for i, (a, d) in enumerate(zip(args_args[num_no_defaults:], args_defaults)):",
         "target": "mypy.fastparse.ASTConverter.transform_args"
@@ -5380,7 +5468,7 @@
       {
         "code": "any",
         "column": 35,
-        "message": "Expression type contains \"Any\" (has type \"zip[(Any | arg, expr)]\")",
+        "message": "Expression type contains \"Any\" (has type \"zip[(arg | Any, expr)]\")",
         "offset": 0,
         "src": "for i, (a, d) in enumerate(zip(args_args[num_no_defaults:], args_defaults)):",
         "target": "mypy.fastparse.ASTConverter.transform_args"
@@ -7653,9 +7741,17 @@
       },
       {
         "code": "any",
+        "column": 7,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 78,
+        "src": "if sys.version_info[:2] == python_version:",
+        "target": "mypy.main._python_executable_from_version"
+      },
+      {
+        "code": "any",
         "column": 24,
         "message": "Expression has type \"Any\"",
-        "offset": 110,
+        "offset": 32,
         "src": "python_executable = special_opts.python_executable or options.python_executable",
         "target": "mypy.main.infer_python_executable"
       },
@@ -10079,9 +10175,17 @@
       },
       {
         "code": "any",
+        "column": 22,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 69,
+        "src": "if match_args and ctx.api.options.python_version[:2] >= (3, 10):",
+        "target": "mypy.plugins.attrs.attr_class_maker_callback_impl"
+      },
+      {
+        "code": "any",
         "column": 37,
         "message": "Expression type contains \"Any\" (has type \"dict[str, Any]\")",
-        "offset": 75,
+        "offset": 6,
         "src": "ctx.cls.info.metadata[\"attrs\"] = {",
         "target": "mypy.plugins.attrs.attr_class_maker_callback_impl"
       },
@@ -11198,10 +11302,18 @@
         "target": "mypy.semanal.SemanticAnalyzer.setup_alias_type_vars"
       },
       {
+        "code": "any",
+        "column": 42,
+        "message": "Expression type contains \"Any\" (has type \"(str, str, str, str, str)\")",
+        "offset": 492,
+        "src": "and base_expr.fullname in TYPED_NAMEDTUPLE_NAMES + TPDICT_NAMES",
+        "target": "mypy.semanal.SemanticAnalyzer.analyze_base_classes"
+      },
+      {
         "code": "redundant-expr",
         "column": 19,
         "message": "Condition is always false",
-        "offset": 1110,
+        "offset": 618,
         "src": "if node is None:",
         "target": "mypy.semanal.SemanticAnalyzer.visit_import_all"
       },
@@ -11241,7 +11353,7 @@
         "code": "helpful-string",
         "column": 71,
         "message": "The string for \"None\" isn't helpful in a user-facing or semantic string",
-        "offset": 963,
+        "offset": 962,
         "src": "f'{message_registry.TYPEVAR_UNEXPECTED_ARGUMENT}: \"{param_name}\"', context",
         "target": "mypy.semanal.SemanticAnalyzer.process_typevar_parameters"
       },
@@ -11992,14 +12104,6 @@
         "offset": 0,
         "src": "return (self._standard_namespace, self._alt_namespace)",
         "target": "mypy.split_namespace.SplitNamespace._get"
-      },
-      {
-        "code": "any",
-        "column": 16,
-        "message": "See https://kotlinisland.github.io/basedmypy/_refs.html#code-any for more info",
-        "offset": 0,
-        "src": "return (self._standard_namespace, self._alt_namespace)",
-        "target": null
       },
       {
         "code": "any",
@@ -13235,9 +13339,17 @@
       },
       {
         "code": "any",
+        "column": 35,
+        "message": "Expression type contains \"Any\" (has type \"(str, str, str, str)\")",
+        "offset": 1143,
+        "src": "and full_module not in (\"abc\", \"asyncio\") + self.TYPING_MODULE_NAMES",
+        "target": "mypy.stubgen.ASTStubGenerator.should_reexport"
+      },
+      {
+        "code": "any",
         "column": 16,
         "message": "Expression type contains \"Any\" (has type \"list[Any]\")",
-        "offset": 1639,
+        "offset": 496,
         "src": "default=[],",
         "target": "mypy.stubgen.parse_options"
       },
@@ -13251,9 +13363,17 @@
       },
       {
         "code": "any",
+        "column": 16,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 15,
+        "src": "pyversion = sys.version_info[:2]",
+        "target": "mypy.stubgen.parse_options"
+      },
+      {
+        "code": "any",
         "column": 7,
         "message": "Expression has type \"Any\"",
-        "offset": 18,
+        "offset": 3,
         "src": "if ns.modules + ns.packages and ns.files:",
         "target": "mypy.stubgen.parse_options"
       },
@@ -13316,8 +13436,16 @@
       {
         "code": "any",
         "column": 18,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 3,
+        "src": "pyversion=pyversion,",
+        "target": "mypy.stubgen.parse_options"
+      },
+      {
+        "code": "any",
+        "column": 18,
         "message": "Expression has type \"Any\"",
-        "offset": 4,
+        "offset": 1,
         "src": "no_import=ns.no_import,",
         "target": "mypy.stubgen.parse_options"
       },
@@ -17176,12 +17304,182 @@
         "target": null
       }
     ],
+    "mypy/test/test_config_parser.py": [
+      {
+        "code": "any",
+        "column": 25,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 43,
+        "src": "result = _find_config_file()",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_no_config"
+      },
+      {
+        "code": "any",
+        "column": 23,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 1,
+        "src": "assert result is None",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_no_config"
+      },
+      {
+        "code": "any",
+        "column": 29,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 14,
+        "src": "result = _find_config_file()",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_parent_config_with_and_without_git"
+      },
+      {
+        "code": "any",
+        "column": 27,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 1,
+        "src": "assert result is not None",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_parent_config_with_and_without_git"
+      },
+      {
+        "code": "any",
+        "column": 32,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str)\")",
+        "offset": 1,
+        "src": "assert Path(result[2]).resolve() == config.resolve()",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_parent_config_with_and_without_git"
+      },
+      {
+        "code": "any",
+        "column": 27,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 6,
+        "src": "assert result is None",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_parent_config_with_and_without_git"
+      },
+      {
+        "code": "any",
+        "column": 27,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 4,
+        "src": "assert result is not None",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_parent_config_with_and_without_git"
+      },
+      {
+        "code": "any",
+        "column": 27,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 5,
+        "src": "assert result is None",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_parent_config_with_and_without_git"
+      },
+      {
+        "code": "any",
+        "column": 29,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 21,
+        "src": "result = _find_config_file()",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_precedence"
+      },
+      {
+        "code": "any",
+        "column": 27,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 1,
+        "src": "assert result is not None",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_precedence"
+      },
+      {
+        "code": "any",
+        "column": 44,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str)\")",
+        "offset": 1,
+        "src": "assert os.path.basename(result[2]) == \"mypy.ini\"",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_precedence"
+      },
+      {
+        "code": "any",
+        "column": 27,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 4,
+        "src": "assert result is not None",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_precedence"
+      },
+      {
+        "code": "any",
+        "column": 44,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str)\")",
+        "offset": 1,
+        "src": "assert os.path.basename(result[2]) == \".mypy.ini\"",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_precedence"
+      },
+      {
+        "code": "any",
+        "column": 27,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 4,
+        "src": "assert result is not None",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_precedence"
+      },
+      {
+        "code": "any",
+        "column": 44,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str)\")",
+        "offset": 1,
+        "src": "assert os.path.basename(result[2]) == \"pyproject.toml\"",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_precedence"
+      },
+      {
+        "code": "any",
+        "column": 27,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 4,
+        "src": "assert result is not None",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_precedence"
+      },
+      {
+        "code": "any",
+        "column": 44,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str)\")",
+        "offset": 1,
+        "src": "assert os.path.basename(result[2]) == \"setup.cfg\"",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_precedence"
+      },
+      {
+        "code": "any",
+        "column": 25,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 15,
+        "src": "result = _find_config_file()",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_precedence_missing_section"
+      },
+      {
+        "code": "any",
+        "column": 23,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str) | None\")",
+        "offset": 1,
+        "src": "assert result is not None",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_precedence_missing_section"
+      },
+      {
+        "code": "any",
+        "column": 28,
+        "message": "Expression type contains \"Any\" (has type \"(MutableMapping[str, Any], dict[str, (Any) -> str | bool | int | float | dict[str, str] | list[str] | (int, int)], str)\")",
+        "offset": 1,
+        "src": "assert Path(result[2]).resolve() == parent_mypy.resolve()",
+        "target": "mypy.test.test_config_parser.FindConfigFileSuite.test_precedence_missing_section"
+      }
+    ],
     "mypy/test/test_ref_info.py": [
+      {
+        "code": "any",
+        "column": 23,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 38,
+        "src": "major, minor = sys.version_info[:2]",
+        "target": "mypy.test.test_ref_info.RefInfoSuite.run_case"
+      },
       {
         "code": "explicit-any",
         "column": 12,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 42,
+        "offset": 4,
         "src": "data: Any = json.load(refs_file)",
         "target": "mypy.test.test_ref_info.RefInfoSuite.run_case"
       },
@@ -17248,6 +17546,56 @@
         "offset": 0,
         "src": "a.append(f\"{item['line']}:{item['column']}:{item['target']}\")",
         "target": "mypy.test.test_ref_info.RefInfoSuite.run_case"
+      }
+    ],
+    "mypy/test/testargs.py": [
+      {
+        "code": "any",
+        "column": 41,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 38,
+        "src": "assert options.python_version == sys.version_info[:2]",
+        "target": "mypy.test.testargs.ArgSuite.test_executable_inference"
+      },
+      {
+        "code": "any",
+        "column": 41,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 5,
+        "src": "assert options.python_version == sys.version_info[:2]",
+        "target": "mypy.test.testargs.ArgSuite.test_executable_inference"
+      },
+      {
+        "code": "any",
+        "column": 41,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 9,
+        "src": "assert options.python_version == sys.version_info[:2]",
+        "target": "mypy.test.testargs.ArgSuite.test_executable_inference"
+      },
+      {
+        "code": "any",
+        "column": 41,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 6,
+        "src": "assert options.python_version == sys.version_info[:2]",
+        "target": "mypy.test.testargs.ArgSuite.test_executable_inference"
+      },
+      {
+        "code": "any",
+        "column": 41,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 14,
+        "src": "assert options.python_version == sys.version_info[:2]",
+        "target": "mypy.test.testargs.ArgSuite.test_executable_inference"
+      },
+      {
+        "code": "any",
+        "column": 41,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 7,
+        "src": "assert options.python_version == sys.version_info[:2]",
+        "target": "mypy.test.testargs.ArgSuite.test_executable_inference"
       }
     ],
     "mypy/test/testcheck.py": [
@@ -17716,6 +18064,16 @@
         "offset": 3,
         "src": "s = f\"? ({type(node.node)})\"",
         "target": "mypy.test.testmerge.ASTMergeSuite.format_symbol_table_node"
+      }
+    ],
+    "mypy/test/testparse.py": [
+      {
+        "code": "any",
+        "column": 37,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 103,
+        "src": "if options.python_version != sys.version_info[:2]:",
+        "target": "mypy.test.testparse.test_parse_error"
       }
     ],
     "mypy/test/testpep561.py": [
@@ -20866,10 +21224,18 @@
         "target": "mypy.util.replace_object_state"
       },
       {
+        "code": "any",
+        "column": 7,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 84,
+        "src": "if sys.version_info[:2] < (3, 9):  # noqa: UP036, RUF100",
+        "target": "mypy.util.check_python_version"
+      },
+      {
         "code": "explicit-any",
         "column": 0,
         "message": "Explicit \"Any\" is not allowed",
-        "offset": 555,
+        "offset": 471,
         "src": "def getattr(value: object, name: str) -> Any: ...",
         "target": "mypy.util.getattr"
       },
@@ -21810,10 +22176,18 @@
     ],
     "mypyc/codegen/emit.py": [
       {
+        "code": "any",
+        "column": 44,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 173,
+        "src": "self.capi_version = capi_version or sys.version_info[:2]",
+        "target": "mypyc.codegen.emit.Emitter.__init__"
+      },
+      {
         "code": "possibly-undefined",
         "column": 22,
         "message": "Name \"item_type\" may be undefined",
-        "offset": 457,
+        "offset": 284,
         "src": "if isinstance(item_type, RTuple):",
         "target": "mypyc.codegen.emit"
       }
@@ -23526,6 +23900,24 @@
         "offset": 2,
         "src": "return attrs",
         "target": "mypyc.irbuild.util.get_mypyc_attrs"
+      }
+    ],
+    "mypyc/options.py": [
+      {
+        "code": "any",
+        "column": 44,
+        "message": "Expression type contains \"Any\" (has type \"(int, int)\")",
+        "offset": 32,
+        "src": "self.capi_version = capi_version or sys.version_info[:2]",
+        "target": "mypyc.options.CompilerOptions.__init__"
+      },
+      {
+        "code": "any",
+        "column": 44,
+        "message": "See https://kotlinisland.github.io/basedmypy/_refs.html#code-any for more info",
+        "offset": 0,
+        "src": "self.capi_version = capi_version or sys.version_info[:2]",
+        "target": null
       }
     ],
     "mypyc/subtype.py": [
