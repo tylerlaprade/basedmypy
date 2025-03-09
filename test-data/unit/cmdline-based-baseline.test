@@ -603,11 +603,13 @@ a
 # cmd: mypy --python-version 3.13 _program.py
 # preload-cache:
 # this is a pragma to preload the cache - to test that when it's run from a warm cache it still works
+from test import test
+[file test/test.py]
 a
 [file .mypy/baseline.json]
 {
     "files": {
-        "_program.py": [
+        "test/test.py": [
             {
                 "code": "name-defined",
                 "column": 0,

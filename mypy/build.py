@@ -1487,7 +1487,7 @@ def find_cache_meta(id: str, path: str, manager: BuildManager) -> CacheMeta | No
         return None
 
     baseline_hash = None
-    baseline_errors = manager.errors.baseline.get(path)
+    baseline_errors = manager.errors.baseline.get(manager.errors.common_path(path))
     if baseline_errors:
         errors = [
             {
@@ -1501,6 +1501,7 @@ def find_cache_meta(id: str, path: str, manager: BuildManager) -> CacheMeta | No
         baseline_hash = hash_digest(json.dumps(errors).encode())
     if baseline_hash != m.baseline_hash:
         manager.log(f"Metadata abandoned for {id}: baseline is different")
+        exit(99)
         return None
     if baseline_errors:
         manager.errors.all_errors[path] = "fresh"

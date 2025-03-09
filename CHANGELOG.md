@@ -1,6 +1,10 @@
 # Basedmypy Changelog
 
 ## [Unreleased]
+### Fixed
+- cache modules that only have baseline errors
+
+## [2.10.0]
 ### Changes
 - codes for `Any` related errors haves been adjusted
 
