@@ -1,6 +1,6 @@
 # Basedmypy Changelog
 
-## [Unreleased]
+## [2.10.0]
 ### Changes
 - codes for `Any` related errors haves been adjusted
 
