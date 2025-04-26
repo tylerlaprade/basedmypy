@@ -1,6 +1,6 @@
 # Basedmypy Changelog
 
-## [Unreleased]
+## [2.10.1]
 ### Changes
 - don't error on missing arguments on `types.FunctionType` and `types.BuiltinFunctionType`
 ### Fixed
